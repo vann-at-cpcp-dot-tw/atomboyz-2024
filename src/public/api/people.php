@@ -13,7 +13,7 @@ switch ($method) {
       'data'=> [
         'list'=> [
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一一',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -23,7 +23,7 @@ switch ($method) {
             'team'=> 1,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -33,7 +33,7 @@ switch ($method) {
             'team'=> 1,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一三',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -43,7 +43,7 @@ switch ($method) {
             'team'=> 2,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一四',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -53,7 +53,7 @@ switch ($method) {
             'team'=> 2,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一五',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -63,7 +63,7 @@ switch ($method) {
             'team'=> 3,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一六',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -73,7 +73,7 @@ switch ($method) {
             'team'=> 3,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一七',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -83,7 +83,7 @@ switch ($method) {
             'team'=> 4,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一八',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -93,7 +93,7 @@ switch ($method) {
             'team'=> 4,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一九',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -103,7 +103,7 @@ switch ($method) {
             'team'=> 5,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二一',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -113,7 +113,7 @@ switch ($method) {
             'team'=> 5,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二二',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -123,7 +123,7 @@ switch ($method) {
             'team'=> 6,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二三',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -133,7 +133,7 @@ switch ($method) {
             'team'=> 6,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二四',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -143,7 +143,7 @@ switch ($method) {
             'team'=> -1, // -1 是待定
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二五',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -153,7 +153,7 @@ switch ($method) {
             'team'=> -1, // -1 是待定
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二六',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
@@ -163,7 +163,7 @@ switch ($method) {
             'team'=> -2, // -2 是淘汰
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 340 * 340
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二七',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,

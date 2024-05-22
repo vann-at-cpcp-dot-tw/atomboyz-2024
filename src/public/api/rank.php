@@ -11,52 +11,52 @@ switch ($method) {
       'data'=> [
         'personal'=> [ // 個人排行
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'votes'=> 19786,
           ]
@@ -90,52 +90,52 @@ switch ($method) {
         'social'=> [ // 社群排行
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png', // 364 * 364
+            'img'=> '/assets/img/rank_img_personal.png',
             'votes'=> 13333,
           ],
         ],
