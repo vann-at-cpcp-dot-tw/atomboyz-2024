@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1093.51" height="711.642" viewBox="0 0 1093.51 711.642">
+  <g id="Group_4363" data-name="Group 4363" transform="translate(-93.245 -149)">
+    <g id="Group_2706" data-name="Group 2706" transform="translate(0 -640)">
+      <g id="Group_2643" data-name="Group 2643" transform="translate(94 719)">
+        <g id="Group_2642" data-name="Group 2642">
+          <g id="Group_2343" data-name="Group 2343" transform="translate(0 0)">
+            <g id="Group_2274" data-name="Group 2274" transform="translate(0 7)">
+              <g id="Group_4364" data-name="Group 4364" transform="translate(0 0)">
+                <path id="Path_942" data-name="Path 942" d="M1031.114,759.057H60.4L.5,691.423V118.049L60.4,50.415h970.718l59.9,67.634V691.423Z" transform="translate(0.245 14.085)" fill="none" stroke="#d4d3d2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+              </g>
+            </g>
+            <path id="Union_48" data-name="Union 48" d="M0,13.373V26.814L13.369,13.445V0ZM0,31.7V45.143L13.369,31.77V18.327ZM0,50.024V63.467L13.369,50.1V36.651ZM0,67.974V169.09H13.369V54.6ZM0,169.09V270.214l13.369,13.37V169.09ZM0,288.159l13.369,13.369V288.086L0,274.713Zm0,18.324,13.369,13.373V306.414L0,293.041Zm0,18.328,13.369,13.369V324.738L0,311.369Z" transform="translate(0.617 257.87)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+            <path id="Union_49" data-name="Union 49" d="M0,324.808V311.366l13.369,13.369v13.445ZM0,306.48V293.038l13.369,13.373v13.442Zm0-18.324V274.714l13.369,13.369v13.446Zm0-17.949V169.091H13.369V283.58ZM0,169.091V67.967L13.369,54.6V169.091ZM0,50.021,13.369,36.652V50.095L0,63.468ZM0,31.7,13.369,18.324V31.767L0,45.14ZM0,13.369,13.369,0V13.442L0,26.812Z" transform="translate(1091.384 598.398) rotate(180)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+          </g>
+          <path id="Path_984" data-name="Path 984" d="M24.884,22.216l-2.669,3.045v642.85l2.668,3.042H1056.832l2.668-3.042V25.262l-2.668-3.045Z" transform="translate(5.143 82.488)" fill="none" stroke="#d4d3d2" stroke-miterlimit="10" stroke-width="3"/>
+          <g id="d6501216" transform="translate(15 85)" fill="none" stroke="#d4d3d2" stroke-width="5">
+            <rect width="1064.313" height="683.653" rx="12" stroke="none"/>
+            <rect x="2.5" y="2.5" width="1059.313" height="678.653" rx="9.5" fill="none"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <path id="Union_55" data-name="Union 55" d="M0,13.373V26.814L13.369,13.445V0ZM0,31.7V45.143L13.369,31.77V18.327ZM0,50.024V63.467L13.369,50.1V36.651ZM0,67.974V169.09H13.369V54.6ZM0,169.09V270.214l13.369,13.37V169.09ZM0,288.159l13.369,13.369V288.086L0,274.713Zm0,18.324,13.369,13.373V306.414L0,293.041Zm0,18.328,13.369,13.369V324.738L0,311.369Z" transform="translate(809.181 151.631) rotate(90)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Union_56" data-name="Union 56" d="M0,324.808V311.366l13.369,13.369v13.445ZM0,306.48V293.038l13.369,13.373v13.442Zm0-18.324V274.714l13.369,13.369v13.446Zm0-17.949V169.091H13.369V283.58ZM0,169.091V67.967L13.369,54.6V169.091ZM0,50.021,13.369,36.652V50.095L0,63.468ZM0,31.7,13.369,18.324V31.767L0,45.14ZM0,13.369,13.369,0V13.442L0,26.812Z" transform="translate(471 860) rotate(-90)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="354.338" height="373.998" viewBox="0 0 354.338 373.998">
+  <g id="Group_4362" data-name="Group 4362" transform="translate(-9.998 -34)">
+    <g id="Group_2706" data-name="Group 2706" transform="translate(11 13.116)">
+      <g id="Group_2643" data-name="Group 2643" transform="translate(0 0)">
+        <g id="Group_2642" data-name="Group 2642" transform="translate(0 0)">
+          <path id="Path_984" data-name="Path 984" d="M23.066,22.216l-.851,1.636V369.178l.85,1.634H352.032l.85-1.634V23.852l-.85-1.636Z" transform="translate(-10.715 11.687)" fill="none" stroke="#d4d3d2" stroke-miterlimit="10" stroke-width="1"/>
+          <g id="d6501216" transform="translate(5.001 27.542)" fill="none" stroke="#d4d3d2" stroke-width="3">
+            <rect width="343.609" height="361.458" rx="5" stroke="none"/>
+            <rect x="1.5" y="1.5" width="340.609" height="358.458" rx="3.5" fill="none"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <path id="Union_55" data-name="Union 55" d="M0,4.317v4.34L4.316,4.341V0Zm0,5.917v4.34l4.316-4.317V5.917ZM0,16.15v4.34l4.316-4.316V11.833Zm0,5.795V54.59H4.316V17.628ZM0,54.59V87.238l4.316,4.316V54.59ZM0,93.031l4.316,4.316v-4.34L0,88.69Zm0,5.916,4.316,4.317v-4.34L0,94.607Zm0,5.917,4.316,4.316v-4.34L0,100.524Z" transform="translate(241.893 36.665) rotate(90)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Union_58" data-name="Union 58" d="M0,104.862v-4.339l4.316,4.316v4.341Zm0-5.917v-4.34l4.316,4.317v4.34ZM0,93.03V88.69l4.316,4.316v4.341Zm0-5.795V54.59H4.316V91.552ZM0,54.59V21.943l4.316-4.316V54.59ZM0,16.149l4.316-4.316v4.34L0,20.49Zm0-5.916L4.316,5.916v4.34L0,14.573ZM0,4.316,4.316,0V4.34L0,8.656Z" transform="translate(132.713 406.433) rotate(-90)" fill="#d4d3d2" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Union_57" data-name="Union 57" d="M17629-7591l-20-22v-328l20-22h313.336l19,21.664-.662,164.335.662,164.335-19,21.664Z" transform="translate(-17598 7997.999)" fill="none" stroke="#d4d3d2" stroke-width="2"/>
+  </g>
+</svg>

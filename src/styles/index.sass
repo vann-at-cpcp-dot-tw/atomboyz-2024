@@ -1,0 +1,131 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css")
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+@import "~~/node_modules/vanns-common-modules/src/styles/index.sass"
+
+:root
+  --color-major: #5D00FF
+  --color-major-50: #D2B8FF
+  --color-major-100: #C5A3FF
+  --color-major-200: #AB7AFF
+  --color-major-300: #9152FF
+  --color-major-400: #7729FF
+  --color-major-500: #5D00FF
+  --color-major-600: #4900C7
+  --color-major-700: #34008F
+  --color-major-800: #200057
+  --color-major-900: #0B001F
+  --color-major-950: #010003
+
+body
+  background: black
+  &.lightbox-open,
+  &.embed-player-open,
+  &.show-cookie-alert,
+  &.show-global-alert,
+  &.show-game-page
+    overflow: hidden
+
+select
+  -webkit-appearance: menulist-button
+  color: #9ca3af
+
+h1, h2, h3, h4, div, p, .block, .flex
+  white-space: normal
+
+input[type=checkbox]
+  accent-color: var(--color-major)
+  @apply rounded
+// select:invalid
+//   color: green
+
+
+.disabled
+  pointer-events: none
+  opacity: 0.5
+
+.swiper.is-locked
+  .swiper-wrapper
+    display: flex
+    justify-content: center
+
+.swiper-pagination
+  position: relative !important
+  bottom: 0px !important
+  top: 0px !important
+  padding-top: 20px
+  display: flex
+  justify-content: center
+.swiper-pagination-bullet
+  display: block !important
+  width: 7px !important
+  height: 7px !important
+  background: white !important
+  opacity: 0.5
+.swiper-pagination-bullet-active
+  background: white
+  opacity: 1
+
+.coverflow-swiper
+  padding-top: 4px !important
+  .swiper-slide-prev
+    .item
+      transform-origin: right center
+  .swiper-slide-next
+    .item
+      transform-origin: left center
+  .swiper-slide
+    width: 33.33% !important
+
+
+.video-swiper
+  position: relative
+  left: 22px
+  .swiper-wrapper
+    display: flex
+    align-items: center
+  .swiper-slide
+    width: calc(33.33% - 44px) !important
+    opacity: 0.6
+  .swiper-slide-active
+    width: 33.33% !important
+    opacity: 1
+
+.news-swiper
+  .swiper-slide
+    width: 58% !important
+    .item
+      transform: scale(0.85)
+      opacity: 0.6
+  .swiper-slide-prev
+    .item
+      transform-origin: right center
+  .swiper-slide-next
+    .item
+      transform-origin: left center
+  .swiper-slide-active
+    .item
+      transform: scale(1)
+      opacity: 1
+
+// .sale-swiper
+//   .swiper-slide
+//     width: 20% !important
+//     @media (max-width: 991px)
+//       width: 50% !important
+
+.EDITOR-CONTENT
+  img
+    display: block
+    margin: 0 auto
+
+.animate__lightup
+  animation-name: lightup
+  animation-duration: 1s
+  animation-direction: alternate-reverse
+  animation-timing-function: linear
+
+@keyframes lightup
+  0%
+    filter: drop-shadow(0px 0px 2vw rgba(255, 255, 255, 0.66))
+  100%
+    filter: drop-shadow(0px 0px 1vw rgba(255, 255, 255, 0))
