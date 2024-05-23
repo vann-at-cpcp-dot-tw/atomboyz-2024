@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     apiSecret: '', // can be overridden by NUXT_API_SECRET environment variable
     public: {
       apiURL: process.env.NUXT_PUBLIC_API_URL, // can be overridden by NUXT_PUBLIC_API_BASE environment variable
+      isPreviewMode: process.env.NUXT_PUBLIC_IS_PRE_MODE,
     }
   },
 })
