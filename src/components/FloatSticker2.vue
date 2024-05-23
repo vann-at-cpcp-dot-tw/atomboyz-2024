@@ -100,16 +100,16 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
       // marginBottom: store.isDownloadStickerShow ?'170px' :'0px'
     }">
       <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-3 flex size-[59px] flex-col items-center justify-center rounded-full lg:size-[72px]"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         state.showGame = true
       }">
-        <img class="mx-auto mb-1.5" src="/assets/img/icon_game.svg" alt="">
-        <div class="text-center text-[14px] leading-[1.2] text-white">小遊戲</div>
+        <img class="mx-auto mb-1 lg:mb-1.5 _lg:max-w-[22px]" src="/assets/img/icon_game.svg" alt="">
+        <div class="text-center text-[11px] leading-[1.2] text-white lg:text-[14px]">小遊戲</div>
       </div>
       <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-3 flex size-[59px] flex-col items-center justify-center rounded-full lg:size-[72px]"
       style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         if( !window ){ return }
@@ -119,10 +119,10 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
         })
       }">
         <img class="mx-auto mb-1" src="/assets/img/icon_circle_top.svg" alt="">
-        <div class="text-center text-[14px] leading-[1.2]">TOP</div>
+        <div class="text-center text-[12px] leading-[1.2] lg:text-[14px]">TOP</div>
       </div>
       <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-3 flex size-[59px] flex-col items-center justify-center rounded-full lg:size-[72px]"
       style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         if( !window ){ return }
@@ -131,7 +131,7 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
           behavior: 'smooth'
         })
       }">
-        <img class="mx-auto mb-1" src="/assets/img/icon_headphone.svg" alt="">
+        <img class="mx-auto _lg:max-w-[26px]" src="/assets/img/icon_headphone.svg" alt="">
       </div>
     </div>
   </ClientOnly>

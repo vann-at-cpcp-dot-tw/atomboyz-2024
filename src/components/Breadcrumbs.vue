@@ -12,7 +12,7 @@ interface IProps {
 const props = defineProps<IProps>()
 </script>
 <template>
-  <div :class="twMerge('container', props.class)">
+  <div :class="twMerge('container-fluid', props.class)">
     <div class="flex items-center text-white">
       <span
       v-for="(node, index) in props.list"

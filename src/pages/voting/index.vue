@@ -4,6 +4,7 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import PageHead from '~/components/templates/voting/PageHead.vue'
 import PeopleCard from '~/components/PeopleCard.vue'
 import PeopleBox from '~/components/PeopleBox.vue'
+
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 definePageMeta({
@@ -58,8 +59,9 @@ if (queryPeople.value){
   <main class="relative text-white">
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: '我要投票'}]" />
     <PageHead class="mb-8" />
-    <PeopleBox v-if="queryPeople" v-bind="queryPeople" />
-
+    <ClientOnly>
+      <PeopleBox v-if="queryPeople" v-bind="queryPeople" />
+    </ClientOnly>
     <div
     v-for="(teamNode, teamIndex) in state.teamWithPeoples"
     :id="`TEAM_${teamNode.id}`"
@@ -68,17 +70,18 @@ if (queryPeople.value){
     class="teamSection container-fluid mb-[55px]">
       <div class="mx-auto w-full max-w-[1093px] rounded-xl border border-white p-5">
         <div class="mx-auto w-full max-w-[959px]">
-          <div class="mb-4 mt-3 flex">
+          <div class="mb-4 mt-3 flex justify-center lg:justify-start">
             <div class="flex items-center justify-center pl-3 pr-6 text-white">
               <img class="-ml-1 w-[54px] scale-[1.2]" :src="teamNode.img" alt="">
               <div class="pl-1 text-[20px]">{{ teamNode.name }}</div>
             </div>
           </div>
-          <div class="row">
+          <div class="row justify-center lg:justify-start">
             <div
             v-for="(peopleNode, peopleIndex) in teamNode?.people || []"
             :key="`${teamIndex}-${peopleIndex}`"
-            class="col-auto mb-5 w-[33.33%] lg:w-1/5">
+            class="col-auto mb-5 w-[33.33%] lg:w-1/5"
+            style="max-width: 190px;">
               <PeopleCard
               v-bind="peopleNode"
               :on-thumb-click="()=>{
@@ -103,11 +106,12 @@ if (queryPeople.value){
               <div class="pl-2 text-[20px]">待定</div>
             </div>
           </div>
-          <div class="row">
+          <div class="row justify-center lg:justify-start">
             <div
             v-for="(peopleNode, peopleIndex) in state.pendingList || []"
             :key="`pending-${peopleIndex}`"
-            class="col-auto mb-5 w-[33.33%] lg:w-1/5">
+            class="col-auto mb-5 w-[33.33%] lg:w-1/5"
+            style="max-width: 190px;">
               <PeopleCard
               v-bind="peopleNode"
               :on-thumb-click="()=>{

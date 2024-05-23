@@ -33,7 +33,7 @@ onMounted(()=>{
 </script>
 <template>
   <div
-  :class="twMerge(`z-[100] fixed right-0 top-1/2 -translate-y-1/2 text-[15px] text-white mt-[-170px] ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+  :class="twMerge(`z-[100] fixed right-0 top-1/2 -translate-y-1/2 text-[15px] text-white mt-[-170px] lg:block hidden ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
   style="padding: 18px 14px; border-radius: 5px 0px 0px 5px; background: linear-gradient(#5d00ff 0%, #2f0080 100%); transition: all .4s;">
     <NuxtLink to="/voting">
       <div class="btn btn-scaleUp mb-4">

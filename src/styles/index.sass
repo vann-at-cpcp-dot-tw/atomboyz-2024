@@ -16,13 +16,18 @@
   --color-major-900: #0B001F
   --color-major-950: #010003
 
+@media (min-width: #{$screen-xl}px)
+  .container
+    max-width: 1280px
+
 body
   background: black
   &.lightbox-open,
   &.embed-player-open,
   &.show-cookie-alert,
   &.show-global-alert,
-  &.show-game-page
+  &.show-game-page,
+  &.show-peoplebox
     overflow: hidden
 
 select

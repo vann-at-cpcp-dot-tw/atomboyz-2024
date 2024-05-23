@@ -22,7 +22,7 @@ store.general = data.value?.data
       <Meta property="og:title" content="原子少年 X beanfun!｜太陽系男團人氣票選" />
       <Meta property="og:image" content="/assets/img/og.jpg" />
       <Meta property="og:description" content="太陽系男團人氣票選，下載beanfun! APP投票票數多五倍，beanfun! 好玩的都在這！" />
-      <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+      <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
       <Link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
       <!-- <Meta v-if="route.name == 'vote' && (route.query.p > 0 && route.query.p <= 80)"
       property="og:title"

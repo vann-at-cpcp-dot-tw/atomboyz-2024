@@ -15,26 +15,38 @@ switch ($method) {
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題為後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題為後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題為後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題為後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
           [
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1', // youtube 標題為後台上稿
+            'date'=> '2024.07.07',
+            'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
           ],
         ],
         'pagination'=> [

@@ -85,6 +85,26 @@ switch ($method) {
       ]
     ];
   break;
+
+  case 'POST':
+    $action = $_REQUEST['action'] ?? null;
+    switch ($action) {
+      case 'addFav': // 加入最愛
+        if( !empty($_REQUEST['name']) ){
+          $res = [
+            'success'=> true
+          ];
+        }
+      case 'removeFav': // 移除最愛
+        if( !empty($_REQUEST['name']) ){
+          $res = [
+            'success'=> true
+          ];
+        }
+      break;
+    }
+
+  break;
 }
 
 echo json_encode($res);

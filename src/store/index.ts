@@ -1,5 +1,4 @@
 import { inject, provide } from 'vue'
-
 export interface IStore {
   general: any
   isDownloadStickerShow: boolean
@@ -9,7 +8,20 @@ export interface IStore {
     id: string | number
     name: string
     votes: number | null
-  } | null
+    avatar: string
+    fav_peoples: {name:string, img?:string}[]
+    daily_quests: {
+      title: string
+      reward: number
+      description: string
+      is_done: boolean
+    }[]
+    vote_logs: {
+      name: string
+      time: string
+      votes: number
+    }[]
+  }
   myVoting: {
     name: string
     votes: number | null
@@ -30,12 +42,16 @@ export const createStore = function(){
       name: '',
       votes: null
     },
-    user: null,
-    // user: {
-    //   id: '',
-    //   name: '',
-    //   votes: 15,
-    // },
+    // user: null,
+    user: {
+      id: '',
+      name: '1',
+      votes: 15,
+      avatar: '',
+      fav_peoples: [],
+      daily_quests: [],
+      vote_logs: [],
+    },
     do: {
       lightboxAdd: (id:string)=>{
         store.lightbox.push(id)
@@ -53,6 +69,34 @@ export const createStore = function(){
       alert: function(content = ''){
         store.alert = content
         store.do.lightboxOpen('Alert')
+      },
+      toggleFav: async function(name:string){
+        if (!store.user?.name){
+          return
+        }
+        const config = useRuntimeConfig()
+        const API_URL = config.public.apiURL
+        const action = store.user?.fav_peoples?.map((node:any)=>node.name).includes(name) ? 'removeFav' : 'addFav'
+        const result = await $fetch(`${API_URL}/user.php`, {
+          method: 'POST',
+          params: {
+            action,
+            name
+          }
+        })
+        if ((result as any)?.success){
+          if (action === 'addFav'){
+            store.user.fav_peoples = [
+              ...(store?.user?.fav_peoples || []),
+              {
+                name
+              }
+            ]
+          } else {
+            store.user.fav_peoples = store.user.fav_peoples?.filter(listNode=>listNode.name !== name)
+          }
+        }
+        return result
       },
       voteInput: function({ name, votes = null }:{name:string, votes?:number | null}){
         store.myVoting.name = name
