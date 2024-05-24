@@ -35,7 +35,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
     class="size-full bg-black bg-no-repeat text-white"
     :style="{
       backgroundImage: 'url(/assets/img/bg_pre_home.jpg)',
-      backgroundSize: '1893px',
+      backgroundSize: '2565px',
       backgroundPosition: 'center bottom'
     }">
       <Lightbox id="PreHomeReminder" icon="person-fill" title="Game Pass 註冊">
