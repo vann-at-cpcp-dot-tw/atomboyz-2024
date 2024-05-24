@@ -5,12 +5,65 @@ import 'swiper/css/autoplay'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+const window = process.client ? globalThis : null
 const route = useRoute()
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
+const APP_URL = config.public.appURL
+const IS_STAGE = config.public.isStage
 const { data } = await useFetch<any>(`${API_URL}/general.php`)
 const store = createStore()
 store.general = data.value?.data
+
+async function trackingInit(){
+  if (!window){
+    return
+  }
+  const sender = await (window as any)?.webTrackingSDK?.init?.({
+    BUID: 'GAMA-hidol-01',
+    property: 'GAMA-hidol-01',
+    sourceProperty: 'GAMA-hidol-01',
+    GTMId: IS_STAGE ? 'GTM-WTMXC2TT' : 'GTM-MCJ7BK4',
+  })
+
+  return sender
+}
+
+async function ChatBotInit(){
+
+}
+onMounted(()=>{
+  if (!window){
+    return
+  }
+  trackingInit().then((sender)=>{
+    store.trackingSender = sender
+    nextTick(()=>{
+      store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+        page_info: {
+          page: 'atomboyz_teaser',
+        },
+      })
+    })
+  })
+
+  ;(window as any).GIMBotTool.init({
+    url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+    logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+    btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
+  })
+
+  ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      page_info: {
+        page: 'atomboyz_teaser',
+      },
+      click_info: {
+        type: 'ai_customer_service',
+      },
+    })
+  })
+})
 </script>
 <template>
   <Html>
@@ -31,6 +84,9 @@ store.general = data.value?.data
       property="og:image"
       :content="`/_admin/upload/${route.query.p}.jpg`" /> -->
       <!-- <Meta http-equiv="Content-Security-Policy" content="default-src *" /> -->
+      <!-- tracikng -->
+      <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'" />
+      <Script :src="IS_STAGE ?'https://botsdk.stg.gim.beango.com/index.umd.js' :'https://botsdk.gamania.chat/index.umd.js'" />
     </Head>
     <NuxtLayout>
       <NuxtPage />

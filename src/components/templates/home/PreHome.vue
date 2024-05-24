@@ -28,6 +28,18 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
     minute,
   })
 }, 1000)
+watch(()=>store.lightbox, (newVal)=>{
+  if (newVal.includes('PreHomeReminder')){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+      page_info: {
+        page: 'atomboyz_teaser',
+        type: 'check_account',
+      },
+    })
+  }
+}, {
+  immediate: true
+})
 </script>
 <template>
   <div class="flex size-full flex-col">
@@ -42,7 +54,21 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
         <div class="mb-6 text-black">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，請於 06/11 前點擊註冊或完成 beanfun! 帳號升級，為您心愛的少年投票。</div>
         <div class="row">
           <div class="col-6">
-            <a href="https://hidol.fan/M6xVL" target="_blank">
+            <a
+            href="https://hidol.fan/M6xVL"
+            target="_blank"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  page: 'atomboyz_teaser',
+                  type: 'check_account',
+                },
+                click_info: {
+                  type: 'cta',
+                  name: 'upgrade'
+                },
+              })
+            }">
               <MajorButton class="h-[40px]">
                 beanfun! 升級
               </MajorButton>
@@ -51,7 +77,19 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
           <div class="col-6">
             <a
             href="https://accounts.stg.gama.beango.com/oauth2/authorize?response_type=code&prompt=login&client_id=MjdiZGNhNWUtMTI2ZC00ZGZmLTkwMjctMDY5MDhmYzM2Mjlj&scope=openid,userinfo.profile&redirect_uri=http://localhost/&state=1234&nonce=5678"
-            target="_blank">
+            target="_blank"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  page: 'atomboyz_teaser',
+                  type: 'check_account',
+                },
+                click_info: {
+                  type: 'cta',
+                  name: 'sign_up'
+                },
+              })
+            }">
               <MajorButton class="h-[40px]">
                 全新註冊
               </MajorButton>
@@ -113,6 +151,15 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
         class="btn btn-light h-[42px] w-[150px] lg:h-[60px] lg:w-[215px] lg:text-[20px]"
         @click="()=>{
           store.do.lightboxOpen('PreHomeReminder')
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            page_info: {
+              page: 'atomboyz_teaser',
+            },
+            click_info: {
+              type: 'cta',
+              name: 'sign_up_entry'
+            },
+          })
         }">
           搶先註冊
         </MajorButton>

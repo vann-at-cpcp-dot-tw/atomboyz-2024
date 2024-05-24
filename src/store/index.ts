@@ -1,4 +1,8 @@
 import { inject, provide } from 'vue'
+interface ConstructorFunction extends Function {
+  new(...args: any[]): any;
+}
+
 export interface IStore {
   general: any
   isDownloadStickerShow: boolean
@@ -26,6 +30,7 @@ export interface IStore {
     name: string
     votes: number | null
   }
+  trackingSender?: any
   do: {
     [key:string]: Function
   }
@@ -69,6 +74,24 @@ export const createStore = function(){
       alert: function(content = ''){
         store.alert = content
         store.do.lightboxOpen('Alert')
+      },
+      tracking: function(eventFunctionName:string, eventId:string|number, event:string, infos?:{
+        page_info?: {[key:string]:any},
+        click_info?: {[key:string]:any},
+        impression_info?: {[key:string]:any},
+      }){
+        const TrackingFunction = (window as any).webTrackingSDK.events[eventFunctionName] as ConstructorFunction
+        if (typeof TrackingFunction === 'function'){
+          store.trackingSender.passEvent(
+            new TrackingFunction({
+              eventId,
+              event,
+              pageInfo: infos?.page_info,
+              clickInfo: infos?.click_info,
+              impressionInfo: infos?.impression_info,
+            })
+          )
+        }
       },
       toggleFav: async function(name:string){
         if (!store.user?.name){
