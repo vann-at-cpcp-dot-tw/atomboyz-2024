@@ -10,7 +10,7 @@ const route = useRoute()
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
-const IS_STAGE = config.public.isStage
+const IS_STAGE = Number(config.public?.isStage) === 1
 const { data } = await useFetch<any>(`${API_URL}/general.php`)
 const store = createStore()
 store.general = data.value?.data
@@ -29,9 +29,6 @@ async function trackingInit(){
   return sender
 }
 
-async function ChatBotInit(){
-
-}
 onMounted(()=>{
   if (!window){
     return
