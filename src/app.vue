@@ -11,6 +11,16 @@ const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
 const IS_STAGE = Number(config.public?.isStage) === 1
+// useHead({
+//   script: [
+//     {
+//       src: IS_STAGE ? 'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' : 'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'
+//     },
+//     {
+//       src: IS_STAGE ? 'https://botsdk.stg.gim.beango.com/index.umd.js' : 'https://botsdk.gamania.chat/index.umd.js'
+//     }
+//   ]
+// })
 const { data } = await useFetch<any>(`${API_URL}/general.php`)
 const store = createStore()
 store.general = data.value?.data
@@ -74,13 +84,6 @@ onMounted(()=>{
       <Meta property="og:description" content="太陽系男團人氣票選，下載beanfun! APP投票票數多五倍，beanfun! 好玩的都在這！" />
       <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
       <Link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
-      <!-- <Meta v-if="route.name == 'vote' && (route.query.p > 0 && route.query.p <= 80)"
-      property="og:title"
-      :content="`原子少年 Atom Boyz ${peopleNames[route.query.p]} 就快第一名了！ 拜託幫我偶像投一票 beanfun! 好玩的都在這～`" />
-      <Meta v-if="route.name == 'vote' && (route.query.p > 0 && route.query.p <= 80)"
-      property="og:image"
-      :content="`/_admin/upload/${route.query.p}.jpg`" /> -->
-      <!-- <Meta http-equiv="Content-Security-Policy" content="default-src *" /> -->
       <!-- tracikng -->
       <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'" />
       <Script :src="IS_STAGE ?'https://botsdk.stg.gim.beango.com/index.umd.js' :'https://botsdk.gamania.chat/index.umd.js'" />

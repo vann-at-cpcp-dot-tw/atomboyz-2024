@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
 import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from '@vueuse/core'
-import { calcSizeByRatio } from 'vanns-common-modules/dist/lib/helpers'
+import { calcSizeByRatio, isEmpty } from 'vanns-common-modules/dist/lib/helpers'
 import { useStore } from '~/store'
 
 const window = process.client ? globalThis : null
@@ -12,6 +12,7 @@ interface IProps {
 const props = defineProps<IProps>()
 const viewport = useWindowSize()
 const store = useStore()
+const route = useRoute()
 const state = reactive({
   active: false,
   checked: false,
@@ -55,12 +56,33 @@ watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
   immediate: true
 })
 
+const trackingPage = computed(()=>{
+  let page = ({
+    index: 'atomboyz_homepage',
+    voting: 'atomboyz_vote',
+    'posts-tab': 'atomboyz_videos',
+    'post-id': 'atomboyz_videos_content',
+  } as any)[route.name] || ''
+
+  if (route.name === 'voting' && !isEmpty(route.query.p)){
+    page = 'atomboyz_member'
+  }
+
+  return page
+})
+
 watch(()=>state.active, (newVal, oldVal)=>{
   if (!window){
     return
   }
   if (newVal){
     document.body.classList.add('show-global-alert')
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+      page_info: {
+        page: trackingPage.value,
+        type: 'ads_page'
+      },
+    })
   } else {
     document.body.classList.remove('show-global-alert')
   }

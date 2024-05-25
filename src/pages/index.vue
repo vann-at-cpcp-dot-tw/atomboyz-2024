@@ -8,6 +8,9 @@ if (IS_PRE_MODE){
     layout: 'prehome'
   })
 }
+definePageMeta({
+  layout: 'home'
+})
 </script>
 <template>
   <PreHome v-if="IS_PRE_MODE" />

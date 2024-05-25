@@ -13,6 +13,7 @@ interface IProps {
   name: string
   votes: number
   team: number
+  tag_id?: string,
   yt_url?: string
   hidoi_url?: string
   can_vote?: boolean
@@ -33,7 +34,7 @@ const state = reactive({
     state.open = ''
   }" />
   <div
-  :id="`PEOPLE_${props.name}`"
+  :id="`${props.tag_id}`"
   :class="twMerge('rounded-lg overflow-hidden', props.class)">
     <div
     class="btn group"

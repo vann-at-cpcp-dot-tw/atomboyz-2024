@@ -8,9 +8,6 @@ import Pagination from '~/components/Pagination.vue'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
-definePageMeta({
-  layout: 'page'
-})
 const viewport = useWindowSize()
 const route = useRoute()
 const router = useRouter()

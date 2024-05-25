@@ -30,6 +30,13 @@ const state:any = reactive({
   newsTableActive: 'videos',
   rankList: computed(()=>{
     switch (state.rankTableActive){
+      case 'personal':
+        return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
+          return {
+            ...node,
+            href: `/voting?p=${node.name}`
+          }
+        })
       case 'team':
         return ranksFetcher.data.value?.data?.team?.map((node:any)=>{
           const { id } = node
@@ -37,7 +44,8 @@ const state:any = reactive({
           return {
             img: targetTeam?.img,
             name: targetTeam?.name,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`
+            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            href: `/voting#${targetTeam?.tagId}`
           }
         })
 

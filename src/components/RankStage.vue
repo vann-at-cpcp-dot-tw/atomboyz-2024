@@ -14,6 +14,7 @@ interface IProps {
     name: string
     number: any
     href?: string
+    target?: string
   }[]
 }
 
@@ -34,7 +35,7 @@ const props = defineProps<IProps>()
             <img src="/assets/img/icon_crown2_1.svg">
             <div class="mt-4 pl-1 text-[22px] font-700 italic leading-none text-[#FFC854]">NO.1</div>
           </div>
-          <a :href="props?.list?.[0]?.href" target="_blank">
+          <NuxtLink class="btn btn-light" :href="props?.list?.[0]?.href" :target="props?.list?.[0]?.target || '_self'">
             <RatioArea ratio="100">
               <div
               class="absolute left-0 top-0 size-full rounded-t bg-cover bg-center"
@@ -47,61 +48,67 @@ const props = defineProps<IProps>()
               <div class="text-[18px]">{{ props?.list?.[0]?.name }}</div>
               <div class="text-[15px]" v-html="props?.list?.[0]?.number"></div>
             </div>
-          </a>
+          </NuxtLink>
         </div>
 
         <div v-else class="relative">
           <div class="row flex-nowrap items-end justify-between">
             <div class="col-auto mb-[-6%] w-[31%]">
-              <div class="flex justify-center">
-                <div class="relative">
-                  <img class="mb-[-4px] ml-[-20px]" src="/assets/img/icon_crown_2.svg" style="width:40px;">
-                  <div class="text-center text-[20px]">{{ props?.list?.[1]?.name }}</div>
-                  <div class="mb-2 text-center text-[18px]" v-html="props?.list?.[1]?.number"></div>
+              <NuxtLink class="btn btn-light" :href="props?.list?.[1]?.href" :target="props?.list?.[0]?.target || '_self'">
+                <div class="flex justify-center">
+                  <div class="relative">
+                    <img class="mb-[-4px] ml-[-20px]" src="/assets/img/icon_crown_2.svg" style="width:40px;">
+                    <div class="text-center text-[20px]">{{ props?.list?.[1]?.name }}</div>
+                    <div class="mb-2 text-center text-[18px]" v-html="props?.list?.[1]?.number"></div>
+                  </div>
                 </div>
-              </div>
-              <RatioArea ratio="100">
-                <div
-                class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
-                :style="{
-                  backgroundImage:`url(${props?.list?.[1]?.img})`,
-                  filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
-                }"></div>
-              </RatioArea>
+                <RatioArea ratio="100">
+                  <div
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  :style="{
+                    backgroundImage:`url(${props?.list?.[1]?.img})`,
+                    filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
+                  }"></div>
+                </RatioArea>
+              </NuxtLink>
             </div>
             <div class="col-auto mb-[2%] w-[39%]">
-              <div class="flex justify-center">
-                <div class="relative">
-                  <img class="mb-[-4px] ml-[-24px]" src="/assets/img/icon_crown_1.svg" style="width:44px;">
-                  <div class="text-center text-[22px]">{{ props?.list?.[0]?.name }}</div>
-                  <div class="mb-2 text-center text-[20px]" v-html="props?.list?.[0]?.number"></div>
+              <NuxtLink class="btn btn-light" :href="props?.list?.[0]?.href" :target="props?.list?.[0]?.target || '_self'">
+                <div class="flex justify-center">
+                  <div class="relative">
+                    <img class="mb-[-4px] ml-[-24px]" src="/assets/img/icon_crown_1.svg" style="width:44px;">
+                    <div class="text-center text-[22px]">{{ props?.list?.[0]?.name }}</div>
+                    <div class="mb-2 text-center text-[20px]" v-html="props?.list?.[0]?.number"></div>
+                  </div>
                 </div>
-              </div>
-              <RatioArea ratio="100">
-                <div
-                class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
-                :style="{
-                  backgroundImage:`url(${props?.list?.[0]?.img})`,
-                  filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
-                }"></div>
-              </RatioArea>
+                <RatioArea ratio="100">
+                  <div
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  :style="{
+                    backgroundImage:`url(${props?.list?.[0]?.img})`,
+                    filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
+                  }"></div>
+                </RatioArea>
+              </NuxtLink>
             </div>
             <div class="col-auto mb-[-10%] w-[31%]">
-              <div class="flex justify-center">
-                <div class="relative">
-                  <img class="mb-[-4px] ml-[-16px]" src="/assets/img/icon_crown_3.svg" style="width:32px;">
-                  <div class="text-center text-[18px]">{{ props?.list?.[2]?.name }}</div>
-                  <div class="mb-2 text-center text-[16px]" v-html="props?.list?.[2]?.number"></div>
+              <NuxtLink class="btn btn-light" :href="props?.list?.[0]?.href" :target="props?.list?.[2]?.target || '_self'">
+                <div class="flex justify-center">
+                  <div class="relative">
+                    <img class="mb-[-4px] ml-[-16px]" src="/assets/img/icon_crown_3.svg" style="width:32px;">
+                    <div class="text-center text-[18px]">{{ props?.list?.[2]?.name }}</div>
+                    <div class="mb-2 text-center text-[16px]" v-html="props?.list?.[2]?.number"></div>
+                  </div>
                 </div>
-              </div>
-              <RatioArea ratio="100">
-                <div
-                class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
-                :style="{
-                  backgroundImage:`url(${props?.list?.[2]?.img})`,
-                  filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
-                }"></div>
-              </RatioArea>
+                <RatioArea ratio="100">
+                  <div
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  :style="{
+                    backgroundImage:`url(${props?.list?.[2]?.img})`,
+                    filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
+                  }"></div>
+                </RatioArea>
+              </NuxtLink>
             </div>
           </div>
           <img class="w-full" src="/assets/img/rank_stage.svg" alt="">
@@ -116,10 +123,12 @@ const props = defineProps<IProps>()
         class="relative">
           <div class="absolute left-0 top-0 z-0 size-full rounded" style="background: linear-gradient(#dad9f6 0%, rgba(218, 217, 246, 0.4) 100%); opacity: 0.25;"></div>
           <div v-if="props?.type === 'sale'">
-            <div
+            <NuxtLink
             v-for="(node, index) in props?.list.slice(1, props?.list?.length) || []"
             :key="index"
-            class="relative z-10">
+            :href="node?.href"
+            :target="props?.list?.[0]?.target || '_self'"
+            class="btn btn-light relative z-10">
               <hr :class="`my-3 ${index === 0 ?'opacity-0': 'opacity-60'}`">
               <div class="row flex-nowrap items-center">
                 <div class="col-auto">
@@ -150,13 +159,15 @@ const props = defineProps<IProps>()
                 </div>
               </div>
               <hr v-if="index === props?.list?.length-2" class="my-3 opacity-0">
-            </div>
+            </NuxtLink>
           </div>
           <div v-else>
-            <div
+            <NuxtLink
             v-for="(node, index) in props?.list.slice(3, props?.list?.length) || []"
             :key="index"
-            class="relative z-10">
+            :href="node?.href"
+            :target="props?.list?.[0]?.target || '_self'"
+            class="btn btn-light relative z-10">
               <hr :class="`my-3 ${index === 0 ?'opacity-0': 'opacity-60'}`">
               <div class="row flex-nowrap items-center">
                 <div class="col-auto"><div class="pl-5">{{ String(index + 4).padStart(2, '0') }}</div></div>
@@ -171,7 +182,7 @@ const props = defineProps<IProps>()
                 </div>
               </div>
               <hr v-if="index === props?.list?.length-4" class="my-3 opacity-0">
-            </div>
+            </NuxtLink>
           </div>
         </div>
       </div>

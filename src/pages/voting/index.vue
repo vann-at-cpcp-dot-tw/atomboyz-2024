@@ -7,9 +7,6 @@ import PeopleBox from '~/components/PeopleBox.vue'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
-definePageMeta({
-  layout: 'page'
-})
 const router = useRouter()
 const route = useRoute()
 const peopleFetcher:{[key:string]:any} = await useFetch(`${API_URL}/people.php`)
@@ -17,8 +14,12 @@ const state = reactive({
   activeTeamId: null,
   scrollDirection: '',
   windowOldScrollY: 0,
+  searchNameToTagID: (name:string)=>{
+    const targetPeople = peopleFetcher.data.value?.data?.list?.find((node:any)=>node.name === name)
+    return targetPeople.tag_id
+  },
   stickyHeight: computed(()=>{
-    return 317
+    return 375
   }),
   teamWithPeoples: computed(()=>{
     const originList = peopleFetcher.data.value?.data?.list
@@ -38,6 +39,9 @@ const state = reactive({
     const originList = peopleFetcher.data.value?.data?.list
     return originList?.filter((node:any)=>node.team === -2)
   }),
+})
+const stickyHeightPx = computed(()=>{
+  return `${state.stickyHeight}px`
 })
 provide('scopeStore', state)
 
@@ -64,7 +68,7 @@ if (queryPeople.value){
     </ClientOnly>
     <div
     v-for="(teamNode, teamIndex) in state.teamWithPeoples"
-    :id="`TEAM_${teamNode.id}`"
+    :id="`${teamNode.tagId}`"
     :key="teamIndex"
     :data-id="teamNode.id"
     class="teamSection container-fluid mb-[55px]">
@@ -128,3 +132,8 @@ if (queryPeople.value){
     </div>
   </main>
 </template>
+<style>
+:target {
+    scroll-margin-top: v-bind('stickyHeightPx');
+}
+</style>

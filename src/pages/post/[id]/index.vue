@@ -1,14 +1,15 @@
 <script lang="tsx" setup>
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
-definePageMeta({
-  layout: 'page'
-})
 const route = useRoute()
 const dataFetcher = await useFetch<any>(`${API_URL}/news.php`, {
   query: {
     id: route.params.id,
   }
+})
+useSeoMeta({
+  ogTitle: dataFetcher.data.value?.data?.title || null,
+  ogImage: dataFetcher.data.value?.data?.img || null,
 })
 </script>
 <template>

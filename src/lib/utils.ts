@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge'
 export const teams = [
   {
     id: 1,
+    tagId: 'light',
     name: '晨之星',
     img: '/assets/img/team_1.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
@@ -11,30 +12,35 @@ export const teams = [
   {
     id: 2,
     name: '天狼星',
+    tagId: 'night',
     img: '/assets/img/team_2.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
   {
     id: 3,
     name: '風行者',
+    tagId: 'wind',
     img: '/assets/img/team_3.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
   {
     id: 4,
     name: '克卜勒',
+    tagId: 'flame',
     img: '/assets/img/team_4.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
   {
     id: 5,
     name: '鑽石星球',
+    tagId: 'ice',
     img: '/assets/img/team_5.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
   {
     id: 6,
     name: '小行星',
+    tagId: 'dune',
     img: '/assets/img/team_6.png',
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },

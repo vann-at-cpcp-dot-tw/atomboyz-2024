@@ -10,6 +10,7 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 const scopeStore = inject<any>('scopeStore')
+const route = useRoute()
 const state = reactive({
   scrollIng: false,
   scrollFocus: null,
@@ -18,6 +19,7 @@ const state = reactive({
     team: '',
   }
 })
+
 const setHeaderBg = function(){
   if (!window){
     return
@@ -28,16 +30,24 @@ const setHeaderBg = function(){
     document.getElementsByTagName('header')[0].style.background = 'none'
   }
 }
+
 onMounted(()=>{
   if (!window){
     return
   }
   setHeaderBg()
   window.addEventListener('scroll', setHeaderBg)
+
+  // if has hash
+  setTimeout(()=>{
+    scrollToSection({ el: window.document.querySelector(route.hash), offset: scopeStore.stickyHeight * -1 })
+  }, 500)
 })
+
 onBeforeUnmount(()=>{
   document.getElementsByTagName('header')[0].style.background = 'none'
 })
+
 onUnmounted(()=>{
   window?.removeEventListener('scroll', setHeaderBg)
 })
@@ -54,7 +64,9 @@ onUnmounted(()=>{
           class="row lg:row-gap-2 flex-nowrap"
           @submit="(e)=>{
             e.preventDefault()
-            const peopleTarget = window?.document.getElementById(`PEOPLE_${state.form.name}`)
+            const searchName = state.form.name
+            const tagId = scopeStore.searchNameToTagID(searchName)
+            const peopleTarget = window?.document.getElementById(tagId)
             if( !window ){
               return
             }
@@ -85,13 +97,13 @@ onUnmounted(()=>{
                     return
                   }
                   state.scrollIng = true
-                  scrollToSection({el:window?.document.getElementById(`TEAM_${(e.target as any).value}`), offset:scopeStore.stickyHeight*-1})
+                  scrollToSection({el:window?.document.getElementById(`${(e.target as any).value}`), offset:scopeStore.stickyHeight*-1})
                   window.setTimeout(() => {
                     state.scrollIng = false
                   }, 800);
                 }">
                   <option value="">請選擇團體</option>
-                  <option v-for="(node) in teams" :key="node.id" :value="node.id">{{ node.name }}</option>
+                  <option v-for="(node) in teams" :key="node.id" :value="node.tagId">{{ node.name }}</option>
                 </select>
                 <div class="pointer-events-none absolute right-0 top-0 flex size-[38px] items-center justify-center bg-major text-white">
                   <i class="bi bi-caret-down-fill"></i>
@@ -135,7 +147,7 @@ onUnmounted(()=>{
               return
             }
             state.scrollIng = true
-            scrollToSection({el:window?.document.getElementById(`TEAM_${node.id}`), offset:scopeStore.stickyHeight*-1})
+            scrollToSection({el:window?.document.getElementById(`${node.tagId}`), offset:scopeStore.stickyHeight*-1})
             state.scrollFocus = node.id
             window.setTimeout(() => {
               state.scrollFocus = null

@@ -17,28 +17,27 @@ const viewport = useWindowSize()
 const props = defineProps<IProps>()
 const swiperRef = ref<any>(null)
 const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
-  if ((viewport.width.value && viewport.width.value <= 991) || props?.list?.length < 4){
+  if (viewport.width.value && viewport.width.value <= 991){
     return {
       class: '',
       modules: [],
       spaceBetween: 0,
-      pagination: { clickable: true },
       grabCursor: true,
       centeredSlides: false,
       slidesPerView: 1,
       loop: true,
     }
-  } else {
-    return {
-      class: 'coverflow-swiper news-swiper !overflow-visible',
-      modules: [EffectCoverflow],
-      spaceBetween: 12,
-      pagination: { clickable: true },
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      loop: true,
-    }
+  }
+
+  return {
+    class: '',
+    modules: [],
+    spaceBetween: 12,
+    grabCursor: true,
+    centeredSlides: false,
+    // slidesPerView: props?.list?.length < 3 ? 2 : 3,
+    slidesPerView: 2,
+    loop: false,
   }
 })
 </script>
@@ -98,15 +97,42 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
               </SwiperSlide>
             </swiper>
           </div>
-          <div
-          v-if="swiperRef?.isLocked === false"
-          :class="`btn btnScale-up`"
-          @click="()=>{
-            swiperRef.slideNext()
-          }">
-            <img src="/assets/img/icon_arrow.svg" alt="">
+          <div class="hidden lg:block">
+            <div
+            v-if="swiperRef?.isLocked === false && !swiperRef?.isEnd"
+            :class="`btn btn-scaleUp`"
+            @click="()=>{
+              swiperRef.slideNext()
+            }">
+              <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
+            </div>
+            <NuxtLink
+            v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
+            to="/posts/video"
+            class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
+              <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
+              <i class="bi bi-chevron-right text-[18px] text-white"></i>
+            </NuxtLink>
+          </div>
+          <div class="block lg:hidden">
+            <div
+            :class="`btn btn-scaleUp ${swiperRef?.isLocked === false && !swiperRef?.isEnd ?'' :'opacity-0 pointer-events-none'}`"
+            @click="()=>{
+              swiperRef.slideNext()
+            }">
+              <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
+            </div>
           </div>
         </div>
+      </div>
+      <div class="container-fluid mt-5 flex justify-center lg:hidden">
+        <NuxtLink
+        v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
+        class="btn btn-scaleUp flex !flex-nowrap items-center"
+        to="/posts/video">
+          <span class="whitespace-nowrap pr-2 text-[12px] text-white underline">更多內容</span>
+          <i class="bi bi-chevron-right text-[12px] text-white"></i>
+        </NuxtLink>
       </div>
     </ClientOnly>
   </div>
