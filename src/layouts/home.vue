@@ -6,7 +6,7 @@ import GlobalAlert from '~/components/GlobalAlert.vue'
 import Footer from '~/components/Footer.vue'
 </script>
 <template>
-  <Html>
+  <!-- <Html>
     <Header />
     <div class="relative bg-black">
       <slot></slot>
@@ -15,5 +15,15 @@ import Footer from '~/components/Footer.vue'
       <GlobalAlert />
     </div>
     <Footer />
+  </Html> -->
+
+  <!-- <Html>
+    <div class="relative size-full bg-black">
+      <slot></slot>
+    </div>
+  </Html> -->
+
+  <Html>
+    <slot></slot>
   </Html>
 </template>

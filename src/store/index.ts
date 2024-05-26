@@ -6,6 +6,7 @@ interface ConstructorFunction extends Function {
 export interface IStore {
   general: any
   isDownloadStickerShow: boolean
+  isPreMode: boolean | undefined
   lightbox: string[]
   alert: string,
   user: {
@@ -41,6 +42,7 @@ export const createStore = function(){
   const store = reactive<IStore>({
     general: {},
     isDownloadStickerShow: false,
+    isPreMode: undefined,
     lightbox: [],
     alert: '',
     myVoting: {

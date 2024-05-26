@@ -1,33 +1,21 @@
 <script lang="tsx" setup>
-import { useWindowSize, useIntervalFn } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
 import { useStore } from '~/store'
 import MajorButton from '~/components/MajorButton.vue'
 import Footer from '~/components/Footer.vue'
-import { calculateRemainingTime } from '~/lib/helpers'
 import Lightbox from '~/components/Lightbox.vue'
-const viewport = useWindowSize()
-const store = useStore()
-const state = reactive({
+interface IProps {
+  class?: string
+  className?: string
   countdown: {
-    days: '--',
-    hours: '--',
-    minutes: '--',
-    seconds: '--',
-  },
-})
-const { pause, resume, isActive } = useIntervalFn(()=>{
-  if (!store.general.countdown_end_time){
-    return
+    days: string
+    hours: string
+    minutes: string
+    seconds: string
   }
-  const [year, month, date, hour, minute] = store.general.coming_soon_end_time.split('-')
-  state.countdown = calculateRemainingTime({
-    year,
-    month,
-    date,
-    hour,
-    minute,
-  })
-}, 1000)
+}
+const props = defineProps<IProps>()
+const store = useStore()
 watch(()=>store.lightbox, (newVal)=>{
   if (newVal.includes('PreHomeReminder')){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
@@ -40,6 +28,7 @@ watch(()=>store.lightbox, (newVal)=>{
 }, {
   immediate: true
 })
+
 </script>
 <template>
   <div class="flex size-full flex-col">
@@ -112,7 +101,7 @@ watch(()=>store.lightbox, (newVal)=>{
           <div class="row lg:row-gap-5 row-gap-2 flex-nowrap items-center justify-center">
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.days }}
+                {{ props.countdown.days }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">DAYS</div>
             </div>
@@ -121,7 +110,7 @@ watch(()=>store.lightbox, (newVal)=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.hours }}
+                {{ props.countdown.hours }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">HOURS</div>
             </div>
@@ -130,7 +119,7 @@ watch(()=>store.lightbox, (newVal)=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.minutes }}
+                {{ props.countdown.minutes }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">MINUTES</div>
             </div>
@@ -139,7 +128,7 @@ watch(()=>store.lightbox, (newVal)=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.seconds }}
+                {{ props.countdown.seconds }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">SECONDS</div>
             </div>

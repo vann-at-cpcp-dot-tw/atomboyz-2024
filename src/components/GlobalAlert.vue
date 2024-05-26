@@ -77,17 +77,24 @@ watch(()=>state.active, (newVal, oldVal)=>{
   }
   if (newVal){
     document.body.classList.add('show-global-alert')
+  } else {
+    document.body.classList.remove('show-global-alert')
+  }
+}, {
+  immediate: true,
+})
+
+watch(()=>[state.active, store.trackingSender], (newVal)=>{
+  if (newVal[0] && newVal[1]){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
       page_info: {
         page: trackingPage.value,
         type: 'ads_page'
       },
     })
-  } else {
-    document.body.classList.remove('show-global-alert')
   }
 }, {
-  immediate: true,
+  immediate: true
 })
 
 watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], ()=>{

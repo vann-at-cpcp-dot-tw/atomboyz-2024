@@ -15,8 +15,7 @@ export default defineNuxtConfig({
     public: {
       apiURL: process.env.NUXT_PUBLIC_API_URL, // can be overridden by NUXT_PUBLIC_API_BASE environment variable
       appURL: process.env.NUXT_PUBLIC_APP_URL,
-      isPreMode: process.env.NUXT_PUBLIC_IS_PRE_MODE,
-      isStage: process.env.IS_PRE_MODE,
+      isStage: process.env.NUXT_PUBLIC_IS_STAGE,
     }
   },
 })

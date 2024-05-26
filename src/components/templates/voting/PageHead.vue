@@ -40,7 +40,9 @@ onMounted(()=>{
 
   // if has hash
   setTimeout(()=>{
-    scrollToSection({ el: window.document.querySelector(route.hash), offset: scopeStore.stickyHeight * -1 })
+    if (route.hash){
+      scrollToSection({ el: window.document.querySelector(route.hash), offset: scopeStore.stickyHeight * -1 })
+    }
   }, 500)
 })
 
