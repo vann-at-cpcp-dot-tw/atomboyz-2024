@@ -12,6 +12,8 @@ import { calculateRemainingTime } from '~/lib/helpers'
 definePageMeta({
   layout: 'home'
 })
+const config = useRuntimeConfig()
+const PRE_MODE_END_AT = config.public.preModeEndAt as string
 const store = useStore()
 const state = reactive({
   preModeCountdown: {
@@ -22,12 +24,13 @@ const state = reactive({
   },
 })
 const { pause, resume, isActive } = useIntervalFn(()=>{
+  const [year, month, date, hour, minute] = PRE_MODE_END_AT.split('-')
   state.preModeCountdown = calculateRemainingTime({
-    year: '2024',
-    month: '06',
-    date: '11',
-    hour: '12',
-    minute: '00',
+    year,
+    month,
+    date,
+    hour,
+    minute,
   })
 }, 1000)
 watch(()=>state.preModeCountdown, (newVal)=>{

@@ -72,7 +72,7 @@ const videosFetcher = await useAsyncData<any>('video', ()=>{
   return $fetch(`${API_URL}/video.php`, {
     params: {
       page: 1,
-      per_page: 6,
+      per_page: 9,
     }
   })
 })
@@ -80,7 +80,7 @@ const newsFetcher = await useAsyncData<any>('news', ()=>{
   return $fetch(`${API_URL}/news.php`, {
     params: {
       page: 1,
-      per_page: 6,
+      per_page: 9,
     }
   })
 }, {
