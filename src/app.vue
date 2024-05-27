@@ -11,16 +11,6 @@ const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
 const IS_STAGE = Number(config.public?.isStage) === 1
-// useHead({
-//   script: [
-//     {
-//       src: IS_STAGE ? 'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' : 'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'
-//     },
-//     {
-//       src: IS_STAGE ? 'https://botsdk.stg.gim.beango.com/index.umd.js' : 'https://botsdk.gamania.chat/index.umd.js'
-//     }
-//   ]
-// })
 const { data } = await useFetch<any>(`${API_URL}/general.php`)
 const store = createStore()
 store.general = data.value?.data

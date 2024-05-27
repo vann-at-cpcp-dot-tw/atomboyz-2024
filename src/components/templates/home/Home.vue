@@ -94,7 +94,7 @@ provide('scopeStore', state)
 </script>
 <template>
   <main class="relative bg-[#0e160b]">
-    <div class="w-full overflow-hidden bg-no-repeat pt-[176px]" style="background-image: url('/assets/img/bg_home_1.jpg'); background-size: 1920px auto; background-position: center top; ">
+    <div class="w-full overflow-hidden bg-no-repeat pt-[176px]" style="background-image: url(/assets/img/bg_home_1.jpg); background-size: 1920px auto; background-position: center top; ">
       <KV />
 
       <KVSwiper class="pb-2" :list="store.general?.home_carousel" />
@@ -105,7 +105,7 @@ provide('scopeStore', state)
         </div>
       </div>
 
-      <div class="relative bg-black pb-[130px]" style="background-image: url('/assets/img/bg_star_1.png');">
+      <div class="relative bg-black pb-[130px]" style="background-image: url(/assets/img/bg_star_1.png);">
         <div class="container-fluid relative z-10 mb-[54px]">
           <div class="mb-5 flex justify-center">
             <img class="w-full" src="/assets/img/section_title_home_1.png" style="max-width:298px;">
@@ -150,7 +150,7 @@ provide('scopeStore', state)
       <RanksTable class="pb-8 pt-16" />
 
       <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
-        <div class="relative" style="background-image: url('/assets/img/bg_star_1.png'); background-repeat: repeat-x; background-position: center 200px;">
+        <div class="relative" style="background-image: url(/assets/img/bg_star_1.png); background-repeat: repeat-x; background-position: center 200px;">
           <div class="container mb-8">
             <img class="mx-auto mb-2" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">

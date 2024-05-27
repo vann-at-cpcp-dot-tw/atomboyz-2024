@@ -4,6 +4,8 @@ import { useStore } from '~/store'
 import MajorButton from '~/components/MajorButton.vue'
 import Footer from '~/components/Footer.vue'
 import Lightbox from '~/components/Lightbox.vue'
+const config = useRuntimeConfig()
+const APP_BASE = config.public.appBase
 interface IProps {
   class?: string
   className?: string
@@ -35,11 +37,26 @@ watch(()=>store.lightbox, (newVal)=>{
     <main
     class="size-full bg-black bg-no-repeat text-white"
     :style="{
-      backgroundImage: 'url(/assets/img/bg_pre_home.jpg)',
+      backgroundImage: `url(${APP_BASE}/assets/img/bg_pre_home.jpg)`,
       backgroundSize: '2565px',
       backgroundPosition: 'center bottom'
     }">
-      <Lightbox id="PreHomeReminder" icon="person-fill" title="Game Pass 註冊">
+      <Lightbox
+      id="PreHomeReminder"
+      icon="person-fill"
+      title="Game Pass 註冊"
+      :on-close="()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            page: 'atomboyz_teaser',
+            type: 'check_account',
+          },
+          click_info: {
+            type: 'cta',
+            name: 'close'
+          },
+        })
+      }">
         <div class="mb-6 text-black">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，請於 06/11 前點擊註冊或完成 beanfun! 帳號升級，為您心愛的少年投票。</div>
         <div class="row">
           <div class="col-6">
