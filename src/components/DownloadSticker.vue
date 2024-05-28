@@ -32,7 +32,7 @@ const state = reactive({
     :class="twMerge('relative z-[90] bottom-0 w-full bg-[#666464] text-white', props.class)">
       <div class="container-fluid py-10">
         <div class="mb-3 flex justify-center">
-          <img class="mx-auto" :src="`/assets/img/btn_download.png`" style="max-width: 344px;">
+          <img class="mx-auto" src="/assets/img/btn_download.png" style="max-width: 344px;">
           <!-- <i
           class="btn bi bi-x-circle relative left-[8px] top-[-24px] ml-auto self-end text-[38px] leading-none"
           @click="()=>{

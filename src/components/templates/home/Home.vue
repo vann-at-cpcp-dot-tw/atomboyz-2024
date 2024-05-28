@@ -17,6 +17,7 @@ import 'swiper/css/effect-coverflow'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
+const IS_STAGE = config.public.isStage
 const store = useStore()
 const route = useRoute()
 const state:any = reactive({
@@ -205,15 +206,17 @@ provide('scopeStore', state)
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
-              <img
-              class="absolute size-full rounded-lg"
-              :src="store.general?.home_bottom_banner"
-              :style="{
-                left: '2%',
-                top: '3.5%',
-                width: '96%',
-                height: '87.5%',
-              }">
+              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/5e7WK' :'https://hidol.fan/mcVjO'" target="_blank">
+                <img
+                class="absolute size-full rounded-lg"
+                src="/assets/img/hidol-preheat-section.png"
+                :style="{
+                  left: '2%',
+                  top: '3.5%',
+                  width: '96%',
+                  height: '87.5%',
+                }">
+              </a>
             </ImgFrame>
           </div>
         </div>

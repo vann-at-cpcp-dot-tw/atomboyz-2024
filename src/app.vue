@@ -44,34 +44,38 @@ onMounted(()=>{
     })
   })
 
-  ;(window as any).GIMBotTool.init({
-    url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
-    logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
-    btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
-  })
-
-  ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
-    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-      page_info: {
-        page: 'atomboyz_teaser',
-      },
-      click_info: {
-        type: 'ai_customer_service',
-      },
+  if (store.isPreMode === false){
+    ;(window as any).GIMBotTool.init({
+      url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+      logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+      btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
     })
-  })
+
+    ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          page: 'atomboyz_teaser',
+        },
+        click_info: {
+          type: 'ai_customer_service',
+        },
+      })
+    })
+  }
 })
 </script>
 <template>
   <Html>
     <Head>
-      <Title>原子少年 X beanfun!｜太陽系男團人氣票選</Title>
-      <Meta name="description" content="太陽系男團-原子少年 Atom Boyz人氣票選就在beanfun! ，beanfun!用戶登入beanfun! APP或活動網頁就可進行投票。現在搶先下載beanfun! APP並完成註冊，票數直接多5倍，只要輕鬆完成任務及分享還可獲得額外票數。 be here for FUN! 好玩的都在這。" />
-      <Meta name="keywords" content="原子少年、bean!、男團、好玩的都在這、太陽系男團人氣票選、Atom Boyz、八大行星、周湯豪、Ella、坤達、be here for FUN!" />
-      <Meta name="url" content="https://atomboyz.beanfun.com/" />
-      <Meta property="og:title" content="原子少年 X beanfun!｜太陽系男團人氣票選" />
+      <Title>hidol X 原子少年 2｜獨家線上投票</Title>
+      <Meta name="description" content="「hidol X 原子少年2」獨家線上投票平台，我們一起為這些勇敢追夢的選手們投票應援吧！hidol 拉近你與idol的距離。" />
+      <Meta name="keywords" content="原子少年、原子少年2、男團、Atom Boyz、Atom Boyz2、歐漢聲、健志、坤達、hidol、拉近你與 idol 的距離、台灣男團選秀" />
+      <Meta name="url" :content="APP_URL" />
+      <Meta property="og:url" :content="APP_URL" />
+      <Meta property="og:title" content="hidol X 原子少年 2｜獨家線上投票" />
+      <Meta property="og:site_name" content="hidol X 原子少年 2｜獨家線上投票" />
       <Meta property="og:image" content="/assets/img/og.jpg" />
-      <Meta property="og:description" content="太陽系男團人氣票選，下載beanfun! APP投票票數多五倍，beanfun! 好玩的都在這！" />
+      <Meta property="og:description" content="讓我們一起為勇敢追夢的選手們投票應援，你喜歡的少年就差你一票！hidol 拉近你與idol的距離。" />
       <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
       <Link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
       <!-- tracikng -->
