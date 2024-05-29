@@ -37,7 +37,7 @@ watch(()=>store.lightbox, (newVal)=>{
     <main
     class="size-full bg-black bg-no-repeat text-white"
     :style="{
-      backgroundImage: `url(${APP_BASE}/assets/img/bg_pre_home.jpg)`,
+      backgroundImage: `url(${APP_BASE}assets/img/bg_pre_home.jpg)`,
       backgroundSize: '2565px',
       backgroundPosition: 'center bottom'
     }">
