@@ -47,6 +47,7 @@ onMounted(()=>{
   if (store.isPreMode === false){
     ;(window as any).GIMBotTool.init({
       url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+      title: '客服幫手 原子小少年',
       logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
       btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
     })

@@ -6,6 +6,8 @@ import Footer from '~/components/Footer.vue'
 import Lightbox from '~/components/Lightbox.vue'
 const config = useRuntimeConfig()
 const APP_BASE = config.public.appBase
+const IS_STAGE = config.public.isStage
+
 interface IProps {
   class?: string
   className?: string
@@ -86,7 +88,7 @@ watch(()=>store.lightbox, (newVal)=>{
           </div>
           <div class="col-6">
             <a
-            href="https://accounts.stg.gama.beango.com/oauth2/authorize?response_type=code&prompt=login&client_id=MjdiZGNhNWUtMTI2ZC00ZGZmLTkwMjctMDY5MDhmYzM2Mjlj&scope=openid,userinfo.profile&redirect_uri=http://localhost/&state=1234&nonce=5678"
+            :href="`https://accounts.stg.gama.beango.com/oauth2/authorize?response_type=code&prompt=login&client_id=MjdiZGNhNWUtMTI2ZC00ZGZmLTkwMjctMDY5MDhmYzM2Mjlj&scope=openid,userinfo.profile&redirect_uri=${IS_STAGE ?'https://events.stg.hidol.beango.com/atomboyz/gamapass_login_callback' :'https://events.hidol.com/atomboyz/gamapass_login_callback'}`"
             target="_blank"
             @click="()=>{
               store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {

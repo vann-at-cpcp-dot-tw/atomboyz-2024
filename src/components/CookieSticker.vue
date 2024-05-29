@@ -45,7 +45,7 @@ watch(()=>state.active, (newVal, oldVal)=>{
               <i class="bi bi-file-earmark-text block text-[44px] leading-none"></i>
             </div>
             <div class="w-full max-w-[750px] shrink pr-4 lg:px-2">
-              遊戲橘子採用網站分析技術，為您帶來更優質的使用體驗，若您點選「同意」或「繼續瀏覽」本網站，即同意我們使用第三方 Cookie，欲瞭解更多資訊請見<a href="" target="_blank" class="text-major underline">隱私權政策。</a>
+              我們採用網站分析技術為您帶來更優質的使用體驗，若您點選<span class="text-major">「我同意」</span>或繼續瀏覽本網站，即表示您同意我們使用第三方 Cookie。
             </div>
             <div class="ml-auto flex-none">
               <MajorButton
