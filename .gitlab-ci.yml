@@ -1,0 +1,108 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA.$CI_PIPELINE_IID
+
+stages:
+  - build_image
+  - update-version
+
+.build_image:
+  stage: build_image
+  image: 
+    name: gcr.io/kaniko-project/executor:v1.16.0-debug
+    entrypoint: [""]
+  tags:
+    - shared-runners-no-root
+  variables:
+    TARGET_ENV: base
+  script:
+    - mkdir -p /kaniko/.docker
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
+
+build_image:dev:
+  extends: .build_image
+  rules:
+    - if: $CI_COMMIT_TAG =~ /DEV/
+  variables:
+    TARGET_ENV: dev
+
+build_image:test:
+  extends: .build_image
+  rules:
+    - if: $CI_COMMIT_TAG =~ /TEST/
+  variables:
+    TARGET_ENV: test
+
+build_image:stg:
+  extends: .build_image
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^[0-9]+\.[0-9]+\.[0-9]+_STG/
+  variables:
+    TARGET_ENV: stg
+
+update-version:dev:
+  stage: update-version
+  allow_failure: false
+  inherit:
+    variables: true
+  needs:
+    - job: 'build_image:dev'
+      optional: true
+  variables:
+    # Use this variable to differentiate within the backend pipeline
+    UPSTREAM_CI_JOB_NAME: $CI_JOB_NAME-frontend
+    UPSTREAM_PROJECT_NAME: $CI_PROJECT_NAME
+    UPSTREAM_GITLAB_USER_EMAIL: $GITLAB_USER_EMAIL
+    UPSTREAM_GITLAB_USER_NAME: $GITLAB_USER_NAME
+    TARGET_ENV: dev
+  rules:
+    - if: $CI_COMMIT_TAG =~ /DEV/
+  trigger:
+    project: hidol/event/atomboyz/2024-gamania-atomboyz-deploy
+    branch: main
+    strategy: depend
+
+update-version:test:
+  stage: update-version
+  allow_failure: false
+  inherit:
+    variables: true
+  needs:
+    - job: 'build_image:test'
+      optional: true
+  variables:
+    UPSTREAM_CI_JOB_NAME: $CI_JOB_NAME-frontend
+    UPSTREAM_PROJECT_NAME: $CI_PROJECT_NAME
+    UPSTREAM_GITLAB_USER_EMAIL: $GITLAB_USER_EMAIL
+    UPSTREAM_GITLAB_USER_NAME: $GITLAB_USER_NAME
+    TARGET_ENV: test
+  rules:
+    - if: $CI_COMMIT_TAG =~ /TEST/
+  trigger:
+    project: hidol/event/atomboyz/2024-gamania-atomboyz-deploy
+    branch: main
+    strategy: depend
+
+update-version:stg:
+  stage: update-version
+  allow_failure: false
+  inherit:
+    variables: true
+  needs:
+    - job: 'build_image:stg'
+      optional: true
+  variables:
+    UPSTREAM_CI_JOB_NAME: $CI_JOB_NAME-frontend
+    UPSTREAM_PROJECT_NAME: $CI_PROJECT_NAME
+    UPSTREAM_GITLAB_USER_EMAIL: $GITLAB_USER_EMAIL
+    UPSTREAM_GITLAB_USER_NAME: $GITLAB_USER_NAME
+    TARGET_ENV: stg
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^[0-9]+\.[0-9]+\.[0-9]+_STG/
+  trigger:
+    project: hidol/event/atomboyz/2024-gamania-atomboyz-deploy
+    branch: main
+    strategy: depend

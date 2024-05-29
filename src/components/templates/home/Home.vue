@@ -17,6 +17,7 @@ import 'swiper/css/effect-coverflow'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
+const IS_STAGE = config.public.isStage
 const store = useStore()
 const route = useRoute()
 const state:any = reactive({
@@ -30,6 +31,13 @@ const state:any = reactive({
   newsTableActive: 'videos',
   rankList: computed(()=>{
     switch (state.rankTableActive){
+      case 'personal':
+        return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
+          return {
+            ...node,
+            href: `/voting?p=${node.name}`
+          }
+        })
       case 'team':
         return ranksFetcher.data.value?.data?.team?.map((node:any)=>{
           const { id } = node
@@ -37,7 +45,8 @@ const state:any = reactive({
           return {
             img: targetTeam?.img,
             name: targetTeam?.name,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`
+            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            href: `/voting#${targetTeam?.tagId}`
           }
         })
 
@@ -64,7 +73,7 @@ const videosFetcher = await useAsyncData<any>('video', ()=>{
   return $fetch(`${API_URL}/video.php`, {
     params: {
       page: 1,
-      per_page: 6,
+      per_page: 9,
     }
   })
 })
@@ -72,7 +81,7 @@ const newsFetcher = await useAsyncData<any>('news', ()=>{
   return $fetch(`${API_URL}/news.php`, {
     params: {
       page: 1,
-      per_page: 6,
+      per_page: 9,
     }
   })
 }, {
@@ -86,7 +95,7 @@ provide('scopeStore', state)
 </script>
 <template>
   <main class="relative bg-[#0e160b]">
-    <div class="w-full overflow-hidden bg-no-repeat pt-[176px]" style="background-image: url('/assets/img/bg_home_1.jpg'); background-size: 1920px auto; background-position: center top; ">
+    <div class="w-full overflow-hidden bg-no-repeat pt-[176px]" style="background-image: url(/assets/img/bg_home_1.jpg); background-size: 1920px auto; background-position: center top; ">
       <KV />
 
       <KVSwiper class="pb-2" :list="store.general?.home_carousel" />
@@ -97,7 +106,7 @@ provide('scopeStore', state)
         </div>
       </div>
 
-      <div class="relative bg-black pb-[130px]" style="background-image: url('/assets/img/bg_star_1.png');">
+      <div class="relative bg-black pb-[130px]" style="background-image: url(/assets/img/bg_star_1.png);">
         <div class="container-fluid relative z-10 mb-[54px]">
           <div class="mb-5 flex justify-center">
             <img class="w-full" src="/assets/img/section_title_home_1.png" style="max-width:298px;">
@@ -142,7 +151,7 @@ provide('scopeStore', state)
       <RanksTable class="pb-8 pt-16" />
 
       <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
-        <div class="relative" style="background-image: url('/assets/img/bg_star_1.png'); background-repeat: repeat-x; background-position: center 200px;">
+        <div class="relative" style="background-image: url(/assets/img/bg_star_1.png); background-repeat: repeat-x; background-position: center 200px;">
           <div class="container mb-8">
             <img class="mx-auto mb-2" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">
@@ -197,15 +206,17 @@ provide('scopeStore', state)
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
-              <img
-              class="absolute size-full rounded-lg"
-              :src="store.general?.home_bottom_banner"
-              :style="{
-                left: '2%',
-                top: '3.5%',
-                width: '96%',
-                height: '87.5%',
-              }">
+              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/5e7WK' :'https://hidol.fan/mcVjO'" target="_blank">
+                <img
+                class="absolute size-full rounded-lg"
+                src="/assets/img/hidol-preheat-section.png"
+                :style="{
+                  left: '2%',
+                  top: '3.5%',
+                  width: '96%',
+                  height: '87.5%',
+                }">
+              </a>
             </ImgFrame>
           </div>
         </div>

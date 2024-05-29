@@ -10,7 +10,6 @@ switch ($method) {
     $res = [
       'data'=> [
         'countdown_end_time'=> '2024-06-30-00-00', // 首頁的倒數目標時間，格式：YYYY-MM-DD-HH-MM
-        'coming_soon_end_time'=> '2024-06-25-00-00', // 預熱頁的倒數目標時間，格式：YYYY-MM-DD-HH-MM
         'global_alert'=> '<div>
           <img src="/assets/img/pic1.jpg"/><br/><p>通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容</p>
         </div>', // 全站蓋板燈箱通知

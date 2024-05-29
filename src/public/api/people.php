@@ -15,6 +15,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一一',
+            'tag_id'=> 'boyz001',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -25,6 +26,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一二',
+            'tag_id'=> 'boyz002',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -35,6 +37,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一三',
+            'tag_id'=> 'boyz003',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -45,6 +48,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一四',
+            'tag_id'=> 'boyz004',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -55,6 +59,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一五',
+            'tag_id'=> 'boyz005',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -65,6 +70,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一六',
+            'tag_id'=> 'boyz006',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -75,6 +81,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一七',
+            'tag_id'=> 'boyz007',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -85,6 +92,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一八',
+            'tag_id'=> 'boyz008',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -95,6 +103,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王一九',
+            'tag_id'=> 'boyz009',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -105,6 +114,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二一',
+            'tag_id'=> 'boyz010',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -115,6 +125,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二二',
+            'tag_id'=> 'boyz011',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -125,6 +136,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二三',
+            'tag_id'=> 'boyz012',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -135,6 +147,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二四',
+            'tag_id'=> 'boyz013',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -145,6 +158,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二五',
+            'tag_id'=> 'boyz014',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -155,6 +169,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二六',
+            'tag_id'=> 'boyz015',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
@@ -165,6 +180,7 @@ switch ($method) {
           [
             'img'=> '/assets/img/rank_img_personal.png',
             'name'=> '王二七',
+            'tag_id'=> 'boyz016',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',

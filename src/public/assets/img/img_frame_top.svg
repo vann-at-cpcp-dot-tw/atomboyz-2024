@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="838.765" height="17.469" viewBox="0 0 838.765 17.469">
-  <g id="Group_4095" data-name="Group 4095" transform="translate(-541.23 -1247.653)">
-    <path id="Union_78" data-name="Union 78" d="M15437.093,10906.555h-114.5l13.371-13.371h202.239l13.376,13.371Zm155.643,0-13.371-13.371h13.446l13.371,13.371Zm-18.325,0-13.372-13.371h13.446l13.371,13.371Zm-18.326,0-13.371-13.371h13.441l13.375,13.371Zm-251.433,0,13.371-13.371h13.446l-13.371,13.371Zm-18.326,0,13.372-13.371h13.441l-13.371,13.371Zm-18.325,0,13.371-13.371h13.441l-13.371,13.371Z" transform="translate(-14476.747 -9642.691)" fill="#231fb1" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
-    <path id="Path_1399" data-name="Path 1399" d="M2111.739,1940.847,2095,1926H1291l-16.011,14.847" transform="translate(-732.739 -676.847)" fill="none" stroke="#231fb1" stroke-width="3"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="838.765" height="17.469"><g data-name="Group 4095"><path data-name="Union 78" d="M419.116 16.211h-114.5L317.987 2.84h202.239l13.376 13.371zm155.643 0L561.388 2.84h13.446l13.371 13.371zm-18.325 0L543.062 2.84h13.446l13.371 13.371zm-18.326 0L524.737 2.84h13.441l13.375 13.371zm-251.433 0L300.046 2.84h13.446l-13.371 13.371zm-18.326 0L281.721 2.84h13.441l-13.371 13.371zm-18.325 0L263.395 2.84h13.441l-13.371 13.371z" fill="#231fb1" stroke="rgba(0,0,0,0)" stroke-miterlimit="10"/><path data-name="Path 1399" d="M837.77 16.347L821.031 1.5h-804L1.02 16.347" fill="none" stroke="#231fb1" stroke-width="3"/></g></svg>

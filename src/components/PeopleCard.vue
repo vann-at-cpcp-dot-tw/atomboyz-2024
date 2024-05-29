@@ -13,9 +13,11 @@ interface IProps {
   name: string
   votes: number
   team: number
+  tag_id?: string,
   yt_url?: string
   hidoi_url?: string
   can_vote?: boolean
+  description?: string
   onThumbClick?: Function
 }
 const props = defineProps<IProps>()
@@ -32,7 +34,7 @@ const state = reactive({
     state.open = ''
   }" />
   <div
-  :id="`PEOPLE_${props.name}`"
+  :id="`${props.tag_id}`"
   :class="twMerge('rounded-lg overflow-hidden', props.class)">
     <div
     class="btn group"
@@ -43,10 +45,29 @@ const state = reactive({
       ratio="92.35">
         <div class="absolute left-0 top-0 z-0 size-full overflow-hidden">
           <div
-          class="absolute left-0 top-0 size-full bg-cover bg-top group-hover:scale-[1.2]"
+          class="btn btn-light absolute left-1.5 top-1.5 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
+          @click="(e)=>{
+            e.stopPropagation()
+          }">
+            <i class="bi bi-share-fill relative -left-0.5 text-[11px] leading-none"></i>
+          </div>
+          <i
+          class="bi btn btn-scaleUp bi-heart-fill absolute right-2 top-1.5 z-10 text-[19px] leading-none"
+          :style="{
+            color: store.user?.fav_peoples?.map((node:any)=>node.name).includes(props?.name) ?'#EC4F7F' :'#555555'
+          }"
+          @click="(e)=>{
+            e.stopPropagation()
+            if( !store.user?.name ){
+              return
+            }
+            store.do.toggleFav(props.name)
+          }"></i>
+          <div
+          class="absolute left-0 top-0 size-full bg-cover bg-top"
           :style="{
             backgroundImage:`url(${props?.img})`,
-            transition: 'all .4s'
+            transition: 'all .8s'
           }"></div>
         </div>
       </RatioArea>

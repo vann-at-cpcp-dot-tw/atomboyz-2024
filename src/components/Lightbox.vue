@@ -62,7 +62,7 @@ watch(()=>[window, store.lightbox], ()=>{
           </div>
           <i v-if="!props?.noClose" class="bi bi-x btn ml-auto block flex-none text-[34px] leading-none" @click="handleClose"></i>
         </div>
-        <div class="bg-white p-5 lg:px-8 lg:py-6"><slot></slot></div>
+        <div class="bg-white p-5 lg:p-6"><slot></slot></div>
       </div>
     </div>
   </div>

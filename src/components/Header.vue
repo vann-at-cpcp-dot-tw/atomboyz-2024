@@ -8,27 +8,35 @@ import { useStore } from '~/store'
 const nav = [
   {
     label: '首頁',
-    name: 'index',
+    names: ['index'],
+    to: '/'
   },
   {
     label: 'NEWS',
-    name: 'news'
+    names: ['posts-tab', 'post-id'],
+    to: '/posts/video',
   },
   {
     label: '我要投票',
-    name: 'voting',
+    names: ['voting'],
+    to: '/voting'
   },
   {
     label: '排行榜',
-    name: 'rank',
+    names: ['rank'],
+    to: '/#RANK'
   },
   {
     label: '周邊商品',
-    name: 'shop',
+    names: ['shop'],
+    to: '/#SALE'
   },
   {
     label: '會員中心',
-    name: 'member',
+    names: ['member'],
+    onClick: ()=>{
+      alert(1)
+    }
   }
 ]
 
@@ -50,10 +58,13 @@ const state = reactive({
           v-for="(node, index) in nav"
           :key="index"
           class="col-auto">
-            <NuxtLink :to="`/${node.name === 'index' ?'' :node.name}`">
+            <NuxtLink :to="node?.to">
               <div
               class="btn rounded-full py-1 text-center"
-              :class="`${route.name === node.name ?'bg-major text-white min-w-[95px]' :'text-major btn-scaleUp'}`">
+              :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major btn-scaleUp'}`"
+              @click="()=>{
+                node?.onClick?.()
+              }">
                 {{ node.label }}
               </div>
             </NuxtLink>
@@ -105,7 +116,7 @@ const state = reactive({
             <i class="bi bi-person-fill block text-[21px] leading-none text-white"></i>
           </div>
           <div v-if="store.user?.name" class="-mb-4 mt-1 text-[10px] text-white">
-            <div>{{ store.user.name }}</div>
+            <div class="text-center">{{ store.user.name }}</div>
             <div>擁有票數：{{ store.user.votes }}</div>
           </div>
           <div v-else class="-mb-4 mt-1 text-[10px] text-white">登入 ｜ 註冊</div>

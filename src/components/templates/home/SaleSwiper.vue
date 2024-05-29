@@ -43,7 +43,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
 })
 </script>
 <template>
-  <div :class="twMerge('', props.class)">
+  <div id="SALE" :class="twMerge('', props.class)">
     <ClientOnly>
       <div v-if="viewport.width.value >= 992 && props?.list?.length <= 5" class="container">
         <div class="row justify-center">

@@ -16,13 +16,18 @@
   --color-major-900: #0B001F
   --color-major-950: #010003
 
+@media (min-width: #{$screen-xl}px)
+  .container
+    max-width: 1280px
+
 body
   background: black
   &.lightbox-open,
   &.embed-player-open,
   &.show-cookie-alert,
   &.show-global-alert,
-  &.show-game-page
+  &.show-game-page,
+  &.show-peoplebox
     overflow: hidden
 
 select
@@ -37,7 +42,6 @@ input[type=checkbox]
   @apply rounded
 // select:invalid
 //   color: green
-
 
 .disabled
   pointer-events: none
@@ -77,18 +81,18 @@ input[type=checkbox]
     width: 33.33% !important
 
 
-.video-swiper
-  position: relative
-  left: 22px
-  .swiper-wrapper
-    display: flex
-    align-items: center
-  .swiper-slide
-    width: calc(33.33% - 44px) !important
-    opacity: 0.6
-  .swiper-slide-active
-    width: 33.33% !important
-    opacity: 1
+// .video-swiper
+//   position: relative
+//   left: 22px
+//   .swiper-wrapper
+//     display: flex
+//     align-items: center
+//   .swiper-slide
+//     width: calc(33.33% - 44px) !important
+//     opacity: 0.6
+//   .swiper-slide-active
+//     width: 33.33% !important
+//     opacity: 1
 
 .news-swiper
   .swiper-slide
@@ -129,3 +133,7 @@ input[type=checkbox]
     filter: drop-shadow(0px 0px 2vw rgba(255, 255, 255, 0.66))
   100%
     filter: drop-shadow(0px 0px 1vw rgba(255, 255, 255, 0))
+
+#gim-bot-tool-button
+  img
+    margin: 0 !important

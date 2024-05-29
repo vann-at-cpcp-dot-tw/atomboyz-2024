@@ -11,7 +11,11 @@ switch ($method) {
       $res = [
         'data'=> [
           'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
+          'img'=> '/assets/img/news_preview.png', // 預覽圖
           'content'=> '<div>內容內容內容內容內容內容內容</div>',
+          'date'=> '2024.07.07',
+          'prev_id'=> 3,
+          'next_id'=> 5,
           'tags'=> ['標籤1', '標籤2', '標籤3']
         ]
       ];

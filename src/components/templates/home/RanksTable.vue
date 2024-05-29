@@ -15,7 +15,7 @@ const scopeStore:any = inject('scopeStore')
 
 </script>
 <template>
-  <div :class="twMerge('relative bg-[#120c60]', props.class)">
+  <div id="RANK" :class="twMerge('relative bg-[#120c60]', props.class)">
     <div class="container mb-8">
       <div class="mb-8 flex justify-center">
         <img class="w-full" src="/assets/img/section_title_home_3.png" style="max-width:335px;">

@@ -1,55 +1,111 @@
 <script lang="tsx" setup>
-import { useWindowSize, useIntervalFn } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
 import { useStore } from '~/store'
 import MajorButton from '~/components/MajorButton.vue'
 import Footer from '~/components/Footer.vue'
-import { calculateRemainingTime } from '~/lib/helpers'
 import Lightbox from '~/components/Lightbox.vue'
-const viewport = useWindowSize()
-const store = useStore()
-const state = reactive({
+const config = useRuntimeConfig()
+const APP_BASE = config.public.appBase
+const IS_STAGE = config.public.isStage
+
+interface IProps {
+  class?: string
+  className?: string
   countdown: {
-    days: '--',
-    hours: '--',
-    minutes: '--',
-    seconds: '--',
-  },
-})
-const { pause, resume, isActive } = useIntervalFn(()=>{
-  if (!store.general.countdown_end_time){
-    return
+    days: string
+    hours: string
+    minutes: string
+    seconds: string
   }
-  const [year, month, date, hour, minute] = store.general.coming_soon_end_time.split('-')
-  state.countdown = calculateRemainingTime({
-    year,
-    month,
-    date,
-    hour,
-    minute,
-  })
-}, 1000)
+}
+const props = defineProps<IProps>()
+const store = useStore()
+watch(()=>store.lightbox, (newVal)=>{
+  if (newVal.includes('PreHomeReminder')){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+      page_info: {
+        page: 'atomboyz_teaser',
+        type: 'check_account',
+      },
+    })
+  }
+}, {
+  immediate: true
+})
+
 </script>
 <template>
   <div class="flex size-full flex-col">
     <main
     class="size-full bg-black bg-no-repeat text-white"
     :style="{
-      backgroundImage: 'url(/assets/img/bg_pre_home.jpg)',
-      backgroundSize: '1893px',
+      backgroundImage: `url(${APP_BASE}assets/img/bg_pre_home.jpg)`,
+      backgroundSize: '2565px',
       backgroundPosition: 'center bottom'
     }">
-      <Lightbox id="PreHomeReminder" icon="person-fill" title="Game Pass 註冊">
-        <div class="mb-6 text-black">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，請於 06/11 前點擊註冊或完成 beanfun! 帳號升級，為您心愛的少年投票。</div>
+      <Lightbox
+      id="PreHomeReminder"
+      icon="person-fill"
+      title="搶先註冊"
+      :on-close="()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            page: 'atomboyz_teaser',
+            type: 'check_account',
+          },
+          click_info: {
+            type: 'cta',
+            name: 'close'
+          },
+        })
+      }">
+        <div class="mb-6 text-black">
+          <div class="mb-2">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，為您心愛的少年投票。</div>
+          <div>1. 我有 beanfun! 帳號：點擊「beanfun! 升級」</div>
+          <div>2. 我沒有 beanfun! 帳號：點擊「全新註冊」</div>
+        </div>
         <div class="row">
           <div class="col-6">
-            <MajorButton class="h-[40px]">
-              beanfun! 升級
-            </MajorButton>
+            <a
+            href="https://hidol.fan/M6xVL"
+            target="_blank"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  page: 'atomboyz_teaser',
+                  type: 'check_account',
+                },
+                click_info: {
+                  type: 'cta',
+                  name: 'upgrade'
+                },
+              })
+            }">
+              <MajorButton class="h-[40px]">
+                beanfun! 升級
+              </MajorButton>
+            </a>
           </div>
           <div class="col-6">
-            <MajorButton class="h-[40px]">
-              全新註冊
-            </MajorButton>
+            <a
+            :href="`https://accounts.stg.gama.beango.com/oauth2/authorize?response_type=code&prompt=login&client_id=MjdiZGNhNWUtMTI2ZC00ZGZmLTkwMjctMDY5MDhmYzM2Mjlj&scope=openid,userinfo.profile&redirect_uri=${IS_STAGE ?'https://events.stg.hidol.beango.com/atomboyz/gamapass_login_callback' :'https://events.hidol.com/atomboyz/gamapass_login_callback'}`"
+            target="_blank"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  page: 'atomboyz_teaser',
+                  type: 'check_account',
+                },
+                click_info: {
+                  type: 'cta',
+                  name: 'sign_up'
+                },
+              })
+            }">
+              <MajorButton class="h-[40px]">
+                全新註冊
+              </MajorButton>
+            </a>
           </div>
         </div>
       </Lightbox>
@@ -68,7 +124,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
           <div class="row lg:row-gap-5 row-gap-2 flex-nowrap items-center justify-center">
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.days }}
+                {{ props.countdown.days }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">DAYS</div>
             </div>
@@ -77,7 +133,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.hours }}
+                {{ props.countdown.hours }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">HOURS</div>
             </div>
@@ -86,7 +142,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.minutes }}
+                {{ props.countdown.minutes }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">MINUTES</div>
             </div>
@@ -95,7 +151,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
             </div>
             <div class="col-auto w-1/4 shrink text-center">
               <div class="whitespace-nowrap text-[56px] font-600 leading-none sm:text-[60px] lg:text-[98px]">
-                {{ state.countdown.seconds }}
+                {{ props.countdown.seconds }}
               </div>
               <div class="-mb-2 text-center text-[12px] font-300 lg:-mb-4 lg:text-[19px]">SECONDS</div>
             </div>
@@ -107,6 +163,15 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
         class="btn btn-light h-[42px] w-[150px] lg:h-[60px] lg:w-[215px] lg:text-[20px]"
         @click="()=>{
           store.do.lightboxOpen('PreHomeReminder')
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            page_info: {
+              page: 'atomboyz_teaser',
+            },
+            click_info: {
+              type: 'cta',
+              name: 'sign_up_entry'
+            },
+          })
         }">
           搶先註冊
         </MajorButton>

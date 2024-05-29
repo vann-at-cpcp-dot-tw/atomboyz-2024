@@ -45,31 +45,28 @@ const props = defineProps({
   },
 })
 const store = useStore()
-// const state = reactive({
-//   show: true
-// })
 const state = reactive({
-  show: false,
+  show: true,
   showGame: false,
 })
 
-onMounted(()=>{
-  if (!window){
-    return
-  }
-  window.addEventListener('scroll', function(){
-    // if (isScrolledPastHalfway()){
-    //   state.show = true
-    // } else {
-    //   state.show = false
-    // }
-    if (window.scrollY > 700){
-      state.show = true
-    } else {
-      state.show = false
-    }
-  })
-})
+// onMounted(()=>{
+//   if (!window){
+//     return
+//   }
+//   window.addEventListener('scroll', function(){
+//     // if (isScrolledPastHalfway()){
+//     //   state.show = true
+//     // } else {
+//     //   state.show = false
+//     // }
+//     if (window.scrollY > 700){
+//       state.show = true
+//     } else {
+//       state.show = false
+//     }
+//   })
+// })
 
 watch(()=>state.showGame, (newVal, oldVal)=>{
   if (!window){
@@ -94,22 +91,22 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
     }" />
 
     <div
-    :class="twMerge(`z-[100] fixed right-5 top-1/2 -translate-y-1/2 mt-[80px] ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+    :class="twMerge(`z-[100] fixed right-5 bottom-[90px] ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
       transition: 'all .4s',
       // marginBottom: store.isDownloadStickerShow ?'170px' :'0px'
     }">
       <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         state.showGame = true
       }">
-        <img class="mx-auto mb-1.5" src="/assets/img/icon_game.svg" alt="">
-        <div class="text-center text-[14px] leading-[1.2] text-white">小遊戲</div>
+        <img class="mx-auto mb-1 max-w-[22px]" src="/assets/img/icon_game.svg" alt="">
+        <div class="text-center text-[11px] leading-[1.2] text-white">小遊戲</div>
       </div>
       <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         if( !window ){ return }
@@ -119,19 +116,7 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
         })
       }">
         <img class="mx-auto mb-1" src="/assets/img/icon_circle_top.svg" alt="">
-        <div class="text-center text-[14px] leading-[1.2]">TOP</div>
-      </div>
-      <div
-      class="btn btn-scaleUp mb-3 flex size-[72px] flex-col items-center justify-center rounded-full"
-      style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
-      @click="()=>{
-        if( !window ){ return }
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }">
-        <img class="mx-auto mb-1" src="/assets/img/icon_headphone.svg" alt="">
+        <div class="text-center text-[12px] leading-[1.2]">TOP</div>
       </div>
     </div>
   </ClientOnly>
