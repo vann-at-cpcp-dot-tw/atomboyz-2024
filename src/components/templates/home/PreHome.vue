@@ -57,10 +57,13 @@ watch(()=>store.lightbox, (newVal)=>{
           },
         })
       }">
-        <div class="mb-6 text-black">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，為您心愛的少年投票。</div>
+        <div class="mb-6 text-black">
+          <div class="mb-2">本次「hidol X 原子少年 2 線上投票」限定使用 Gama Pass 帳號登入，為您心愛的少年投票。</div>
+          <div>1. 我有 beanfun! 帳號：點擊「beanfun! 升級」</div>
+          <div>2. 我沒有 beanfun! 帳號：點擊「全新註冊」</div>
+        </div>
         <div class="row">
-          <div class="col-12 mb-4 flex items-center">
-            <div class="py-1 pr-1 text-black">我有 beanfun! 帳號，點擊：</div>
+          <div class="col-6">
             <a
             href="https://hidol.fan/M6xVL"
             target="_blank"
@@ -81,8 +84,7 @@ watch(()=>store.lightbox, (newVal)=>{
               </MajorButton>
             </a>
           </div>
-          <div class="col-12 flex items-center">
-            <div class="py-1 pr-1 text-black">我沒有 beanfun! 帳號，點擊：</div>
+          <div class="col-6">
             <a
             href="https://accounts.stg.gama.beango.com/oauth2/authorize?response_type=code&prompt=login&client_id=MjdiZGNhNWUtMTI2ZC00ZGZmLTkwMjctMDY5MDhmYzM2Mjlj&scope=openid,userinfo.profile&redirect_uri=http://localhost/&state=1234&nonce=5678"
             target="_blank"
