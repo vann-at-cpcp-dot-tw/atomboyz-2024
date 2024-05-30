@@ -102,7 +102,7 @@ export const createStore = function(){
         const config = useRuntimeConfig()
         const API_URL = config.public.apiURL
         const action = store.user?.fav_peoples?.map((node:any)=>node.name).includes(name) ? 'removeFav' : 'addFav'
-        const result = await $fetch(`${API_URL}/user.php`, {
+        const result = await $fetch(`${API_URL}/user`, {
           method: 'POST',
           params: {
             action,

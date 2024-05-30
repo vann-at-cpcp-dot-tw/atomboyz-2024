@@ -15,7 +15,7 @@ const props = defineProps<IProps>()
 const router = useRouter()
 const store = useStore()
 const gameFetcher = await useAsyncData<any>('game', ()=>{
-  return $fetch(`${API_URL}/game.php`, {
+  return $fetch(`${API_URL}/game`, {
     params: {
     }
   })
