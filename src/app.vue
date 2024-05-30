@@ -10,8 +10,9 @@ const route = useRoute()
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
+const APP_BASE = config.public.appBase
 const IS_STAGE = Number(config.public?.isStage) === 1
-const { data } = await useFetch<any>(`${API_URL}/general.php`)
+const { data } = await useFetch<any>(`${API_URL}/general`)
 const store = createStore()
 store.general = data.value?.data
 
@@ -75,10 +76,10 @@ onMounted(()=>{
       <Meta property="og:url" :content="APP_URL" />
       <Meta property="og:title" content="hidol X 原子少年 2｜獨家線上投票" />
       <Meta property="og:site_name" content="hidol X 原子少年 2｜獨家線上投票" />
-      <Meta property="og:image" content="/assets/img/og.jpg" />
+      <Meta property="og:image" :content="`${APP_BASE}assets/img/og.jpg`" />
       <Meta property="og:description" content="讓我們一起為勇敢追夢的選手們投票應援，你喜歡的少年就差你一票！hidol 拉近你與idol的距離。" />
       <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-      <Link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
+      <Link rel="icon" type="image/x-icon" :href="`${APP_BASE}assets/img/favicon.png`" />
       <!-- tracikng -->
       <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'" />
       <Script :src="IS_STAGE ?'https://botsdk.stg.gim.beango.com/index.umd.js' :'https://botsdk.gamania.chat/index.umd.js'" />

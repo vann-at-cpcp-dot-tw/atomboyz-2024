@@ -2,7 +2,7 @@
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const route = useRoute()
-const dataFetcher = await useFetch<any>(`${API_URL}/news.php`, {
+const dataFetcher = await useFetch<any>(`${API_URL}/news`, {
   query: {
     id: route.params.id,
   }
