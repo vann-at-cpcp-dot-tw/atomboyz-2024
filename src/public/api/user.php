@@ -122,15 +122,17 @@ switch ($method) {
         ];
       break;
       case 'vote':
-        $res = [
-          'success'=> true,
-          'data'=> [
-            'user'=> [ // 任何互動的 api，如果需要更新 user，就增加 'data['user']' 這個欄位，內部結構和 GET user 的一摸一樣，前端接到就會複寫
-              'votes'=> 10,
-              // ... 其他需要複寫 user 的欄位
+        if( !empty($_REQUEST['name']) && !empty($_REQUEST['votes']) ){
+          $res = [
+            'success'=> true,
+            'data'=> [
+              'user'=> [ // 任何互動的 api，如果需要更新 user，就增加 'data['user']' 這個欄位，內部結構和 GET user 的一摸一樣，前端接到就會複寫
+                'votes'=> 10,
+                // ... 其他需要複寫 user 的欄位
+              ]
             ]
-          ]
-        ];
+          ];
+        }
       break;
     }
 
