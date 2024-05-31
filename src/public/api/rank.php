@@ -11,61 +11,61 @@ switch ($method) {
       'data'=> [
         'personal'=> [ // 個人排行
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz010',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz011',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz012',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz013',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz014',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz015',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz016',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz017',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz018',
             'votes'=> 19786,
           ],
           [
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz019',
             'votes'=> 19786,
@@ -100,70 +100,70 @@ switch ($method) {
         'social'=> [ // 社群排行
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
             'name'=> '王三四',
-            'img'=> '/assets/img/rank_img_personal.png',
+            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
@@ -171,35 +171,35 @@ switch ($method) {
         ],
         'sale'=> [ // 銷售排行
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500', // 如果是銷售排行的話，帶價錢，設計稿的價錢會有區間，所以此欄位傳處理過的字串
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500', // 如果是銷售排行的話，帶價錢，設計稿的價錢會有區間，所以此欄位傳處理過的字串
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500', // 如果是銷售排行的話，帶價錢，設計稿的價錢會有區間，所以此欄位傳處理過的字串
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500', // 如果是銷售排行的話，帶價錢，設計稿的價錢會有區間，所以此欄位傳處理過的字串
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500', // 如果是銷售排行的話，帶價錢，設計稿的價錢會有區間，所以此欄位傳處理過的字串
             'href'=> 'https://google.com',
