@@ -5,95 +5,89 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 $res = null;
 
-$t = $_GET['t'] ?? null;
-if( $t !== '$2y$12$sQkktWRb4MPjGBVhWL64fuxpFSCzfwBypHF3MeEYCf15xS5DCCdjO' ){
-  // 如果登入失效，回傳 'not login'
-  $res = 'not login';
-  echo json_encode($res);
-  exit;
-}
-
 switch ($method) {
   case 'GET':
-    $res = [
-      'data'=> [
-        'user'=>[
-          'name'=> '許毅達',
-          'votes'=> 10,
-          'avatar'=> '',
-          'fav_peoples'=> [
-            [
-              'name'=> '王小明',
-              'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+    if( isLogin() ){
+      $res = [
+        'data'=> [
+          'user'=>[
+            'name'=> '許毅達',
+            'votes'=> 10,
+            'avatar'=> '',
+            'fav_peoples'=> [
+              [
+                'name'=> '王小明',
+                'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+              ],
+              [
+                'name'=> '王小明',
+                'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+              ],
+              [
+                'name'=> '王小明',
+                'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+              ],
+              [
+                'name'=> '王小明',
+                'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+              ]
             ],
-            [
-              'name'=> '王小明',
-              'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+            'daily_quests'=>[
+              [
+                'title'=> '每天登入',
+                'reward'=> 3,
+                'description'=> '說明說明說明說明說明說明說明說明說明',
+                'is_done'=> true,
+              ],
+              [
+                'title'=> '每日小遊戲',
+                'reward'=> 3,
+                'description'=> '說明說明說明說明說明說明說明說明說明',
+                'is_done'=> false,
+              ],
+              [
+                'title'=> '點擊活動BN',
+                'reward'=> 3,
+                'description'=> '說明說明說明說明說明說明說明說明說明',
+                'is_done'=> true,
+              ]
             ],
-            [
-              'name'=> '王小明',
-              'img'=> '/atomboyz/assets/img/rank_img_personal.png',
+            'vote_logs'=> [
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
+              [
+                'name'=> '陳小明',
+                'time'=> '2024/07/12/ 10:50:42',
+                'votes'=> 10,
+              ],
             ],
-            [
-              'name'=> '王小明',
-              'img'=> '/atomboyz/assets/img/rank_img_personal.png',
-            ]
-          ],
-          'daily_quests'=>[
-            [
-              'title'=> '每天登入',
-              'reward'=> 3,
-              'description'=> '說明說明說明說明說明說明說明說明說明',
-              'is_done'=> true,
-            ],
-            [
-              'title'=> '每日小遊戲',
-              'reward'=> 3,
-              'description'=> '說明說明說明說明說明說明說明說明說明',
-              'is_done'=> false,
-            ],
-            [
-              'title'=> '點擊活動BN',
-              'reward'=> 3,
-              'description'=> '說明說明說明說明說明說明說明說明說明',
-              'is_done'=> true,
-            ]
-          ],
-          'vote_logs'=> [
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-            [
-              'name'=> '陳小明',
-              'time'=> '2024/07/12/ 10:50:42',
-              'votes'=> 10,
-            ],
-          ],
+          ]
         ]
-      ]
-    ];
+      ];
+    }
   break;
 
   case 'POST':
@@ -101,6 +95,7 @@ switch ($method) {
     $res = $action;
     switch ($action) {
       case 'addFav': // 加入最愛
+        needLogin();
         if( !empty($_REQUEST['name']) ){
           $res = [
             'success'=> true
@@ -108,6 +103,7 @@ switch ($method) {
         }
       break;
       case 'removeFav': // 移除最愛
+        needLogin();
         if( !empty($_REQUEST['name']) ){
           $res = [
             'success'=> true
@@ -126,6 +122,7 @@ switch ($method) {
         ];
       break;
       case 'vote':
+        needLogin();
         if( !empty($_REQUEST['name']) && !empty($_REQUEST['votes']) ){
           $res = [
             'success'=> false,
