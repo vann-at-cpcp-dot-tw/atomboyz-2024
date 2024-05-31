@@ -9,7 +9,7 @@ const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const router = useRouter()
 const route = useRoute()
-const peopleFetcher:{[key:string]:any} = await useFetch(`${API_URL}/people.php`)
+const peopleFetcher:{[key:string]:any} = await useFetch(`${API_URL}/people`)
 const state = reactive({
   activeTeamId: null,
   scrollDirection: '',

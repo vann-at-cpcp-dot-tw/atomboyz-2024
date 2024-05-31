@@ -12,7 +12,7 @@ const viewport = useWindowSize()
 const route = useRoute()
 const router = useRouter()
 const tab = route.params.tab
-const listFetcher = await useFetch<any>(`${API_URL}/${tab}.php`, {
+const listFetcher = await useFetch<any>(`${API_URL}/${tab}`, {
   query: {
     page: computed(()=>route.query.page || 1),
     per_page: 3,

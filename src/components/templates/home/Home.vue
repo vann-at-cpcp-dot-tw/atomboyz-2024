@@ -68,9 +68,9 @@ const state:any = reactive({
     }
   }),
 })
-const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank.php`)
+const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank`)
 const videosFetcher = await useAsyncData<any>('video', ()=>{
-  return $fetch(`${API_URL}/video.php`, {
+  return $fetch(`${API_URL}/video`, {
     params: {
       page: 1,
       per_page: 9,
@@ -78,7 +78,7 @@ const videosFetcher = await useAsyncData<any>('video', ()=>{
   })
 })
 const newsFetcher = await useAsyncData<any>('news', ()=>{
-  return $fetch(`${API_URL}/news.php`, {
+  return $fetch(`${API_URL}/news`, {
     params: {
       page: 1,
       per_page: 9,
@@ -88,7 +88,7 @@ const newsFetcher = await useAsyncData<any>('news', ()=>{
   // immediate: false,
 })
 const saleFetcher = await useAsyncData<any>('sale', ()=>{
-  return $fetch(`${API_URL}/sale.php`)
+  return $fetch(`${API_URL}/sale`)
 })
 
 provide('scopeStore', state)
