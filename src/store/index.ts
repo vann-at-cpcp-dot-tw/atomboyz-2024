@@ -1,5 +1,6 @@
 import { inject, provide } from 'vue'
 import { shareFb, shareLine } from 'vanns-common-modules/dist/lib/helpers'
+import { calculateRemainingTime } from '~/lib/helpers'
 interface ConstructorFunction extends Function {
   new(...args: any[]): any;
 }
@@ -103,20 +104,49 @@ export const createStore = function(){
           )
         }
       },
-      voteInput: function({ name, votes = null }:{name:string, votes?:number | null}){
+      canVote: function(){
         if (!store?.user?.name){
           store.do.lightboxOpen('NeedLogin')
+          return false
+        }
+
+        if (typeof store.general?.countdown_end_time === 'string'){
+          const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
+          const countdown = calculateRemainingTime({
+            year,
+            month,
+            date,
+            hour,
+            minute,
+          })
+          const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
+          if (countdownTotal <= 0){
+            store.do.lightboxOpen('VoteComing')
+            return false
+          }
+        }
+
+        return true
+      },
+      voteInput: function({ name, votes = null }:{name:string, votes?:number | null}){
+        if (!store.do.canVote()){
           return
         }
+
         if (typeof store?.user?.votes === 'number' && store?.user?.votes <= 0){
           store.do.lightboxOpen('NoMoreVotes')
           return
         }
+
         store.myVoting.name = name
         store.myVoting.votes = votes
         store.do.lightboxOpen('VoteInput')
       },
       voteConfirm: function(args:{ name?:string, votes?:number | null }){
+        if (!store.do.canVote()){
+          return
+        }
+
         store.myVoting = {
           ...store.myVoting,
           name: args?.name || store.myVoting.name,
@@ -196,6 +226,10 @@ export const createStore = function(){
         return result
       },
       vote: async function(){
+        if (!store.do.canVote()){
+          return
+        }
+
         const API_URL = useRuntimeConfig().public.apiURL
         const result = await $fetch<IAPIResponse>(`${API_URL}/user`, {
           method: 'POST',
@@ -207,26 +241,6 @@ export const createStore = function(){
           }
         })
         store.do.handleRes(result)
-
-        if (result?.code){
-          switch (String(result?.code)){ // 1:下輪即將啟動，2:沒雙重驗證，3:票數不足，4:IP風險，5:其他原因失敗，總之就是失敗
-            case '1':
-              store.do.lightboxOpen('VoteComing')
-              break
-            case '2':
-              store.do.lightboxOpen('NeedVerify')
-              break
-            case '3':
-              store.do.lightboxOpen('NoMoreVotes')
-              break
-            case '4':
-              store.do.lightboxOpen('IPWarning')
-              break
-            case '5':
-              store.do.lightboxOpen('VoteFailed')
-              break
-          }
-        }
         return result
       },
       share: async(data:{url:string, title?:string, text?:string}, shareTarget?:string)=>{

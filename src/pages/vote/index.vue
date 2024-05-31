@@ -95,6 +95,22 @@ if (queryPeople.value){
       </div>
     </Lightbox>
 
+    <Lightbox id="VoteComing" icon="calendar-x" title="尚未開放投票">
+      <div>下一輪投票即將啟動，敬請期待</div>
+    </Lightbox>
+
+    <Lightbox id="NoMoreVotes" title-bg="#AF0808" title="投票失敗">
+      <div>您目前的票數不足<span v-if="typeof store?.user?.votes === 'number' && store?.user?.votes>0">，請重新輸入票數</span>。</div>
+    </Lightbox>
+
+    <Lightbox id="IPWarning" title-bg="#AF0808" title="無法投票">
+      <div>您的 IP 位址可能存在安全風險，請您再次檢查您的網路環境。</div>
+    </Lightbox>
+
+    <Lightbox id="VoteFailed" title-bg="#AF0808" title="投票失敗">
+      <div>請檢查您的網路環境，並確認您有足夠的票數。</div>
+    </Lightbox>
+
     <Lightbox id="VoteInput" icon="hand-thumbs-up-fill" title="原子少年2 ATOM BOYZ">
       <div class="mb-6">
         <div class="text-[18px] text-[#342F2F]">投票給 <span class="text-major">{{ store.myVoting.name || '-' }}</span> 選手</div>
@@ -162,32 +178,42 @@ if (queryPeople.value){
           <MajorButton
           class="bg-major"
           @click="()=>{
-            store.do.vote().then(()=>{
-              peopleFetcher.refresh()
+            store.do.vote().then((result:any)=>{
               store.do.lightboxClear()
-              router.push({
-                query: {
-                  p: store.myVoting?.name
+              if (result?.code){
+                switch (String(result?.code)){ // 1:下輪即將啟動，2:沒雙重驗證，3:票數不足，4:IP風險，5:其他原因失敗，總之就是失敗
+                case '1':
+                  store.do.lightboxOpen('VoteComing')
+                  break
+                case '2':
+                  store.do.lightboxOpen('NeedVerify')
+                  break
+                case '3':
+                  store.do.lightboxOpen('NoMoreVotes')
+                  break
+                case '4':
+                  store.do.lightboxOpen('IPWarning')
+                  break
+                case '5':
+                  store.do.lightboxOpen('VoteFailed')
+                  break
                 }
-              })
+                return
+              }
+              if( result?.success === true ){
+                peopleFetcher.refresh()
+                router.push({
+                  query: {
+                    p: store.myVoting?.name
+                  }
+                })
+              }
             })
           }">
             確認
           </MajorButton>
         </div>
       </div>
-    </Lightbox>
-
-    <Lightbox id="NoMoreVotes" title-bg="#AF0808" title="投票失敗">
-      <div>您目前的票數不足<span v-if="typeof store?.user?.votes === 'number' && store?.user?.votes>0">，qwing重新輸入票數</span>。</div>
-    </Lightbox>
-
-    <Lightbox id="IPWarning" title-bg="#AF0808" title="無法投票">
-      <div>您的 IP 位址可能存在安全風險，請您再次檢查您的網路環境。</div>
-    </Lightbox>
-
-    <Lightbox id="VoteFailed" title-bg="#AF0808" title="投票失敗">
-      <div>請檢查您的網路環境，並確認您有足夠的票數。</div>
     </Lightbox>
 
     <div

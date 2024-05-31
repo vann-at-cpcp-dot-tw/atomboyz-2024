@@ -126,10 +126,10 @@ switch ($method) {
         if( !empty($_REQUEST['name']) && !empty($_REQUEST['votes']) ){
           $res = [
             'success'=> true,
-            // 'code'=> rand(1, 5), // 投票結果回應彈窗，1:下輪即將啟動，2:沒雙重驗證，3:票數不足，4:IP風險，5:其他原因失敗，總之就是失敗
+            'code'=> rand(1, 5), // 投票結果回應彈窗，1:下輪即將啟動，2:沒雙重驗證，3:票數不足，4:IP風險，5:其他原因失敗，總之就是失敗
             'data'=> [
               'user'=> [ // 任何互動的 api，如果需要更新 user，就增加 'data['user']' 這個欄位，內部結構和 GET user 的一摸一樣，前端接到就會複寫
-                'votes'=> 0,
+                'votes'=> 5,
                 // ... 其他需要複寫 user 的欄位
               ],
             ]
