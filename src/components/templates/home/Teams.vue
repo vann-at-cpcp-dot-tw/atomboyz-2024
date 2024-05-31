@@ -35,7 +35,7 @@ function handleClick(teamIndex:number){
               @click="handleClick(teamIndex)">
                 <img
                 class="mx-auto mb-3"
-                :src="teams[teamIndex].img"
+                :src="teams[teamIndex].getImg()"
                 :style="{
                   maxWidth: '283px',
                   filter: `drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`
@@ -59,7 +59,7 @@ function handleClick(teamIndex:number){
               @click="handleClick(teamIndex)">
                 <img
                 class="mx-auto mb-3"
-                :src="teams[teamIndex].img"
+                :src="teams[teamIndex].getImg()"
                 :style="{
                   maxWidth: '283px',
                   filter: `drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`
@@ -92,7 +92,7 @@ function handleClick(teamIndex:number){
           }">
             <img
             class="mx-auto mb-3"
-            :src="teams[teamIndex].img"
+            :src="teams[teamIndex].getImg()"
             :style="{
               maxWidth: '127px',
               filter: `drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`,

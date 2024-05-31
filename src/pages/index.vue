@@ -33,6 +33,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
     minute,
   })
 }, 1000)
+
 watch(()=>state.preModeCountdown, (newVal)=>{
   const preModeCountdownTotal = Number(state.preModeCountdown.days) + Number(state.preModeCountdown.hours) + Number(state.preModeCountdown.minutes) + Number(state.preModeCountdown.seconds)
 
@@ -56,7 +57,7 @@ watch(()=>state.preModeCountdown, (newVal)=>{
     <div class="relative bg-black">
       <Home />
       <CookieSticker />
-      <DownloadSticker />
+      <!-- <DownloadSticker /> -->
       <GlobalAlert />
     </div>
     <Footer />

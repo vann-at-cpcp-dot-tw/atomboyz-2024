@@ -59,12 +59,12 @@ watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
 const trackingPage = computed(()=>{
   let page = ({
     index: 'atomboyz_homepage',
-    voting: 'atomboyz_vote',
+    vote: 'atomboyz_vote',
     'posts-tab': 'atomboyz_videos',
     'post-id': 'atomboyz_videos_content',
   } as any)[route.name] || ''
 
-  if (route.name === 'voting' && !isEmpty(route.query.p)){
+  if (route.name === 'vote' && !isEmpty(route.query.p)){
     page = 'atomboyz_member'
   }
 
@@ -150,8 +150,8 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
           width: `${state.contentSize.w}px`,
           height: `${state.contentSize.h}px`
         }">
-          <img class="pointer-events-none absolute left-0 top-0 z-10 hidden size-full lg:block" :src="`/assets/img/img_frame_global_alert.svg`" alt="">
-          <img class="pointer-events-none absolute left-0 top-0 z-10 block size-full lg:hidden" :src="`/assets/img/img_frame_global_alert_m.svg`" alt="">
+          <img class="pointer-events-none absolute left-0 top-0 z-10 hidden size-full lg:block" src="/assets/img/img_frame_global_alert.svg" alt="">
+          <img class="pointer-events-none absolute left-0 top-0 z-10 block size-full lg:hidden" src="/assets/img/img_frame_global_alert_m.svg" alt="">
           <div
           class="relative z-0 overflow-hidden rounded-lg bg-white pb-14 pt-10 lg:pt-16"
           :style="{

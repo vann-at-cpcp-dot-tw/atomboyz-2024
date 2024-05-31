@@ -55,7 +55,7 @@ onUnmounted(()=>{
 })
 </script>
 <template>
-  <div :class="twMerge('sticky left-0 py-5 top-[73px] bg-black z-[10]', props.class)">
+  <div :class="twMerge('sticky left-0 pb-5 pt-7 top-[73px] bg-black z-[10]', props.class)">
     <div class="container mb-5 text-center">
       <div class="row items-center justify-center">
         <div class="col-auto mb-4 lg:mb-0 lg:ml-[40%] xl:ml-[44]">
@@ -158,7 +158,7 @@ onUnmounted(()=>{
           }">
             <img
             class="mb-2 w-full"
-            :src="`/assets/img/team_${node.id}.png`"
+            :src="node.getImg()"
             style="filter: drop-shadow(0px 0px 1vw rgba(255, 255, 255, 0.42));">
             <div class="-mt-5 text-center lg:text-[18px]">{{ node.name }}</div>
           </div>

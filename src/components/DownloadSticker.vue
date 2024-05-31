@@ -29,7 +29,7 @@ const state = reactive({
   <ClientOnly>
     <div
     v-if="state.active"
-    :class="twMerge('relative z-[90] bottom-0 w-full bg-[#666464] text-white', props.class)">
+    :class="twMerge('relative z-[90] bottom-0 w-full bg-[#666464] text-white lg:hidden block', props.class)">
       <div class="container-fluid py-10">
         <div class="mb-3 flex justify-center">
           <img class="mx-auto" src="/assets/img/btn_download.png" style="max-width: 344px;">

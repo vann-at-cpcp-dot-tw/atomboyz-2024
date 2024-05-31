@@ -56,10 +56,13 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
       </div>
     </div>
     <div class="container mb-[75px] flex justify-center">
-      <div class="btn btn-scaleUp flex items-center rounded-full px-8 py-3.5" style="background: linear-gradient(#fcf4b6 0%, #e6d651 100%); filter: drop-shadow(0px 0px 25px #fff);">
+      <NuxtLink
+      to="/vote"
+      class="btn btn-scaleUp flex items-center rounded-full px-8 py-3.5"
+      style="background: linear-gradient(#fcf4b6 0%, #e6d651 100%); filter: drop-shadow(0px 0px 25px #fff);">
         <img src="/assets/img/icon_rocket.svg">
         <div class="pl-2 text-black">投 票 應 援</div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

@@ -11,6 +11,7 @@ interface IProps {
   type?: string
   list?: {
     img: string
+    getImg?: Function
     name: string
     number: any
     href?: string
@@ -149,7 +150,7 @@ const props = defineProps<IProps>()
                   </div>
                 </div>
                 <div class="col-auto">
-                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img})`}"></div>
+                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
                 </div>
                 <div class="col-12 shrink">
                   <div class="pr-5">
@@ -172,7 +173,7 @@ const props = defineProps<IProps>()
               <div class="row flex-nowrap items-center">
                 <div class="col-auto"><div class="pl-5">{{ String(index + 4).padStart(2, '0') }}</div></div>
                 <div class="col-auto">
-                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img})`}"></div>
+                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
                 </div>
                 <div class="col-6 shrink">
                   <div class="text-[14px]">{{ node.name }}</div>

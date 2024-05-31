@@ -44,11 +44,18 @@ const props = defineProps({
     default: '',
   },
 })
+const route = useRoute()
 const store = useStore()
 const state = reactive({
   show: true,
   showGame: false,
 })
+
+// watch(()=>route.hash, (newVal)=>{
+//   console.log(111, newVal)
+// }, {
+//   immediate: true,
+// })
 
 // onMounted(()=>{
 //   if (!window){
@@ -91,8 +98,9 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
     }" />
 
     <div
-    :class="twMerge(`z-[100] fixed right-5 bottom-[90px] ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+    :class="twMerge(`z-[100] fixed right-5 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
+      bottom: '95px', // 沒有話 AI 的話0，有 AI 的話 95
       transition: 'all .4s',
       // marginBottom: store.isDownloadStickerShow ?'170px' :'0px'
     }">

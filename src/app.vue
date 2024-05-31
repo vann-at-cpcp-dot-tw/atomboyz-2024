@@ -7,6 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 const window = process.client ? globalThis : null
 const route = useRoute()
+const router = useRouter()
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
@@ -30,10 +31,39 @@ async function trackingInit(){
   return sender
 }
 
+// get user from query
+watch(()=>[route.query.t, window], (newVal, oldVal)=>{
+  const [t, window] = newVal
+  if (!window || !t){
+    return
+  }
+
+  store.do.setUser(route.query.t).then(()=>{
+    const queryWithoutT = { ...route.query }
+    delete queryWithoutT.t
+    router.push(queryWithoutT)
+  })
+}, {
+  immediate: true
+})
+
+// get user from localStorage
 onMounted(()=>{
   if (!window){
     return
   }
+  // window.store = store
+  if (window.localStorage.getItem('t')){
+    store.do.setUser(window.localStorage.getItem('t'))
+  }
+})
+
+// tracking
+onMounted(()=>{
+  if (!window){
+    return
+  }
+
   trackingInit().then((sender)=>{
     store.trackingSender = sender
     nextTick(()=>{
@@ -45,25 +75,23 @@ onMounted(()=>{
     })
   })
 
-  if (store.isPreMode === false){
-    ;(window as any).GIMBotTool.init({
-      url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
-      title: '客服幫手 原子小少年',
-      logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
-      btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
-    })
+  ;(window as any).GIMBotTool.init({
+    url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+    title: '客服幫手 原子小少年',
+    logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+    btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
+  })
 
-    ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        page_info: {
-          page: 'atomboyz_teaser',
-        },
-        click_info: {
-          type: 'ai_customer_service',
-        },
-      })
+  ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      page_info: {
+        page: 'atomboyz_teaser',
+      },
+      click_info: {
+        type: 'ai_customer_service',
+      },
     })
-  }
+  })
 })
 </script>
 <template>

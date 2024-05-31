@@ -5,6 +5,8 @@ import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import EmbedPlayer from './EmbedPlayer.vue'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import { useStore } from '~/store'
+import { copyUrlToClipboard } from '~/lib/helpers'
+
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -24,6 +26,7 @@ const props = defineProps<IProps>()
 const store = useStore()
 const state = reactive({
   open: '',
+  isShareNavOpen: false
 })
 </script>
 <template>
@@ -46,10 +49,50 @@ const state = reactive({
         <div class="absolute left-0 top-0 z-0 size-full overflow-hidden">
           <div
           class="btn btn-light absolute left-1.5 top-1.5 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
+          @mouseenter="()=>{
+            if( !window?.navigator?.canShare?.() ){
+              state.isShareNavOpen = true
+            }
+          }"
+          @mouseleave="()=>{
+            state.isShareNavOpen = false
+          }"
           @click="(e)=>{
             e.stopPropagation()
+            if( window?.navigator?.canShare?.() ){
+              store.do.share({
+                url: window?.location?.href
+              })
+            }
           }">
-            <i class="bi bi-share-fill relative -left-0.5 text-[11px] leading-none"></i>
+            <i class="bi bi-share-fill relative text-[11px] leading-none"></i>
+            <div v-show="state.isShareNavOpen" class="absolute left-0 top-full w-full py-1">
+              <div
+              class="btn btn-scaleUp mx-auto mb-1 flex size-[21px] items-center justify-center rounded-full  bg-major text-white"
+              @click="(e)=>{
+                copyUrlToClipboard()
+              }">
+                <i class="bi bi-link-45deg text-[15px]"></i>
+              </div>
+              <div
+              class="btn btn-scaleUp mx-auto mb-1 size-[21px] rounded-full bg-white"
+              @click="()=>{
+                store.do.share({
+                  url: window?.location?.href
+                }, 'fb')
+              }">
+                <i class="bi bi-facebook block text-[21px] leading-none text-major"></i>
+              </div>
+              <div
+              class="btn btn-scaleUp mx-auto flex size-[21px] items-center justify-center rounded-full bg-major text-white"
+              @click="()=>{
+                store.do.share({
+                  url: window?.location?.href
+                }, 'line')
+              }">
+                <i class="bi bi-line relative mt-[3px] block text-[12px] leading-none text-white"></i>
+              </div>
+            </div>
           </div>
           <i
           class="bi btn btn-scaleUp bi-heart-fill absolute right-2 top-1.5 z-10 text-[19px] leading-none"
@@ -58,9 +101,6 @@ const state = reactive({
           }"
           @click="(e)=>{
             e.stopPropagation()
-            if( !store.user?.name ){
-              return
-            }
             store.do.toggleFav(props.name)
           }"></i>
           <div
@@ -102,7 +142,16 @@ const state = reactive({
       </div>
 
       <div class="mt-2">
-        <div v-if="props?.can_vote === true" class="btn btn-light flex h-[29px] w-full items-center justify-center rounded-full bg-[#C3C1F9] text-[12px] text-[#0D116B]">投票</div>
+        <div
+        v-if="props?.can_vote === true"
+        class="btn btn-light flex h-[29px] w-full items-center justify-center rounded-full bg-[#C3C1F9] text-[12px] text-[#0D116B]"
+        @click="()=>{
+          store.do.voteInput({
+            name: props.name,
+          })
+        }">
+          投票
+        </div>
         <div v-else class="pointer-events-none flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white">未開放投票</div>
       </div>
     </div>

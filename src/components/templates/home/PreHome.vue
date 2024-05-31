@@ -67,7 +67,7 @@ watch(()=>store.lightbox, (newVal)=>{
         <div class="row">
           <div class="col-6">
             <a
-            href="https://hidol.fan/M6xVL"
+            :href="`${IS_STAGE ?'https://hidol.fan/5e7WK' :'https://hidol.fan/M6xVL'}`"
             target="_blank"
             @click="()=>{
               store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
