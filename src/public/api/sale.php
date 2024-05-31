@@ -11,49 +11,49 @@ switch ($method) {
       'data'=> [
         'list'=> [
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           [
-            'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+            'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
             'name'=> '原子少年2 全彩全開海報',
             'price_string'=> 'NT$1,000 ~ NT$1,500',
             'href'=> 'https://google.com',
             'description'=> '原子少年2限量周邊收藏只有這次手刀加入購物車',
           ],
           // [
-          //   'img'=> '/assets/img/rank_img_sale.png', // 614 * 614
+          //   'img'=> '/atomboyz/assets/img/rank_img_sale.png', // 614 * 614
           //   'name'=> '原子少年2 全彩全開海報',
           //   'price_string'=> 'NT$1,000 ~ NT$1,500',
           //   'href'=> 'https://google.com',

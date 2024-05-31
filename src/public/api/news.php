@@ -11,7 +11,7 @@ switch ($method) {
       $res = [
         'data'=> [
           'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
-          'img'=> '/assets/img/news_preview.png', // 預覽圖
+          'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖
           'content'=> '<div>內容內容內容內容內容內容內容</div>',
           'date'=> '2024.07.07',
           'prev_id'=> 3,
@@ -27,14 +27,14 @@ switch ($method) {
           'list'=> [
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
             ],
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
@@ -42,7 +42,7 @@ switch ($method) {
             ],
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
@@ -50,7 +50,7 @@ switch ($method) {
             ],
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
@@ -58,7 +58,7 @@ switch ($method) {
             ],
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
@@ -66,7 +66,7 @@ switch ($method) {
             ],
             [
               'id'=> 1,
-              'img'=> '/assets/img/news_preview.png', // 預覽圖，562 * 374
+              'img'=> '/atomboyz/assets/img/news_preview.png', // 預覽圖，562 * 374
               'title'=> '【原子少年2】EP3花絮｜當週人氣倒數懲罰 殘酷2選1',
               'excerpts'=> '文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要文章摘要',
               'date'=> '2024.07.07',
