@@ -96,9 +96,13 @@ const saleFetcher = await useAsyncData<any>('sale', ()=>{
 
 provide('scopeStore', state)
 
-// onMounted(()=>{
-//   store.do.tracking()
-// })
+onMounted(()=>{
+  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+    page_info: {
+      page: 'atomboyz_homepage'
+    }
+  })
+})
 </script>
 <template>
   <main class="relative bg-[#0e160b]">

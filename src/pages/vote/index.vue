@@ -81,6 +81,31 @@ if (queryPeople.value){
     ]
   })
 }
+
+onMounted(()=>{
+  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+})
+
+watch(()=>store.lightbox, (newVal)=>{
+  const voteAlert = {
+    NeedLogin: 'havent_login',
+    NeedVerify: 'unauthenticated',
+    VoteConfirm: 'check',
+    NoMoreVotes: 'failed',
+    VoteFailed: 'failed',
+    IPWarning: 'blocked'
+  }[store?.lightbox?.[0]]
+
+  if (voteAlert){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+      click_info: {
+        type: voteAlert
+      }
+    })
+  }
+}, {
+  immediate: true
+})
 </script>
 <template>
   <main
@@ -91,14 +116,41 @@ if (queryPeople.value){
       <PeopleBox v-if="queryPeople" v-bind="queryPeople" />
     </ClientOnly>
 
-    <Lightbox id="NeedVerify" icon="arrow-left-right" title="尚未完成會員雙重驗證">
+    <Lightbox
+    id="NeedVerify"
+    icon="arrow-left-right"
+    title="尚未完成會員雙重驗證"
+    :on-close="()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'unauthenticated'
+        },
+        click_info: {
+          type: 'close'
+        }
+      })
+    }">
       <div class="mb-6">為了增強您的帳戶安全，請您先至GAMAPASS會員中心完成Email 或 手機門號驗證再進行投票喔！</div>
       <div class="flex justify-end">
-        <MajorButton class="h-[40px] max-w-[154px]">
-          <div class="flex items-center">
-            立即前往驗證 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
-          </div>
-        </MajorButton>
+        <a
+        href="###"
+        @click="()=>{
+          store.do.tracking('ClickEvent', '55001', 'hidol_campaign_item_click', {
+            page_info: {
+              type: 'unauthenticated',
+            },
+            click_info: {
+              type: 'popup_function',
+              name: 'to_2FA',
+            }
+          })
+        }">
+          <MajorButton class="h-[40px] max-w-[154px]">
+            <div class="flex items-center">
+              立即前往驗證 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
+            </div>
+          </MajorButton>
+        </a>
       </div>
     </Lightbox>
 
@@ -106,15 +158,54 @@ if (queryPeople.value){
       <div>下一輪投票即將啟動，敬請期待</div>
     </Lightbox>
 
-    <Lightbox id="NoMoreVotes" title-bg="#AF0808" title="投票失敗">
+    <Lightbox
+    id="NoMoreVotes"
+    title-bg="#AF0808"
+    title="投票失敗"
+    :on-close="()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'failed'
+        },
+        click_info: {
+          type: 'close'
+        }
+      })
+    }">
       <div>您目前的票數不足<span v-if="typeof store?.user?.votes === 'number' && store?.user?.votes>0">，請重新輸入票數</span>。</div>
     </Lightbox>
 
-    <Lightbox id="IPWarning" title-bg="#AF0808" title="無法投票">
+    <Lightbox
+    id="IPWarning"
+    title-bg="#AF0808"
+    title="無法投票"
+    :on-close="()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'blocked'
+        },
+        click_info: {
+          type: 'close'
+        }
+      })
+    }">
       <div>您的 IP 位址可能存在安全風險，請您再次檢查您的網路環境。</div>
     </Lightbox>
 
-    <Lightbox id="VoteFailed" title-bg="#AF0808" title="投票失敗">
+    <Lightbox
+    id="VoteFailed"
+    title-bg="#AF0808"
+    title="投票失敗"
+    :on-close="()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'failed'
+        },
+        click_info: {
+          type: 'close'
+        }
+      })
+    }">
       <div>請檢查您的網路環境，並確認您有足夠的票數。</div>
     </Lightbox>
 
@@ -135,6 +226,15 @@ if (queryPeople.value){
               :class="`btn btn-scaleUp flex h-[38px] w-[95px] flex-none items-center justify-center rounded text-[15px] text-white ${typeof store.myVoting.votes === 'number' && store.myVoting.votes >= 1 ?'bg-major' :'bg-gray-400 pointer-events-none'}`"
               @click="()=>{
                 store.do.voteConfirm()
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    type: 'vote_page'
+                  },
+                  click_info: {
+                    type: 'sent_vote',
+                    name: '送出投票'
+                  }
+                })
               }">
                 送出投票
               </div>
@@ -145,7 +245,18 @@ if (queryPeople.value){
           <div class="col-6">
             <MajorButton
             class="h-[40px]"
-            @click="store.do.voteConfirm({votes:1})">
+            @click="()=>{
+              store.do.voteConfirm({votes:1})
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  type: 'vote_page'
+                },
+                click_info: {
+                  type: 'sent_vote',
+                  name: '投一票'
+                }
+              })
+            }">
               <div class="flex items-center">
                 投他 1 票 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
               </div>
@@ -156,6 +267,15 @@ if (queryPeople.value){
             class="h-[40px]"
             @click="()=>{
               store.do.voteConfirm({votes:store?.user?.votes})
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  type: 'vote_page'
+                },
+                click_info: {
+                  type: 'sent_vote',
+                  name: '剩下全投'
+                }
+              })
             }">
               <div
               class="flex items-center">
@@ -167,7 +287,20 @@ if (queryPeople.value){
       </div>
     </Lightbox>
 
-    <Lightbox id="VoteConfirm" icon="exclamation-triangle-fill" title="請您再次確認投票資訊">
+    <Lightbox
+    id="VoteConfirm"
+    icon="exclamation-triangle-fill"
+    title="請您再次確認投票資訊"
+    :on-close="()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'check'
+        },
+        click_info: {
+          type: 'close'
+        }
+      })
+    }">
       <div class="mb-6">
         此次您將投票給 <span class="text-major">{{ store.myVoting.name }}</span>，總共 <span class="text-major">{{ store.myVoting.votes || '-' }}</span> 票，請再次確認您的投票票數，並點擊「確認」完成投票。
       </div>
@@ -177,6 +310,14 @@ if (queryPeople.value){
           class="bg-major-300"
           @click="()=>{
             store.do.lightboxClear()
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'check'
+              },
+              click_info: {
+                type: 'cancel'
+              }
+            })
           }">
             取消
           </MajorButton>
@@ -185,6 +326,14 @@ if (queryPeople.value){
           <MajorButton
           class="bg-major"
           @click="()=>{
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'check'
+              },
+              click_info: {
+                type: 'confirm'
+              }
+            })
             store.do.vote().then((result:any)=>{
               store.do.lightboxClear()
               if (result?.code){

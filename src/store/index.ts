@@ -30,10 +30,28 @@ export interface IAPIResponse {
     [key:string]: any
   }
 }
+
+type EventFunctionName = 'PageViewEvent'|'ClickEvent'|'ImpressionEvent'|'SearchEvent'
+type EventId = '55001'|'55002'|'55003'|'55004'
+type Event = 'hidol_campaign_page_view'|'hidol_campaign_item_click'|'hidol_campaign_item_click'|'hidol_campaign_impression'
+export interface ITrackingInfos {
+  page_info?: {
+    page?: string
+    type?: string
+    sec?: string
+  },
+  click_info?: {
+    name?: string
+    type?: string
+    sec?: string
+  },
+  impression_info?: {[key:string]:any},
+}
 export interface IStore {
   general: any
   bottomStickyHeight: number | undefined
   isPreMode: boolean | undefined
+  trackingPageName: string
   lightbox: string[]
   user: IUser | null
   myVoting: {
@@ -43,6 +61,7 @@ export interface IStore {
   trackingSender?: any
   do: {
     [key:string]: Function
+    tracking: (eventFunctionName:EventFunctionName, eventId:EventId, event:Event, infos?:ITrackingInfos)=>boolean
   }
 }
 
@@ -52,6 +71,7 @@ export const createStore = function(){
     general: {},
     bottomStickyHeight: undefined,
     isPreMode: undefined,
+    trackingPageName: '/',
     lightbox: [],
     myVoting: {
       name: '',
@@ -86,23 +106,23 @@ export const createStore = function(){
           ...(updateData || {})
         }
       },
-      tracking: function(eventFunctionName:string, eventId:string|number, event:string, infos?:{
-        page_info?: {[key:string]:any},
-        click_info?: {[key:string]:any},
-        impression_info?: {[key:string]:any},
-      }){
+      tracking: function(eventFunctionName:EventFunctionName, eventId:EventId, event:Event, infos?:ITrackingInfos){
         const TrackingFunction = (window as any).webTrackingSDK.events[eventFunctionName] as ConstructorFunction
         if (typeof TrackingFunction === 'function'){
           store.trackingSender.passEvent(
             new TrackingFunction({
               eventId,
               event,
-              pageInfo: infos?.page_info,
+              pageInfo: {
+                page: store.trackingPageName,
+                ...(infos?.page_info || {})
+              },
               clickInfo: infos?.click_info,
               impressionInfo: infos?.impression_info,
             })
           )
         }
+        return true
       },
       canVote: function(){
         if (!store?.user?.name){

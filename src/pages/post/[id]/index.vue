@@ -11,6 +11,7 @@ useSeoMeta({
   ogTitle: dataFetcher.data.value?.data?.title || null,
   ogImage: dataFetcher.data.value?.data?.img || null,
 })
+
 </script>
 <template>
   <main class="text-white">

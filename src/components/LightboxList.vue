@@ -14,10 +14,35 @@ const props = defineProps<IProps>()
 const store = useStore()
 </script>
 <template>
-  <Lightbox id="NeedLogin" icon="person-fill" title="尚未登入">
+  <Lightbox
+  id="NeedLogin"
+  icon="person-fill"
+  title="尚未登入"
+  :on-close="()=>{
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      page_info: {
+        type: 'havent_login'
+      },
+      click_info: {
+        type: 'close'
+      }
+    })
+  }">
     <div class="mb-6">請您先登入會員再進行相關操作！</div>
     <div class="flex justify-end">
-      <a :href="LOGIN_URL">
+      <a
+      :href="LOGIN_URL"
+      @click="()=>{
+        store.do.tracking('ClickEvent', '55001', 'hidol_campaign_item_click', {
+          page_info: {
+            type: 'havent_login'
+          },
+          click_info: {
+            type: 'popup_function',
+            name: 'to_login',
+          }
+        })
+      }">
         <MajorButton class="h-[40px] max-w-[154px]">
           <div class="flex items-center">
             前往登入 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>

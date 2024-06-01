@@ -31,6 +31,24 @@ async function trackingInit(){
   return sender
 }
 
+watch(()=>route.path, (newVal)=>{
+  if (newVal.includes('/post/')){
+    store.trackingPageName = 'atomboyz_news_article'
+    return
+  }
+
+  const paths = {
+    '/': 'atomboyz_homepage',
+    '/vote': 'atomboyz_vote',
+    '/posts/video': 'atomboyz_videos',
+    '/posts/news': 'atomboyz_news',
+  } as {[key:string]:string}
+
+  store.trackingPageName = paths[newVal] || 'atomboyz_homepage'
+}, {
+  immediate: true
+})
+
 // get user from query
 watch(()=>[route.query.t, window], (newVal, oldVal)=>{
   const [t, window] = newVal
@@ -84,9 +102,6 @@ onMounted(()=>{
 
   ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-      page_info: {
-        page: 'atomboyz_teaser',
-      },
       click_info: {
         type: 'ai_customer_service',
       },

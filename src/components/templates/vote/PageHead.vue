@@ -2,6 +2,7 @@
 import { twMerge } from 'tailwind-merge'
 import { scrollToSection } from 'vanns-common-modules/dist/lib/helpers'
 import { teams } from '~/lib/utils'
+import { useStore } from '~/store'
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IProps {
 const props = defineProps<IProps>()
 const scopeStore = inject<any>('scopeStore')
 const route = useRoute()
+const store = useStore()
 const state = reactive({
   scrollIng: false,
   scrollFocus: null,
@@ -155,6 +157,16 @@ onUnmounted(()=>{
               state.scrollFocus = null
               state.scrollIng = false
             }, 800);
+
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                sec: 'atombyz_vote'
+              },
+              click_info: {
+                type: 'direct_vote',
+                name: node.name
+              }
+            })
           }">
             <img
             class="mb-2 w-full scale-[1.8] lg:scale-100"

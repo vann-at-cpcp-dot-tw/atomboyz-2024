@@ -56,21 +56,6 @@ watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
   immediate: true
 })
 
-const trackingPage = computed(()=>{
-  let page = ({
-    index: 'atomboyz_homepage',
-    vote: 'atomboyz_vote',
-    'posts-tab': 'atomboyz_videos',
-    'post-id': 'atomboyz_videos_content',
-  } as any)[route.name] || ''
-
-  if (route.name === 'vote' && !isEmpty(route.query.p)){
-    page = 'atomboyz_member'
-  }
-
-  return page
-})
-
 watch(()=>state.active, (newVal, oldVal)=>{
   if (!window){
     return
@@ -88,7 +73,6 @@ watch(()=>[state.active, store.trackingSender], (newVal)=>{
   if (newVal[0] && newVal[1]){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
       page_info: {
-        page: trackingPage.value,
         type: 'ads_page'
       },
     })

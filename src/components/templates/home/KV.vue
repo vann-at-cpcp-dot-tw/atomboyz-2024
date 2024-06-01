@@ -60,7 +60,16 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
       <NuxtLink
       to="/vote"
       class="btn btn-scaleUp flex items-center rounded-full px-8 py-3.5"
-      style="background: linear-gradient(#fcf4b6 0%, #e6d651 100%); filter: drop-shadow(0px 0px 25px #fff);">
+      style="background: linear-gradient(#fcf4b6 0%, #e6d651 100%); filter: drop-shadow(0px 0px 25px #fff);"
+      @click="()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: 'cta',
+            name: 'atomboyz_vote',
+            sec: 'header',
+          }
+        })
+      }">
         <img src="/assets/img/icon_rocket.svg">
         <div class="pl-2 text-black">投 票 應 援</div>
       </NuxtLink>

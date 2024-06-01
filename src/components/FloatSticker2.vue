@@ -109,6 +109,11 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         state.showGame = true
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: 'game'
+          }
+        })
       }">
         <img class="mx-auto mb-1 max-w-[22px]" src="/assets/img/icon_game.svg" alt="">
         <div class="text-center text-[11px] leading-[1.2] text-white">小遊戲</div>

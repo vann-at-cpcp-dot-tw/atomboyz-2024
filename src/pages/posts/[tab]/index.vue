@@ -5,6 +5,7 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import MajorButton from '~/components/MajorButton.vue'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import Pagination from '~/components/Pagination.vue'
+import { useStore } from '~/store'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
@@ -18,8 +19,12 @@ const listFetcher = await useFetch<any>(`${API_URL}/${tab}`, {
     per_page: 3,
   }
 })
+const store = useStore()
 const state = reactive({
   open: ''
+})
+onMounted(()=>{
+  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
 })
 </script>
 <template>

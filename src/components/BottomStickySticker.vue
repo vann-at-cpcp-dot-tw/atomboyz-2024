@@ -32,10 +32,19 @@ watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
     :ref="(e)=>{
       elRef = e
     }"
-    :class="twMerge('sticky z-[90] bottom-0', props.class)">
+    :class="twMerge('sticky z-[90] bottom-0 lg:hidden block', props.class)">
       <div
       v-show="state.active"
-      class="block w-full bg-[#444444] text-white lg:hidden">
+      class="block w-full bg-[#444444] text-white lg:hidden"
+      @click="()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: 'cta',
+            name: 'download',
+            sec: 'bottom'
+          }
+        })
+      }">
         <div class="container-fluid p-3 pt-4">
           <div class="row row-gap-3 flex-nowrap items-center">
             <div class="col-auto">
@@ -52,7 +61,8 @@ watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
               <div class="pl-3">
                 <i
                 class="btn bi bi-x-circle relative -ml-2 -mr-1 -mt-2 text-[18px] leading-none"
-                @click="()=>{
+                @click="(e)=>{
+                  e.stopPropagation()
                   state.active = false
                   // if( window ){
                   //   window.localStorage.setItem('show-download', '0')
@@ -64,11 +74,32 @@ watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
         </div>
       </div>
       <div class="flex h-[60px] w-full flex-nowrap text-white">
-        <NuxtLink to="/vote" class="flex h-full grow flex-nowrap items-center justify-center bg-[#5D00FF] px-2">
+        <NuxtLink
+        to="/vote"
+        class="flex h-full grow flex-nowrap items-center justify-center bg-[#5D00FF] px-2"
+        @click="()=>{
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            click_info: {
+              type: 'must_do',
+              name: 'direct_vote',
+              sec: 'bottom'
+            }
+          })
+        }">
           <img class="w-[30px]" src="/assets/img/icon_rocket.svg" style="filter:brightness(100);">
           <div class="pl-2 text-[20px]">我要投票</div>
         </NuxtLink>
-        <!-- <div class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2">
+
+        <!-- <div class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2"
+        @click="()=>{
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            click_info: {
+              type: 'must_do',
+              name: 'direct_mission',
+              sec: 'bottom'
+            }
+          })
+        }">
           <img class="w-[24px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);">
           <div class="pl-2 text-[20px]">每日任務</div>
         </div> -->

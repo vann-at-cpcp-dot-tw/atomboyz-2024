@@ -25,33 +25,78 @@ const nav:{
   {
     label: '首頁',
     names: ['index'],
-    to: '/'
+    to: '/',
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_homepage'
+        }
+      })
+    },
   },
   // {
   //   label: 'NEWS',
   //   names: ['posts-tab', 'post-id'],
   //   to: '/posts/video',
+  //   onClick: ()=>{
+  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+  //       click_info: {
+  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+  //         name: 'atomboyz_news'
+  //       }
+  //     })
+  //   }
   // },
   {
     label: '我要投票',
     names: ['vote'],
-    to: '/vote'
+    to: '/vote',
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_vote'
+        }
+      })
+    }
   },
   // {
   //   label: '排行榜',
   //   names: ['rank'],
-  //   to: '/#RANK'
+  //   to: '/#RANK',
+  //   onClick: ()=>{
+  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+  //       click_info: {
+  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+  //         name: 'atomboyz_ranking'
+  //       }
+  //     })
+  //   }
   // },
   // {
   //   label: '周邊商品',
   //   names: ['shop'],
-  //   to: '/#SALE'
+  //   to: '/#SALE',
+  //   onClick: ()=>{
+  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+  //       click_info: {
+  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+  //         name: 'atomboyz_goods'
+  //       }
+  //     })
+  //   }
   // },
   // {
   //   label: '會員中心',
   //   names: ['member'],
   //   onClick: ()=>{
-
+  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+  //       click_info: {
+  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+  //         name: 'atomboyz_member_center'
+  //       }
+  //     })
   //   }
   // }
 ]
@@ -103,6 +148,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
         @mouseenter="()=>{
           if( !window?.navigator?.canShare?.() ){
             state.isShareNavOpen = true
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'share',
+                name: 'open'
+              }
+            })
           }
         }"
         @mouseleave="()=>{
@@ -110,6 +161,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
         }"
         @click="()=>{
           if( window?.navigator?.canShare?.() ){
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'share',
+                name: 'open'
+              }
+            })
             store.do.share()
           }
         }">
@@ -127,6 +184,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
             <div
             class="btn btn-scaleUp mx-auto mb-1.5 flex size-7 items-center justify-center rounded-full  bg-major-700 text-white"
             @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                click_info: {
+                  type: 'share',
+                  name: 'link'
+                }
+              })
               copyUrlToClipboard()
             }">
               <i class="bi bi-link-45deg text-[21px]"></i>
@@ -134,6 +197,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
             <div
             class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
             @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                click_info: {
+                  type: 'share',
+                  name: 'facebook'
+                }
+              })
               store.do.share(null, 'fb')
             }">
               <i class="bi bi-facebook block text-[28px] leading-none text-major-700"></i>
@@ -141,6 +210,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
             <div
             class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major-700 text-white"
             @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                click_info: {
+                  type: 'share',
+                  name: 'line'
+                }
+              })
               store.do.share(null, 'line')
             }">
               <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
@@ -152,6 +227,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
           class="btn flex flex-col"
           @click="()=>{
             if( !window ){ return }
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'atomboyz_member_icon',
+                name: !store.user?.name ?'login_register' :'atomboyz_member_center'
+              }
+            })
             if( !store.user?.name ){
               window.location.href = LOGIN_URL
             }
@@ -191,6 +272,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
     style="border-radius: 0px 0px 0px 9px; background: linear-gradient(#0c1074 0%, #5d00ff 50%, #0c1074 100%);"
     @click="()=>{
       state.isMobileMenuOpen = true
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: 'hamburger',
+          name: 'open'
+        },
+      })
     }">
       <img src="/assets/img/icon_menu.svg" alt="">
     </div>
@@ -222,6 +309,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
           class="btn flex size-8 items-center justify-center rounded-full bg-[#3A1DAC]"
           @click="()=>{
             state.isMobileMenuOpen = false
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'hamburger',
+                name: 'close'
+              },
+            })
           }">
             <i class="bi bi-x text-[32px] leading-none text-white"></i>
           </div>
@@ -251,6 +344,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
               class="flex size-[49px] items-center justify-center rounded-full"
               style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
               @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  click_info: {
+                    type: 'share',
+                    name: 'link'
+                  }
+                })
                 copyUrlToClipboard()
               }">
                 <i class="bi bi-link-45deg pointer-events-none relative top-0.5 text-[36px] leading-none text-white"></i>
@@ -261,6 +360,12 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
               class="flex size-[49px] items-center justify-center rounded-full"
               style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
               @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  click_info: {
+                    type: 'share',
+                    name: 'open'
+                  }
+                })
                 store.do.share()
               }">
                 <i class="bi bi-share-fill pointer-events-none relative -left-0.5 text-[26px] leading-none text-white"></i>
