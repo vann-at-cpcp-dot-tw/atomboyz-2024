@@ -1,0 +1,78 @@
+<script lang="tsx" setup>
+import { twMerge } from 'tailwind-merge'
+import { useStore } from '~/store'
+const window = process.client ? globalThis : null
+interface IProps {
+  class?: string
+  className?: string
+}
+const props = defineProps<IProps>()
+const elRef = ref<any>(null)
+const store = useStore()
+const state = reactive({
+  active: true,
+})
+watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
+  const [height, el] = newVal ?? []
+  if (height === undefined && el !== null){
+    const resizeObserver = new ResizeObserver((entries)=>{
+      entries.forEach((entry)=>{
+        store.bottomStickyHeight = entry.contentRect.height
+      })
+    })
+    resizeObserver.observe(elRef.value)
+  }
+}, {
+  immediate: true
+})
+</script>
+<template>
+  <ClientOnly>
+    <div
+    :ref="(e)=>{
+      elRef = e
+    }"
+    :class="twMerge('sticky z-[90] bottom-0', props.class)">
+      <div
+      v-show="state.active"
+      class="block w-full bg-[#444444] text-white lg:hidden">
+        <div class="container-fluid p-3 pt-4">
+          <div class="row row-gap-3 flex-nowrap items-center">
+            <div class="col-auto">
+              <img class="rounded-lg" src="/assets/img/favicon.png" style="width:48px;">
+            </div>
+            <div class="col-12 shrink">
+              <div class="text-[14px] text-white">下載 hidol 拉近你與idol的距離。</div>
+              <div class="text-[12px] text-white opacity-80">無線樂趣，都在 hidol</div>
+            </div>
+            <div class="col-auto">
+              <div class="rounded border border-major-100 px-2 py-1 text-major-100">下載</div>
+            </div>
+            <div class="relative -top-2 col-auto flex justify-center self-start">
+              <div class="pl-3">
+                <i
+                class="btn bi bi-x-circle relative -ml-2 -mr-1 -mt-2 text-[18px] leading-none"
+                @click="()=>{
+                  state.active = false
+                  // if( window ){
+                  //   window.localStorage.setItem('show-download', '0')
+                  // }
+                }"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex h-[60px] w-full flex-nowrap text-white">
+        <NuxtLink to="/vote" class="flex h-full grow flex-nowrap items-center justify-center bg-[#5D00FF] px-2">
+          <img class="w-[30px]" src="/assets/img/icon_rocket.svg" style="filter:brightness(100);">
+          <div class="pl-2 text-[20px]">我要投票</div>
+        </NuxtLink>
+        <!-- <div class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2">
+          <img class="w-[24px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);">
+          <div class="pl-2 text-[20px]">每日任務</div>
+        </div> -->
+      </div>
+    </div>
+  </ClientOnly>
+</template>

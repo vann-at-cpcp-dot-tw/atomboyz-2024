@@ -60,9 +60,7 @@ const state = reactive({
           @click="(e)=>{
             e.stopPropagation()
             if( window?.navigator?.canShare?.() ){
-              store.do.share({
-                url: window?.location?.href
-              })
+              store.do.share()
             }
           }">
             <i class="bi bi-share-fill relative text-[11px] leading-none"></i>
@@ -72,23 +70,19 @@ const state = reactive({
               @click="(e)=>{
                 copyUrlToClipboard()
               }">
-                <i class="bi bi-link-45deg text-[15px]"></i>
+                <i class="bi bi-link-45deg text-[15px] leading-none"></i>
               </div>
               <div
               class="btn btn-scaleUp mx-auto mb-1 size-[21px] rounded-full bg-white"
               @click="()=>{
-                store.do.share({
-                  url: window?.location?.href
-                }, 'fb')
+                store.do.share(null, 'fb')
               }">
                 <i class="bi bi-facebook block text-[21px] leading-none text-major"></i>
               </div>
               <div
               class="btn btn-scaleUp mx-auto flex size-[21px] items-center justify-center rounded-full bg-major text-white"
               @click="()=>{
-                store.do.share({
-                  url: window?.location?.href
-                }, 'line')
+                store.do.share(null, 'line')
               }">
                 <i class="bi bi-line relative mt-[3px] block text-[12px] leading-none text-white"></i>
               </div>
@@ -113,26 +107,26 @@ const state = reactive({
       </RatioArea>
     </div>
     <div class="bg-[#2B288E] px-2 py-3">
-      <div class="text-center">{{ name }}</div>
-      <div class="mb-2 text-center text-[20px] font-bold">{{ numberFormat(props.votes) }} 票</div>
-      <div class="row row-gap-2 items-center">
+      <div class="text-center _lg:text-[12px]">{{ name }}</div>
+      <div class="mb-2 text-center text-[14px] font-bold lg:text-[20px]">{{ numberFormat(props.votes) }} 票</div>
+      <div class="row row-gap-0 lg:row-gap-2 items-center">
         <div class="col-4 flex">
           <div
           class="btn btn-light relative top-[2px]"
           @click="()=>{ state.open = convertYoutubeUrlToEmbed(props.yt_url || '')?.embedURL || '' }">
-            <i class="bi bi-youtube block text-[31px] leading-none"></i>
+            <i class="bi bi-youtube block text-[24px] leading-none lg:text-[31px]"></i>
           </div>
         </div>
 
         <div class="col-4 flex justify-center">
-          <div class="btn btn-light relative left-1">
-            <img src="/assets/img/icon_hidol.png" alt="" style="width:48px;">
+          <div class="btn btn-light relative left-1 w-[33px] lg:w-[48px]">
+            <img src="/assets/img/icon_hidol.png" alt="">
           </div>
         </div>
 
         <div class="col-4 flex justify-end">
           <div
-          class="btn btn-light flex size-6 items-center justify-center rounded-full bg-white"
+          class="btn btn-light flex size-5 items-center justify-center rounded-full bg-white lg:size-6"
           @click="()=>{
             props?.onThumbClick?.()
           }">
@@ -144,7 +138,7 @@ const state = reactive({
       <div class="mt-2">
         <div
         v-if="props?.can_vote === true"
-        class="btn btn-light flex h-[29px] w-full items-center justify-center rounded-full bg-[#C3C1F9] text-[12px] text-[#0D116B]"
+        class="btn btn-light flex w-full items-center justify-center rounded-full bg-[#C3C1F9] py-2 text-[12px] leading-none text-[#0D116B]"
         @click="()=>{
           store.do.voteInput({
             name: props.name,

@@ -32,7 +32,7 @@ export interface IAPIResponse {
 }
 export interface IStore {
   general: any
-  isDownloadStickerShow: boolean
+  bottomStickyHeight: number | undefined
   isPreMode: boolean | undefined
   lightbox: string[]
   user: IUser | null
@@ -50,7 +50,7 @@ export const createStore = function(){
   const window = process.client ? globalThis : null
   const store = reactive<IStore>({
     general: {},
-    isDownloadStickerShow: false,
+    bottomStickyHeight: undefined,
     isPreMode: undefined,
     lightbox: [],
     myVoting: {
@@ -243,17 +243,22 @@ export const createStore = function(){
         store.do.handleRes(result)
         return result
       },
-      share: async(data:{url:string, title?:string, text?:string}, shareTarget?:string)=>{
+      share: async(data?:{url?:string, title?:string, text?:string}, shareTarget?:string)=>{
         const API_URL = useRuntimeConfig().public.apiURL
+        if (!window){ return }
+
         if (window?.navigator?.canShare?.()){
-          window?.navigator?.share?.(data)
+          window?.navigator?.share?.({
+            ...(data || {}),
+            url: data?.url || window.location.href,
+          })
         } else {
           switch (shareTarget){
             case 'fb':
-              shareFb(data.url)
+              shareFb(data?.url || window?.location?.href)
               break
             case 'line':
-              shareLine(data.url)
+              shareLine(data?.url || window?.location?.href)
               break
           }
         }

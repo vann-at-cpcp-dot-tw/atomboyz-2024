@@ -46,18 +46,6 @@ const isShowWinScreen = computed(()=>{
   return String(gameFetcher.data.value?.code) === '1' && gameFetcher.data.value?.data?.reward && state.isAnimationCompleted
 })
 
-const handleCode = function(code:string | number){
-  switch (String(code)){
-    case '2':
-      store.do.lightboxOpen('IsGamePlayed')
-      break
-
-    case '3':
-      store.do.lightboxOpen('IsGameNotOpen')
-      break
-  }
-}
-
 function handleResult(res:any){
   store.do.handleRes(res)
   const { code, data } = res ?? {}

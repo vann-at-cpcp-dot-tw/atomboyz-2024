@@ -55,11 +55,11 @@ onUnmounted(()=>{
 })
 </script>
 <template>
-  <div :class="twMerge('sticky left-0 pb-5 pt-7 top-[73px] bg-black z-[10]', props.class)">
+  <div :class="twMerge('sticky left-0 pb-5 pt-0 lg:top-[95px] top-[68px] bg-black z-[300]', props.class)">
     <div class="container mb-5 text-center">
       <div class="row items-center justify-center">
         <div class="col-auto mb-4 lg:mb-0 lg:ml-[40%] xl:ml-[44]">
-          <i class="text-[32px] font-900">我要投票</i>
+          <i class="text-[28px] font-900 lg:text-[32px]">我要投票</i>
         </div>
         <div class="col-12 ml-auto lg:col-auto">
           <form
@@ -157,10 +157,10 @@ onUnmounted(()=>{
             }, 800);
           }">
             <img
-            class="mb-2 w-full"
+            class="mb-2 w-full scale-[1.8] lg:scale-100"
             :src="node.getImg()"
             style="filter: drop-shadow(0px 0px 1vw rgba(255, 255, 255, 0.42));">
-            <div class="-mt-5 text-center lg:text-[18px]">{{ node.name }}</div>
+            <div class="mt-2.5 whitespace-nowrap text-center text-[11px] lg:-mt-5 lg:text-[18px]">{{ node.name }}</div>
           </div>
         </div>
       </div>

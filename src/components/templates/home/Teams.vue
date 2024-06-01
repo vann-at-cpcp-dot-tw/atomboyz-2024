@@ -24,7 +24,7 @@ function handleClick(teamIndex:number){
 <template>
   <div :class="twMerge('overflow-hidden bg-[#120C60]', props.class)">
     <div class="container relative">
-      <img class="mx-auto lg:-mb-8" src="/assets/img/section_title_home_6.png" style="max-width:267px;">
+      <img class="mx-auto max-w-[254px] lg:-mb-8 lg:max-w-[267px]" src="/assets/img/section_title_home_6.png">
       <!-- <img class="absolute right-0 top-[22%] min-w-[721px] lg:top-[7%] lg:min-w-[1879px]" src="/assets/img/home_stars_circle.svg"> -->
       <div class="hidden w-full max-w-[988px] lg:block">
         <div class="mb-6 pr-[168px]">

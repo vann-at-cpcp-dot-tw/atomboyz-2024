@@ -1,5 +1,6 @@
 <script lang="tsx" setup>
 import { provide } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 import { useStore } from '~/store'
 import KV from '~/components/templates/home/KV.vue'
 import KVSwiper from '~/components/templates/home/KVSwiper.vue'
@@ -20,6 +21,7 @@ const APP_BASE = config.public.appBase
 const API_URL = config.public.apiURL
 const IS_STAGE = config.public.isStage
 const store = useStore()
+const viewport = useWindowSize()
 const route = useRoute()
 const state:any = reactive({
   rankTables: [
@@ -97,19 +99,19 @@ provide('scopeStore', state)
 <template>
   <main class="relative bg-[#0e160b]">
     <div
-    class="w-full overflow-hidden bg-no-repeat pt-[176px]"
+    class="w-full overflow-hidden bg-no-repeat pt-8 lg:pt-[176px]"
     :style="{
-      backgroundImage: `url(${APP_BASE}assets/img/bg_home_1.jpg)`,
-      backgroundSize: '1920px auto',
+      backgroundImage: viewport.width.value >= 992 ?`url(${APP_BASE}assets/img/bg_home_1.jpg)` :`url(${APP_BASE}assets/img/bg_home_1_m.jpg)`,
+      backgroundSize: viewport.width.value >= 992 ?'1920px auto' :'100% auto',
       backgroundPosition: 'center top',
     }">
       <KV />
 
       <KVSwiper class="pb-2" :list="store.general?.home_carousel" />
 
-      <div class="divider relative z-10 mb-[-133px]" style="height: 294px; background: linear-gradient(#0e160b 0%, #000 100%);">
+      <div class="divider relative z-10 mb-[-66px] h-[147px] lg:mb-[-133px] lg:h-[294px]" style="background: linear-gradient(#0e160b 0%, #000 100%);">
         <div class="container flex justify-center">
-          <img class="animate__slideOutDown animate__animated animate__infinite" src="/assets/img/icon_mouse_wheel.svg">
+          <img class="animate__slideOutDown animate__animated animate__infinite w-[19px] lg:w-[27px]" src="/assets/img/icon_mouse_wheel.svg">
         </div>
       </div>
 
@@ -131,7 +133,7 @@ provide('scopeStore', state)
                 left: '2%',
                 top: '3.5%',
                 width: '96%',
-                height: '87.5%',
+                height: '87.5%',3
               }">
             </ImgFrame>
           </div>
@@ -157,7 +159,7 @@ provide('scopeStore', state)
         </div>
       </div> -->
 
-      <div class="divider relative z-10 mt-[-130px] w-full" style="height:130px; background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
+      <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
       <!-- <RanksTable class="pb-8 pt-16" /> -->
 
@@ -213,11 +215,11 @@ provide('scopeStore', state)
 
       <!-- <div class="divider relative" style="height:120px; background: linear-gradient(black 0%, #120c60 100%);"></div> -->
 
-      <Teams class="relative z-10 pb-[336px] pt-8" />
+      <Teams class="relative z-10 py-8 lg:pb-[336px]" />
 
-      <Terms class="relative z-20 mt-[-200px]" />
+      <Terms class="relative z-20 lg:mt-[-200px]" />
 
-      <div class="divider relative mb-[-187px]" style="height:287px; background: linear-gradient(#120c60 0%, black 100%);"></div>
+      <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
       <div class="bg-black pb-[60px]">
         <div class="container-fluid">

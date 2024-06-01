@@ -87,9 +87,7 @@ onUnmounted(()=>{
                   }"
                   @click="()=>{
                     if( window?.navigator?.canShare?.() ){
-                      store.do.share({
-                        url: window?.location?.href
-                      })
+                      store.do.share()
                     }
                   }">
                     <i class="bi bi-share-fill relative text-[15px] leading-none"></i>
@@ -104,18 +102,14 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
-                        store.do.share({
-                          url: window?.location?.href
-                        }, 'fb')
+                        store.do.share(null, 'fb')
                       }">
                         <i class="bi bi-facebook block text-[28px] leading-none text-major"></i>
                       </div>
                       <div
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
-                        store.do.share({
-                          url: window?.location?.href
-                        }, 'line')
+                        store.do.share(null, 'line')
                       }">
                         <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
                       </div>
@@ -177,7 +171,7 @@ onUnmounted(()=>{
                 </div>
               </RatioArea>
             </div>
-            <div class="mb-4 flex w-2/5 flex-col">
+            <div class="flex w-2/5 flex-col">
               <div class="mb-2">
                 <div class="text-[24px] font-600">{{ props?.name }}</div>
               </div>

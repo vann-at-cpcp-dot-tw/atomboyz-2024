@@ -1,4 +1,5 @@
 <script lang="tsx" setup>
+import { useWindowSize } from '@vueuse/core'
 import FloatSticker1 from './FloatSticker1.vue'
 import FloatSticker2 from './FloatSticker2.vue'
 import { copyUrlToClipboard } from '~/lib/helpers'
@@ -9,8 +10,10 @@ const config = useRuntimeConfig()
 const LOGIN_URL = config.public.loginURL
 const route = useRoute()
 const store = useStore()
+const viewport = useWindowSize()
 const state = reactive({
   isShareNavOpen: false,
+  isMobileMenuOpen: false,
 })
 
 const nav:{
@@ -52,13 +55,29 @@ const nav:{
   //   }
   // }
 ]
+watch(()=>state.isMobileMenuOpen, (newVal)=>{
+  if (!window){
+    return
+  }
+  if (newVal === true){
+    document.body.classList.add('menu-open')
+  } else {
+    document.body.classList.remove('menu-open')
+  }
+}, {
+  immediate: true
+})
 </script>
 <template>
   <LightboxList />
   <FloatSticker1 />
   <FloatSticker2 />
-  <header class="fixed left-0 top-0 z-[100] flex w-full justify-center pt-6">
-    <div class="container flex justify-center">
+  <header
+  class="fixed left-0 top-0 flex w-full justify-end pb-5 lg:justify-center lg:pt-5"
+  :style="{
+    zIndex: viewport.width.value >= 992 ?'100' :state.isMobileMenuOpen ?'1000' :'100'
+  }">
+    <div class="container hidden justify-center lg:flex">
       <div class="mx-auto flex w-auto max-w-full items-center rounded-full px-5 py-1" style="background: rgba(255,255,255, 0.66); box-shadow: 13px 6px 10px rgba(0,0,0,0.44); height: 50px;">
         <div class="row">
           <div
@@ -91,9 +110,7 @@ const nav:{
         }"
         @click="()=>{
           if( window?.navigator?.canShare?.() ){
-            store.do.share({
-              url: window?.location?.href
-            })
+            store.do.share()
           }
         }">
           <div class="py-1">
@@ -117,18 +134,14 @@ const nav:{
             <div
             class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
             @click="()=>{
-              store.do.share({
-                url: window?.location?.href
-              }, 'fb')
+              store.do.share(null, 'fb')
             }">
               <i class="bi bi-facebook block text-[28px] leading-none text-major-700"></i>
             </div>
             <div
             class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major-700 text-white"
             @click="()=>{
-              store.do.share({
-                url: window?.location?.href
-              }, 'line')
+              store.do.share(null, 'line')
             }">
               <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
             </div>
@@ -166,6 +179,92 @@ const nav:{
             v-else
             class="-mb-4 mt-1 text-center text-[10px] text-white">
               登入 ｜ 註冊
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+    v-show="!state.isMobileMenuOpen"
+    class="btn flex size-[68px] items-center justify-center lg:hidden"
+    style="border-radius: 0px 0px 0px 9px; background: linear-gradient(#0c1074 0%, #5d00ff 50%, #0c1074 100%);"
+    @click="()=>{
+      state.isMobileMenuOpen = true
+    }">
+      <img src="/assets/img/icon_menu.svg" alt="">
+    </div>
+    <div
+    v-show="state.isMobileMenuOpen"
+    class="fixed left-0 top-0 z-[1000] size-full overflow-hidden"
+    :style="{
+      height: '100%',
+      maxHeight: `calc(100% - ${16+(store.bottomStickyHeight||0)}px)`
+    }">
+      <div
+      v-show="state.isMobileMenuOpen"
+      class="fixed left-0 top-0 z-10 flex h-[67px] w-full items-center justify-between px-4"
+      style="background:#3A1DAC;">
+        <img src="/assets/img/menu_logo_m.png" style="width:117px;">
+      </div>
+      <div
+      class="absolute rounded-lg p-2.5"
+      :style="{
+        width: 'calc(100% - 32px)',
+        left: '16px',
+        top: 'calc(67px + 16px)',
+        height: `calc(100% - 67px - 16px)`,
+        background: `rgba(58,29,172,0.44)`,
+        backdropFilter: 'blur(4px)',
+      }">
+        <div class="mb-2.5 flex justify-end">
+          <div
+          class="btn flex size-8 items-center justify-center rounded-full bg-[#3A1DAC]"
+          @click="()=>{
+            state.isMobileMenuOpen = false
+          }">
+            <i class="bi bi-x text-[32px] leading-none text-white"></i>
+          </div>
+        </div>
+        <div class="flex size-full flex-col overflow-auto">
+          <div class="px-5">
+            <div
+            v-for="(node, index) in nav"
+            :key="index"
+            class="w-full pb-3">
+              <NuxtLink :to="node?.to">
+                <div
+                class="btn rounded-full py-3 text-center text-[20px]"
+                :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major bg-white'}`"
+                @click="()=>{
+                  node?.onClick?.()
+                  state.isMobileMenuOpen = false
+                }">
+                  {{ node.label }}
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="mt-auto flex justify-center pb-12">
+            <div class="px-1.5">
+              <div
+              class="flex size-[49px] items-center justify-center rounded-full"
+              style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
+              @click="()=>{
+                copyUrlToClipboard()
+              }">
+                <i class="bi bi-link-45deg pointer-events-none relative top-0.5 text-[36px] leading-none text-white"></i>
+              </div>
+            </div>
+            <div class="px-1.5">
+              <div
+              class="flex size-[49px] items-center justify-center rounded-full"
+              style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
+              @click="()=>{
+                store.do.share()
+              }">
+                <i class="bi bi-share-fill pointer-events-none relative -left-0.5 text-[26px] leading-none text-white"></i>
+              </div>
             </div>
           </div>
         </div>

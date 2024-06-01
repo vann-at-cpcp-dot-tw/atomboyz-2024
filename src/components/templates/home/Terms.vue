@@ -7,19 +7,19 @@ interface IProps {
   className?: string
 }
 interface IState {
-  active: number
+  active: number | null
 }
 const props = defineProps<IProps>()
 const state = reactive<IState>({
   active: 0
 })
 const Trigger = defineComponent({
-  props: ['title'],
+  props: ['title', 'isActive'],
   setup: (props, { slots })=>{
     return ()=><div class="btn trigger flex items-center py-4 text-major-800">
-      <div class="ml-auto">{ props?.title }</div>
+      <div class="ml-auto text-[18px]">{ props?.title }</div>
       <div class="ml-auto flex size-6 items-center justify-center rounded-full border">
-        <i class="bi bi-chevron-down block leading-none"></i>
+        <i class={`bi bi-chevron-${props.isActive ? 'up' : 'down'} block leading-none`}></i>
       </div>
     </div>
   }
@@ -46,17 +46,17 @@ const ListItem = defineComponent({
 })
 </script>
 <template>
-  <div :class="twMerge('bg-[#120C60]', props.class)">
-    <div class="container mb-2 bg-white">
-      <Trigger title="投票說明" @click="()=>{ state.active = 0 }" />
+  <div :class="twMerge('bg-[#120C60] lg:px-0 px-5', props.class)">
+    <div class="container mb-2.5 rounded bg-white">
+      <Trigger title="投票說明" :is-active="state.active === 0" @click="()=>{ state.active = state.active === 0 ?null :0 }" />
       <div v-if="state.active === 0" class="pb-4">
         <hr class="mb-4 border-major-800">
         此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。
       </div>
     </div>
 
-    <div class="container mb-2 bg-white">
-      <Trigger title="活動辦法" @click="()=>{ state.active = 1 }" />
+    <div class="container mb-2.5 rounded bg-white">
+      <Trigger title="活動辦法" :is-active="state.active === 1" @click="()=>{ state.active = state.active === 1 ?null :1 }" />
       <div v-if="state.active === 1" class="pb-4">
         <hr class="mb-4 border-major-800">
         <BlockTitle title="投票資格" />
@@ -98,8 +98,8 @@ const ListItem = defineComponent({
       </div>
     </div>
 
-    <div class="container bg-white">
-      <Trigger title="注意事項" @click="()=>{ state.active = 2 }" />
+    <div class="container rounded bg-white">
+      <Trigger title="注意事項" :is-active="state.active === 2" @click="()=>{ state.active = state.active === 2 ?null :2 }" />
       <div v-if="state.active === 2" class="pb-4">
         <hr class="mb-4 border-major-800">
         <ListItem>

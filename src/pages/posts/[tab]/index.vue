@@ -34,7 +34,7 @@ const state = reactive({
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: 'News'}]" />
 
     <div class="container mb-5 flex justify-center">
-      <img class="w-[124px] lg:w-[158px]" :src="`/assets/img/page_title_news.png`">
+      <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
     </div>
 
     <div class="container mb-6">

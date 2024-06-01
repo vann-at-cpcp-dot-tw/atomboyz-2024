@@ -16,7 +16,7 @@ useSeoMeta({
   <main class="text-white">
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label:'News', href:'/posts/news'}, {label: dataFetcher.data.value?.data?.title}]" />
     <div class="container mb-5 flex justify-center">
-      <img class="w-[124px] lg:w-[158px]" :src="`/assets/img/page_title_news.png`">
+      <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
     </div>
     <div class="container" style="max-width: 1110px;">
       <div class="mb-4 text-[20px] lg:text-[40px]">{{ dataFetcher.data.value?.data?.title }}</div>
