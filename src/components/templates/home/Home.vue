@@ -95,6 +95,10 @@ const saleFetcher = await useAsyncData<any>('sale', ()=>{
 })
 
 provide('scopeStore', state)
+
+// onMounted(()=>{
+//   store.do.tracking()
+// })
 </script>
 <template>
   <main class="relative bg-[#0e160b]">
