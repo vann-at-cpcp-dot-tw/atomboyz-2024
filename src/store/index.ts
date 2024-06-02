@@ -108,7 +108,10 @@ export const createStore = function(){
       },
       tracking: function(eventFunctionName:EventFunctionName, eventId:EventId, event:Event, infos?:ITrackingInfos){
         const TrackingFunction = (window as any).webTrackingSDK.events[eventFunctionName] as ConstructorFunction
-        if (typeof TrackingFunction === 'function'){
+        if (
+          typeof TrackingFunction === 'function'
+          // && typeof store.trackingSender?.passEvent === 'function'
+        ){
           store.trackingSender.passEvent(
             new TrackingFunction({
               eventId,

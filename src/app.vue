@@ -70,7 +70,7 @@ onMounted(()=>{
   if (!window){
     return
   }
-  // window.store = store
+  window.store = store
   if (window.localStorage.getItem('t')){
     store.do.setUser(window.localStorage.getItem('t'))
   }

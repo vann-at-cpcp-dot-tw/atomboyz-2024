@@ -96,12 +96,13 @@ const saleFetcher = await useAsyncData<any>('sale', ()=>{
 
 provide('scopeStore', state)
 
-onMounted(()=>{
-  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
-    page_info: {
-      page: 'atomboyz_homepage'
-    }
-  })
+const isTrackingInit = ref(false)
+watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
+  if (!isTrackingInit.value && store.trackingSender){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+  }
+}, {
+  immediate: true
 })
 </script>
 <template>

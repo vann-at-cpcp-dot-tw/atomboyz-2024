@@ -82,8 +82,13 @@ if (queryPeople.value){
   })
 }
 
-onMounted(()=>{
-  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+const isTrackingInit = ref(false)
+watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
+  if (!isTrackingInit.value && store.trackingSender){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+  }
+}, {
+  immediate: true
 })
 
 watch(()=>store.lightbox, (newVal)=>{

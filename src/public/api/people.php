@@ -36,17 +36,6 @@ switch ($method) {
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
-            'name'=> '王一二',
-            'tag_id'=> 'boyz002',
-            'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
-            'votes'=> 1234567,
-            'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
-            'hidoi_url'=> 'https://google.com',
-            'can_vote'=> true,
-            'team'=> 1,
-          ],
-          [
-            'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一三',
             'tag_id'=> 'boyz003',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
