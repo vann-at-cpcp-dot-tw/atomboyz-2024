@@ -118,7 +118,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
   <FloatSticker1 />
   <FloatSticker2 />
   <header
-  class="fixed left-0 top-0 flex w-full justify-end pb-5 lg:justify-center lg:pt-5"
+  class="fixed left-0 top-0 flex w-full justify-center pb-5 lg:pt-5"
   :style="{
     zIndex: viewport.width.value >= 992 ?'100' :state.isMobileMenuOpen ?'1000' :'100'
   }">
@@ -223,152 +223,118 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
           </div>
         </div>
         <div class="flex flex-col items-center">
-          <div
-          class="btn flex flex-col"
-          @click="()=>{
-            if( !window ){ return }
-            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-              click_info: {
-                type: 'atomboyz_member_icon',
-                name: !store.user?.name ?'login_register' :'atomboyz_member_center'
-              }
-            })
-            if( !store.user?.name ){
-              window.location.href = LOGIN_URL
-            }
-          }">
-            <div
-            v-if="!store?.user?.avatar"
-            class="btn btn-scaleUp mx-auto flex size-[37px] items-center justify-center rounded-full bg-major-700 py-2"
-            style="box-shadow: -1px 1px 8px #fff inset;">
-              <i class="bi bi-person-fill block text-[21px] leading-none text-white"></i>
-            </div>
-            <div
-            v-else
-            class="btn btn-scaleUp mx-auto flex size-[37px] rounded-full bg-cover"
-            :style="{
-              boxShadow: '-1px 1px 8px #fff inset',
-              backgroundImage: `url(${store.user.avatar})`
-            }">
-              <i class="bi bi-person-fill block text-[21px] leading-none text-white"></i>
-            </div>
-            <div v-if="store.user?.name" class="-mb-4 mt-1 text-center text-[10px] text-white">
-              <div class="text-center">{{ store.user.name }}</div>
-              <div>擁有票數：{{ store.user.votes }}</div>
-            </div>
-            <div
-            v-else
-            class="-mb-4 mt-1 text-center text-[10px] text-white">
-              登入 ｜ 註冊
-            </div>
-          </div>
+          <MemberAvatar />
         </div>
       </div>
     </div>
 
-    <div
-    v-show="!state.isMobileMenuOpen"
-    class="btn flex size-[68px] items-center justify-center lg:hidden"
-    style="border-radius: 0px 0px 0px 9px; background: linear-gradient(#0c1074 0%, #5d00ff 50%, #0c1074 100%);"
-    @click="()=>{
-      state.isMobileMenuOpen = true
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: 'hamburger',
-          name: 'open'
-        },
-      })
-    }">
-      <img src="/assets/img/icon_menu.svg" alt="">
-    </div>
-    <div
-    v-show="state.isMobileMenuOpen"
-    class="fixed left-0 top-0 z-[1000] size-full overflow-hidden"
-    :style="{
-      height: '100%',
-      maxHeight: `calc(100% - ${16+(store.bottomStickyHeight||0)}px)`
-    }">
+    <div class="flex w-full justify-end lg:hidden">
+      <MemberAvatar v-show="!state.isMobileMenuOpen" class="mr-2 mt-4" />
       <div
-      v-show="state.isMobileMenuOpen"
-      class="fixed left-0 top-0 z-10 flex h-[67px] w-full items-center justify-between px-4"
-      style="background:#3A1DAC;">
-        <img src="/assets/img/menu_logo_m.png" style="width:117px;">
+      v-show="!state.isMobileMenuOpen"
+      class="btn flex size-[68px] items-center justify-center lg:hidden"
+      style="border-radius: 0px 0px 0px 9px; background: linear-gradient(#0c1074 0%, #5d00ff 50%, #0c1074 100%);"
+      @click="()=>{
+        state.isMobileMenuOpen = true
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: 'hamburger',
+            name: 'open'
+          },
+        })
+      }">
+        <img src="/assets/img/icon_menu.svg" alt="">
       </div>
       <div
-      class="absolute rounded-lg p-2.5"
+      v-show="state.isMobileMenuOpen"
+      class="fixed left-0 top-0 z-[1000] size-full overflow-hidden"
       :style="{
-        width: 'calc(100% - 32px)',
-        left: '16px',
-        top: 'calc(67px + 16px)',
-        height: `calc(100% - 67px - 16px)`,
-        background: `rgba(58,29,172,0.44)`,
-        backdropFilter: 'blur(4px)',
+        height: '100%',
+        maxHeight: `calc(100% - ${16+(store.bottomStickyHeight||0)}px)`
       }">
-        <div class="mb-2.5 flex justify-end">
-          <div
-          class="btn flex size-8 items-center justify-center rounded-full bg-[#3A1DAC]"
-          @click="()=>{
-            state.isMobileMenuOpen = false
-            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-              click_info: {
-                type: 'hamburger',
-                name: 'close'
-              },
-            })
-          }">
-            <i class="bi bi-x text-[32px] leading-none text-white"></i>
-          </div>
+        <div
+        v-show="state.isMobileMenuOpen"
+        class="fixed left-0 top-0 z-10 flex h-[67px] w-full items-start justify-between px-4"
+        style="background:#3A1DAC;">
+          <img class="self-center" src="/assets/img/menu_logo_m.png" style="width:150px;">
+          <MemberAvatar class="mt-4" />
         </div>
-        <div class="flex size-full flex-col overflow-auto">
-          <div class="px-5">
+        <div
+        class="absolute rounded-lg p-2.5"
+        :style="{
+          width: 'calc(100% - 32px)',
+          left: '16px',
+          top: 'calc(67px + 16px)',
+          height: `calc(100% - 67px - 16px)`,
+          background: `rgba(58,29,172,0.44)`,
+          backdropFilter: 'blur(4px)',
+        }">
+          <div class="mb-2.5 flex justify-end">
             <div
-            v-for="(node, index) in nav"
-            :key="index"
-            class="w-full pb-3">
-              <NuxtLink :to="node?.to">
-                <div
-                class="btn rounded-full py-3 text-center text-[20px]"
-                :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major bg-white'}`"
-                @click="()=>{
-                  node?.onClick?.()
-                  state.isMobileMenuOpen = false
-                }">
-                  {{ node.label }}
-                </div>
-              </NuxtLink>
+            class="btn flex size-8 items-center justify-center rounded-full bg-[#3A1DAC]"
+            @click="()=>{
+              state.isMobileMenuOpen = false
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                click_info: {
+                  type: 'hamburger',
+                  name: 'close'
+                },
+              })
+            }">
+              <i class="bi bi-x text-[32px] leading-none text-white"></i>
             </div>
           </div>
-          <div class="mt-auto flex justify-center pb-12">
-            <div class="px-1.5">
+          <div class="flex size-full flex-col overflow-auto">
+            <div class="px-5">
               <div
-              class="flex size-[49px] items-center justify-center rounded-full"
-              style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
-              @click="()=>{
-                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-                  click_info: {
-                    type: 'share',
-                    name: 'link'
-                  }
-                })
-                copyUrlToClipboard()
-              }">
-                <i class="bi bi-link-45deg pointer-events-none relative top-0.5 text-[36px] leading-none text-white"></i>
+              v-for="(node, index) in nav"
+              :key="index"
+              class="w-full pb-3">
+                <NuxtLink :to="node?.to">
+                  <div
+                  class="btn rounded-full py-3 text-center text-[20px]"
+                  :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major bg-white'}`"
+                  @click="()=>{
+                    node?.onClick?.()
+                    state.isMobileMenuOpen = false
+                  }">
+                    {{ node.label }}
+                  </div>
+                </NuxtLink>
               </div>
             </div>
-            <div class="px-1.5">
-              <div
-              class="flex size-[49px] items-center justify-center rounded-full"
-              style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
-              @click="()=>{
-                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-                  click_info: {
-                    type: 'share',
-                    name: 'open'
-                  }
-                })
-                store.do.share()
-              }">
-                <i class="bi bi-share-fill pointer-events-none relative -left-0.5 text-[26px] leading-none text-white"></i>
+            <div class="mt-auto flex justify-center pb-12">
+              <div class="px-1.5">
+                <div
+                class="flex size-[49px] items-center justify-center rounded-full"
+                style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
+                @click="()=>{
+                  store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                    click_info: {
+                      type: 'share',
+                      name: 'link'
+                    }
+                  })
+                  copyUrlToClipboard()
+                }">
+                  <i class="bi bi-link-45deg pointer-events-none relative top-0.5 text-[36px] leading-none text-white"></i>
+                </div>
+              </div>
+              <div class="px-1.5">
+                <div
+                class="flex size-[49px] items-center justify-center rounded-full"
+                style="background: linear-gradient(#0c1074 0%, #5d00ff 100%);"
+                @click="()=>{
+                  store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                    click_info: {
+                      type: 'share',
+                      name: 'open'
+                    }
+                  })
+                  store.do.share()
+                }">
+                  <i class="bi bi-share-fill pointer-events-none relative -left-0.5 text-[26px] leading-none text-white"></i>
+                </div>
               </div>
             </div>
           </div>

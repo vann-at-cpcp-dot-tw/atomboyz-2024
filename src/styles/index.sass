@@ -27,9 +27,12 @@ body
   &.show-cookie-alert,
   &.show-global-alert,
   &.show-game-page,
-  &.show-peoplebox,
-  &.menu-open
+  &.show-peoplebox
     overflow: hidden
+body
+  &.menu-open
+    @media (min-width: 992px)
+      overflow: visible
 
 // select
 //   -webkit-appearance: menulist-button
