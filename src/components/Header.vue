@@ -228,8 +228,8 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
       </div>
     </div>
 
-    <div class="flex w-full justify-end lg:hidden">
-      <MemberAvatar v-show="!state.isMobileMenuOpen" class="mr-2 mt-4" />
+    <div class="flex w-full items-center justify-end lg:hidden">
+      <MemberAvatar v-show="!state.isMobileMenuOpen" class="mr-2" />
       <div
       v-show="!state.isMobileMenuOpen"
       class="btn flex size-[68px] items-center justify-center lg:hidden"

@@ -68,24 +68,35 @@ onUnmounted(()=>{
           class="row lg:row-gap-2 flex-nowrap"
           @submit="(e)=>{
             e.preventDefault()
-            const searchName = state.form.name
-            const tagId = scopeStore.searchNameToTagID(searchName)
-            const peopleTarget = window?.document.getElementById(tagId)
             if( !window ){
               return
             }
-            if( state.scrollIng ){
-              return
-            }
-            if( !peopleTarget){
-              return
-            }
-            state.scrollIng = true
-            scrollToSection({el:peopleTarget, offset:scopeStore.stickyHeight*-1})
-            window.setTimeout(() => {
-              state.scrollIng = false
+            const searchName = state.form.name
+            const tagId = scopeStore.searchNameToTagID(searchName)
+            // const peopleTarget = window?.document?.getElementById?.(tagId)
+            if( tagId ){
+              $router.push({
+                query: {
+                  p:searchName
+                }
+              })
+            }else{
+              window.alert('您搜尋的少年名稱有誤，請確認名稱輸入正確！')
               state.form.name = ''
-            }, 800);
+            }
+
+            // if( state.scrollIng ){
+            //   return
+            // }
+            // if( !peopleTarget){
+            //   return
+            // }
+            // state.scrollIng = true
+            // scrollToSection({el:peopleTarget, offset:scopeStore.stickyHeight*-1})
+            // window.setTimeout(() => {
+            //   state.scrollIng = false
+            //   state.form.name = ''
+            // }, 800);
           }">
             <div class="col-6 shrink lg:col-auto">
               <div class="relative h-[38px] overflow-hidden rounded">

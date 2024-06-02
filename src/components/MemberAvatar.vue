@@ -27,16 +27,16 @@ const store = useStore()
         window.location.href = LOGIN_URL
       }
     }">
-      <div class="order-last ml-2 lg:order-first lg:ml-0">
+      <div class="order-last ml-2 size-[37px] lg:order-first lg:mx-auto">
         <div
         v-if="!store?.user?.avatar"
-        class="btn btn-scaleUp mx-auto flex size-[37px] items-center justify-center rounded-full bg-major-700 py-2"
+        class="btn btn-scaleUp mx-auto flex size-full items-center justify-center rounded-full bg-major-700 py-2"
         style="box-shadow: -1px 1px 8px #fff inset;">
           <i class="bi bi-person-fill block text-[21px] leading-none text-white"></i>
         </div>
         <div
         v-else
-        class="btn btn-scaleUp mx-auto flex size-[37px] rounded-full bg-cover"
+        class="btn btn-scaleUp mx-auto flex size-full rounded-full bg-cover"
         :style="{
           boxShadow: '-1px 1px 8px #fff inset',
           backgroundImage: `url(${store.user.avatar})`
@@ -45,13 +45,13 @@ const store = useStore()
         </div>
       </div>
 
-      <div v-if="store.user?.name" class="-mb-4 mt-1 text-right text-[10px] text-white lg:text-center">
+      <div v-if="store.user?.name" class="mt-1 text-right text-[10px] text-white lg:text-center">
         <div>{{ store.user.name }}</div>
         <div>擁有票數：{{ store.user.votes }}</div>
       </div>
       <div
       v-else
-      class="-mb-4 mt-1 text-center text-[10px] text-white">
+      class="self-center text-center text-[10px] text-white lg:mb-0 lg:mt-1">
         登入 ｜ 註冊
       </div>
     </div>

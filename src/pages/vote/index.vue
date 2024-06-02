@@ -19,7 +19,7 @@ const state = reactive({
   windowOldScrollY: 0,
   searchNameToTagID: (name:string)=>{
     const targetPeople = peopleFetcher.data.value?.data?.list?.find((node:any)=>node.name === name)
-    return targetPeople.tag_id
+    return targetPeople?.tag_id
   },
   stickyHeight: computed(()=>{
     if (viewport.width.value >= 992){

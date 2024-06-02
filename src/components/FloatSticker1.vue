@@ -33,7 +33,7 @@ onMounted(()=>{
 </script>
 <template>
   <div
-  :class="twMerge(`z-[100] fixed right-0 text-[15px] text-white mt-[-170px] lg:block hidden ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+  :class="twMerge(`z-[400] fixed right-0 text-[15px] text-white mt-[-170px] lg:block hidden ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
   :style="{
     padding: '18px 14px',
     borderRadius: '5px 0px 0px 5px',

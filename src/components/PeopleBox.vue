@@ -7,6 +7,8 @@ import { teams, convertYoutubeUrlToEmbed } from '~/lib/utils'
 import { useStore } from '~/store'
 import { copyUrlToClipboard } from '~/lib/helpers'
 const window = process.client ? globalThis : null
+const config = useRuntimeConfig()
+const APP_URL = config.public.appURL
 interface IProps {
   class?: string
   className?: string
@@ -87,7 +89,9 @@ onUnmounted(()=>{
                   }"
                   @click="()=>{
                     if( window?.navigator?.canShare?.() ){
-                      store.do.share()
+                      store.do.share({
+                        url: `${APP_URL}/vote?p=${props.name}`
+                      })
                     }
                   }">
                     <i class="bi bi-share-fill relative text-[15px] leading-none"></i>
@@ -102,14 +106,18 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
-                        store.do.share(null, 'fb')
+                        store.do.share({
+                          url: `${APP_URL}/vote?p=${props.name}`
+                        }, 'fb')
                       }">
                         <i class="bi bi-facebook block text-[28px] leading-none text-major"></i>
                       </div>
                       <div
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
-                        store.do.share(null, 'line')
+                        store.do.share({
+                          url: `${APP_URL}/vote?p=${props.name}`
+                        }, 'line')
                       }">
                         <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
                       </div>
