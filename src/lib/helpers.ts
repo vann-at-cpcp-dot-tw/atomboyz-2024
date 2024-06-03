@@ -1,3 +1,6 @@
+import queryString from 'query-string'
+import { parse } from 'query-string/base'
+
 export * from 'vanns-common-modules/dist/lib/helpers'
 
 export function calculateRemainingTime(
@@ -38,7 +41,15 @@ export function calculateRemainingTime(
 
 export async function copyUrlToClipboard(){
   try {
-    await navigator.clipboard.writeText(window.location.href)
+    let queryObject = queryString.parse(location.search)
+    queryObject = {
+      ...queryObject,
+      utm_source: 'other',
+      utm_medium: 'link',
+      utm_campaign: 'atomboyz2'
+    }
+    const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.hash}?${queryString.stringify(queryObject)}`
+    await navigator.clipboard.writeText(url)
     alert('複製成功！')
   } catch (err){
     console.error('Failed to copy text: ', err)

@@ -1,5 +1,6 @@
 import { inject, provide } from 'vue'
 import { shareFb, shareLine } from 'vanns-common-modules/dist/lib/helpers'
+import queryString from 'query-string'
 import { calculateRemainingTime } from '~/lib/helpers'
 interface ConstructorFunction extends Function {
   new(...args: any[]): any;
@@ -269,19 +270,32 @@ export const createStore = function(){
       share: async(data?:{url?:string, title?:string, text?:string}, shareTarget?:string)=>{
         const API_URL = useRuntimeConfig().public.apiURL
         if (!window){ return }
-
+        const pureURL = data?.url?.split('?')?.[0] || `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.hash}`
+        let queryObject = queryString.parse(location.search)
+        queryObject = {
+          ...queryObject,
+          utm_medium: 'link',
+          utm_campaign: 'atomboyz2'
+        }
+        let shareURL = ''
         if (window?.navigator?.canShare?.()){
+          queryObject.utm_source = 'builtin'
+          shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
           window?.navigator?.share?.({
             ...(data || {}),
-            url: data?.url || window.location.href,
+            url: shareURL
           })
         } else {
           switch (shareTarget){
             case 'fb':
-              shareFb(data?.url || window?.location?.href)
+              queryObject.utm_source = 'facebook'
+              shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
+              shareFb(shareURL)
               break
             case 'line':
-              shareLine(data?.url || window?.location?.href)
+              queryObject.utm_source = 'line'
+              shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
+              shareLine(shareURL)
               break
           }
         }

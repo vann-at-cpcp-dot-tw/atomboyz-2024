@@ -82,6 +82,11 @@ onMounted(()=>{
     return
   }
 
+  // 鎖右鍵
+  window.document.addEventListener('contextmenu', function(e){
+    e.preventDefault()
+  })
+
   trackingInit().then((sender)=>{
     store.trackingSender = sender
     nextTick(()=>{

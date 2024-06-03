@@ -209,7 +209,7 @@ onUnmounted(()=>{
             </div>
           </div>
 
-          <div class="flex flex-col lg:w-[62.5%] lg:pl-[22px]">
+          <div class="flex w-full flex-col lg:w-[62.5%] lg:pl-[22px]">
             <div class="-mt-4 mb-2 hidden !flex-nowrap items-center lg:flex">
               <div class="pr-2 text-[30px] font-600">{{ props?.name }}</div>
               <div v-if="targetTeam?.getImg?.()" class="-mr-2">
