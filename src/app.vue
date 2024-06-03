@@ -25,7 +25,7 @@ async function trackingInit(){
     BUID: 'GAMA-hidol-01',
     property: 'GAMA-hidol-01',
     sourceProperty: 'GAMA-hidol-01',
-    GTMId: IS_STAGE ? 'GTM-WTMXC2TT' : 'GTM-MCJ7BK4',
+    GTMId: IS_STAGE ? 'GTM-MCJ7BK4' : 'GTM-WTMXC2TT',
   })
 
   return sender
