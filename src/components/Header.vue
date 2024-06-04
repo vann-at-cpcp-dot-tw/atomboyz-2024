@@ -120,7 +120,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
   <header
   class="fixed left-0 top-0 flex w-full justify-center pb-5 lg:pt-5"
   :style="{
-    zIndex: viewport.width.value >= 992 ?'100' :state.isMobileMenuOpen ?'1000' :'100'
+    zIndex: viewport.width.value >= 992 ?'400' :state.isMobileMenuOpen ?'1000' :'100'
   }">
     <div class="container hidden justify-center lg:flex">
       <div class="mx-auto flex w-auto max-w-full items-center rounded-full px-5 py-1" style="background: rgba(255,255,255, 0.66); box-shadow: 13px 6px 10px rgba(0,0,0,0.44); height: 50px;">
@@ -144,7 +144,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
       </div>
       <div class="flex">
         <div
-        class="relative mr-4"
+        class="relative mr-4 self-start"
         @mouseenter="()=>{
           if( !window?.navigator?.canShare?.() ){
             state.isShareNavOpen = true

@@ -13,6 +13,7 @@ interface IProps {
   class?: string
   className?: string
   name: string
+  tag_id: string
   yt_url: string
   can_vote: boolean
   votes: string
@@ -90,7 +91,7 @@ onUnmounted(()=>{
                   @click="()=>{
                     if( window?.navigator?.canShare?.() ){
                       store.do.share({
-                        url: `${APP_URL}/vote?p=${props.name}`
+                        url: `${APP_URL}/vote#${props?.tag_id}`
                       })
                     }
                   }">
@@ -107,7 +108,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
                         store.do.share({
-                          url: `${APP_URL}/vote?p=${props.name}`
+                          url: `${APP_URL}/vote#${props.tag_id}`
                         }, 'fb')
                       }">
                         <i class="bi bi-facebook block text-[28px] leading-none text-major"></i>
@@ -116,7 +117,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
                         store.do.share({
-                          url: `${APP_URL}/vote?p=${props.name}`
+                          url: `${APP_URL}/vote#${props.tag_id}`
                         }, 'line')
                       }">
                         <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
@@ -136,8 +137,16 @@ onUnmounted(()=>{
               </RatioArea>
             </div>
             <div class="mb-5 text-center text-[24px]">總票數：<i class="text-[30px] font-700 text-major">{{ numberFormat(props?.votes) }}</i>&nbsp;票</div>
+            <div
+            v-if="store.do.isNotVoteDate()"
+            class="btn flex h-[49px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white"
+            @click="()=>{
+              store.do.lightboxOpen('VoteComing')
+            }">
+              未開放投票
+            </div>
             <MajorButton
-            v-if="props?.can_vote === true"
+            v-else-if="props?.can_vote === true"
             class="h-[49px] text-[18px]"
             @click="()=>{
               store.do.voteInput({
@@ -195,8 +204,16 @@ onUnmounted(()=>{
               </div>
             </div>
             <div class="mt-4 w-full">
+              <div
+              v-if="store.do.isNotVoteDate()"
+              class="btn flex h-[41px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white"
+              @click="()=>{
+                store.do.lightboxOpen('VoteComing')
+              }">
+                未開放投票
+              </div>
               <MajorButton
-              v-if="props?.can_vote === true"
+              v-else-if="props?.can_vote === true"
               class="h-[41px]"
               @click="()=>{
                 store.do.voteInput({

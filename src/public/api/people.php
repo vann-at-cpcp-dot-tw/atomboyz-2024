@@ -21,6 +21,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true, // 此人是否可以投票
+            'situation_key'=> 1,
             'team'=> 1,
           ],
           [
@@ -32,6 +33,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 1,
           ],
           [
@@ -43,6 +45,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 2,
           ],
           [
@@ -54,6 +57,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 2,
           ],
           [
@@ -65,6 +69,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 3,
           ],
           [
@@ -76,6 +81,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 3,
           ],
           [
@@ -87,6 +93,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 4,
           ],
           [
@@ -98,6 +105,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 4,
           ],
           [
@@ -109,6 +117,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 5,
           ],
           [
@@ -120,6 +129,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 5,
           ],
           [
@@ -131,6 +141,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 6,
           ],
           [
@@ -142,6 +153,7 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
+            'situation_key'=> 1,
             'team'=> 6,
           ],
           [
@@ -153,7 +165,8 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> true,
-            'team'=> -1, // -1 是待定
+            'situation_key'=> 3, // 3 是待定
+            'team'=> 6,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
@@ -164,7 +177,8 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> false,
-            'team'=> -1, // -1 是待定
+            'situation_key'=> 3, // 3 是待定
+            'team'=> 6,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
@@ -175,7 +189,8 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> false,
-            'team'=> -2, // -2 是淘汰
+            'situation_key'=> 2, // 2 是淘汰
+            'team'=> 6,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
@@ -186,7 +201,8 @@ switch ($method) {
             'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
             'hidoi_url'=> 'https://google.com',
             'can_vote'=> false,
-            'team'=> -2, // -2 是淘汰
+            'situation_key'=> 2, // 2 是淘汰
+            'team'=> 6,
           ],
         ]
       ]

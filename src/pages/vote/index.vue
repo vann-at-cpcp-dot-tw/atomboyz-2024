@@ -14,6 +14,8 @@ const store = useStore()
 const viewport = useWindowSize()
 const peopleFetcher:{[key:string]:any} = await useFetch(`${API_URL}/people`)
 const state = reactive({
+  scrollIng: false,
+  scrollFocus: null,
   activeTeamId: null,
   scrollDirection: '',
   windowOldScrollY: 0,
@@ -53,7 +55,7 @@ const stickyHeightPx = computed(()=>{
 provide('scopeStore', state)
 
 const queryPeople = computed(()=>{
-  const result = peopleFetcher.data.value?.data?.list.find((node:any)=>node.name === route.query?.p)
+  const result = peopleFetcher.data.value?.data?.list.find((node:any)=>node.tag_id === route.query.p)
   if (result?.team === -2){
     return null
   }
@@ -111,10 +113,20 @@ watch(()=>store.lightbox, (newVal)=>{
 }, {
   immediate: true
 })
+
 </script>
 <template>
   <main
-  class="relative text-white">
+  v-touch:drag="(e:any)=>{
+    if(e.type.includes('mouse')){
+      return
+    }
+    state.scrollFocus = null
+  }"
+  class="relative text-white"
+  @mousewheel="(e:any)=>{
+    state.scrollFocus = null
+  }">
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: '我要投票'}]" />
     <PageHead class="mb-8" />
     <ClientOnly>
@@ -379,10 +391,13 @@ watch(()=>store.lightbox, (newVal)=>{
 
     <div
     v-for="(teamNode, teamIndex) in state.teamWithPeoples"
-    :id="`${teamNode.tagId}`"
     :key="teamIndex"
     :data-id="teamNode.id"
-    class="teamSection container-fluid mb-[55px] px-2 lg:px-5">
+    :class="`teamSection container-fluid relative mb-[55px] px-2 lg:px-5 ${store.general.exclude_teams?.includes(teamNode.id) ?'pointer-events-none opacity-20' :''}`"
+    :style="{
+
+    }">
+      <div :id="`${teamNode.tagId}`" class="anchor relative" :style="{top: `-${stickyHeightPx}`}"></div>
       <div class="mx-auto w-full max-w-[1093px] rounded-xl border border-white p-2 lg:p-5">
         <div class="mx-auto w-full max-w-[959px]">
           <div class="mb-2 mt-1 flex justify-center lg:mb-4 lg:mt-3 lg:justify-start">
@@ -402,7 +417,7 @@ watch(()=>store.lightbox, (newVal)=>{
               :on-thumb-click="()=>{
                 router.push({
                   query: {
-                    p: peopleNode.name
+                    p: peopleNode.tag_id
                   }
                 })
               }" />
@@ -432,7 +447,7 @@ watch(()=>store.lightbox, (newVal)=>{
               :on-thumb-click="()=>{
                 router.push({
                   query: {
-                    p: peopleNode.name
+                    p: peopleNode.tag_id
                   }
                 })
               }" />
@@ -462,7 +477,7 @@ watch(()=>store.lightbox, (newVal)=>{
               :on-thumb-click="()=>{
                 router.push({
                   query: {
-                    p: peopleNode.name
+                    p: peopleNode.tag_id
                   }
                 })
               }" />

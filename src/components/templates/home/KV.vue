@@ -42,7 +42,10 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
     <div class="container mb-6 flex justify-center">
       <img class="max-w-[256px] lg:max-w-[500px]" src="/assets/img/title_home_2.png">
     </div>
-    <div class="relative z-10 mx-auto mb-6 flex w-[222px] flex-col !flex-nowrap overflow-hidden lg:w-[434px] lg:flex-row _lg:rounded-lg">
+
+    <div
+    v-if="!store.do.isNotVoteDate()"
+    class="relative z-10 mx-auto mb-6 flex w-[222px] flex-col !flex-nowrap overflow-hidden lg:w-[434px] lg:flex-row _lg:rounded-lg">
       <div class="flex w-auto flex-none flex-nowrap items-center px-5 py-2.5 text-white lg:rounded-l-lg _lg:justify-center" style="background: rgba(53, 69, 241, 0.73); box-shadow: 0px 4px 9px inset rgba(255,255,255,0.75);">
         <img src="/assets/img/icon_timer.svg">
         <div class="pl-2 text-[18px]">投 票 倒 數</div>
@@ -56,6 +59,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
         </div>
       </div>
     </div>
+
     <div class="container mb-10 flex justify-center lg:mb-[75px]">
       <NuxtLink
       to="/vote"

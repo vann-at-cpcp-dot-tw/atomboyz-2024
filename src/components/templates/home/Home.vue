@@ -38,7 +38,7 @@ const state:any = reactive({
         return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
           return {
             ...node,
-            href: `/vote?p=${node.name}`
+            href: `/vote?p=${node.tag_id}`
           }
         })
       case 'team':
@@ -49,7 +49,8 @@ const state:any = reactive({
             img: targetTeam?.getImg?.(),
             name: targetTeam?.name,
             number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
-            href: `/vote#${targetTeam?.tagId}`
+            href: `/vote#${targetTeam?.tagId}`,
+            disabled: store?.general?.exclude_teams?.includes(id)
           }
         })
 
@@ -170,7 +171,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 
       <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
-      <!-- <RanksTable class="pb-8 pt-16" /> -->
+      <RanksTable class="pb-8 pt-16" />
 
       <!-- <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
         <div
@@ -230,7 +231,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 
       <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
-      <div class="bg-black pb-[60px]">
+      <!-- <div class="bg-black pb-[60px]">
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
@@ -248,7 +249,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
             </ImgFrame>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </main>
 </template>

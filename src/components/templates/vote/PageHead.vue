@@ -3,6 +3,8 @@ import { twMerge } from 'tailwind-merge'
 import { scrollToSection } from 'vanns-common-modules/dist/lib/helpers'
 import { teams } from '~/lib/utils'
 import { useStore } from '~/store'
+import { scrollToSection2 } from '~/lib/helpers'
+
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -10,12 +12,10 @@ interface IProps {
   className?: string
 }
 const props = defineProps<IProps>()
-const scopeStore = inject<any>('scopeStore')
 const route = useRoute()
 const store = useStore()
+const scopeStore = inject<any>('scopeStore')
 const state = reactive({
-  scrollIng: false,
-  scrollFocus: null,
   form: {
     name: '',
     team: '',
@@ -43,7 +43,7 @@ onMounted(()=>{
   // if has hash
   setTimeout(()=>{
     if (route.hash){
-      scrollToSection({ el: window.document.querySelector(route.hash), offset: scopeStore.stickyHeight * -1 })
+      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
     }
   }, 500)
 })
@@ -55,9 +55,10 @@ onBeforeUnmount(()=>{
 onUnmounted(()=>{
   window?.removeEventListener('scroll', setHeaderBg)
 })
+
 </script>
 <template>
-  <div :class="twMerge('sticky left-0 pb-5 pt-0 lg:top-[95px] top-[68px] bg-black z-[300]', props.class)">
+  <div :class="twMerge('sticky left-0 pb-5 pt-0 lg:top-[111px] top-[68px] bg-black z-[300]', props.class)">
     <div class="container mb-5 text-center">
       <div class="row items-center justify-center">
         <div class="col-auto mb-4 lg:mb-0 lg:ml-[40%] xl:ml-[44]">
@@ -71,9 +72,9 @@ onUnmounted(()=>{
             if( !window ){
               return
             }
+            state.form.name = (state.form.name || '').trim()
             const searchName = state.form.name
             const tagId = scopeStore.searchNameToTagID(searchName)
-            // const peopleTarget = window?.document?.getElementById?.(tagId)
             if( tagId ){
               $router.push({
                 query: {
@@ -84,19 +85,6 @@ onUnmounted(()=>{
               window.alert('您搜尋的少年名稱有誤，請確認名稱輸入正確！')
               state.form.name = ''
             }
-
-            // if( state.scrollIng ){
-            //   return
-            // }
-            // if( !peopleTarget){
-            //   return
-            // }
-            // state.scrollIng = true
-            // scrollToSection({el:peopleTarget, offset:scopeStore.stickyHeight*-1})
-            // window.setTimeout(() => {
-            //   state.scrollIng = false
-            //   state.form.name = ''
-            // }, 800);
           }">
             <div class="col-6 shrink lg:col-auto">
               <div class="relative h-[38px] overflow-hidden rounded">
@@ -108,14 +96,13 @@ onUnmounted(()=>{
                   if( !window ){
                     return
                   }
-                  if( state.scrollIng ){
-                    return
-                  }
-                  state.scrollIng = true
-                  scrollToSection({el:window?.document.getElementById(`${(e.target as any).value}`), offset:scopeStore.stickyHeight*-1})
+
+                  $router.push({
+                    hash: `#${(e.target as any).value}`
+                  })
                   window.setTimeout(() => {
-                    state.scrollIng = false
-                  }, 800);
+                    scrollToSection2({el:window?.document.querySelector(`#${(e.target as any).value}`), jump: true })
+                  }, 0);
                 }">
                   <option value="">請選擇團體</option>
                   <option v-for="(node) in teams" :key="node.id" :value="node.tagId">{{ node.name }}</option>
@@ -129,14 +116,10 @@ onUnmounted(()=>{
               <div class="relative h-[38px] overflow-hidden rounded">
                 <input v-model="state.form.name" type="text" class="size-full pl-2 pr-[69px] text-black lg:w-[200px]" placeholder="請輸入少年姓名">
                 <button type="submit" class="btn btn-light absolute right-0 top-0 flex h-[38px] w-[65px] items-center justify-center bg-major text-white">
-                  <!-- <i class="bi bi-search"></i> -->
                   搜尋
                 </button>
               </div>
             </div>
-          <!-- <div class="col-auto">
-              <div class="btn btn-light flex h-[38px] w-[65px] items-center justify-center rounded bg-major">搜尋</div>
-            </div> -->
           </form>
         </div>
       </div>
@@ -149,25 +132,19 @@ onUnmounted(()=>{
         :key="index"
         class="col-2">
           <div
-          :class="`btn`"
-          :style="{
-            // filter: `brightness(${scopeStore.activeTeamId !== null && String(scopeStore.activeTeamId) !== String(node.id) ?'0.2' :'1'})`
-            filter: `brightness(${state.scrollFocus !== null && state.scrollFocus !== node.id ?'0.2' :'1'})`
-          }"
+          :class="`btn ${(scopeStore.scrollFocus !== null && scopeStore.scrollFocus !== node.id) || store.general.exclude_teams?.includes(node.id) ?'pointer-events-none opacity-20' :''}`"
           @click="()=>{
             if( !window ){
               return
             }
-            if( state.scrollIng ){
-              return
-            }
-            state.scrollIng = true
-            scrollToSection({el:window?.document.getElementById(`${node.tagId}`), offset:scopeStore.stickyHeight*-1})
-            state.scrollFocus = node.id
-            window.setTimeout(() => {
-              state.scrollFocus = null
-              state.scrollIng = false
-            }, 800);
+
+            scopeStore.scrollFocus = node.id
+            $router.push({
+              hash: `#${node.tagId}`
+            })
+            window.setTimeout(()=>{
+              scrollToSection2({el:window?.document.querySelector(`#${node.tagId}`), jump: true })
+            }, 0)
 
             store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
               page_info: {

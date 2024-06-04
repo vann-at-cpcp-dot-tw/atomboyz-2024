@@ -12,7 +12,7 @@ switch ($method) {
         'data'=> [
           'user'=>[
             'name'=> '許毅達',
-            'votes'=> 10,
+            'votes'=> 0,
             'avatar'=> '',
             'fav_peoples'=> [
               [

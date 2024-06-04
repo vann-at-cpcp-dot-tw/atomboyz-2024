@@ -55,6 +55,7 @@ export interface IStore {
   trackingPageName: string
   lightbox: string[]
   user: IUser | null
+  voteAjaxing: boolean,
   myVoting: {
     name: string
     votes: number | null
@@ -74,6 +75,7 @@ export const createStore = function(){
     isPreMode: undefined,
     trackingPageName: '/',
     lightbox: [],
+    voteAjaxing: false,
     myVoting: {
       name: '',
       votes: null
@@ -128,12 +130,7 @@ export const createStore = function(){
         }
         return true
       },
-      canVote: function(){
-        if (!store?.user?.name){
-          store.do.lightboxOpen('NeedLogin')
-          return false
-        }
-
+      isNotVoteDate: function(){
         if (typeof store.general?.countdown_end_time === 'string'){
           const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
           const countdown = calculateRemainingTime({
@@ -144,10 +141,19 @@ export const createStore = function(){
             minute,
           })
           const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
-          if (countdownTotal <= 0){
-            store.do.lightboxOpen('VoteComing')
-            return false
-          }
+          return countdownTotal <= 0
+        }
+        return true
+      },
+      canVote: function(){
+        if (!store?.user?.name){
+          store.do.lightboxOpen('NeedLogin')
+          return false
+        }
+
+        if (store.do.isNotVoteDate()){
+          store.do.lightboxOpen('VoteComing')
+          return false
         }
 
         return true
@@ -157,7 +163,7 @@ export const createStore = function(){
           return
         }
 
-        if (typeof store?.user?.votes === 'number' && store?.user?.votes <= 0){
+        if (Number((store?.user?.votes || 0) <= 0)){
           store.do.lightboxOpen('NoMoreVotes')
           return
         }
@@ -250,10 +256,15 @@ export const createStore = function(){
         return result
       },
       vote: async function(){
+        if (store.voteAjaxing){
+          return
+        }
+
         if (!store.do.canVote()){
           return
         }
 
+        store.voteAjaxing = true
         const API_URL = useRuntimeConfig().public.apiURL
         const result = await $fetch<IAPIResponse>(`${API_URL}/user`, {
           method: 'POST',
@@ -265,6 +276,7 @@ export const createStore = function(){
           }
         })
         store.do.handleRes(result)
+        store.voteAjaxing = false
         return result
       },
       share: async(data?:{url?:string, title?:string, text?:string}, shareTarget?:string)=>{

@@ -64,7 +64,7 @@ const state = reactive({
             e.stopPropagation()
             if( window?.navigator?.canShare?.() ){
               store.do.share({
-                url: `${APP_URL}/vote?p=${props.name}`
+                url: `${APP_URL}/vote?p=${props.tag_id}`
               })
             }
           }">
@@ -81,7 +81,7 @@ const state = reactive({
               class="btn btn-scaleUp mx-auto mb-1 size-[21px] rounded-full bg-white"
               @click="()=>{
                 store.do.share({
-                  url: `${APP_URL}/vote?p=${props.name}`
+                  url: `${APP_URL}/vote?p=${props.tag_id}`
                 }, 'fb')
               }">
                 <i class="bi bi-facebook block text-[21px] leading-none text-major"></i>
@@ -90,7 +90,7 @@ const state = reactive({
               class="btn btn-scaleUp mx-auto flex size-[21px] items-center justify-center rounded-full bg-major text-white"
               @click="()=>{
                 store.do.share({
-                  url: `${APP_URL}/vote?p=${props.name}`
+                  url: `${APP_URL}/vote?p=${props.tag_id}`
                 }, 'line')
               }">
                 <i class="bi bi-line relative mt-[3px] block text-[12px] leading-none text-white"></i>
@@ -146,7 +146,15 @@ const state = reactive({
 
       <div class="mt-2">
         <div
-        v-if="props?.can_vote === true"
+        v-if="store.do.isNotVoteDate()"
+        class="btn flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white"
+        @click="()=>{
+          store.do.lightboxOpen('VoteComing')
+        }">
+          未開放投票
+        </div>
+        <div
+        v-else-if="props?.can_vote === true"
         class="btn btn-light flex w-full items-center justify-center rounded-full bg-[#C3C1F9] py-2 text-[12px] leading-none text-[#0D116B]"
         @click="()=>{
           store.do.voteInput({

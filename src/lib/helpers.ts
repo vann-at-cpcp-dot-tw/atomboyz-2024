@@ -3,6 +3,26 @@ import { parse } from 'query-string/base'
 
 export * from 'vanns-common-modules/dist/lib/helpers'
 
+export const scrollToSection2 = function({ el, offset = 0, jump = false }:any, callback?:Function){
+  if (el){
+    const targetRect = el.getBoundingClientRect()
+    const targetTop = targetRect.top + window.pageYOffset
+    const top = (targetTop - Number((document?.body?.style?.paddingTop?.split?.('px')?.[0] || 0)) + offset).toFixed()
+    const onScroll = function(){
+      if (window.pageYOffset.toFixed() === top){
+        window.removeEventListener('scroll', onScroll)
+        callback?.()
+      }
+    }
+    window.addEventListener('scroll', onScroll)
+    onScroll()
+    window.scrollTo({
+      top,
+      behavior: jump === true ? undefined : 'smooth'
+    })
+  }
+}
+
 export function calculateRemainingTime(
   futureTime:{
     year: string

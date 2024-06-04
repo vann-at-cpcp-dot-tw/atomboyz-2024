@@ -9,7 +9,8 @@ switch ($method) {
   case 'GET':
     $res = [
       'data'=> [
-        'countdown_end_time'=> '2024-06-30-00-00', // 首頁的倒數目標時間，格式：YYYY-MM-DD-HH-MM
+        'countdown_end_time'=> '2024-04-30-00-00', // 首頁的倒數目標時間，格式：YYYY-MM-DD-HH-MM
+        'exclude_teams'=> [4, 5],
         'global_alert'=> '<div>
           <img src="/atomboyz/assets/img/pic1.jpg"/><br/><p>通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容通知內容</p>
         </div>', // 全站蓋板燈箱通知

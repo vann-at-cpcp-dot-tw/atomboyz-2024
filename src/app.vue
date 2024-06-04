@@ -23,8 +23,8 @@ async function trackingInit(){
   }
   const sender = await (window as any)?.webTrackingSDK?.init?.({
     BUID: 'GAMA-hidol-01',
-    property: 'GAMA-hidol-01',
-    sourceProperty: 'GAMA-hidol-01',
+    property: 'hidol-01',
+    sourceProperty: 'hidol-campaign',
     GTMId: IS_STAGE ? 'GTM-MCJ7BK4' : 'GTM-WTMXC2TT',
   })
 
@@ -70,6 +70,7 @@ onMounted(()=>{
   if (!window){
     return
   }
+
   // window.store = store
   if (window.localStorage.getItem('t')){
     store.do.setUser(window.localStorage.getItem('t'))
