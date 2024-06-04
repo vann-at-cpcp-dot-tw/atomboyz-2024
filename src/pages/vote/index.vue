@@ -393,7 +393,7 @@ watch(()=>store.lightbox, (newVal)=>{
     v-for="(teamNode, teamIndex) in state.teamWithPeoples"
     :key="teamIndex"
     :data-id="teamNode.id"
-    :class="`teamSection container-fluid relative mb-[55px] px-2 lg:px-5 ${store.general.exclude_teams?.includes(teamNode.id) ?'pointer-events-none opacity-20' :''}`"
+    :class="`teamSection container-fluid relative mb-[55px] px-2 lg:px-5 ${store?.general?.exclude_teams?.includes?.(teamNode.id) ?'pointer-events-none opacity-20' :''}`"
     :style="{
 
     }">

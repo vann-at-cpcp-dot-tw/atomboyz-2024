@@ -50,7 +50,7 @@ const state:any = reactive({
             name: targetTeam?.name,
             number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
             href: `/vote#${targetTeam?.tagId}`,
-            disabled: store?.general?.exclude_teams?.includes(id)
+            disabled: store?.general?.exclude_teams?.includes?.(id)
           }
         })
 
