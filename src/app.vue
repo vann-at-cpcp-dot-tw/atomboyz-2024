@@ -23,7 +23,7 @@ async function trackingInit(){
   }
   const sender = await (window as any)?.webTrackingSDK?.init?.({
     BUID: 'GAMA-hidol-01',
-    property: 'hidol-01',
+    property: 'hidol-web',
     sourceProperty: 'hidol-campaign',
     GTMId: IS_STAGE ? 'GTM-MCJ7BK4' : 'GTM-WTMXC2TT',
   })

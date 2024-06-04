@@ -55,6 +55,7 @@ const swiperConfig = computed<any>(()=>{
       <div class="container mb-4">
         <div class="relative mx-auto flex w-full max-w-[1145px] !flex-nowrap items-center justify-between">
           <div
+          v-show="swiperRef?.isLocked === false"
           :class="`btn btnScale-up`"
           @click="()=>{
             swiperRef.slidePrev()
@@ -73,6 +74,7 @@ const swiperConfig = computed<any>(()=>{
             :coverflow-effect="swiperConfig.coverflowEffect"
             :loop="swiperConfig.loop"
             @swiper="(swiper)=>{
+              console.log(swiper)
               swiperRef = swiper
             }"
             @slide-change="()=>{}">
@@ -84,6 +86,7 @@ const swiperConfig = computed<any>(()=>{
             </swiper>
           </div>
           <div
+          v-show="swiperRef?.isLocked === false"
           :class="`btn btnScale-up`"
           @click="()=>{
             swiperRef.slideNext()
