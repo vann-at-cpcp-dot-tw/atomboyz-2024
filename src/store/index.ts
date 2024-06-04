@@ -296,7 +296,8 @@ export const createStore = function(){
           window?.navigator?.share?.({
             ...(data || {}),
             url: shareURL
-          })
+          }).then(()=>console.log('Successful share'))
+            .catch(error=>console.log('Error sharing:', error))
         } else {
           switch (shareTarget){
             case 'fb':

@@ -20,7 +20,7 @@ const state = reactive({
   },
 })
 const { pause, resume, isActive } = useIntervalFn(()=>{
-  if (!store.general.countdown_end_time){
+  if (!store.general.countdown_end_time || typeof store.general.countdown_end_time !== 'string'){
     return
   }
   const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
