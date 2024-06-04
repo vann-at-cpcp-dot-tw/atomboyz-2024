@@ -35,18 +35,18 @@ const state = reactive({
     const listWithTeam = teams?.map((teamNode, index)=>{
       return {
         ...teamNode,
-        people: originList?.filter((peopleNode:any)=>peopleNode.team === teamNode.id)
+        people: originList?.filter((peopleNode:any)=>peopleNode.team === teamNode.id && peopleNode?.situation_key == 1)
       }
     })
     return listWithTeam
   }),
   pendingList: computed(()=>{
     const originList = peopleFetcher.data.value?.data?.list
-    return originList?.filter((node:any)=>node.team === -1)
+    return originList?.filter((node:any)=>node?.situation_key == 3)
   }),
   failedList: computed(()=>{
     const originList = peopleFetcher.data.value?.data?.list
-    return originList?.filter((node:any)=>node.team === -2)
+    return originList?.filter((node:any)=>node.situation_key == 2)
   }),
 })
 const stickyHeightPx = computed(()=>{

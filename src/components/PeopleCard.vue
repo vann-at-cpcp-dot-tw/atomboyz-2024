@@ -18,6 +18,7 @@ interface IProps {
   name: string
   votes: number
   team: number
+  situation_key?: string | number
   tag_id?: string,
   yt_url?: string
   hidoi_url?: string

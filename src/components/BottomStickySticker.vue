@@ -9,18 +9,19 @@ interface IProps {
 const props = defineProps<IProps>()
 const elRef = ref<any>(null)
 const store = useStore()
-const state = reactive({
+const route = useRoute()
+const state = reactive<any>({
   active: true,
+  observer: null
 })
-watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
-  const [height, el] = newVal ?? []
-  if (height === undefined && el !== null){
-    const resizeObserver = new ResizeObserver((entries)=>{
+watch(()=>elRef.value, (newVal)=>{
+  if (newVal){
+    state.observer = new ResizeObserver((entries)=>{
       entries.forEach((entry)=>{
         store.bottomStickyHeight = entry.contentRect.height
       })
     })
-    resizeObserver.observe(elRef.value)
+    state.observer.observe(newVal)
   }
 }, {
   immediate: true
@@ -73,7 +74,10 @@ watch(()=>[store.bottomStickyHeight, elRef.value], (newVal)=>{
           </div>
         </div>
       </div>
-      <div class="flex h-[60px] w-full flex-nowrap text-white">
+
+      <div
+      v-show="route.name !== 'vote'"
+      class="flex h-[60px] w-full flex-nowrap text-white">
         <NuxtLink
         to="/vote"
         class="flex h-full grow flex-nowrap items-center justify-center bg-[#5D00FF] px-2"

@@ -74,7 +74,6 @@ const swiperConfig = computed<any>(()=>{
             :coverflow-effect="swiperConfig.coverflowEffect"
             :loop="swiperConfig.loop"
             @swiper="(swiper)=>{
-              console.log(swiper)
               swiperRef = swiper
             }"
             @slide-change="()=>{}">

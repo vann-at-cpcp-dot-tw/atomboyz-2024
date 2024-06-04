@@ -13,6 +13,7 @@ interface IProps {
   class?: string
   className?: string
   name: string
+  situation_key?: string | number
   tag_id: string
   yt_url: string
   can_vote: boolean
