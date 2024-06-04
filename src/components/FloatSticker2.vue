@@ -47,7 +47,7 @@ const props = defineProps({
 const route = useRoute()
 const store = useStore()
 const state = reactive({
-  show: true,
+  show: false,
   showGame: false,
 })
 
@@ -57,23 +57,23 @@ const state = reactive({
 //   immediate: true,
 // })
 
-// onMounted(()=>{
-//   if (!window){
-//     return
-//   }
-//   window.addEventListener('scroll', function(){
-//     // if (isScrolledPastHalfway()){
-//     //   state.show = true
-//     // } else {
-//     //   state.show = false
-//     // }
-//     if (window.scrollY > 700){
-//       state.show = true
-//     } else {
-//       state.show = false
-//     }
-//   })
-// })
+onMounted(()=>{
+  if (!window){
+    return
+  }
+  window.addEventListener('scroll', function(){
+    // if (isScrolledPastHalfway()){
+    //   state.show = true
+    // } else {
+    //   state.show = false
+    // }
+    if (window.scrollY > 700){
+      state.show = true
+    } else {
+      state.show = false
+    }
+  })
+})
 
 watch(()=>state.showGame, (newVal, oldVal)=>{
   if (!window){
@@ -88,6 +88,7 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
 }, {
   immediate: true
 })
+
 </script>
 <template>
   <ClientOnly>
