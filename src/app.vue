@@ -130,7 +130,7 @@ onMounted(()=>{
       <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
       <Link rel="icon" type="image/x-icon" :href="`${APP_BASE}assets/img/favicon.png`" />
       <!-- tracikng -->
-      <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'" />
+      <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.gamania.dev/webtrackingsdk.min.js.gz'" />
       <Script :src="IS_STAGE ?'https://botsdk.stg.gim.beango.com/index.umd.js' :'https://botsdk.gamania.chat/index.umd.js'" />
     </Head>
     <NuxtLayout>
