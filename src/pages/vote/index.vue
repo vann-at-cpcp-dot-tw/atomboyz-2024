@@ -25,7 +25,7 @@ const state = reactive({
   },
   stickyHeight: computed(()=>{
     if (viewport.width.value >= 992){
-      return 95 + 276
+      return 111 + 276
     } else {
       return 88 + 201
     }
@@ -128,8 +128,9 @@ watch(()=>store.lightbox, (newVal)=>{
     state.scrollFocus = null
   }">
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: '我要投票'}]" />
-    <PageHead class="mb-8" />
+
     <ClientOnly>
+      <PageHead class="mb-8" />
       <PeopleBox v-if="queryPeople" v-bind="queryPeople" />
     </ClientOnly>
 

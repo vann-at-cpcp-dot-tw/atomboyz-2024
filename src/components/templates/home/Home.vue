@@ -171,7 +171,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 
       <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
-      <RanksTable class="pb-8 pt-16" />
+      <!-- <RanksTable class="pb-8 pt-16" /> -->
 
       <!-- <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
         <div

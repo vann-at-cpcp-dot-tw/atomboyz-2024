@@ -132,7 +132,7 @@ onUnmounted(()=>{
         :key="index"
         class="col-2">
           <div
-          :class="`btn ${(scopeStore.scrollFocus !== null && scopeStore.scrollFocus !== node.id) || store?.general?.exclude_teams?.includes?.(node.id) ?'pointer-events-none opacity-20' :''}`"
+          :class="`btn ${(scopeStore.scrollFocus !== null && scopeStore.scrollFocus !== node.id) || store?.general?.exclude_teams?.includes?.(node.id) ?'opacity-20' :''} ${store?.general?.exclude_teams?.includes?.(node.id) ?'pointer-events-none' :''}`"
           @click="()=>{
             if( !window ){
               return
