@@ -118,8 +118,10 @@ const state = reactive({
     <div class="bg-[#2B288E] px-2 py-3">
       <div class="text-center _lg:text-[12px]">{{ name }}</div>
       <div class="mb-2 text-center text-[14px] font-bold lg:text-[20px]">{{ numberFormat(props.votes) }} 票</div>
-      <div class="row row-gap-0 lg:row-gap-2 items-center">
-        <div class="col-4 flex">
+      <div class="row row-gap-0 lg:row-gap-2 items-center justify-end">
+        <div
+        v-show="props?.yt_url"
+        class="col-4 flex">
           <div
           class="btn btn-light relative top-[2px]"
           @click="()=>{ state.open = convertYoutubeUrlToEmbed(props.yt_url || '')?.embedURL || '' }">
@@ -127,10 +129,12 @@ const state = reactive({
           </div>
         </div>
 
-        <div class="col-4 flex justify-center">
-          <div class="btn btn-light relative left-1 w-[33px] lg:w-[48px]">
+        <div
+        v-show="props?.hidoi_url"
+        class="col-4 flex justify-center">
+          <a class="btn btn-light relative left-1 w-[33px] lg:w-[48px]" :href="props?.hidoi_url" target="_blank">
             <img src="/assets/img/icon_hidol.png" alt="">
-          </div>
+          </a>
         </div>
 
         <div class="col-4 flex justify-end">

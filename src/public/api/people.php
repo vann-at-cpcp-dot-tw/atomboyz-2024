@@ -18,8 +18,8 @@ switch ($method) {
             'tag_id'=> 'boyz001',
             'description'=> '個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述個人描述',
             'votes'=> 1234567,
-            'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
-            'hidoi_url'=> 'https://google.com',
+            // 'yt_url'=> 'https://youtu.be/T_lC2O1oIew?si=C1NQZLgsYD76uGm3',
+            // 'hidoi_url'=> 'https://google.com',
             'can_vote'=> true, // 此人是否可以投票
             'situation_key'=> 1,
             'team'=> 1,
