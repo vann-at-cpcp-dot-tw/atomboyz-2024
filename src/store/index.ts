@@ -290,6 +290,7 @@ export const createStore = function(){
           utm_campaign: 'atomboyz2'
         }
         let shareURL = ''
+        console.log('can share', window?.navigator?.canShare?.())
         if (window?.navigator?.canShare?.()){
           queryObject.utm_source = 'builtin'
           shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
