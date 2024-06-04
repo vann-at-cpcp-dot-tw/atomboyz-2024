@@ -90,7 +90,7 @@ onUnmounted(()=>{
               <div class="relative h-[38px] overflow-hidden rounded">
                 <select
                 :value="state.form.team"
-                class="btn size-full pl-2 pr-[38px] text-black lg:w-[176px]"
+                class="btn size-full pl-2 pr-[38px] text-[13px] text-black lg:w-[176px]"
                 @change="(e)=>{
                   state.form.team = (e.target as any).value
                   if( !window ){
@@ -114,7 +114,7 @@ onUnmounted(()=>{
             </div>
             <div class="col-6 shrink lg:col-auto">
               <div class="relative h-[38px] overflow-hidden rounded">
-                <input v-model="state.form.name" type="text" class="size-full pl-2 pr-[69px] text-black lg:w-[200px]" placeholder="請輸入少年姓名">
+                <input v-model="state.form.name" type="text" class="size-full pl-2 pr-[69px] text-[13px] text-black lg:w-[200px]" placeholder="請輸入少年姓名">
                 <button type="submit" class="btn btn-light absolute right-0 top-0 flex h-[38px] w-[65px] items-center justify-center bg-major text-white">
                   搜尋
                 </button>

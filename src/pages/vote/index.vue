@@ -236,7 +236,7 @@ watch(()=>store.lightbox, (newVal)=>{
         <div class="mb-4 rounded-lg bg-[#C3C1F9] p-5">
           <div class="mx-auto w-full max-w-[250px]">
             <div class="flex !flex-nowrap">
-              <select v-model="store.myVoting.votes" class="mr-2 h-[38px] shrink rounded px-2">
+              <select v-model="store.myVoting.votes" class="mr-2 h-[38px] shrink rounded px-2 text-[13px]">
                 <option :value="null">請輸入投票票數</option>
                 <option v-for="(node, index) in [...Array(store?.user?.votes || 0)]" :key="index" :value="index+1">{{ index+1 }}</option>
               </select>
