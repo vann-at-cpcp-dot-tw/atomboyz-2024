@@ -291,7 +291,8 @@ export const createStore = function(){
         }
         let shareURL = ''
         console.log('can share', window?.navigator?.canShare?.())
-        if (window?.navigator?.canShare?.()){
+        // if (window?.navigator?.canShare?.()){
+        if (!shareTarget){
           queryObject.utm_source = 'builtin'
           shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
           window?.navigator?.share?.({
