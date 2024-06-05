@@ -86,9 +86,11 @@ const myList = computed(()=>{
             }"
             @slide-change="()=>{}">
               <SwiperSlide v-for="(node, index) in myList" :key="index">
-                <RatioArea ratio="83.41">
-                  <img class="item absolute left-0 top-0 size-full" :src="node?.img" style="box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);">
-                </RatioArea>
+                <NuxtLink :href="node?.href" target="_blank">
+                  <RatioArea ratio="83.41">
+                    <img class="item absolute left-0 top-0 size-full" :src="node?.img" style="box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);">
+                  </RatioArea>
+                </NuxtLink>
               </SwiperSlide>
             </swiper>
           </div>
