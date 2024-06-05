@@ -132,7 +132,7 @@ export const createStore = function(){
       },
       isNotVoteDate: function(){
         if (typeof store.general?.countdown_end_time === 'string'){
-          if (store.general?.countdown_end_time.length === 0){
+          if (store.general?.countdown_end_time.length === ''){
             return true
           }
 
@@ -147,7 +147,7 @@ export const createStore = function(){
           const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
           return countdownTotal <= 0
         }
-        return true
+        return false
       },
       canVote: function(){
         if (!store?.user?.name){

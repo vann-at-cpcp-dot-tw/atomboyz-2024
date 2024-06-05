@@ -78,7 +78,7 @@ onUnmounted(()=>{
             if( tagId ){
               $router.push({
                 query: {
-                  p:searchName
+                  p:tagId
                 }
               })
             }else{
