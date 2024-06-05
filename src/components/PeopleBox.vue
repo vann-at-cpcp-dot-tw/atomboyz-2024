@@ -237,7 +237,9 @@ onUnmounted(()=>{
             </div>
 
             <div class="mb-2 lg:mb-4">
-              <RatioArea ratio="56.25">
+              <RatioArea
+              v-if="embedURL"
+              ratio="56.25">
                 <div class="absolute left-0 top-0 size-full overflow-hidden rounded-lg">
                   <iframe class="absolute left-0 top-0 size-full" :src="`${embedURL}`" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                 </div>

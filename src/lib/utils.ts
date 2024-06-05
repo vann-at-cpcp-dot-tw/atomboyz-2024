@@ -81,9 +81,9 @@ export function cn(...inputs: ClassValue[]){
 export const convertYoutubeUrlToEmbed = function(input:string){
   let youtubeID
 
-  if (input.includes('https://youtu.be/')){
-    youtubeID = input.replace('https://youtu.be/', '').split('?si')[0]
-  } else if (input.includes('https://www.youtube.com/watch?v=')){
+  if (input?.includes?.('https://youtu.be/')){
+    youtubeID = input.replace('https://youtu.be/', '').split('?si')?.[0]
+  } else if (input?.includes?.('https://www.youtube.com/watch?v=')){
     youtubeID = input.replace('https://www.youtube.com/watch?v=', '').split('&')[0]
   }
 
