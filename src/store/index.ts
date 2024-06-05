@@ -132,6 +132,10 @@ export const createStore = function(){
       },
       isNotVoteDate: function(){
         if (typeof store.general?.countdown_end_time === 'string'){
+          if (store.general?.countdown_end_time.length === 0){
+            return true
+          }
+
           const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
           const countdown = calculateRemainingTime({
             year,

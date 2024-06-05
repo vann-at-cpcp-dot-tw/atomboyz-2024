@@ -114,6 +114,14 @@ watch(()=>store.lightbox, (newVal)=>{
   immediate: true
 })
 
+watch(()=>store?.general?.countdown_end_time, (newVal)=>{
+  if (store.do.isNotVoteDate()){
+    store.do.lightboxOpen('VoteComing')
+  }
+}, {
+  immediate: true
+})
+
 </script>
 <template>
   <main
