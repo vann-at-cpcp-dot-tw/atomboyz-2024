@@ -141,9 +141,9 @@ export const createStore = function(){
             minute,
           })
           const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
-          return countdownTotal > 0
+          return countdownTotal <= 0
         }
-        return false
+        return true
       },
       canVote: function(){
         if (!store?.user?.name){
