@@ -43,7 +43,7 @@ const state = reactive({
   }" />
   <div
   :id="`${props.tag_id}`"
-  :class="twMerge('rounded-lg overflow-hidden', props.class)">
+  :class="twMerge('rounded-lg overflow-hidden flex flex-col grow', props.class)">
     <div
     class="btn group"
     @click="()=>{
@@ -117,10 +117,10 @@ const state = reactive({
         </div>
       </RatioArea>
     </div>
-    <div class="bg-[#2B288E] px-2 py-3">
+    <div class="flex grow flex-col bg-[#2B288E] px-2 py-3">
       <div class="text-center _lg:text-[12px]">{{ name }}</div>
       <div class="mb-2 text-center text-[14px] font-bold lg:text-[20px]">{{ numberFormat(props.votes) }} 票</div>
-      <div class="row row-gap-0 lg:row-gap-2 items-center justify-end">
+      <div class="row row-gap-0 lg:row-gap-2 mb-2 items-center justify-end">
         <div
         v-show="props?.yt_url"
         class="col-4 flex">
@@ -150,7 +150,7 @@ const state = reactive({
         </div>
       </div>
 
-      <div class="mt-2">
+      <div class="mt-auto">
         <div
         v-if="store.do.isNotVoteDate()"
         class="flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white">

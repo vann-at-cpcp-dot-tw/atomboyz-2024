@@ -422,9 +422,10 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
             <div
             v-for="(peopleNode, peopleIndex) in teamNode?.people || []"
             :key="`${teamIndex}-${peopleIndex}`"
-            class="col-auto mb-5 w-[33.33%] lg:w-1/5"
+            class="col-auto mb-5 flex w-[33.33%] flex-col lg:w-1/5"
             style="max-width: 190px;">
               <PeopleCard
+              class="flex flex-col"
               v-bind="peopleNode"
               :on-thumb-click="()=>{
                 console.log(peopleNode)
@@ -453,7 +454,7 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
             <div
             v-for="(peopleNode, peopleIndex) in state.pendingList || []"
             :key="`pending-${peopleIndex}`"
-            class="col-auto mb-5 w-[33.33%] lg:w-1/5"
+            class="col-auto mb-5 flex w-[33.33%] flex-col lg:w-1/5"
             style="max-width: 190px;">
               <PeopleCard
               v-bind="peopleNode"
@@ -483,7 +484,7 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
             <div
             v-for="(peopleNode, peopleIndex) in state.pendingList || []"
             :key="`pending-${peopleIndex}`"
-            class="col-auto mb-5 w-[33.33%] lg:w-1/5"
+            class="col-auto mb-5 flex w-[33.33%] flex-col lg:w-1/5"
             style="max-width: 190px;">
               <PeopleCard
               v-bind="peopleNode"
