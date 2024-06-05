@@ -140,10 +140,7 @@ onUnmounted(()=>{
             <div class="mb-5 text-center text-[24px]">總票數：<i class="text-[30px] font-700 text-major">{{ numberFormat(props?.votes) }}</i>&nbsp;票</div>
             <div
             v-if="store.do.isNotVoteDate()"
-            class="btn flex h-[49px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white"
-            @click="()=>{
-              store.do.lightboxOpen('VoteComing')
-            }">
+            class="flex h-[49px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white">
               未開放投票
             </div>
             <MajorButton
@@ -207,10 +204,7 @@ onUnmounted(()=>{
             <div class="mt-4 w-full">
               <div
               v-if="store.do.isNotVoteDate()"
-              class="btn flex h-[41px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white"
-              @click="()=>{
-                store.do.lightboxOpen('VoteComing')
-              }">
+              class="flex h-[41px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[18px] text-white">
                 未開放投票
               </div>
               <MajorButton

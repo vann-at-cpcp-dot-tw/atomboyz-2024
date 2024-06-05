@@ -153,10 +153,7 @@ const state = reactive({
       <div class="mt-2">
         <div
         v-if="store.do.isNotVoteDate()"
-        class="btn flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white"
-        @click="()=>{
-          store.do.lightboxOpen('VoteComing')
-        }">
+        class="flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white">
           未開放投票
         </div>
         <div
