@@ -59,10 +59,10 @@ const ListItem = defineComponent({
       <Trigger title="活動辦法" :is-active="state.active === 1" @click="()=>{ state.active = state.active === 1 ?null :1 }" />
       <div v-if="state.active === 1" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <div>投票資格</div>
+        <div>【投票資格】</div>
         <div>只要完成 Gama Pass 帳號註冊，且進行手機或 E-mail 的綁定驗證後，即可參與每輪投票。</div>
         <br>
-        <div>投票流程</div>
+        <div>【投票流程】</div>
         <ListItem>
           <template #dot>Step #1.</template>
           <template #default>登入或註冊 Gama Pass 帳號，且完成手機或 E-mail 的綁定驗證。</template>
@@ -71,10 +71,11 @@ const ListItem = defineComponent({
           <template #dot>Step #2.</template>
           <template #default>透過「投票應援」按鈕前往投票頁面，選擇您想支持的少年並點擊「投票」後，選擇欲投之票數（半形數字）即可完成投票。</template>
         </ListItem>
-        <div>線上分數計算</div>
+        <br>
+        <div>【線上分數計算】</div>
         <div>線上投票分數佔總分的20%，依該賽制各團體內所有成員之得票數加總計算為各團體的分數。每階段的投票成績將於該賽制的錄影現場公開，成為該賽制的線上投票分數。舉例：總分為 100 分，得票最高團體可獲得20分，其次為18分、16分、14分、12分、10分，依此類推。</div>
         <br>
-        <div>其他說明</div>
+        <div>【其他說明】</div>
         <ListItem>
           <template #dot><div class="text-major-800">1.</div></template>
           <template #default>此投票活動統一以 Gama Pass 帳號登入，且完成手機或 E-mail 的綁定驗證後即可參與每輪投票。</template>
@@ -100,7 +101,7 @@ const ListItem = defineComponent({
           <template #default>投票活動期間內若使用非法程式惡意灌票，經查證將把您的 Gama Pass 帳號停權，因此您將無法參與往後的《原子少年2》投票活動。</template>
         </ListItem>
         <br>
-        <div>問題回報</div>
+        <div>【問題回報】</div>
         <div>如果您遇到了任何問題或需要協助，您可以透過問題回報中心與我們聯繫，只需填寫問題回報單，我們將會迅速處理您的需求。</div>
         <div>✷ 問題回報單 ➜ <a class="text-major underline" href="https://service.antspw.com/hidol/APPForm" target="_blank">https://service.antspw.com/hidol/APPForm</a></div>
       </div>

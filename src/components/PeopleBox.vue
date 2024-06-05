@@ -92,7 +92,7 @@ onUnmounted(()=>{
                   @click="()=>{
                     if( window?.navigator?.canShare?.() ){
                       store.do.share({
-                        url: `${APP_URL}/vote#${props?.tag_id}`
+                        url: `${APP_URL}/vote?p=${props?.tag_id}`
                       })
                     }
                   }">
@@ -101,7 +101,7 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto mb-1.5 flex size-7 items-center justify-center rounded-full  bg-major text-white"
                       @click="()=>{
-                        copyUrlToClipboard()
+                        copyUrlToClipboard(`${APP_URL}/vote?p=${props.tag_id}`)
                       }">
                         <i class="bi bi-link-45deg text-[21px]"></i>
                       </div>
@@ -109,7 +109,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
                         store.do.share({
-                          url: `${APP_URL}/vote#${props.tag_id}`
+                          url: `${APP_URL}/vote?p=${props.tag_id}`
                         }, 'fb')
                       }">
                         <i class="bi bi-facebook block text-[28px] leading-none text-major"></i>
@@ -118,7 +118,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
                         store.do.share({
-                          url: `${APP_URL}/vote#${props.tag_id}`
+                          url: `${APP_URL}/vote?p=${props.tag_id}`
                         }, 'line')
                       }">
                         <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>

@@ -59,7 +59,7 @@ export function calculateRemainingTime(
   }
 }
 
-export async function copyUrlToClipboard(){
+export async function copyUrlToClipboard(copyString?:string){
   try {
     let queryObject = queryString.parse(location.search)
     queryObject = {
@@ -69,7 +69,13 @@ export async function copyUrlToClipboard(){
       utm_campaign: 'atomboyz2'
     }
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.hash}?${queryString.stringify(queryObject)}`
-    await navigator.clipboard.writeText(url)
+
+    if (copyString){
+      await navigator.clipboard.writeText(copyString)
+    } else {
+      await navigator.clipboard.writeText(url)
+    }
+
     alert('複製成功！')
   } catch (err){
     console.error('Failed to copy text: ', err)

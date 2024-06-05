@@ -75,7 +75,7 @@ const state = reactive({
               <div
               class="btn btn-scaleUp mx-auto mb-1 flex size-[21px] items-center justify-center rounded-full  bg-major text-white"
               @click="(e)=>{
-                copyUrlToClipboard()
+                copyUrlToClipboard(`${APP_URL}/vote?p=${props.tag_id}`)
               }">
                 <i class="bi bi-link-45deg text-[15px] leading-none"></i>
               </div>
