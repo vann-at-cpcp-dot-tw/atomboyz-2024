@@ -74,16 +74,18 @@ input[type=checkbox]
   opacity: 1
 
 .coverflow-swiper
-  padding-top: 4px !important
-  .swiper-slide-prev
-    .item
-      transform-origin: right center
-  .swiper-slide-next
-    .item
-      transform-origin: left center
+  .swiper-slide.swiper-slide-prev
+    opacity: 1 !important
+    transform: scale(0.9) !important
+  .swiper-slide.swiper-slide-next
+    opacity: 1 !important
+    transform: scale(0.9) !important
+  .swiper-slide-active
+    opacity: 1 !important
   .swiper-slide
+    transform: scale(1) !important
+    padding: 0px 5px
     width: 33.33% !important
-
 
 // .video-swiper
 //   position: relative

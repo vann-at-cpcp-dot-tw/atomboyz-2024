@@ -14,10 +14,11 @@ const APP_URL = config.public.appURL
 interface IProps {
   class?: string
   className?: string
-  img: string
+  img: string | null
   name: string
   votes: number
   team: number
+  id?: string | number
   situation_key?: string | number
   tag_id?: string,
   yt_url?: string

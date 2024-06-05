@@ -20,7 +20,7 @@ const state = reactive({
   scrollDirection: '',
   windowOldScrollY: 0,
   searchNameToTagID: (name:string)=>{
-    const targetPeople = peopleFetcher.data.value?.data?.list?.find((node:any)=>node.name === name)
+    const targetPeople = peopleFetcher.data.value?.data?.list?.find((node:any)=>node.name.toLowerCase() === name.toLowerCase())
     return targetPeople?.tag_id
   },
   stickyHeight: computed(()=>{
@@ -55,7 +55,7 @@ const stickyHeightPx = computed(()=>{
 provide('scopeStore', state)
 
 const queryPeople = computed(()=>{
-  const result = peopleFetcher.data.value?.data?.list.find((node:any)=>node.tag_id === route.query.p)
+  const result = peopleFetcher.data.value?.data?.list.find((node:any)=>node.tag_id && (node.tag_id === route.query.p))
   if (result?.team === -2){
     return null
   }
@@ -354,7 +354,17 @@ watch(()=>store.lightbox, (newVal)=>{
             })
             store.do.vote().then((result:any)=>{
               store.do.lightboxClear()
-              if (result?.code){
+
+              if( result?.success === true ){
+                peopleFetcher.refresh()
+                router.push({
+                  query: {
+                    p: state.searchNameToTagID(store.myVoting?.name)
+                  }
+                })
+              }
+
+              if (result.success === false && result?.code){
                 switch (String(result?.code)){ // 1:下輪即將啟動，2:沒雙重驗證，3:票數不足，4:IP風險，5:其他原因失敗，總之就是失敗
                 case '1':
                   store.do.lightboxOpen('VoteComing')
@@ -374,14 +384,7 @@ watch(()=>store.lightbox, (newVal)=>{
                 }
                 return
               }
-              if( result?.success === true ){
-                peopleFetcher.refresh()
-                router.push({
-                  query: {
-                    p: store.myVoting?.name
-                  }
-                })
-              }
+
             })
           }">
             確認
@@ -416,6 +419,7 @@ watch(()=>store.lightbox, (newVal)=>{
               <PeopleCard
               v-bind="peopleNode"
               :on-thumb-click="()=>{
+                console.log(peopleNode)
                 router.push({
                   query: {
                     p: peopleNode.tag_id

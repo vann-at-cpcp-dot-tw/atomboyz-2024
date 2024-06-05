@@ -38,15 +38,23 @@ const swiperConfig = computed<any>(()=>{
     grabCursor: true,
     centeredSlides: true,
     slidesPerView: 'auto',
+    loopAdditionalSlides: 100,
     coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
+      rotate: 0,
+      scale: 1,
+      slideShadows: false,
     },
     loop: true,
   }
+})
+const myList = computed(()=>{
+  if (props?.list?.length < 6){
+    return [
+      ...(props?.list || []),
+      ...(props?.list || []),
+    ]
+  }
+  return props.list
 })
 </script>
 <template>
@@ -77,7 +85,7 @@ const swiperConfig = computed<any>(()=>{
               swiperRef = swiper
             }"
             @slide-change="()=>{}">
-              <SwiperSlide v-for="(node, index) in props?.list" :key="index">
+              <SwiperSlide v-for="(node, index) in myList" :key="index">
                 <RatioArea ratio="83.41">
                   <img class="item absolute left-0 top-0 size-full" :src="node?.img" style="box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);">
                 </RatioArea>
