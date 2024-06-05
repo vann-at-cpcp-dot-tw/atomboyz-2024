@@ -482,7 +482,7 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           </div>
           <div class="lg:row-gap-5 row-gap-2 row justify-center lg:justify-start">
             <div
-            v-for="(peopleNode, peopleIndex) in state.pendingList || []"
+            v-for="(peopleNode, peopleIndex) in state.failedList || []"
             :key="`pending-${peopleIndex}`"
             class="col-auto mb-5 flex w-[33.33%] flex-col lg:w-1/5"
             style="max-width: 190px;">
