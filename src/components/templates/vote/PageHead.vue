@@ -58,7 +58,7 @@ onUnmounted(()=>{
 
 </script>
 <template>
-  <div :class="twMerge('sticky left-0 pb-5 pt-0 lg:top-[111px] top-[68px] bg-black z-[300]', props.class)">
+  <div :class="twMerge(`sticky left-0 pb-5 pt-0 top-[68px] bg-black z-[300] ${store?.user?.name ?'lg:top-[111px]' :'lg:top-[96px]'}`, props.class)">
     <div class="container mb-5 text-center">
       <div class="row items-center justify-center">
         <div class="col-auto mb-4 lg:mb-0 lg:ml-[40%] xl:ml-[44]">
