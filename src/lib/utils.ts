@@ -50,7 +50,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_5.png`
     },
-    description: 'BPM37093，距離地球52光年，是一顆冷卻後的恆星，核心存在大量碳晶體，相當於1x10 34克拉的鑽石。。',
+    description: 'BPM37093，距離地球52光年，是一顆冷卻後的恆星，核心存在大量碳晶體，相當於1x10 34克拉的鑽石。',
   },
   {
     id: 6,
