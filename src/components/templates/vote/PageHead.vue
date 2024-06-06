@@ -145,16 +145,6 @@ onUnmounted(()=>{
             window.setTimeout(()=>{
               scrollToSection2({el:window?.document.querySelector(`#${node.tagId}`), jump: true })
             }, 0)
-
-            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-              page_info: {
-                sec: 'atombyz_vote'
-              },
-              click_info: {
-                type: 'direct_vote',
-                name: node.name
-              }
-            })
           }">
             <img
             class="mb-2 w-full scale-[1.8] lg:scale-100"

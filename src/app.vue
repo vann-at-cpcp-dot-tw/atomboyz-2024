@@ -90,13 +90,6 @@ onMounted(()=>{
 
   trackingInit().then((sender)=>{
     store.trackingSender = sender
-    nextTick(()=>{
-      store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
-        page_info: {
-          page: 'atomboyz_teaser',
-        },
-      })
-    })
   })
 
   // ;(window as any).GIMBotTool.init({

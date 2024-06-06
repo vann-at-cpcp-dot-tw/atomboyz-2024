@@ -1,6 +1,7 @@
 <script lang="tsx" setup>
 import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
+import { useStore } from '~/store'
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -12,6 +13,7 @@ interface IState {
 }
 const props = defineProps<IProps>()
 const router = useRouter()
+const store = useStore()
 const state = reactive<IState>({
   active: null,
   clickTimes: 0,
@@ -21,6 +23,15 @@ function handleClick(teamIndex:number){
     router.push({
       path: '/vote',
       hash: `#${teams[teamIndex].tagId}`
+    })
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      page_info: {
+        sec: 'atombyz_vote'
+      },
+      click_info: {
+        type: 'direct_vote',
+        name: teams[teamIndex].name
+      }
     })
     return
   }
@@ -44,6 +55,17 @@ function handleClick(teamIndex:number){
               }"
               @mouseleave="()=>{
                 state.active = null
+              }"
+              @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    sec: 'atombyz_vote'
+                  },
+                  click_info: {
+                    type: 'direct_vote',
+                    name: teams[teamIndex].name
+                  }
+                })
               }">
                 <img
                 class="mx-auto mb-3"
@@ -74,6 +96,17 @@ function handleClick(teamIndex:number){
               }"
               @mouseleave="()=>{
                 state.active = null
+              }"
+              @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    sec: 'atombyz_vote'
+                  },
+                  click_info: {
+                    type: 'direct_vote',
+                    name: teams[teamIndex].name
+                  }
+                })
               }">
                 <img
                 class="mx-auto mb-3"
