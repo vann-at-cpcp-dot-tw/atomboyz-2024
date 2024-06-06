@@ -152,7 +152,12 @@ const state = reactive({
 
       <div class="mt-auto">
         <div
-        v-if="store.do.isNotVoteDate()"
+        v-if="props.situation_key === 2"
+        class="flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white">
+          已淘汰
+        </div>
+        <div
+        v-else-if="store.do.isNotVoteDate()"
         class="flex h-[29px] w-full items-center justify-center rounded-full bg-[#706E6E] text-[12px] text-white">
           未開放投票
         </div>
