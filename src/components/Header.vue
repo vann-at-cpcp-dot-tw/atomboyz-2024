@@ -158,15 +158,15 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
           state.isShareNavOpen = false
         }"
         @click="()=>{
-          if( window?.navigator?.canShare?.() ){
-            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-              click_info: {
-                type: 'share',
-                name: 'open'
-              }
-            })
-            store.do.share()
-          }
+          // if( window?.navigator?.canShare?.() ){
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            click_info: {
+              type: 'share',
+              name: 'open'
+            }
+          })
+          store.do.share()
+          // }
         }">
           <div class="py-1">
             <div

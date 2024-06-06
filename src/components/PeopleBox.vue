@@ -90,11 +90,11 @@ onUnmounted(()=>{
                     state.isShareNavOpen = false
                   }"
                   @click="()=>{
-                    if( window?.navigator?.canShare?.() ){
-                      store.do.share({
-                        url: `${APP_URL}/vote?p=${props?.tag_id}`
-                      })
-                    }
+                    // if( window?.navigator?.canShare?.() ){
+                    store.do.share({
+                      url: `${APP_URL}/vote?p=${props?.tag_id}`
+                    })
+                    // }
                   }">
                     <i class="bi bi-share-fill relative text-[15px] leading-none"></i>
                     <div v-show="state.isShareNavOpen" class="absolute left-0 top-full w-full py-2">

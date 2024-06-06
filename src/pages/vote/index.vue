@@ -377,11 +377,6 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
 
               if( result?.success === true ){
                 peopleFetcher.refresh()
-                router.push({
-                  query: {
-                    p: state.searchNameToTagID(store.myVoting?.name)
-                  }
-                })
               }
 
               if (result.success === false && result?.code){
