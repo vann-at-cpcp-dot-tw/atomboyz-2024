@@ -167,8 +167,10 @@ const state = reactive({
         v-else-if="props?.can_vote === true"
         class="btn btn-light flex w-full items-center justify-center rounded-full bg-[#C3C1F9] py-2 text-[12px] leading-none text-[#0D116B]"
         @click="()=>{
-          store.do.voteInput({
-            name: props.name,
+          store.do.setUser(window?.localStorage?.getItem?.('t')).then(()=>{
+            store.do.voteInput({
+              name: props.name,
+            })
           })
         }">
           投票

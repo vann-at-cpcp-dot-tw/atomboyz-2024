@@ -147,9 +147,12 @@ onUnmounted(()=>{
             v-else-if="props?.can_vote === true"
             class="h-[49px] text-[18px]"
             @click="()=>{
-              store.do.voteInput({
-                name: props.name
+              store.do.setUser(window?.localStorage?.getItem?.('t')).then(()=>{
+                store.do.voteInput({
+                  name: props.name
+                })
               })
+
             }">
               投票
             </MajorButton>
@@ -211,8 +214,10 @@ onUnmounted(()=>{
               v-else-if="props?.can_vote === true"
               class="h-[41px]"
               @click="()=>{
-                store.do.voteInput({
-                  name: props.name
+                store.do.setUser(window?.localStorage?.getItem?.('t')).then(()=>{
+                  store.do.voteInput({
+                    name: props.name
+                  })
                 })
               }">
                 投票
