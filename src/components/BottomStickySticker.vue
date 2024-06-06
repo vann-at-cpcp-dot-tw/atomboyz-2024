@@ -34,7 +34,7 @@ watch(()=>elRef.value, (newVal)=>{
       elRef = e
     }"
     :class="twMerge('sticky z-[90] bottom-0 lg:hidden block', props.class)">
-      <div
+      <!-- <div
       v-show="state.active"
       class="block w-full bg-[#444444] text-white lg:hidden"
       @click="()=>{
@@ -73,7 +73,7 @@ watch(()=>elRef.value, (newVal)=>{
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div
       v-show="route.name !== 'vote'"

@@ -144,7 +144,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
         <div
         class="relative mr-4 self-start"
         @mouseenter="()=>{
-          if( !window?.navigator?.canShare?.() ){
+          if( typeof window?.navigator?.share !== 'function' ){
             state.isShareNavOpen = true
             store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
               click_info: {
@@ -158,15 +158,15 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
           state.isShareNavOpen = false
         }"
         @click="()=>{
-          // if( window?.navigator?.canShare?.() ){
-          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-            click_info: {
-              type: 'share',
-              name: 'open'
-            }
-          })
-          store.do.share()
-          // }
+          if( typeof window?.navigator?.share === 'function' ){
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'share',
+                name: 'open'
+              }
+            })
+            store.do.share()
+          }
         }">
           <div class="py-1">
             <div
@@ -178,7 +178,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
               <i class="bi bi-share-fill ml-[-2px] mt-px text-[18px] text-major-700"></i>
             </div>
           </div>
-          <div v-show="state.isShareNavOpen" class="absolute left-0 top-full w-full rounded-full bg-[#D3D5F6] py-2" style="box-shadow: -2px 5px 8px #fff inset;">
+          <div v-if="state.isShareNavOpen" class="absolute left-0 top-full hidden w-full rounded-full bg-[#D3D5F6] py-2 lg:block" style="box-shadow: -2px 5px 8px #fff inset;">
             <div
             class="btn btn-scaleUp mx-auto mb-1.5 flex size-7 items-center justify-center rounded-full  bg-major-700 text-white"
             @click="()=>{

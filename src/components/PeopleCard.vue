@@ -56,7 +56,7 @@ const state = reactive({
           <div
           class="btn btn-light absolute left-1.5 top-1.5 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
           @mouseenter="()=>{
-            if( !window?.navigator?.canShare?.() ){
+            if( typeof window?.navigator?.share !== 'function' ){
               state.isShareNavOpen = true
             }
           }"
@@ -65,14 +65,14 @@ const state = reactive({
           }"
           @click="(e)=>{
             e.stopPropagation()
-            // if( window?.navigator?.canShare?.() ){
-            store.do.share({
-              url: `${APP_URL}/vote?p=${props.tag_id}`
-            })
-            // }
+            if( typeof window?.navigator?.share === 'function' ){
+              store.do.share({
+                url: `${APP_URL}/vote?p=${props.tag_id}`
+              })
+            }
           }">
             <i class="bi bi-share-fill relative text-[11px] leading-none"></i>
-            <div v-show="state.isShareNavOpen" class="absolute left-0 top-full w-full py-1">
+            <div v-if="state.isShareNavOpen" class="absolute left-0 top-full hidden w-full py-1 lg:block">
               <div
               class="btn btn-scaleUp mx-auto mb-1 flex size-[21px] items-center justify-center rounded-full  bg-major text-white"
               @click="(e)=>{
