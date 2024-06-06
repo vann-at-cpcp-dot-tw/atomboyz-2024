@@ -132,7 +132,7 @@ export const createStore = function(){
       },
       isNotVoteDate: function(){
         if (typeof store.general?.countdown_end_time === 'string'){
-          if (store.general?.countdown_end_time.length === ''){
+          if (store.general.countdown_end_time.length === 0){
             return true
           }
 
