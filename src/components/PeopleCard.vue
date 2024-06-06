@@ -43,7 +43,8 @@ const state = reactive({
   }" />
   <div
   :id="`${props.tag_id}`"
-  :class="twMerge('rounded-lg overflow-hidden flex flex-col grow', props.class)">
+  :class="twMerge('rounded-lg overflow-hidden flex flex-col grow relative', props.class)">
+    <div v-show="props.situation_key === 2" class="absolute left-0 top-0 z-10 size-full" style="background:rgba(0,0,0,0.5);"></div>
     <div
     class="btn group"
     @click="()=>{
@@ -100,6 +101,7 @@ const state = reactive({
             </div>
           </div>
           <i
+          v-show="props.situation_key !== 2"
           class="bi btn btn-scaleUp bi-heart-fill absolute right-2 top-1.5 z-10 text-[19px] leading-none"
           :style="{
             color: store.user?.fav_peoples?.map((node:any)=>node.name).includes(props?.name) ?'#EC4F7F' :'#555555'
@@ -117,7 +119,7 @@ const state = reactive({
         </div>
       </RatioArea>
     </div>
-    <div class="flex grow flex-col bg-[#2B288E] px-2 py-3">
+    <div :class="`flex grow flex-col ${props.situation_key === 2 ?'bg-[#555555]' :'bg-[#2B288E]'} px-2 py-3 relative`">
       <div class="text-center _lg:text-[12px]">{{ name }}</div>
       <div class="mb-2 text-center text-[14px] font-bold lg:text-[20px]">{{ numberFormat(props.votes) }} 票</div>
       <div class="row row-gap-0 lg:row-gap-2 mb-2 items-center justify-end">
