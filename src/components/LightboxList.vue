@@ -24,7 +24,8 @@ const store = useStore()
         type: 'havent_login'
       },
       click_info: {
-        type: 'close'
+        type: 'popup_function',
+        name: 'close'
       }
     })
   }">

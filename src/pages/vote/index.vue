@@ -154,7 +154,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           type: 'unauthenticated'
         },
         click_info: {
-          type: 'close'
+          type: 'popup_function',
+          name: 'close'
         }
       })
     }">
@@ -196,7 +197,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           type: 'failed'
         },
         click_info: {
-          type: 'close'
+          type: 'popup_function',
+          name: 'close'
         }
       })
     }">
@@ -213,7 +215,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           type: 'blocked'
         },
         click_info: {
-          type: 'close'
+          type: 'popup_function',
+          name: 'close'
         }
       })
     }">
@@ -230,7 +233,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           type: 'failed'
         },
         click_info: {
-          type: 'close'
+          type: 'popup_function',
+          name: 'close'
         }
       })
     }">
@@ -256,7 +260,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
                 store.do.voteConfirm()
                 store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
                   page_info: {
-                    type: 'vote_page'
+                    type: 'vote_page',
+                    name: store.myVoting.name,
                   },
                   click_info: {
                     type: 'sent_vote',
@@ -277,7 +282,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
               store.do.voteConfirm({votes:1})
               store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
                 page_info: {
-                  type: 'vote_page'
+                  type: 'vote_page',
+                  name: store.myVoting.name,
                 },
                 click_info: {
                   type: 'sent_vote',
@@ -297,7 +303,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
               store.do.voteConfirm({votes:store?.user?.votes})
               store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
                 page_info: {
-                  type: 'vote_page'
+                  type: 'vote_page',
+                  name: store.myVoting.name,
                 },
                 click_info: {
                   type: 'sent_vote',
@@ -325,7 +332,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
           type: 'check'
         },
         click_info: {
-          type: 'close'
+          type: 'popup_function',
+          name: 'close'
         }
       })
     }">
@@ -343,7 +351,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
                 type: 'check'
               },
               click_info: {
-                type: 'cancel'
+                type: 'popup_function',
+                name: 'cancel'
               }
             })
           }">
@@ -359,7 +368,8 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
                 type: 'check'
               },
               click_info: {
-                type: 'confirm'
+                type: 'popup_function',
+                name: 'confirm'
               }
             })
             store.do.vote().then((result:any)=>{
