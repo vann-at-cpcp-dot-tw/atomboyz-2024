@@ -40,6 +40,7 @@ export interface ITrackingInfos {
     page?: string
     type?: string
     sec?: string
+    name?: string
   },
   click_info?: {
     name?: string

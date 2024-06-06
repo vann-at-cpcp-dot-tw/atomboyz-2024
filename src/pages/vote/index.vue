@@ -97,17 +97,19 @@ watch(()=>store.lightbox, (newVal)=>{
   const voteAlert = {
     NeedLogin: 'havent_login',
     NeedVerify: 'unauthenticated',
+    VoteInput: 'voting_page',
     VoteConfirm: 'check',
     NoMoreVotes: 'failed',
     VoteFailed: 'failed',
     IPWarning: 'blocked'
-  }[store?.lightbox?.[0]]
+  }[newVal[0]]
 
   if (voteAlert){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
-      click_info: {
+      page_info: {
+        name: voteAlert === 'check' ? store.myVoting.name : undefined,
         type: voteAlert
-      }
+      },
     })
   }
 }, {
