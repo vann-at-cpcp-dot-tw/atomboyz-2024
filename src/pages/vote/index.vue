@@ -107,7 +107,7 @@ watch(()=>store.lightbox, (newVal)=>{
   if (voteAlert){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
       page_info: {
-        name: voteAlert === 'check' ? store.myVoting.name : undefined,
+        name: ['VoteInput', 'VoteConfirm'].includes(newVal[0]) ? store.myVoting.name : undefined,
         type: voteAlert
       },
     })
