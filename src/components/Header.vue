@@ -6,8 +6,6 @@ import { copyUrlToClipboard } from '~/lib/helpers'
 import LightboxList from '~/components/LightboxList.vue'
 import { useStore } from '~/store'
 const window = process.client ? globalThis : null
-const config = useRuntimeConfig()
-const LOGIN_URL = config.public.loginURL
 const route = useRoute()
 const store = useStore()
 const viewport = useWindowSize()

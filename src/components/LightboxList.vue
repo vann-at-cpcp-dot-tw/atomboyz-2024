@@ -12,6 +12,7 @@ const config = useRuntimeConfig()
 const LOGIN_URL = config.public.loginURL
 const props = defineProps<IProps>()
 const store = useStore()
+const route = useRoute()
 </script>
 <template>
   <Lightbox
@@ -34,6 +35,10 @@ const store = useStore()
       <a
       :href="LOGIN_URL"
       @click="()=>{
+        if(!window){
+          return
+        }
+        window.localStorage.setItem('after_login_route_name', route.name)
         store.do.tracking('ClickEvent', '55001', 'hidol_campaign_item_click', {
           page_info: {
             type: 'havent_login'

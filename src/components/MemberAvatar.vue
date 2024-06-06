@@ -10,6 +10,7 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 const store = useStore()
+const route = useRoute()
 </script>
 <template>
   <div :class="twMerge('btn flex lg:flex-col', props.class)">
@@ -24,6 +25,7 @@ const store = useStore()
         }
       })
       if( !store.user?.name ){
+        window.localStorage.setItem('after_login_route_name', route.name)
         window.location.href = LOGIN_URL
       }
     }">

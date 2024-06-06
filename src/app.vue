@@ -59,7 +59,10 @@ watch(()=>[route.query.t, window], (newVal, oldVal)=>{
   store.do.setUser(route.query.t).then(()=>{
     const queryWithoutT = { ...route.query }
     delete queryWithoutT.t
-    router.push(queryWithoutT)
+    router.push({
+      name: localStorage?.getItem?.('after_login_route_name') || 'index',
+      query: queryWithoutT
+    })
   })
 }, {
   immediate: true
