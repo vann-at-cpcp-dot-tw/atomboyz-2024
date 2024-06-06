@@ -119,7 +119,7 @@ const state = reactive({
         </div>
       </RatioArea>
     </div>
-    <div :class="`flex grow flex-col ${props.situation_key === 2 ?'bg-[#555555]' :'bg-[#2B288E]'} px-2 py-3 relative`">
+    <div :class="`flex grow flex-col ${props.situation_key === 2 ?'bg-[#333333]' :'bg-[#2B288E]'} px-2 py-3 relative`">
       <div class="text-center _lg:text-[12px]">{{ name }}</div>
       <div class="mb-2 text-center text-[14px] font-bold lg:text-[20px]">{{ numberFormat(props.votes) }} 票</div>
       <div class="row row-gap-0 lg:row-gap-2 mb-2 items-center justify-end">

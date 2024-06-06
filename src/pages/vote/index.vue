@@ -35,18 +35,18 @@ const state = reactive({
     const listWithTeam = teams?.map((teamNode, index)=>{
       return {
         ...teamNode,
-        people: originList?.filter((peopleNode:any)=>peopleNode.team === teamNode.id && peopleNode?.situation_key == 1)
+        people: originList?.filter?.((peopleNode:any)=>peopleNode.team === teamNode.id && peopleNode?.situation_key == 1)
       }
     })
     return listWithTeam
   }),
   pendingList: computed(()=>{
     const originList = peopleFetcher.data.value?.data?.list
-    return originList?.filter((node:any)=>node?.situation_key == 3)
+    return originList?.filter?.((node:any)=>node?.situation_key == 3)
   }),
   failedList: computed(()=>{
     const originList = peopleFetcher.data.value?.data?.list
-    return originList?.filter((node:any)=>node.situation_key == 2)
+    return originList?.filter?.((node:any)=>node.situation_key == 2)
   }),
 })
 const stickyHeightPx = computed(()=>{
@@ -55,7 +55,7 @@ const stickyHeightPx = computed(()=>{
 provide('scopeStore', state)
 
 const queryPeople = computed(()=>{
-  const result = peopleFetcher.data.value?.data?.list.find((node:any)=>node.tag_id && (node.tag_id === route.query.p))
+  const result = peopleFetcher.data.value?.data?.list?.find?.((node:any)=>node.tag_id && (node.tag_id === route.query.p))
   if (result?.team === -2){
     return null
   }
@@ -444,8 +444,10 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
     <div v-if="state.pendingList?.length > 0" class="container-fluid mb-[55px] px-2 lg:px-5">
       <div class="mx-auto w-full max-w-[1093px] rounded-xl border border-white p-2 lg:p-5">
         <div class="mx-auto w-full max-w-[959px]">
-          <div class="mb-4 mt-1 flex justify-center lg:mt-3">
-            <div class="flex items-center justify-center rounded-lg px-4 py-1.5 text-white">
+          <div class="mb-4 mt-1 flex lg:mt-3">
+            <div
+            class="flex items-center justify-center rounded-lg px-4 py-1.5 text-white"
+            style="background: rgba(255,255,255,0.34);">
               <img class="w-[30px]" src="/assets/img/icon_pendding.svg" alt="">
               <div class="pl-2 text-[18px] lg:text-[20px]">待定</div>
             </div>
@@ -474,8 +476,10 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
     <div v-if="state.failedList?.length > 0" class="container-fluid mb-[55px] px-2 lg:px-5">
       <div class="mx-auto w-full max-w-[1093px] rounded-xl border border-white p-2 lg:p-5">
         <div class="mx-auto w-full max-w-[959px]">
-          <div class="mb-4 mt-1 flex justify-center lg:mt-3">
-            <div class="flex items-center justify-center rounded-lg px-4 py-1.5 text-white">
+          <div class="mb-4 mt-1 flex lg:mt-3">
+            <div
+            class="flex items-center justify-center rounded-lg px-4 py-1.5 text-white"
+            style="background: rgba(255,255,255,0.34);">
               <img class="w-[30px]" src="/assets/img/icon_pendding.svg" alt="">
               <div class="pl-2 text-[18px] lg:text-[20px]">淘汰</div>
             </div>

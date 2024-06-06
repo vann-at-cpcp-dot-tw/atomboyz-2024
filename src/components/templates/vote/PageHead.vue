@@ -82,7 +82,7 @@ onUnmounted(()=>{
                 }
               })
             }else{
-              window.alert('您搜尋的少年名稱有誤，請確認名稱輸入正確！')
+              window.alert('目前找不到您所搜尋的少年，請填入選手正確姓名再次進行搜索唷！')
               state.form.name = ''
             }
           }">
