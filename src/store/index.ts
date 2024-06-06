@@ -57,6 +57,7 @@ export interface IStore {
   lightbox: string[]
   user: IUser | null
   voteAjaxing: boolean,
+  isNotInGetVotesTimeAlerted: boolean
   myVoting: {
     name: string
     votes: number | null
@@ -74,6 +75,7 @@ export const createStore = function(){
     general: {},
     bottomStickyHeight: undefined,
     isPreMode: undefined,
+    isNotInGetVotesTimeAlerted: false,
     trackingPageName: '/',
     lightbox: [],
     voteAjaxing: false,
@@ -208,6 +210,10 @@ export const createStore = function(){
         }
         if (res?.data?.user){
           store.do.updateUser(res.data.user)
+        }
+        if (res?.pop_vote_block && store.isNotInGetVotesTimeAlerted === false){
+          store.isNotInGetVotesTimeAlerted = true
+          store.do.lightboxOpen('IsNotInGetVotesTime')
         }
         return true
       },

@@ -57,4 +57,12 @@ const route = useRoute()
       </a>
     </div>
   </Lightbox>
+
+  <Lightbox
+  id="IsNotInGetVotesTime"
+  icon="calendar-x"
+  title="目前非票券發送時間"
+  :on-close="()=>{}">
+    <div>為確保每日取得票數投票完成的合理操作時間，各種票券發送至當日 23:55 止，若超過此時間登入或完成任務將無法獲得對應的可投票票數，明天請記得於 23:55 前取得票數為少年投票喔！</div>
+  </Lightbox>
 </template>
