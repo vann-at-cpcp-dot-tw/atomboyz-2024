@@ -290,22 +290,49 @@ export const createStore = function(){
         store.voteAjaxing = false
         return result
       },
-      share: async(data?:{url?:string, title?:string, text?:string}, shareTarget?:string)=>{
+      genShareURL: (routeName:string, shareTarget?:string)=>{
+        switch (routeName){
+          case 'index':
+            switch (shareTarget){
+              case 'fb':
+                return 'https://hidol.fan/metT7'
+              case 'line':
+                return 'https://hidol.fan/g0AGU'
+              default:
+                return 'https://hidol.fan/wSmqD'
+            }
+          case 'vote':
+            switch (shareTarget){
+              case 'fb':
+                return 'https://hidol.fan/mlmjk'
+              case 'line':
+                return 'https://hidol.fan/O6luv'
+              default:
+                return 'https://hidol.fan/LNLHt'
+            }
+          default:
+            return null
+        }
+      },
+      share: async(routeName:string, data?:{url?:string, title?:string, text?:string}, shareTarget?:string)=>{
         const API_URL = useRuntimeConfig().public.apiURL
         if (!window){ return }
-        const pureURL = data?.url?.split('?')?.[0] || `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.hash}`
+
+        const pureURL = data?.url?.split('?')?.[0] || store.do.genShareURL(routeName, shareTarget) || `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.hash}`
         let queryObject = queryString.parse(location.search)
         queryObject = {
           ...queryObject,
           utm_medium: 'link',
           utm_campaign: 'atomboyz2'
         }
-        let shareURL = ''
+
+        let shareURL = pureURL.includes('https://hidol.fan/') ? pureURL : ''
+
         console.log('can share', window?.navigator?.canShare?.())
         // if (window?.navigator?.canShare?.()){
         if (!shareTarget){
           queryObject.utm_source = 'builtin'
-          shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
+          shareURL = shareURL || `${pureURL}?${queryString.stringify(queryObject)}`
           window?.navigator?.share?.({
             ...(data || {}),
             url: shareURL
@@ -315,12 +342,12 @@ export const createStore = function(){
           switch (shareTarget){
             case 'fb':
               queryObject.utm_source = 'facebook'
-              shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
+              shareURL = shareURL || `${pureURL}?${queryString.stringify(queryObject)}`
               shareFb(shareURL)
               break
             case 'line':
               queryObject.utm_source = 'line'
-              shareURL = `${pureURL}?${queryString.stringify(queryObject)}`
+              shareURL = shareURL || `${pureURL}?${queryString.stringify(queryObject)}`
               shareLine(shareURL)
               break
           }

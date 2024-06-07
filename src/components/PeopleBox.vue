@@ -99,7 +99,7 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
-                        store.do.share({
+                        store.do.share($route.name, {
                           url: `${APP_URL}/vote?p=${props.tag_id}`
                         }, 'fb')
                       }">
@@ -108,7 +108,7 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
-                        store.do.share({
+                        store.do.share($route.name, {
                           url: `${APP_URL}/vote?p=${props.tag_id}`
                         }, 'line')
                       }">
@@ -162,7 +162,7 @@ onUnmounted(()=>{
                   class="btn btn-light absolute left-2 top-2 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
                   @click="(e)=>{
                     if( typeof window?.navigator?.share === 'function' ){
-                      store.do.share({
+                      store.do.share($route.name, {
                         url: `${APP_URL}/vote?p=${props?.tag_id}`
                       })
                     }

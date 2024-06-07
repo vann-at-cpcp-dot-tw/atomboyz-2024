@@ -66,7 +66,7 @@ const state = reactive({
           @click="(e)=>{
             e.stopPropagation()
             if( typeof window?.navigator?.share === 'function' && viewport.width.value <= 991){
-              store.do.share({
+              store.do.share($route.name, {
                 url: `${APP_URL}/vote?p=${props.tag_id}`
               })
             }
@@ -83,7 +83,7 @@ const state = reactive({
               <div
               class="btn btn-scaleUp mx-auto mb-1 size-[21px] rounded-full bg-white"
               @click="()=>{
-                store.do.share({
+                store.do.share($route.name, {
                   url: `${APP_URL}/vote?p=${props.tag_id}`
                 }, 'fb')
               }">
@@ -92,7 +92,7 @@ const state = reactive({
               <div
               class="btn btn-scaleUp mx-auto flex size-[21px] items-center justify-center rounded-full bg-major text-white"
               @click="()=>{
-                store.do.share({
+                store.do.share($route.name, {
                   url: `${APP_URL}/vote?p=${props.tag_id}`
                 }, 'line')
               }">

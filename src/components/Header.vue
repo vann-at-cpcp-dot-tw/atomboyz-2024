@@ -163,7 +163,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                 name: 'open'
               }
             })
-            store.do.share()
+            store.do.share(route.name)
           }
         }">
           <div class="py-1">
@@ -186,7 +186,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                   name: 'link'
                 }
               })
-              copyUrlToClipboard()
+              copyUrlToClipboard(store.do.genShareURL($route.name))
             }">
               <i class="bi bi-link-45deg text-[21px]"></i>
             </div>
@@ -199,7 +199,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                   name: 'facebook'
                 }
               })
-              store.do.share(null, 'fb')
+              store.do.share(route.name, null, 'fb')
             }">
               <i class="bi bi-facebook block text-[28px] leading-none text-major-700"></i>
             </div>
@@ -212,7 +212,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                   name: 'line'
                 }
               })
-              store.do.share(null, 'line')
+              store.do.share(route.name, null, 'line')
             }">
               <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
             </div>
@@ -311,7 +311,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                       name: 'link'
                     }
                   })
-                  copyUrlToClipboard()
+                  copyUrlToClipboard(store.do.genShareURL($route.name))
                 }">
                   <i class="bi bi-link-45deg pointer-events-none relative top-0.5 text-[36px] leading-none text-white"></i>
                 </div>
@@ -327,7 +327,7 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
                       name: 'open'
                     }
                   })
-                  store.do.share()
+                  store.do.share(route.name)
                 }">
                   <i class="bi bi-share-fill pointer-events-none relative -left-0.5 text-[26px] leading-none text-white"></i>
                 </div>
