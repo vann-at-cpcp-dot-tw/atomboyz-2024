@@ -144,21 +144,19 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
         <div
         class="relative mr-4 self-start"
         @mouseenter="()=>{
-          if( typeof window?.navigator?.share !== 'function' ){
-            state.isShareNavOpen = true
-            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-              click_info: {
-                type: 'share',
-                name: 'open'
-              }
-            })
-          }
+          state.isShareNavOpen = true
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            click_info: {
+              type: 'share',
+              name: 'open'
+            }
+          })
         }"
         @mouseleave="()=>{
           state.isShareNavOpen = false
         }"
         @click="()=>{
-          if( typeof window?.navigator?.share === 'function' ){
+          if( typeof window?.navigator?.share === 'function' && viewport.width.value <= 991 ){
             store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
               click_info: {
                 type: 'share',

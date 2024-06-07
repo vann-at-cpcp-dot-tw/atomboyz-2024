@@ -58,9 +58,7 @@ const state = reactive({
           <div
           class="btn btn-light absolute left-1.5 top-1.5 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
           @mouseenter="()=>{
-            if( typeof window?.navigator?.share !== 'function' ){
-              state.isShareNavOpen = true
-            }
+            state.isShareNavOpen = true
           }"
           @mouseleave="()=>{
             state.isShareNavOpen = false
