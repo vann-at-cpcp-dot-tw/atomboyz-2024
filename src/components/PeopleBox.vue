@@ -13,6 +13,11 @@ interface IProps {
   class?: string
   className?: string
   name: string
+  share_links?: {
+    copy: string
+    fb: string
+    line: string
+  }
   situation_key?: string | number
   tag_id: string
   yt_url: string
@@ -92,7 +97,7 @@ onUnmounted(()=>{
                       <div
                       class="btn btn-scaleUp mx-auto mb-1.5 flex size-7 items-center justify-center rounded-full  bg-major text-white"
                       @click="()=>{
-                        copyUrlToClipboard(`${APP_URL}/vote?p=${props.tag_id}`)
+                        copyUrlToClipboard(props?.share_links?.copy)
                       }">
                         <i class="bi bi-link-45deg text-[21px]"></i>
                       </div>
@@ -100,7 +105,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto mb-1.5 size-7 rounded-full bg-white"
                       @click="()=>{
                         store.do.share($route.name, {
-                          url: `${APP_URL}/vote?p=${props.tag_id}`
+                          url: props?.share_links?.fb
                         }, 'fb')
                       }">
                         <i class="bi bi-facebook block text-[28px] leading-none text-major"></i>
@@ -109,7 +114,7 @@ onUnmounted(()=>{
                       class="btn btn-scaleUp mx-auto flex size-7 items-center justify-center rounded-full bg-major text-white"
                       @click="()=>{
                         store.do.share($route.name, {
-                          url: `${APP_URL}/vote?p=${props.tag_id}`
+                          url: props?.share_links?.line
                         }, 'line')
                       }">
                         <i class="bi bi-line relative mt-[3px] block text-[19px] leading-none text-white"></i>
@@ -163,7 +168,7 @@ onUnmounted(()=>{
                   @click="(e)=>{
                     if( typeof window?.navigator?.share === 'function' ){
                       store.do.share($route.name, {
-                        url: `${APP_URL}/vote?p=${props?.tag_id}`
+                        url: props?.share_links?.copy
                       })
                     }
                   }">

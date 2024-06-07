@@ -435,7 +435,6 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
               class="flex flex-col"
               v-bind="peopleNode"
               :on-thumb-click="()=>{
-                console.log(peopleNode)
                 router.push({
                   query: {
                     p: peopleNode.tag_id

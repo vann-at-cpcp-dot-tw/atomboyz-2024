@@ -19,6 +19,11 @@ interface IProps {
   name: string
   votes: number
   team: number
+  share_links?: {
+    copy: string
+    fb: string
+    line: string
+  }
   id?: string | number
   situation_key?: string | number
   tag_id?: string,
@@ -65,9 +70,9 @@ const state = reactive({
           }"
           @click="(e)=>{
             e.stopPropagation()
-            if( typeof window?.navigator?.share === 'function' && viewport.width.value <= 991){
+            if( viewport.width.value <= 991){
               store.do.share($route.name, {
-                url: `${APP_URL}/vote?p=${props.tag_id}`
+                url: props?.share_links?.copy
               })
             }
           }">
@@ -76,7 +81,7 @@ const state = reactive({
               <div
               class="btn btn-scaleUp mx-auto mb-1 flex size-[21px] items-center justify-center rounded-full  bg-major text-white"
               @click="(e)=>{
-                copyUrlToClipboard(`${APP_URL}/vote?p=${props.tag_id}`)
+                copyUrlToClipboard(props?.share_links?.copy)
               }">
                 <i class="bi bi-link-45deg text-[15px] leading-none"></i>
               </div>
@@ -84,7 +89,7 @@ const state = reactive({
               class="btn btn-scaleUp mx-auto mb-1 size-[21px] rounded-full bg-white"
               @click="()=>{
                 store.do.share($route.name, {
-                  url: `${APP_URL}/vote?p=${props.tag_id}`
+                  url: props?.share_links?.fb
                 }, 'fb')
               }">
                 <i class="bi bi-facebook block text-[21px] leading-none text-major"></i>
@@ -93,7 +98,7 @@ const state = reactive({
               class="btn btn-scaleUp mx-auto flex size-[21px] items-center justify-center rounded-full bg-major text-white"
               @click="()=>{
                 store.do.share($route.name, {
-                  url: `${APP_URL}/vote?p=${props.tag_id}`
+                  url: props?.share_links?.line
                 }, 'line')
               }">
                 <i class="bi bi-line relative mt-[3px] block text-[12px] leading-none text-white"></i>
