@@ -2,6 +2,7 @@
 import { twMerge } from 'tailwind-merge'
 import { numberFormat } from 'vanns-common-modules/dist/lib/helpers'
 import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
+import { useWindowSize } from '@vueuse/core'
 import EmbedPlayer from './EmbedPlayer.vue'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import { useStore } from '~/store'
@@ -29,6 +30,7 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 const store = useStore()
+const viewport = useWindowSize()
 const state = reactive({
   open: '',
   isShareNavOpen: false
@@ -65,7 +67,7 @@ const state = reactive({
           }"
           @click="(e)=>{
             e.stopPropagation()
-            if( typeof window?.navigator?.share === 'function' ){
+            if( typeof window?.navigator?.share === 'function' && viewport.width.value <= 991){
               store.do.share({
                 url: `${APP_URL}/vote?p=${props.tag_id}`
               })

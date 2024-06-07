@@ -82,19 +82,10 @@ onUnmounted(()=>{
                   <div
                   class="btn btn-light absolute left-3 top-3 z-10 flex size-[31px] items-center justify-center rounded-full bg-major text-white"
                   @mouseenter="()=>{
-                    if( typeof window?.navigator?.share !== 'function' ){
-                      state.isShareNavOpen = true
-                    }
+                    state.isShareNavOpen = true
                   }"
                   @mouseleave="()=>{
                     state.isShareNavOpen = false
-                  }"
-                  @click="()=>{
-                    if( typeof window?.navigator?.share === 'function' ){
-                      store.do.share({
-                        url: `${APP_URL}/vote?p=${props?.tag_id}`
-                      })
-                    }
                   }">
                     <i class="bi bi-share-fill relative text-[15px] leading-none"></i>
                     <div v-if="state.isShareNavOpen" class="absolute left-0 top-full hidden w-full py-2 lg:block">
@@ -170,7 +161,11 @@ onUnmounted(()=>{
                   <div
                   class="btn btn-light absolute left-2 top-2 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
                   @click="(e)=>{
-                    e.stopPropagation()
+                    if( typeof window?.navigator?.share === 'function' ){
+                      store.do.share({
+                        url: `${APP_URL}/vote?p=${props?.tag_id}`
+                      })
+                    }
                   }">
                     <i class="bi bi-share-fill relative text-[11px] leading-none"></i>
                   </div>
