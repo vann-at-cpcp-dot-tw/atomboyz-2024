@@ -7,11 +7,12 @@ interface IProps {
   className?: string
 }
 interface IState {
-  active: number | null
+  active: string | null
 }
 const props = defineProps<IProps>()
+const route = useRoute()
 const state = reactive<IState>({
-  active: 0
+  active: 'voteinfo'
 })
 const Trigger = defineComponent({
   props: ['title', 'isActive'],
@@ -24,6 +25,7 @@ const Trigger = defineComponent({
     </div>
   }
 })
+
 const BlockTitle = defineComponent({
   props: ['title'],
   setup: (props, { slots })=>{
@@ -32,6 +34,7 @@ const BlockTitle = defineComponent({
     </div>
   }
 })
+
 const ListItem = defineComponent({
   setup: (props, { slots })=>{
     return ()=><div class="mb-2 flex !flex-nowrap">
@@ -44,20 +47,34 @@ const ListItem = defineComponent({
     </div>
   }
 })
+
+watch(()=>route.hash, (newVal)=>{
+  switch (newVal){
+    case '#voteinfo':
+    case '#rules':
+    case '#notice':
+      state.active = route.hash.split('#')[1]
+      break
+  }
+}, {
+  immediate: true
+})
 </script>
 <template>
   <div :class="twMerge('bg-[#120C60] lg:px-0 px-5', props.class)">
     <div class="container mb-2.5 rounded bg-white">
-      <Trigger title="投票說明" :is-active="state.active === 0" @click="()=>{ state.active = state.active === 0 ?null :0 }" />
-      <div v-if="state.active === 0" class="pb-4">
+      <div id="voteinfo" class="anchor relative top-[-80px]"></div>
+      <Trigger title="投票說明" :is-active="state.active === 'voteinfo'" @click="()=>{ state.active = state.active === 'voteinfo' ?null :'voteinfo' }" />
+      <div v-if="state.active === 'voteinfo'" class="pb-4">
         <hr class="mb-4 border-major-800">
         此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。
       </div>
     </div>
 
     <div class="container mb-2.5 rounded bg-white">
-      <Trigger title="活動辦法" :is-active="state.active === 1" @click="()=>{ state.active = state.active === 1 ?null :1 }" />
-      <div v-if="state.active === 1" class="pb-4">
+      <div id="rules" class="anchor relative top-[-80px]"></div>
+      <Trigger title="活動辦法" :is-active="state.active === 'rules'" @click="()=>{ state.active = state.active === 'rules' ?null :'rules' }" />
+      <div v-if="state.active === 'rules'" class="pb-4">
         <hr class="mb-4 border-major-800">
         <div>【投票資格】</div>
         <div>只要完成 Gama Pass 帳號註冊，且進行手機或 E-mail 的綁定驗證後，即可參與每輪投票。</div>
@@ -108,8 +125,9 @@ const ListItem = defineComponent({
     </div>
 
     <div class="container rounded bg-white">
-      <Trigger title="注意事項" :is-active="state.active === 2" @click="()=>{ state.active = state.active === 2 ?null :2 }" />
-      <div v-if="state.active === 2" class="pb-4">
+      <div id="notice" class="anchor relative top-[-80px]"></div>
+      <Trigger title="注意事項" :is-active="state.active === 'notice'" @click="()=>{ state.active = state.active === 'notice' ?null :'notice' }" />
+      <div v-if="state.active === 'notice'" class="pb-4">
         <hr class="mb-4 border-major-800">
         <ListItem>
           <template #dot><div class="text-major-800">1.</div></template>
