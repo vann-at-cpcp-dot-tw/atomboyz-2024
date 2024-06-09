@@ -1,6 +1,8 @@
 <script lang="tsx" setup>
 import { defineComponent } from 'vue'
 import { twMerge } from 'tailwind-merge'
+import { scrollToSection2 } from '~/lib/helpers'
+
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -58,6 +60,19 @@ watch(()=>route.hash, (newVal)=>{
   }
 }, {
   immediate: true
+})
+
+onMounted(()=>{
+  if (!window){
+    return
+  }
+
+  // if has hash
+  setTimeout(()=>{
+    if (route.hash){
+      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+    }
+  }, 500)
 })
 </script>
 <template>

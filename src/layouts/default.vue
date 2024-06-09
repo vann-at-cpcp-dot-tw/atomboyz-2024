@@ -30,7 +30,7 @@ const viewport = useWindowSize()
         backgroundPosition: 'center bottom',
         backgroundSize: '992px auto',
       }">
-        <img src="/assets/img/title_home_1_m.png" style="max-width:150px;">
+        <img src="/assets/img/title_home_1_m.png" style="max-width:140px; margin-top:40px;">
       </div>
       <!-- <div
       class="mb-[-170px] block h-[474px] w-full bg-no-repeat lg:hidden"

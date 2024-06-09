@@ -48,7 +48,18 @@ const route = useRoute()
       </div>
 
       <div v-if="store.user?.name" class="mt-1 text-right text-[10px] text-white lg:text-center">
-        <div>{{ store.user.name }}</div>
+        <div>
+          {{ store.user.name }} | <a
+          class="btn btn-opacity"
+          @click="(e)=>{
+            e.stopPropagation();
+            if( !window ){
+              return
+            }
+            window.localStorage.setItem('t', '')
+            window.location.reload()
+          }">登出</a>
+        </div>
         <div>擁有票數：{{ store.user.votes }}</div>
       </div>
       <div

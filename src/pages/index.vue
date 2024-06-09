@@ -55,7 +55,9 @@ watch(()=>state.preModeCountdown, (newVal)=>{
   <div v-else-if="store.isPreMode === false">
     <Header />
     <div class="relative bg-black">
-      <Home />
+      <ClientOnly>
+        <Home />
+      </ClientOnly>
       <CookieSticker />
       <BottomStickySticker />
       <GlobalAlert />
