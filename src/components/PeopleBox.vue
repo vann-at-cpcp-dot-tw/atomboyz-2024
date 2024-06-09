@@ -181,9 +181,6 @@ onUnmounted(()=>{
                   }"
                   @click="(e)=>{
                     e.stopPropagation()
-                    if( !store.user?.name ){
-                      return
-                    }
                     store.do.toggleFav(props.name)
                   }"></i>
                 </div>
