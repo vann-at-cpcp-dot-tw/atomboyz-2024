@@ -114,7 +114,7 @@ onMounted(()=>{
         </ListItem>
         <ListItem>
           <template #dot><div class="text-major-800">2.</div></template>
-          <template #default>獲得當日票數：每日系統給票時間為 00:00 ~ 23:55，每日 23:55 ~ 23:59 為系統調整時間。</template>
+          <template #default>獲得當日票數：每日系統派票時間為 00:00 ~ 23:55，每日 23:56 ~ 23:59 為系統調整時間。</template>
         </ListItem>
         <ListItem>
           <template #dot><div class="text-major-800">3.</div></template>
