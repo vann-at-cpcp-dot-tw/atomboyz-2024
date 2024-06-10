@@ -160,7 +160,7 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
             </div>
             <div class="relative size-full overflow-auto">
               <div class="relative px-4 lg:px-8">
-                <div class="relative mx-auto w-full max-w-[790px]" v-html="store.general?.global_alert"></div>
+                <div class="MCE-CONTENT relative mx-auto w-full max-w-[790px]" v-html="store.general?.global_alert"></div>
               </div>
             </div>
             <div class="absolute bottom-5 left-0 flex w-full justify-center">

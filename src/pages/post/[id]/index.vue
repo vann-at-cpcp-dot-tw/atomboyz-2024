@@ -25,7 +25,7 @@ useSeoMeta({
         <div class="mr-2 rounded-lg bg-major px-3 py-2 text-[14px]">娛樂</div>
         <div class="rounded-lg border px-3 py-2 text-[14px]">{{ dataFetcher.data.value?.data?.date }}</div>
       </div>
-      <div class="EDITOR-CONTENT mb-4" v-html="dataFetcher.data.value?.data?.content"></div>
+      <div class="MCE-CONTENT mb-4" v-html="dataFetcher.data.value?.data?.content"></div>
       <div v-if="dataFetcher.data.value?.data?.tags?.length > 0" class="mb-10 flex">
         <div v-for="(tag, index) in dataFetcher.data.value?.data?.tags" :key="index" class="mr-2 w-auto flex-none text-[#6ED3FF] _lg:text-[13px]">#{{ tag }}</div>
       </div>
