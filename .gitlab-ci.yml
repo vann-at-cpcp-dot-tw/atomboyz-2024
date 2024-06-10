@@ -21,6 +21,8 @@ stages:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
+      --compressed-caching=false
+      --single-snapshot
 
 build_image:dev:
   extends: .build_image
