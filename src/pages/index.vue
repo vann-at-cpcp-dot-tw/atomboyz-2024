@@ -3,7 +3,7 @@ import { useIntervalFn } from '@vueuse/core'
 import Home from '~/components/templates/home/Home.vue'
 import PreHome from '~/components/templates/home/PreHome.vue'
 import Header from '~/components/Header.vue'
-import DownloadSticker from '~/components/DownloadSticker.vue'
+import BottomStickySticker from '~/components/BottomStickySticker.vue'
 import CookieSticker from '~/components/CookieSticker.vue'
 import GlobalAlert from '~/components/GlobalAlert.vue'
 import Footer from '~/components/Footer.vue'
@@ -33,6 +33,7 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
     minute,
   })
 }, 1000)
+
 watch(()=>state.preModeCountdown, (newVal)=>{
   const preModeCountdownTotal = Number(state.preModeCountdown.days) + Number(state.preModeCountdown.hours) + Number(state.preModeCountdown.minutes) + Number(state.preModeCountdown.seconds)
 
@@ -54,9 +55,11 @@ watch(()=>state.preModeCountdown, (newVal)=>{
   <div v-else-if="store.isPreMode === false">
     <Header />
     <div class="relative bg-black">
-      <Home />
+      <ClientOnly>
+        <Home />
+      </ClientOnly>
       <CookieSticker />
-      <DownloadSticker />
+      <BottomStickySticker />
       <GlobalAlert />
     </div>
     <Footer />

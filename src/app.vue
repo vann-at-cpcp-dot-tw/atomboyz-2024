@@ -7,6 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 const window = process.client ? globalThis : null
 const route = useRoute()
+const router = useRouter()
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const APP_URL = config.public.appURL
@@ -22,48 +23,92 @@ async function trackingInit(){
   }
   const sender = await (window as any)?.webTrackingSDK?.init?.({
     BUID: 'GAMA-hidol-01',
-    property: 'GAMA-hidol-01',
-    sourceProperty: 'GAMA-hidol-01',
-    GTMId: IS_STAGE ? 'GTM-WTMXC2TT' : 'GTM-MCJ7BK4',
+    property: 'hidol-web',
+    sourceProperty: 'hidol-campaign',
+    GTMId: IS_STAGE ? 'GTM-MCJ7BK4' : 'GTM-WTMXC2TT',
   })
 
   return sender
 }
 
+watch(()=>route.path, (newVal)=>{
+  if (newVal.includes('/post/')){
+    store.trackingPageName = 'atomboyz_news_article'
+    return
+  }
+
+  const paths = {
+    '/': 'atomboyz_homepage',
+    '/vote': 'atomboyz_vote',
+    '/posts/video': 'atomboyz_videos',
+    '/posts/news': 'atomboyz_news',
+  } as {[key:string]:string}
+
+  store.trackingPageName = paths[newVal] || 'atomboyz_homepage'
+}, {
+  immediate: true
+})
+
+// get user from query
+watch(()=>[route.query.t, window], (newVal, oldVal)=>{
+  const [t, window] = newVal
+  if (!window || !t){
+    return
+  }
+
+  store.do.setUser(route.query.t).then(()=>{
+    const queryWithoutT = { ...route.query }
+    delete queryWithoutT.t
+    router.push({
+      name: localStorage?.getItem?.('after_login_route_name') || 'index',
+      query: queryWithoutT
+    })
+  })
+}, {
+  immediate: true
+})
+
+// get user from localStorage
 onMounted(()=>{
   if (!window){
     return
   }
-  trackingInit().then((sender)=>{
-    store.trackingSender = sender
-    nextTick(()=>{
-      store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
-        page_info: {
-          page: 'atomboyz_teaser',
-        },
-      })
-    })
+
+  // window.store = store
+  if (window.localStorage.getItem('t')){
+    store.do.setUser(window.localStorage.getItem('t'))
+  }
+})
+
+// tracking
+onMounted(()=>{
+  if (!window){
+    return
+  }
+
+  // 鎖右鍵
+  window.document.addEventListener('contextmenu', function(e){
+    e.preventDefault()
   })
 
-  if (store.isPreMode === false){
-    ;(window as any).GIMBotTool.init({
-      url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
-      title: '客服幫手 原子小少年',
-      logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
-      btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
-    })
+  trackingInit().then((sender)=>{
+    store.trackingSender = sender
+  })
 
-    ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        page_info: {
-          page: 'atomboyz_teaser',
-        },
-        click_info: {
-          type: 'ai_customer_service',
-        },
-      })
-    })
-  }
+  // ;(window as any).GIMBotTool.init({
+  //   url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+  //   title: '客服幫手 原子小少年',
+  //   logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+  //   btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
+  // })
+
+  // ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+  //   store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+  //     click_info: {
+  //       type: 'ai_customer_service',
+  //     },
+  //   })
+  // })
 })
 </script>
 <template>
@@ -76,12 +121,12 @@ onMounted(()=>{
       <Meta property="og:url" :content="APP_URL" />
       <Meta property="og:title" content="hidol X 原子少年 2｜獨家線上投票" />
       <Meta property="og:site_name" content="hidol X 原子少年 2｜獨家線上投票" />
-      <Meta property="og:image" :content="`${APP_BASE}assets/img/og.jpg`" />
+      <Meta property="og:image" content="https://events.hidol.com/events/atomboyz/assets/img/og.jpg" />
       <Meta property="og:description" content="讓我們一起為勇敢追夢的選手們投票應援，你喜歡的少年就差你一票！hidol 拉近你與idol的距離。" />
       <Meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-      <Link rel="icon" type="image/x-icon" :href="`${APP_BASE}assets/img/favicon.png`" />
+      <Link rel="icon" type="image/x-icon" href="https://events.hidol.com/events/atomboyz/assets/img/favicon.png" />
       <!-- tracikng -->
-      <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz'" />
+      <Script :src="IS_STAGE ?'https://sdk.stg.gamania.dev/webtrackingsdk.min.js.gz' :'https://sdk.gamania.dev/webtrackingsdk.min.js.gz'" />
       <Script :src="IS_STAGE ?'https://botsdk.stg.gim.beango.com/index.umd.js' :'https://botsdk.gamania.chat/index.umd.js'" />
     </Head>
     <NuxtLayout>

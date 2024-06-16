@@ -44,29 +44,36 @@ const props = defineProps({
     default: '',
   },
 })
+const route = useRoute()
 const store = useStore()
 const state = reactive({
-  show: true,
+  show: false,
   showGame: false,
 })
 
-// onMounted(()=>{
-//   if (!window){
-//     return
-//   }
-//   window.addEventListener('scroll', function(){
-//     // if (isScrolledPastHalfway()){
-//     //   state.show = true
-//     // } else {
-//     //   state.show = false
-//     // }
-//     if (window.scrollY > 700){
-//       state.show = true
-//     } else {
-//       state.show = false
-//     }
-//   })
+// watch(()=>route.hash, (newVal)=>{
+//   console.log(111, newVal)
+// }, {
+//   immediate: true,
 // })
+
+onMounted(()=>{
+  if (!window){
+    return
+  }
+  window.addEventListener('scroll', function(){
+    // if (isScrolledPastHalfway()){
+    //   state.show = true
+    // } else {
+    //   state.show = false
+    // }
+    if (window.scrollY > 700){
+      state.show = true
+    } else {
+      state.show = false
+    }
+  })
+})
 
 watch(()=>state.showGame, (newVal, oldVal)=>{
   if (!window){
@@ -81,6 +88,7 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
 }, {
   immediate: true
 })
+
 </script>
 <template>
   <ClientOnly>
@@ -91,20 +99,26 @@ watch(()=>state.showGame, (newVal, oldVal)=>{
     }" />
 
     <div
-    :class="twMerge(`z-[100] fixed right-5 bottom-[90px] ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+    :class="twMerge(`z-[100] fixed right-5 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
+      bottom: '0px', // 沒有話 AI 的話0，有 AI 的話 95
       transition: 'all .4s',
-      // marginBottom: store.isDownloadStickerShow ?'170px' :'0px'
+      // marginBottom: store.isBottomStickyStickerShow ?'170px' :'0px'
     }">
-      <div
+      <!-- <div
       class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         state.showGame = true
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: 'game'
+          }
+        })
       }">
         <img class="mx-auto mb-1 max-w-[22px]" src="/assets/img/icon_game.svg" alt="">
         <div class="text-center text-[11px] leading-[1.2] text-white">小遊戲</div>
-      </div>
+      </div> -->
       <div
       class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"

@@ -5,6 +5,7 @@ import { useStore } from '~/store'
 
 const window = process.client ? globalThis : null
 const config = useRuntimeConfig()
+const APP_BASE = config.public.appBase
 const API_URL = config.public.apiURL
 interface IProps {
   class?: string
@@ -17,6 +18,7 @@ const store = useStore()
 const gameFetcher = await useAsyncData<any>('game', ()=>{
   return $fetch(`${API_URL}/game`, {
     params: {
+      t: window?.localStorage?.getItem('t')
     }
   })
 }, {
@@ -30,6 +32,7 @@ const rewardAngles:{[key:number]: string | number} = {
   4: '6.2turn',
   5: '7turn',
 }
+
 const state = reactive<any>({
   animationDuration: 6000,
   rewardAngle: 0,
@@ -38,12 +41,25 @@ const state = reactive<any>({
     return gameFetcher.data.value !== null
   }),
 })
+
 const isShowWinScreen = computed(()=>{
-  return String(gameFetcher.data.value?.data?.result?.code) === '1' && gameFetcher.data.value?.data?.result?.reward && state.isAnimationCompleted
+  return String(gameFetcher.data.value?.code) === '1' && gameFetcher.data.value?.data?.reward && state.isAnimationCompleted
 })
 
-const handleResult = function(code:string | number){
+function handleResult(res:any){
+  store.do.handleRes(res)
+  const { code, data } = res ?? {}
+  const { reward } = data ?? {}
   switch (String(code)){
+    case '1':
+      state.rewardAngle = rewardAngles?.[reward]
+      setTimeout(()=>{
+        state.isAnimationCompleted = true
+        if (store.user){
+          store.user.votes = store.user.votes + reward
+        }
+      }, state.animationDuration + 500)
+      break
     case '2':
       store.do.lightboxOpen('IsGamePlayed')
       break
@@ -53,22 +69,11 @@ const handleResult = function(code:string | number){
       break
   }
 }
-watch(()=>gameFetcher.data.value?.data, (newVal, oldVal)=>{
-  const { result } = newVal ?? {}
-  const { code, reward } = result ?? {}
-  switch (String(code)){
-    case '1':
-      state.rewardAngle = rewardAngles?.[reward]
-      setTimeout(()=>{
-        state.isAnimationCompleted = true
-      }, state.animationDuration + 500)
-      break
 
-    default:
-      handleResult(code)
-      break
-  }
+watch(()=>gameFetcher.data.value, (newVal, oldVal)=>{
+  handleResult(newVal)
 })
+
 </script>
 <template>
   <Lightbox
@@ -101,7 +106,11 @@ watch(()=>gameFetcher.data.value?.data, (newVal, oldVal)=>{
   </Lightbox>
 
   <div :class="twMerge('fixed size-full z-[1000] left-0 top-0', props.class)" style="background: rgba(0,0,0,0.8);">
-    <div class="absolute left-0 top-0 z-0 size-full bg-cover" style="background-image: url(/assets/img/game_bg.png);"></div>
+    <div
+    class="absolute left-0 top-0 z-0 size-full bg-cover"
+    :style="{
+      backgroundImage: `url(${APP_BASE}assets/img/game_bg.png)`
+    }"></div>
     <div v-show="isShowWinScreen">
       <img class="pointer-events-none absolute left-1/2 top-[66px] hidden w-[1110px] min-w-[1110px] -translate-x-1/2 lg:block" src="/assets/img/game_success_deco.png">
       <img class="pointer-events-none absolute left-1/2 top-8 block  w-[375px] min-w-[375px] -translate-x-1/2 lg:hidden" src="/assets/img/game_success_deco_m.png">
@@ -133,7 +142,7 @@ watch(()=>gameFetcher.data.value?.data, (newVal, oldVal)=>{
           }">
           <img
           src="/assets/img/game_center.png"
-          :class="`btn btn-dark absolute ${state.hasResult ?'pointer-events-none' :'animate__animated animate__pulse animate__infinite'}`"
+          :class="`btn btn-dark absolute animate__animated animate__pulse animate__infinite`"
           :style="{
             width: '34.23%',
             left: '33%',
@@ -144,7 +153,7 @@ watch(()=>gameFetcher.data.value?.data, (newVal, oldVal)=>{
             if( !state.hasResult ){
               gameFetcher.execute()
             }else{
-              handleResult(gameFetcher.data.value?.data?.result?.code)
+              handleResult(gameFetcher.data.value)
             }
           }">
         </div>
@@ -152,14 +161,14 @@ watch(()=>gameFetcher.data.value?.data, (newVal, oldVal)=>{
         v-if="isShowWinScreen"
         class="mb-4 w-auto shrink text-center text-[#dfdcec] lg:mb-0 lg:text-left">
           <img class="mb-2.5 w-[207px] lg:w-[290px]" src="/assets/img/game_congrats_title.svg" style="filter: drop-shadow(0px 3px 48px rgba(0, 0, 0, 0.97));">
-          <div class="text-[20px] lg:text-[28px]">恭喜您獲得 {{ gameFetcher.data.value?.data?.result?.reward }} 票，</div>
+          <div class="text-[20px] lg:text-[28px]">恭喜您獲得 {{ gameFetcher.data.value?.data?.reward }} 票，</div>
           <div class="mb-4 text-[14px] lg:text-[20px]">立即為你喜歡的選手投票吧！</div>
           <MajorButton
           class="h-[43px] w-full max-w-[259px]"
           @click="()=>{
             props.close()
             router.push({
-              path: '/voting'
+              path: '/vote'
             })
           }">
             <div class="flex items-center">

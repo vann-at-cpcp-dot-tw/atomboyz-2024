@@ -5,6 +5,7 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import MajorButton from '~/components/MajorButton.vue'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import Pagination from '~/components/Pagination.vue'
+import { useStore } from '~/store'
 
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
@@ -18,8 +19,18 @@ const listFetcher = await useFetch<any>(`${API_URL}/${tab}`, {
     per_page: 3,
   }
 })
+const store = useStore()
 const state = reactive({
   open: ''
+})
+
+const isTrackingInit = ref(false)
+watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
+  if (!isTrackingInit.value && store.trackingSender){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+  }
+}, {
+  immediate: true
 })
 </script>
 <template>
@@ -34,7 +45,7 @@ const state = reactive({
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: 'News'}]" />
 
     <div class="container mb-5 flex justify-center">
-      <img class="w-[124px] lg:w-[158px]" :src="`/assets/img/page_title_news.png`">
+      <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
     </div>
 
     <div class="container mb-6">

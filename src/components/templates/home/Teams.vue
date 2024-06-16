@@ -1,6 +1,7 @@
 <script lang="tsx" setup>
 import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
+import { useStore } from '~/store'
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -8,14 +9,30 @@ interface IProps {
 }
 interface IState {
   active: null | number
+  clickTimes: number,
 }
 const props = defineProps<IProps>()
+const router = useRouter()
+const store = useStore()
 const state = reactive<IState>({
-  active: null
+  active: null,
+  clickTimes: 0,
 })
 function handleClick(teamIndex:number){
   if (state.active === teamIndex){
-    state.active = null
+    router.push({
+      path: '/vote',
+      hash: `#${teams[teamIndex].tagId}`
+    })
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      page_info: {
+        sec: 'atombyz_vote'
+      },
+      click_info: {
+        type: 'direct_vote',
+        name: teams[teamIndex].name
+      }
+    })
     return
   }
   state.active = teamIndex
@@ -24,18 +41,35 @@ function handleClick(teamIndex:number){
 <template>
   <div :class="twMerge('overflow-hidden bg-[#120C60]', props.class)">
     <div class="container relative">
-      <img class="mx-auto lg:-mb-8" src="/assets/img/section_title_home_6.png" style="max-width:267px;">
+      <img class="mx-auto max-w-[254px] lg:-mb-8 lg:max-w-[267px]" src="/assets/img/section_title_home_6.png">
       <!-- <img class="absolute right-0 top-[22%] min-w-[721px] lg:top-[7%] lg:min-w-[1879px]" src="/assets/img/home_stars_circle.svg"> -->
-      <div class="hidden w-full max-w-[988px] lg:block">
+      <div class="mx-auto hidden w-full max-w-[988px] lg:block">
         <div class="mb-6 pr-[168px]">
           <div class="flex">
             <div v-for="(teamIndex) in [0,1,2]" :key="teamIndex" class="flex w-1/3 justify-center">
-              <div
+              <NuxtLink
+              :to="`/vote#${teams[teamIndex].tagId}`"
               class="btn relative"
-              @click="handleClick(teamIndex)">
+              @mouseenter="()=>{
+                state.active = teamIndex
+              }"
+              @mouseleave="()=>{
+                state.active = null
+              }"
+              @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    sec: 'atombyz_vote'
+                  },
+                  click_info: {
+                    type: 'direct_vote',
+                    name: teams[teamIndex].name
+                  }
+                })
+              }">
                 <img
                 class="mx-auto mb-3"
-                :src="teams[teamIndex].img"
+                :src="teams[teamIndex].getImg()"
                 :style="{
                   maxWidth: '283px',
                   filter: `drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`
@@ -47,19 +81,36 @@ function handleClick(teamIndex:number){
                 style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
                   {{ teams[teamIndex].description }}
                 </div>
-              </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
         <div class="pl-[168px]">
           <div class="flex">
             <div v-for="(teamIndex) in [3,4,5]" :key="teamIndex" class="flex w-1/3 justify-center">
-              <div
+              <NuxtLink
+              :to="`/vote#${teams[teamIndex].tagId}`"
               class="btn relative"
-              @click="handleClick(teamIndex)">
+              @mouseenter="()=>{
+                state.active = teamIndex
+              }"
+              @mouseleave="()=>{
+                state.active = null
+              }"
+              @click="()=>{
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    sec: 'atombyz_vote'
+                  },
+                  click_info: {
+                    type: 'direct_vote',
+                    name: teams[teamIndex].name
+                  }
+                })
+              }">
                 <img
                 class="mx-auto mb-3"
-                :src="teams[teamIndex].img"
+                :src="teams[teamIndex].getImg()"
                 :style="{
                   maxWidth: '283px',
                   filter: `drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`
@@ -71,7 +122,7 @@ function handleClick(teamIndex:number){
                 style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
                   {{ teams[teamIndex].description }}
                 </div>
-              </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -83,16 +134,10 @@ function handleClick(teamIndex:number){
         :class="`mb-4 col-6 relative flex ${teamIndex%2 === 0 ?'justify-end' :''}`">
           <div
           class="btn relative"
-          @click="()=>{
-            if( state.active === teamIndex ){
-              state.active = null
-              return
-            }
-            state.active = teamIndex
-          }">
+          @click="handleClick(teamIndex)">
             <img
             class="mx-auto mb-3"
-            :src="teams[teamIndex].img"
+            :src="teams[teamIndex].getImg()"
             :style="{
               maxWidth: '127px',
               filter: `drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5)) ${state.active !== null && state.active !== teamIndex ?'brightness(0.2) grayscale(1)' :''}`,

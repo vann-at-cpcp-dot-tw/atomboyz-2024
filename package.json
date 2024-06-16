@@ -16,13 +16,15 @@
     "clsx": "^2.1.0",
     "lucide-vue-next": "^0.363.0",
     "nuxt": "^3.11.1",
+    "query-string": "^9.0.0",
     "radix-vue": "^1.6.1",
     "swiper": "^11.1.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vanns-common-modules": "https://github.com/vann-at-cpcp-dot-tw/vanns-common-modules.git",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-touch-events": "^4.1.8"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^12.0.0",

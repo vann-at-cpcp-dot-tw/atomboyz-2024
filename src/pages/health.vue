@@ -1,7 +1,8 @@
 <script lang="tsx" setup>
+definePageMeta({
+  layout: 'health'
+})
 </script>
 <template>
-  <Html>
-    <slot></slot>
-  </Html>
+  <main></main>
 </template>

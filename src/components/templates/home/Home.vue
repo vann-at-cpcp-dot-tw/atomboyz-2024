@@ -1,5 +1,6 @@
 <script lang="tsx" setup>
 import { provide } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 import { useStore } from '~/store'
 import KV from '~/components/templates/home/KV.vue'
 import KVSwiper from '~/components/templates/home/KVSwiper.vue'
@@ -16,9 +17,11 @@ import { teams } from '~/lib/utils'
 import 'swiper/css/effect-coverflow'
 
 const config = useRuntimeConfig()
+const APP_BASE = config.public.appBase
 const API_URL = config.public.apiURL
 const IS_STAGE = config.public.isStage
 const store = useStore()
+const viewport = useWindowSize()
 const route = useRoute()
 const state:any = reactive({
   rankTables: [
@@ -35,7 +38,7 @@ const state:any = reactive({
         return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
           return {
             ...node,
-            href: `/voting?p=${node.name}`
+            href: `/vote?p=${node.tag_id}`
           }
         })
       case 'team':
@@ -43,10 +46,11 @@ const state:any = reactive({
           const { id } = node
           const targetTeam = teams.find((teamNode:any)=>teamNode.id === id)
           return {
-            img: targetTeam?.img,
+            img: targetTeam?.getImg?.(),
             name: targetTeam?.name,
             number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
-            href: `/voting#${targetTeam?.tagId}`
+            href: `/vote#${targetTeam?.tagId}`,
+            disabled: store?.general?.exclude_teams?.includes?.(id)
           }
         })
 
@@ -92,21 +96,40 @@ const saleFetcher = await useAsyncData<any>('sale', ()=>{
 })
 
 provide('scopeStore', state)
+
+const isTrackingInit = ref(false)
+watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
+  if (!isTrackingInit.value && store.trackingSender){
+    store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+  }
+}, {
+  immediate: true
+})
 </script>
 <template>
   <main class="relative bg-[#0e160b]">
-    <div class="w-full overflow-hidden bg-no-repeat pt-[176px]" style="background-image: url(/assets/img/bg_home_1.jpg); background-size: 1920px auto; background-position: center top; ">
+    <div
+    class="w-full overflow-hidden bg-no-repeat pt-8 lg:pt-[176px]"
+    :style="{
+      backgroundImage: viewport.width.value >= 992 ?`url(${APP_BASE}assets/img/bg_home_1.jpg)` :`url(${APP_BASE}assets/img/bg_home_1_m.jpg)`,
+      backgroundSize: viewport.width.value >= 992 ?'1920px auto' :'100% auto',
+      backgroundPosition: 'center top',
+    }">
       <KV />
 
       <KVSwiper class="pb-2" :list="store.general?.home_carousel" />
 
-      <div class="divider relative z-10 mb-[-133px]" style="height: 294px; background: linear-gradient(#0e160b 0%, #000 100%);">
+      <div class="divider relative z-10 mb-[-66px] h-[147px] lg:mb-[-133px] lg:h-[294px]" style="background: linear-gradient(#0e160b 0%, #000 100%);">
         <div class="container flex justify-center">
-          <img class="animate__slideOutDown animate__animated animate__infinite" src="/assets/img/icon_mouse_wheel.svg">
+          <img class="animate__slideOutDown animate__animated animate__infinite w-[19px] lg:w-[27px]" src="/assets/img/icon_mouse_wheel.svg">
         </div>
       </div>
 
-      <div class="relative bg-black pb-[130px]" style="background-image: url(/assets/img/bg_star_1.png);">
+      <!-- <div
+      class="relative bg-black pb-[130px]"
+      :style="{
+        backgroundImage: `url(${APP_BASE}assets/img/bg_star_1.png)`
+      }">
         <div class="container-fluid relative z-10 mb-[54px]">
           <div class="mb-5 flex justify-center">
             <img class="w-full" src="/assets/img/section_title_home_1.png" style="max-width:298px;">
@@ -115,12 +138,12 @@ provide('scopeStore', state)
             <ImgFrame>
               <img
               class="absolute size-full rounded-lg"
-              :src="store.general?.rank_summary?.team_champion?.img"
+              :src="`${APP_BASE}assets/img/team_big_${String(store.general?.rank_summary?.team_champion)}.jpg`"
               :style="{
                 left: '2%',
                 top: '3.5%',
                 width: '96%',
-                height: '87.5%',
+                height: '87.5%',3
               }">
             </ImgFrame>
           </div>
@@ -134,7 +157,7 @@ provide('scopeStore', state)
             <ImgFrame>
               <img
               class="absolute size-full rounded-lg"
-              :src="store.general?.rank_summary?.team_popular?.img"
+              :src="`${APP_BASE}assets/img/team_big_${String(store.general?.rank_summary?.team_popular)}.jpg`"
               :style="{
                 left: '2%',
                 top: '3.5%',
@@ -144,14 +167,20 @@ provide('scopeStore', state)
             </ImgFrame>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="divider relative z-10 mt-[-130px] w-full" style="height:130px; background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
+      <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
-      <RanksTable class="pb-8 pt-16" />
+      <!-- <RanksTable class="pb-8 pt-16" /> -->
 
-      <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
-        <div class="relative" style="background-image: url(/assets/img/bg_star_1.png); background-repeat: repeat-x; background-position: center 200px;">
+      <!-- <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
+        <div
+        class="relative"
+        :style="{
+          backgroundImage: `url(${APP_BASE}assets/img/bg_star_1.png)`,
+          backgroundRepeat: `repeat-x`,
+          backgroundPosition: `center 200px`,
+        }">
           <div class="container mb-8">
             <img class="mx-auto mb-2" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">
@@ -192,17 +221,17 @@ provide('scopeStore', state)
             <SaleSwiper :list="saleFetcher.data.value?.data?.list" />
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="divider relative" style="height:120px; background: linear-gradient(black 0%, #120c60 100%);"></div>
+      <!-- <div class="divider relative" style="height:120px; background: linear-gradient(black 0%, #120c60 100%);"></div> -->
 
-      <Teams class="relative z-10 pb-[336px] pt-8" />
+      <Teams class="relative z-10 py-8 lg:pb-[336px]" />
 
-      <Terms class="relative z-20 mt-[-200px]" />
+      <Terms class="relative z-20 lg:mt-[-200px]" />
 
-      <div class="divider relative mb-[-187px]" style="height:287px; background: linear-gradient(#120c60 0%, black 100%);"></div>
+      <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
-      <div class="bg-black pb-[60px]">
+      <!-- <div class="bg-black pb-[60px]">
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
@@ -220,7 +249,7 @@ provide('scopeStore', state)
             </ImgFrame>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </main>
 </template>

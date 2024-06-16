@@ -29,10 +29,14 @@ body
   &.show-game-page,
   &.show-peoplebox
     overflow: hidden
+body
+  &.menu-open
+    @media (min-width: 992px)
+      overflow: visible
 
-select
-  -webkit-appearance: menulist-button
-  color: #9ca3af
+// select
+//   -webkit-appearance: menulist-button
+//   color: #9ca3af
 
 h1, h2, h3, h4, div, p, .block, .flex
   white-space: normal
@@ -70,16 +74,18 @@ input[type=checkbox]
   opacity: 1
 
 .coverflow-swiper
-  padding-top: 4px !important
-  .swiper-slide-prev
-    .item
-      transform-origin: right center
-  .swiper-slide-next
-    .item
-      transform-origin: left center
+  .swiper-slide.swiper-slide-prev
+    opacity: 1 !important
+    transform: scale(0.9) !important
+  .swiper-slide.swiper-slide-next
+    opacity: 1 !important
+    transform: scale(0.9) !important
+  .swiper-slide-active
+    opacity: 1 !important
   .swiper-slide
+    transform: scale(1) !important
+    padding: 0px 5px
     width: 33.33% !important
-
 
 // .video-swiper
 //   position: relative
@@ -117,7 +123,7 @@ input[type=checkbox]
 //     @media (max-width: 991px)
 //       width: 50% !important
 
-.EDITOR-CONTENT
+.MCE-CONTENT
   img
     display: block
     margin: 0 auto
@@ -134,6 +140,11 @@ input[type=checkbox]
   100%
     filter: drop-shadow(0px 0px 1vw rgba(255, 255, 255, 0))
 
+body.menu-open
+  #gim-bot-tool
+    display: none
+#gim-bot-tool
+  z-index: 500 !important
 #gim-bot-tool-button
   img
     margin: 0 !important

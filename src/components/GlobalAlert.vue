@@ -56,21 +56,6 @@ watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
   immediate: true
 })
 
-const trackingPage = computed(()=>{
-  let page = ({
-    index: 'atomboyz_homepage',
-    voting: 'atomboyz_vote',
-    'posts-tab': 'atomboyz_videos',
-    'post-id': 'atomboyz_videos_content',
-  } as any)[route.name] || ''
-
-  if (route.name === 'voting' && !isEmpty(route.query.p)){
-    page = 'atomboyz_member'
-  }
-
-  return page
-})
-
 watch(()=>state.active, (newVal, oldVal)=>{
   if (!window){
     return
@@ -88,7 +73,6 @@ watch(()=>[state.active, store.trackingSender], (newVal)=>{
   if (newVal[0] && newVal[1]){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
       page_info: {
-        page: trackingPage.value,
         type: 'ads_page'
       },
     })
@@ -150,8 +134,8 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
           width: `${state.contentSize.w}px`,
           height: `${state.contentSize.h}px`
         }">
-          <img class="pointer-events-none absolute left-0 top-0 z-10 hidden size-full lg:block" :src="`/assets/img/img_frame_global_alert.svg`" alt="">
-          <img class="pointer-events-none absolute left-0 top-0 z-10 block size-full lg:hidden" :src="`/assets/img/img_frame_global_alert_m.svg`" alt="">
+          <img class="pointer-events-none absolute left-0 top-0 z-10 hidden size-full lg:block" src="/assets/img/img_frame_global_alert.svg" alt="">
+          <img class="pointer-events-none absolute left-0 top-0 z-10 block size-full lg:hidden" src="/assets/img/img_frame_global_alert_m.svg" alt="">
           <div
           class="relative z-0 overflow-hidden rounded-lg bg-white pb-14 pt-10 lg:pt-16"
           :style="{
@@ -176,7 +160,7 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
             </div>
             <div class="relative size-full overflow-auto">
               <div class="relative px-4 lg:px-8">
-                <div class="relative mx-auto w-full max-w-[790px]" v-html="store.general?.global_alert"></div>
+                <div class="MCE-CONTENT relative mx-auto w-full max-w-[790px]" v-html="store.general?.global_alert"></div>
               </div>
             </div>
             <div class="absolute bottom-5 left-0 flex w-full justify-center">

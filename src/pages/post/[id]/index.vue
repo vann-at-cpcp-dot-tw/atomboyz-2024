@@ -11,12 +11,13 @@ useSeoMeta({
   ogTitle: dataFetcher.data.value?.data?.title || null,
   ogImage: dataFetcher.data.value?.data?.img || null,
 })
+
 </script>
 <template>
   <main class="text-white">
     <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label:'News', href:'/posts/news'}, {label: dataFetcher.data.value?.data?.title}]" />
     <div class="container mb-5 flex justify-center">
-      <img class="w-[124px] lg:w-[158px]" :src="`/assets/img/page_title_news.png`">
+      <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
     </div>
     <div class="container" style="max-width: 1110px;">
       <div class="mb-4 text-[20px] lg:text-[40px]">{{ dataFetcher.data.value?.data?.title }}</div>
@@ -24,7 +25,7 @@ useSeoMeta({
         <div class="mr-2 rounded-lg bg-major px-3 py-2 text-[14px]">娛樂</div>
         <div class="rounded-lg border px-3 py-2 text-[14px]">{{ dataFetcher.data.value?.data?.date }}</div>
       </div>
-      <div class="EDITOR-CONTENT mb-4" v-html="dataFetcher.data.value?.data?.content"></div>
+      <div class="MCE-CONTENT mb-4" v-html="dataFetcher.data.value?.data?.content"></div>
       <div v-if="dataFetcher.data.value?.data?.tags?.length > 0" class="mb-10 flex">
         <div v-for="(tag, index) in dataFetcher.data.value?.data?.tags" :key="index" class="mr-2 w-auto flex-none text-[#6ED3FF] _lg:text-[13px]">#{{ tag }}</div>
       </div>
