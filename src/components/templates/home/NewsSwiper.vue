@@ -73,14 +73,14 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                   <div class="p-2.5">
                     <div class="row">
                       <div class="col-12 shrink lg:max-w-[51%]">
-                        <NuxtLink :to="`/post/${node.id}`">
+                        <NuxtLink :to="`/article/${node.id}`">
                           <RatioArea ratio="66.54">
                             <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.img})` }"></div>
                           </RatioArea>
                         </NuxtLink>
                       </div>
                       <div class="col-12 shrink text-white lg:max-w-[49%]">
-                        <NuxtLink :to="`/post/${node.id}`">
+                        <NuxtLink :to="`/article/${node.id}`">
                           <div class="mb-2 text-[18px]">{{ node.title }}</div>
                           <div class="mb-4 flex">
                             <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
@@ -108,7 +108,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
             </div>
             <NuxtLink
             v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
-            to="/posts/video"
+            to="/news/video"
             class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
               <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
               <i class="bi bi-chevron-right text-[18px] text-white"></i>
@@ -129,7 +129,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
         <NuxtLink
         v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
         class="btn btn-scaleUp flex !flex-nowrap items-center"
-        to="/posts/video">
+        to="/news/video">
           <span class="whitespace-nowrap pr-2 text-[12px] text-white underline">更多內容</span>
           <i class="bi bi-chevron-right text-[12px] text-white"></i>
         </NuxtLink>

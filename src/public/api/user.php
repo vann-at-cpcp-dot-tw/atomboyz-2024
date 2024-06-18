@@ -16,21 +16,20 @@ switch ($method) {
             'avatar'=> '',
             'fav_peoples'=> [
               [
-                'name'=> '王小明',
+                'name'=> '王一一',
+                'tag_id'=> 'boyz001',
                 'img'=> '/atomboyz/assets/img/rank_img_personal.png',
               ],
               [
-                'name'=> '王小明',
+                'name'=> '王一二',
+                'tag_id'=> 'boyz002',
                 'img'=> '/atomboyz/assets/img/rank_img_personal.png',
               ],
               [
-                'name'=> '王小明',
+                'name'=> '王一三',
+                'tag_id'=> 'boyz003',
                 'img'=> '/atomboyz/assets/img/rank_img_personal.png',
               ],
-              [
-                'name'=> '王小明',
-                'img'=> '/atomboyz/assets/img/rank_img_personal.png',
-              ]
             ],
             'daily_quests'=>[
               [
@@ -38,19 +37,22 @@ switch ($method) {
                 'reward'=> 3,
                 'description'=> '說明說明說明說明說明說明說明說明說明',
                 'is_done'=> true,
+                'href'=> 'https://google.com'
               ],
               [
                 'title'=> '每日小遊戲',
                 'reward'=> 3,
                 'description'=> '說明說明說明說明說明說明說明說明說明',
                 'is_done'=> false,
+                'href'=> 'https://google.com'
               ],
               [
                 'title'=> '點擊活動BN',
                 'reward'=> 3,
                 'description'=> '說明說明說明說明說明說明說明說明說明',
                 'is_done'=> true,
-              ]
+                'href'=> 'https://google.com'
+              ],
             ],
             'vote_logs'=> [
               [

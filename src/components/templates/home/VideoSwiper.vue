@@ -128,7 +128,7 @@ const listWithCoverImage = computed(()=>{
             </div>
             <NuxtLink
             v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
-            to="/posts/video"
+            to="/news/video"
             class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
               <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
               <i class="bi bi-chevron-right text-[18px] text-white"></i>
@@ -150,7 +150,7 @@ const listWithCoverImage = computed(()=>{
         <NuxtLink
         v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
         class="btn btn-scaleUp flex !flex-nowrap items-center"
-        to="/posts/video">
+        to="/news/video">
           <span class="whitespace-nowrap pr-2 text-[12px] text-white underline">更多內容</span>
           <i class="bi bi-chevron-right text-[12px] text-white"></i>
         </NuxtLink>

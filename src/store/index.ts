@@ -10,12 +10,17 @@ export interface IUser {
   name: string
   votes: number | null
   avatar: string
-  fav_peoples: {name:string, img?:string}[]
+  fav_peoples: {
+    name: string,
+    tag_id: string,
+    img?: string
+  }[]
   daily_quests: {
     title: string
-    reward: number
-    description: string
-    is_done: boolean
+    reward?: number
+    description?: string
+    is_done?: boolean
+    href?: string
   }[]
   vote_logs: {
     name: string
@@ -139,13 +144,14 @@ export const createStore = function(){
             return true
           }
 
-          const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
+          const [year, month, date, hour, minute, second] = store.general.countdown_end_time.split('-')
           const countdown = calculateRemainingTime({
             year,
             month,
             date,
             hour,
             minute,
+            second,
           })
           const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
           return countdownTotal <= 0

@@ -27,6 +27,10 @@ const route = useRoute()
       if( !store.user?.name ){
         window.localStorage.setItem('after_login_route_name', route.name)
         window.location.href = LOGIN_URL
+      }else{
+        $router.push({
+          hash: '#member'
+        })
       }
     }">
       <div class="order-last ml-2 size-[37px] lg:order-first lg:mx-auto">
@@ -49,7 +53,8 @@ const route = useRoute()
 
       <div v-if="store.user?.name" class="mt-1 text-right text-[10px] text-white lg:text-center">
         <div>
-          {{ store.user.name }} | <a
+          {{ store.user.name }}
+          <!-- | <a
           class="btn btn-opacity"
           @click="(e)=>{
             e.stopPropagation();
@@ -58,7 +63,7 @@ const route = useRoute()
             }
             window.localStorage.setItem('t', '')
             window.location.reload()
-          }">登出</a>
+          }">登出</a> -->
         </div>
         <div>擁有票數：{{ store.user.votes }}</div>
       </div>

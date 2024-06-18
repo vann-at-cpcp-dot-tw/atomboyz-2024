@@ -32,7 +32,7 @@ async function trackingInit(){
 }
 
 watch(()=>route.path, (newVal)=>{
-  if (newVal.includes('/post/')){
+  if (newVal.includes('/article/')){
     store.trackingPageName = 'atomboyz_news_article'
     return
   }
@@ -40,8 +40,8 @@ watch(()=>route.path, (newVal)=>{
   const paths = {
     '/': 'atomboyz_homepage',
     '/vote': 'atomboyz_vote',
-    '/posts/video': 'atomboyz_videos',
-    '/posts/news': 'atomboyz_news',
+    '/news/video': 'atomboyz_videos',
+    '/news/article': 'atomboyz_news',
   } as {[key:string]:string}
 
   store.trackingPageName = paths[newVal] || 'atomboyz_homepage'

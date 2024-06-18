@@ -39,13 +39,6 @@ onMounted(()=>{
   }
   setHeaderBg()
   window.addEventListener('scroll', setHeaderBg)
-
-  // if has hash
-  setTimeout(()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  }, 500)
 })
 
 onBeforeUnmount(()=>{

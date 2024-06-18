@@ -23,13 +23,14 @@ const { pause, resume, isActive } = useIntervalFn(()=>{
   if (!store.general.countdown_end_time || typeof store.general.countdown_end_time !== 'string'){
     return
   }
-  const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
+  const [year, month, date, hour, minute, second] = store.general.countdown_end_time.split('-')
   state.countdown = calculateRemainingTime({
     year,
     month,
     date,
     hour,
     minute,
+    second,
   })
 }, 1000)
 </script>

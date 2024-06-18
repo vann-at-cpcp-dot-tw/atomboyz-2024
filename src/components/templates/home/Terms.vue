@@ -61,19 +61,6 @@ watch(()=>route.hash, (newVal)=>{
 }, {
   immediate: true
 })
-
-onMounted(()=>{
-  if (!window){
-    return
-  }
-
-  // if has hash
-  setTimeout(()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  }, 500)
-})
 </script>
 <template>
   <div :class="twMerge('bg-[#120C60] lg:px-0 px-5', props.class)">

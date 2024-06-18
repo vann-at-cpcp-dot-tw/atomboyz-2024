@@ -15,7 +15,7 @@ useSeoMeta({
 </script>
 <template>
   <main class="text-white">
-    <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label:'News', href:'/posts/news'}, {label: dataFetcher.data.value?.data?.title}]" />
+    <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label:'News', href:'/news/article'}, {label: dataFetcher.data.value?.data?.title}]" />
     <div class="container mb-5 flex justify-center">
       <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
     </div>
@@ -31,17 +31,17 @@ useSeoMeta({
       </div>
       <div class="row justify-center pb-10">
         <div :class="`col-auto ${dataFetcher.data.value?.data?.prev_id ?'' :'opacity-50 pointer-events-none'}`">
-          <NuxtLink :to="`/post/${dataFetcher.data.value?.data?.prev_id}`">
+          <NuxtLink :to="`/article/${dataFetcher.data.value?.data?.prev_id}`">
             <div class="btn btn-dark rounded-full bg-white px-5 py-2.5 text-black">上一則</div>
           </NuxtLink>
         </div>
         <div class="col-auto">
-          <NuxtLink to="/posts/news">
+          <NuxtLink to="/news/article">
             <div class="btn btn-dark rounded-full bg-white px-5 py-2.5 text-black">返回</div>
           </NuxtLink>
         </div>
         <div :class="`col-auto ${dataFetcher.data.value?.data?.next_id ?'' :'opacity-50 pointer-events-none'}`">
-          <NuxtLink :to="`/post/${dataFetcher.data.value?.data?.next_id}`">
+          <NuxtLink :to="`/article/${dataFetcher.data.value?.data?.next_id}`">
             <div class="btn btn-dark rounded-full bg-white px-5 py-2.5 text-black">下一則</div>
           </NuxtLink>
         </div>
