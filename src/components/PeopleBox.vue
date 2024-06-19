@@ -38,12 +38,33 @@ const router = useRouter()
 const state = reactive({
   isShareNavOpen: false
 })
+function handleCLose(){
+  router.push({
+    query: {}
+  })
+  store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+    page_info: {
+      type: 'introduction',
+      name: props.name,
+    },
+    click_info: {
+      type: 'voting_function',
+      name: 'close'
+    }
+  })
+}
 onMounted(()=>{
   if (!window){
     return
   }
 
   document.body.classList.add('show-peoplebox')
+  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+    page_info: {
+      type: 'introduction',
+      name: props.name
+    }
+  })
 })
 onUnmounted(()=>{
   if (!window){
@@ -57,9 +78,7 @@ onUnmounted(()=>{
   :class="twMerge('size-full fixed left-0 top-0 z-[1000] text-black parent', props.class)"
   @click="(e)=>{
     if( (e?.target as HTMLDivElement)?.classList?.value?.includes?.('parent') ){
-      router.push({
-        query: {}
-      })
+      handleCLose()
     }
   }">
     <div
@@ -69,11 +88,7 @@ onUnmounted(()=>{
         <div class="relative -top-2.5 left-2.5 flex justify-end lg:-top-8 lg:left-0 lg:-mb-10">
           <i
           class="btn bi bi-x-circle text-[25px] leading-none lg:text-[45px]"
-          @click="()=>{
-            router.push({
-              query: {}
-            })
-          }"></i>
+          @click="handleCLose"></i>
         </div>
         <div class="lg:nowrap mx-auto flex w-full max-w-[926px]">
           <div class="hidden w-[37.5%] pr-[22px] lg:block">
@@ -88,6 +103,16 @@ onUnmounted(()=>{
                   class="btn btn-light absolute left-3 top-3 z-10 flex size-[31px] items-center justify-center rounded-full bg-major text-white"
                   @mouseenter="()=>{
                     state.isShareNavOpen = true
+                    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                      page_info: {
+                        type: 'introduction',
+                        name: props.name,
+                      },
+                      click_info: {
+                        type: 'voting_function',
+                        name: 'share'
+                      }
+                    })
                   }"
                   @mouseleave="()=>{
                     state.isShareNavOpen = false
@@ -148,7 +173,16 @@ onUnmounted(()=>{
                   name: props.name
                 })
               })
-
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  type: 'introduction',
+                  name: props.name,
+                },
+                click_info: {
+                  type: 'voting_function',
+                  name: 'vote'
+                }
+              })
             }">
               投票
             </MajorButton>
@@ -171,6 +205,16 @@ onUnmounted(()=>{
                         url: props?.share_links?.copy
                       })
                     }
+                    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                      page_info: {
+                        type: 'introduction',
+                        name: props.name,
+                      },
+                      click_info: {
+                        type: 'voting_function',
+                        name: 'share'
+                      }
+                    })
                   }">
                     <i class="bi bi-share-fill relative text-[11px] leading-none"></i>
                   </div>
@@ -182,6 +226,16 @@ onUnmounted(()=>{
                   @click="(e)=>{
                     e.stopPropagation()
                     store.do.toggleFav(props.name)
+                    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                      page_info: {
+                        type: 'introduction',
+                        name: props.name,
+                      },
+                      click_info: {
+                        type: 'voting_function',
+                        name: store.user?.fav_peoples?.map((node:any)=>node.name).includes(props?.name) ?'unfollow' :'follow'
+                      }
+                    })
                   }"></i>
                 </div>
               </RatioArea>
@@ -215,6 +269,16 @@ onUnmounted(()=>{
                   store.do.voteInput({
                     name: props.name
                   })
+                })
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    type: 'introduction',
+                    name: props.name,
+                  },
+                  click_info: {
+                    type: 'voting_function',
+                    name: 'vote'
+                  }
                 })
               }">
                 投票

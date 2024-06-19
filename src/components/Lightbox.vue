@@ -12,6 +12,7 @@ interface IProps {
   className?: string
   noClose?: boolean
   onClose?: Function
+  onOpen?: Function
 }
 const props = defineProps<IProps>()
 const store = useStore()
@@ -29,10 +30,22 @@ watch(()=>[window, store.lightbox], ()=>{
   if (!window){
     return
   }
+
   if (store.lightbox.length > 0){
     window.document.body.classList.add('lightbox-open')
   } else {
     window.document.body.classList.remove('lightbox-open')
+  }
+}, {
+  immediate: true
+})
+
+watch(()=>[store.lightbox, props?.id, props?.onOpen], (newVal, oldVal)=>{
+  const currentLightboxIds = (newVal?.[0] as string[]) || []
+  const prevLightboxIds = (oldVal?.[0] as string[]) || []
+
+  if (!prevLightboxIds?.includes?.(props?.id) && currentLightboxIds?.includes?.(props.id)){
+    props?.onOpen?.()
   }
 }, {
   immediate: true

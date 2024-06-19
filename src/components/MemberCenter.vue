@@ -38,6 +38,11 @@ onMounted(()=>{
     return
   }
   window.document.body.classList.add('mc-open')
+  store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view', {
+    page_info: {
+      page: 'atomboyz_member'
+    }
+  })
 })
 onUnmounted(()=>{
   if (!window){

@@ -39,7 +39,7 @@ export interface IAPIResponse {
 
 type EventFunctionName = 'PageViewEvent'|'ClickEvent'|'ImpressionEvent'|'SearchEvent'
 type EventId = '55001'|'55002'|'55003'|'55004'
-type Event = 'hidol_campaign_page_view'|'hidol_campaign_item_click'|'hidol_campaign_item_click'|'hidol_campaign_impression'
+type Event = 'hidol_campaign_page_view'|'hidol_campaign_item_click'|'hidol_campaign_item_click'|'hidol_campaign_function_click'|'hidol_campaign_impression'
 export interface ITrackingInfos {
   page_info?: {
     page?: string
@@ -50,7 +50,9 @@ export interface ITrackingInfos {
   click_info?: {
     name?: string
     type?: string
+    tab?: string
     sec?: string
+    url?: string
   },
   impression_info?: {[key:string]:any},
 }
