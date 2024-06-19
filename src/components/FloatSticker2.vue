@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import { twMerge } from 'tailwind-merge'
-import { useWindowScroll } from '@vueuse/core'
+import { useWindowScroll, useWindowSize } from '@vueuse/core'
 import Game from './Game.vue'
 import { useStore } from '~/store'
 
@@ -37,6 +37,7 @@ function isScrolledPastHalfway(): boolean{
 }
 
 const window = process.client ? globalThis : null
+const viewport = useWindowSize()
 
 const props = defineProps({
   class: {
@@ -96,7 +97,7 @@ watch(()=>route.hash, (newVal, oldVal)=>{
     <div
     :class="twMerge(`z-[100] fixed right-5 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
-      bottom: '0px', // 沒有話 AI 的話0，有 AI 的話 95
+      bottom: viewport.width.value<= 991 ?'60px' :'0px', // 沒有話 AI 的話0，有 AI 的話 95
       transition: 'all .4s',
     }">
       <div

@@ -94,7 +94,8 @@ watch(()=>elRef.value, (newVal)=>{
           <div class="pl-2 text-[20px]">我要投票</div>
         </NuxtLink>
 
-        <!-- <div class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2"
+        <div
+        class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2"
         @click="()=>{
           store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
             click_info: {
@@ -103,10 +104,16 @@ watch(()=>elRef.value, (newVal)=>{
               sec: 'bottom'
             }
           })
+          $router.push({
+            hash: '#task'
+          })
         }">
           <img class="w-[24px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);">
-          <div class="pl-2 text-[20px]">每日任務</div>
-        </div> -->
+          <div
+          class="pl-2 text-[20px]">
+            每日任務
+          </div>
+        </div>
       </div>
     </div>
   </ClientOnly>

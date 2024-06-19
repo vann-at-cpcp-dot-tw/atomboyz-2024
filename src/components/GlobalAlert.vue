@@ -184,7 +184,7 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
                 <input
                 v-model="state.checked"
                 type="checkbox"
-                @change="{(e:any)=>{
+                @change="(e:any)=>{
                   if( e.target.checked ){
                     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
                       page_info: {
@@ -195,7 +195,7 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
                       }
                     })
                   }
-                }}">
+                }">
                 <div class="pl-1">今日不再顯示</div>
               </label>
             </div>

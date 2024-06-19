@@ -39,7 +39,7 @@ const nav:{
   {
     label: 'NEWS',
     names: ['news-tab', 'article-id'],
-    to: '/news/article',
+    to: '/news/video',
     onClick: ()=>{
       store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
         click_info: {
