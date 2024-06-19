@@ -97,7 +97,7 @@ watch(()=>route.hash, (newVal, oldVal)=>{
     <div
     :class="twMerge(`z-[100] fixed right-5 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
-      bottom: viewport.width.value<= 991 ?'60px' :'0px', // 沒有話 AI 的話0，有 AI 的話 95
+      bottom: viewport.width.value<= 991 ?'calc(60px + 0px)' :'calc(0px + 0px)', // 沒有話 AI 的話+0px，有 AI 的話+95px
       transition: 'all .4s',
     }">
       <div
