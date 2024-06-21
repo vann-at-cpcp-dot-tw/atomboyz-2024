@@ -110,11 +110,15 @@ onMounted(()=>{
   //   })
   // })
 })
+onMounted(()=>{
+  console.log(route)
+})
 </script>
 <template>
   <Html>
     <Head>
       <Title>hidol X 原子少年 2｜獨家線上投票</Title>
+      <Link rel="canonical" :href="`${APP_URL}${$route.fullPath}`" />
       <Meta name="description" content="「hidol X 原子少年2」獨家線上投票平台，我們一起為這些勇敢追夢的選手們投票應援吧！hidol 拉近你與idol的距離。" />
       <Meta name="keywords" content="原子少年、原子少年2、男團、Atom Boyz、Atom Boyz2、歐漢聲、健志、坤達、hidol、拉近你與 idol 的距離、台灣男團選秀" />
       <Meta name="url" :content="APP_URL" />
