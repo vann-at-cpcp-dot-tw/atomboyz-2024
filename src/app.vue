@@ -95,20 +95,20 @@ onMounted(()=>{
     store.trackingSender = sender
   })
 
-  // ;(window as any).GIMBotTool.init({
-  //   url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
-  //   title: '客服幫手 原子小少年',
-  //   logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
-  //   btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
-  // })
+  ;(window as any).GIMBotTool.init({
+    url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+    title: '客服幫手 原子小少年',
+    logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+    btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
+  })
 
-  // ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
-  //   store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //     click_info: {
-  //       type: 'ai_customer_service',
-  //     },
-  //   })
-  // })
+  ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      click_info: {
+        type: 'ai_customer_service',
+      },
+    })
+  })
 })
 onMounted(()=>{
   console.log(route)

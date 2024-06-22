@@ -71,7 +71,7 @@ const listWithCoverImage = computed(()=>{
         <div class="relative mx-auto flex w-full max-w-[1188px] !flex-nowrap items-center justify-between">
           <div
           v-if="swiperRef?.isLocked === false"
-          :class="`btn btnScale-up ${swiperRef?.isBeginning ?'opacity-50 pointer-events-none' :''}`"
+          :class="`btn btnScale-up ${swiperRef?.isBeginning ?'lg:opacity-50 lg:pointer-events-none' :''}`"
           @click="()=>{
             swiperRef.slidePrev()
           }">

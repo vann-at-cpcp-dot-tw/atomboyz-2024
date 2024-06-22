@@ -20,11 +20,11 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
     return {
       class: 'sale-swiper',
       modules: [],
-      spaceBetween: 0,
-      pagination: { clickable: true },
+      spaceBetween: 8,
+      // pagination: { clickable: true },
       grabCursor: true,
       centeredSlides: false,
-      slidesPerView: 1,
+      slidesPerView: 2,
       loop: true,
     }
   } else {
@@ -32,7 +32,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
       class: 'sale-swiper',
       modules: [],
       spaceBetween: 20,
-      pagination: { clickable: true },
+      // pagination: { clickable: true },
       grabCursor: true,
       centeredSlides: false,
       slidesPerView: 5,
@@ -74,7 +74,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           @click="()=>{
             swiperRef.slidePrev()
           }">
-            <img src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
+            <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
           </div>
           <div class="relative mx-auto w-full max-w-[1070px] overflow-hidden px-5">
             <Swiper
@@ -115,7 +115,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           @click="()=>{
             swiperRef.slideNext()
           }">
-            <img src="/assets/img/icon_arrow.svg" alt="">
+            <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
           </div>
         </div>
       </div>

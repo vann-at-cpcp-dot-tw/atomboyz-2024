@@ -38,7 +38,8 @@ const state:any = reactive({
         return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
           return {
             ...node,
-            href: `/vote?p=${node.tag_id}`
+            href: `/vote?p=${node.tag_id}`,
+            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
           }
         })
       case 'team':
@@ -159,7 +160,7 @@ onMounted(()=>{
         <div class="container-fluid relative z-10 mb-[54px]">
           <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
-            <img class="w-full" src="/assets/img/section_title_home_1.png" style="max-width:298px;">
+            <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
             <ImgFrame>
@@ -179,7 +180,7 @@ onMounted(()=>{
         <div class="container-fluid relative z-10">
           <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
-            <img class="w-full" src="/assets/img/section_title_home_2.png" style="max-width:274px;">
+            <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
             <ImgFrame>
@@ -219,12 +220,12 @@ onMounted(()=>{
           <div class="container mb-8">
             <div id="video" class="anchor relative top-[-80px]"></div>
             <div id="article" class="anchor relative top-[-80px]"></div>
-            <img class="mx-auto mb-2" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
+            <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">
               <div class="row">
                 <div class="col-6">
                   <MajorButton
-                  class="h-[50px] text-[21px]"
+                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
                   :active="state.newsTableActive === 'video'"
                   @click="()=>{ state.newsTableActive = 'video' }">
@@ -233,7 +234,7 @@ onMounted(()=>{
                 </div>
                 <div class="col-6">
                   <MajorButton
-                  class="h-[50px] text-[21px]"
+                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
                   :active="state.newsTableActive === 'article'"
                   @click="()=>{
@@ -255,13 +256,13 @@ onMounted(()=>{
 
           <div class="pb-4">
             <div id="merch" class="anchor relative top-[-80px]"></div>
-            <img class="mx-auto mb-4" src="/assets/img/section_title_home_5.png" style="max-width:335px;">
+            <img class="mx-auto mb-4 max-w-[318px] lg:max-w-[335px]" src="/assets/img/section_title_home_5.png">
             <SaleSwiper :list="saleFetcher.data.value?.data?.list" />
           </div>
         </div>
       </div>
 
-      <div class="divider relative" style="height:120px; background: linear-gradient(black 0%, #120c60 100%);"></div>
+      <div class="divider relative h-[60px] lg:h-[120px]" style="background: linear-gradient(black 0%, #120c60 100%);"></div>
 
       <Teams class="relative z-10 py-8 lg:pb-[336px]" />
 

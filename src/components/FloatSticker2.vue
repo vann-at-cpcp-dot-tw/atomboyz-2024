@@ -95,13 +95,13 @@ watch(()=>route.hash, (newVal, oldVal)=>{
     }" />
 
     <div
-    :class="twMerge(`z-[100] fixed right-5 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
+    :class="twMerge(`z-[100] fixed lg:right-5 right-2 ${state.show ?'opacity-100' :'opacity-0 pointer-events-none'}`, props.class)"
     :style="{
-      bottom: viewport.width.value<= 991 ?'calc(60px + 0px)' :'calc(0px + 0px)', // 沒有話 AI 的話+0px，有 AI 的話+95px
+      bottom: viewport.width.value<= 991 ?'130px' :'95px', // 沒有話 AI 的話 0px，有 AI 的話 130/95px
       transition: 'all .4s',
     }">
       <div
-      class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-2 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         $router.push({
@@ -117,7 +117,7 @@ watch(()=>route.hash, (newVal, oldVal)=>{
         <div class="text-center text-[11px] leading-[1.2] text-white">小遊戲</div>
       </div>
       <div
-      class="btn btn-scaleUp mb-3 flex size-[60px] flex-col items-center justify-center rounded-full"
+      class="btn btn-scaleUp mb-2 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#fff 0%, #808080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
         if( !window ){ return }
