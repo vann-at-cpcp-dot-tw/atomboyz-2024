@@ -63,15 +63,15 @@ export const teams = [
     description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
 ]
-export function routeNameToTrackingPageName(routePath:'/'|'/vote'|'/posts/video'|'/posts/news'|string){
-  if (routePath.includes('/post/')){
+export function routeNameToTrackingPageName(routePath:'/'|'/vote'|'/news/video'|'/news/article'|string){
+  if (routePath.includes('/article/')){
     return 'atomboyz_news_article'
   }
   return {
     '/': 'atomboyz_homepage',
     '/vote': 'atomboyz_vote',
-    '/posts/video': 'atomboyz_videos',
-    '/posts/news': 'atomboyz_news',
+    '/news/video': 'atomboyz_videos',
+    '/news/article': 'atomboyz_news',
   }[routePath]
 }
 export function cn(...inputs: ClassValue[]){

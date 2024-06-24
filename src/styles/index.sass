@@ -27,7 +27,8 @@ body
   &.show-cookie-alert,
   &.show-global-alert,
   &.show-game-page,
-  &.show-peoplebox
+  &.show-peoplebox,
+  &.mc-open
     overflow: hidden
 body
   &.menu-open
@@ -145,6 +146,9 @@ body.menu-open
     display: none
 #gim-bot-tool
   z-index: 500 !important
+  @media (max-width:991px)
+    bottom: 70px !important
+    right: 8px !important
 #gim-bot-tool-button
   img
     margin: 0 !important

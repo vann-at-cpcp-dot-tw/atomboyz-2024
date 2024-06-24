@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue'
 import { twMerge } from 'tailwind-merge'
 import { scrollToSection2 } from '~/lib/helpers'
+import { useStore } from '~/store'
 
 const window = process.client ? globalThis : null
 interface IProps {
@@ -13,6 +14,7 @@ interface IState {
 }
 const props = defineProps<IProps>()
 const route = useRoute()
+const store = useStore()
 const state = reactive<IState>({
   active: 'voteinfo'
 })
@@ -61,25 +63,26 @@ watch(()=>route.hash, (newVal)=>{
 }, {
   immediate: true
 })
-
-onMounted(()=>{
-  if (!window){
-    return
-  }
-
-  // if has hash
-  setTimeout(()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  }, 500)
-})
 </script>
 <template>
   <div :class="twMerge('bg-[#120C60] lg:px-0 px-5', props.class)">
     <div class="container mb-2.5 rounded bg-white">
       <div id="voteinfo" class="anchor relative top-[-80px]"></div>
-      <Trigger title="投票說明" :is-active="state.active === 'voteinfo'" @click="()=>{ state.active = state.active === 'voteinfo' ?null :'voteinfo' }" />
+      <Trigger
+      title="投票說明"
+      :is-active="state.active === 'voteinfo'"
+      @click="()=>{
+        state.active = state.active === 'voteinfo' ?null :'voteinfo'
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            sec: 'information'
+          },
+          click_info: {
+            type: 'expand_info',
+            name: 'vote_info'
+          }
+        })
+      }" />
       <div v-if="state.active === 'voteinfo'" class="pb-4">
         <hr class="mb-4 border-major-800">
         此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。
@@ -88,7 +91,21 @@ onMounted(()=>{
 
     <div class="container mb-2.5 rounded bg-white">
       <div id="rules" class="anchor relative top-[-80px]"></div>
-      <Trigger title="活動辦法" :is-active="state.active === 'rules'" @click="()=>{ state.active = state.active === 'rules' ?null :'rules' }" />
+      <Trigger
+      title="活動辦法"
+      :is-active="state.active === 'rules'"
+      @click="()=>{
+        state.active = state.active === 'rules' ?null :'rules'
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            sec: 'information'
+          },
+          click_info: {
+            type: 'expand_info',
+            name: 'campaign_info'
+          }
+        })
+      }" />
       <div v-if="state.active === 'rules'" class="pb-4">
         <hr class="mb-4 border-major-800">
         <div>【投票資格】</div>
@@ -141,7 +158,21 @@ onMounted(()=>{
 
     <div class="container rounded bg-white">
       <div id="notice" class="anchor relative top-[-80px]"></div>
-      <Trigger title="注意事項" :is-active="state.active === 'notice'" @click="()=>{ state.active = state.active === 'notice' ?null :'notice' }" />
+      <Trigger
+      title="注意事項"
+      :is-active="state.active === 'notice'"
+      @click="()=>{
+        state.active = state.active === 'notice' ?null :'notice'
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            sec: 'information'
+          },
+          click_info: {
+            type: 'expand_info',
+            name: 'notice_info'
+          }
+        })
+      }" />
       <div v-if="state.active === 'notice'" class="pb-4">
         <hr class="mb-4 border-major-800">
         <ListItem>

@@ -10,12 +10,18 @@ export interface IUser {
   name: string
   votes: number | null
   avatar: string
-  fav_peoples: {name:string, img?:string}[]
+  openId: string | number
+  fav_peoples: {
+    name: string,
+    tag_id: string,
+    img?: string
+  }[]
   daily_quests: {
     title: string
-    reward: number
-    description: string
-    is_done: boolean
+    reward?: number
+    description?: string
+    is_done?: boolean
+    href?: string
   }[]
   vote_logs: {
     name: string
@@ -34,7 +40,7 @@ export interface IAPIResponse {
 
 type EventFunctionName = 'PageViewEvent'|'ClickEvent'|'ImpressionEvent'|'SearchEvent'
 type EventId = '55001'|'55002'|'55003'|'55004'
-type Event = 'hidol_campaign_page_view'|'hidol_campaign_item_click'|'hidol_campaign_item_click'|'hidol_campaign_impression'
+type Event = 'hidol_campaign_page_view'|'hidol_campaign_item_click'|'hidol_campaign_item_click'|'hidol_campaign_function_click'|'hidol_campaign_impression'
 export interface ITrackingInfos {
   page_info?: {
     page?: string
@@ -45,7 +51,9 @@ export interface ITrackingInfos {
   click_info?: {
     name?: string
     type?: string
+    tab?: string
     sec?: string
+    url?: string
   },
   impression_info?: {[key:string]:any},
 }
@@ -139,13 +147,14 @@ export const createStore = function(){
             return true
           }
 
-          const [year, month, date, hour, minute] = store.general.countdown_end_time.split('-')
+          const [year, month, date, hour, minute, second] = store.general.countdown_end_time.split('-')
           const countdown = calculateRemainingTime({
             year,
             month,
             date,
             hour,
             minute,
+            second,
           })
           const countdownTotal = Number(countdown.days) + Number(countdown.hours) + Number(countdown.minutes) + Number(countdown.seconds)
           return countdownTotal <= 0
@@ -232,7 +241,7 @@ export const createStore = function(){
           store.user = result.data?.user
         }
         window?.localStorage?.setItem('t', t)
-        return result
+        return store.user
       },
       toggleFav: async function(name:string){
         const API_URL = useRuntimeConfig().public.apiURL

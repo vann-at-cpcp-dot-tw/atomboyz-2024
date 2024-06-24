@@ -13,7 +13,11 @@ const viewport = useWindowSize()
 const route = useRoute()
 const router = useRouter()
 const tab = route.params.tab
-const listFetcher = await useFetch<any>(`${API_URL}/${tab}`, {
+const tabNameToApiResource:any = {
+  article: 'news',
+  video: 'video',
+}
+const listFetcher = await useFetch<any>(`${API_URL}/${tabNameToApiResource?.[tab]}`, {
   query: {
     page: computed(()=>route.query.page || 1),
     per_page: 3,
@@ -42,7 +46,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
       state.open = ''
     }" />
 
-    <Breadcrumbs :list="[{label: '首頁', href: '/'}, {label: 'News'}]" />
+    <Breadcrumbs class="mb-3" :list="[{label: '首頁', href: '/'}, {label: 'News'}]" />
 
     <div class="container mb-5 flex justify-center">
       <img class="w-[124px] lg:w-[158px]" src="/assets/img/page_title_news.png">
@@ -51,13 +55,13 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
     <div class="container mb-6">
       <div class="row justify-center">
         <div class="col-6" style="max-width:190px;">
-          <NuxtLink to="/posts/video">
+          <NuxtLink to="/news/video">
             <MajorButton class="h-[44px] lg:h-[49px] lg:text-[21px]" :variant="tab === 'video' ?'solid' :'outline'">最新影音</MajorButton>
           </NuxtLink>
         </div>
         <div class="col-6" style="max-width: 190px;">
-          <NuxtLink to="/posts/news">
-            <MajorButton class="h-[44px] lg:h-[49px] lg:text-[21px]" :variant="tab === 'news' ?'solid' :'outline'">最新娛樂</MajorButton>
+          <NuxtLink to="/news/article">
+            <MajorButton class="h-[44px] lg:h-[49px] lg:text-[21px]" :variant="tab === 'article' ?'solid' :'outline'">最新娛樂</MajorButton>
           </NuxtLink>
         </div>
       </div>
@@ -86,7 +90,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 </RatioArea>
                 <NuxtLink
                 v-else
-                :to="`/post/${node.id}`">
+                :to="`/article/${node.id}`">
                   <RatioArea ratio="66.54">
                     <div
                     class="absolute left-0 top-0 size-full bg-cover bg-center bg-no-repeat"
@@ -97,7 +101,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 </NuxtLink>
               </div>
               <div class="col-12 mb-5 shrink text-white lg:mb-2">
-                <NuxtLink :to="`/post/${node.id}`">
+                <NuxtLink :to="`/article/${node.id}`">
                   <div class="mb-2.5 text-[18px]">{{ node.title }}</div>
                   <div class="mb-4 flex">
                     <div class="mr-2 rounded-lg bg-major px-2 py-1 text-[14px]">{{ tab === 'video' ?'影音' :'娛樂' }}</div>
@@ -115,7 +119,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                     state.open = convertYoutubeUrlToEmbed(node?.yt_url)?.embedURL || ''
                   }else{
                     router.push({
-                      path: `/post/${node.id}`
+                      path: `/article/${node.id}`
                     })
                   }
                 }">

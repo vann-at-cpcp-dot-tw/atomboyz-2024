@@ -17,10 +17,23 @@ const { data } = await useFetch<any>(`${API_URL}/general`)
 const store = createStore()
 store.general = data.value?.data
 
+function trackingUserLogin(openId:any){
+  if (!((window as any)?.webTrackingSDK)){
+    setTimeout(()=>{
+      trackingUserLogin(openId)
+    }, 1000)
+    return
+  }
+  (window as any)?.webTrackingSDK?.status?.setLogin?.({
+    openId
+  })
+}
+
 async function trackingInit(){
   if (!window){
     return
   }
+
   const sender = await (window as any)?.webTrackingSDK?.init?.({
     BUID: 'GAMA-hidol-01',
     property: 'hidol-web',
@@ -32,7 +45,7 @@ async function trackingInit(){
 }
 
 watch(()=>route.path, (newVal)=>{
-  if (newVal.includes('/post/')){
+  if (newVal.includes('/article/')){
     store.trackingPageName = 'atomboyz_news_article'
     return
   }
@@ -40,8 +53,8 @@ watch(()=>route.path, (newVal)=>{
   const paths = {
     '/': 'atomboyz_homepage',
     '/vote': 'atomboyz_vote',
-    '/posts/video': 'atomboyz_videos',
-    '/posts/news': 'atomboyz_news',
+    '/news/video': 'atomboyz_videos',
+    '/news/article': 'atomboyz_news',
   } as {[key:string]:string}
 
   store.trackingPageName = paths[newVal] || 'atomboyz_homepage'
@@ -56,13 +69,15 @@ watch(()=>[route.query.t, window], (newVal, oldVal)=>{
     return
   }
 
-  store.do.setUser(route.query.t).then(()=>{
+  store.do.setUser(route.query.t).then((user:any)=>{
     const queryWithoutT = { ...route.query }
     delete queryWithoutT.t
     router.push({
       name: localStorage?.getItem?.('after_login_route_name') || 'index',
       query: queryWithoutT
     })
+
+    trackingUserLogin(user.openId)
   })
 }, {
   immediate: true
@@ -76,7 +91,9 @@ onMounted(()=>{
 
   // window.store = store
   if (window.localStorage.getItem('t')){
-    store.do.setUser(window.localStorage.getItem('t'))
+    store.do.setUser(window.localStorage.getItem('t')).then((user:any)=>{
+      trackingUserLogin(user.openId)
+    })
   }
 })
 
@@ -95,26 +112,27 @@ onMounted(()=>{
     store.trackingSender = sender
   })
 
-  // ;(window as any).GIMBotTool.init({
-  //   url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
-  //   title: '客服幫手 原子小少年',
-  //   logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
-  //   btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
-  // })
+  ;(window as any).GIMBotTool.init({
+    url: IS_STAGE ? 'https://helpdesk.stg.gim.beango.com/Atomboyz' : 'https://atomboyz.gamania.chat/',
+    title: '客服幫手 原子小少年',
+    logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
+    btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,
+  })
 
-  // ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
-  //   store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //     click_info: {
-  //       type: 'ai_customer_service',
-  //     },
-  //   })
-  // })
+  ;((window as any).document.getElementById('gim-bot-tool-button') as HTMLDivElement).addEventListener('click', (e)=>{
+    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+      click_info: {
+        type: 'ai_customer_service',
+      },
+    })
+  })
 })
 </script>
 <template>
   <Html>
     <Head>
       <Title>hidol X 原子少年 2｜獨家線上投票</Title>
+      <Link rel="canonical" :href="`${APP_URL}${$route.fullPath}`" />
       <Meta name="description" content="「hidol X 原子少年2」獨家線上投票平台，我們一起為這些勇敢追夢的選手們投票應援吧！hidol 拉近你與idol的距離。" />
       <Meta name="keywords" content="原子少年、原子少年2、男團、Atom Boyz、Atom Boyz2、歐漢聲、健志、坤達、hidol、拉近你與 idol 的距離、台灣男團選秀" />
       <Meta name="url" :content="APP_URL" />

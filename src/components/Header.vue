@@ -2,11 +2,14 @@
 import { useWindowSize } from '@vueuse/core'
 import FloatSticker1 from './FloatSticker1.vue'
 import FloatSticker2 from './FloatSticker2.vue'
-import { copyUrlToClipboard } from '~/lib/helpers'
+import MemberCenter from './MemberCenter.vue'
+import { copyUrlToClipboard, scrollToSection2 } from '~/lib/helpers'
 import LightboxList from '~/components/LightboxList.vue'
 import { useStore } from '~/store'
+
 const window = process.client ? globalThis : null
 const route = useRoute()
+const router = useRouter()
 const store = useStore()
 const viewport = useWindowSize()
 const state = reactive({
@@ -33,19 +36,19 @@ const nav:{
       })
     },
   },
-  // {
-  //   label: 'NEWS',
-  //   names: ['posts-tab', 'post-id'],
-  //   to: '/posts/video',
-  //   onClick: ()=>{
-  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //       click_info: {
-  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-  //         name: 'atomboyz_news'
-  //       }
-  //     })
-  //   }
-  // },
+  {
+    label: 'NEWS',
+    names: ['news-tab', 'article-id'],
+    to: '/news/video',
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_news'
+        }
+      })
+    }
+  },
   {
     label: '我要投票',
     names: ['vote'],
@@ -59,45 +62,49 @@ const nav:{
       })
     }
   },
-  // {
-  //   label: '排行榜',
-  //   names: ['rank'],
-  //   to: '/#RANK',
-  //   onClick: ()=>{
-  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //       click_info: {
-  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-  //         name: 'atomboyz_ranking'
-  //       }
-  //     })
-  //   }
-  // },
-  // {
-  //   label: '周邊商品',
-  //   names: ['shop'],
-  //   to: '/#SALE',
-  //   onClick: ()=>{
-  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //       click_info: {
-  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-  //         name: 'atomboyz_goods'
-  //       }
-  //     })
-  //   }
-  // },
-  // {
-  //   label: '會員中心',
-  //   names: ['member'],
-  //   onClick: ()=>{
-  //     store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-  //       click_info: {
-  //         type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-  //         name: 'atomboyz_member_center'
-  //       }
-  //     })
-  //   }
-  // }
+  {
+    label: '排行榜',
+    names: ['rank'],
+    to: '/#ranking',
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_ranking'
+        }
+      })
+    }
+  },
+  {
+    label: '周邊商品',
+    names: ['shop'],
+    to: '/#merch',
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_goods'
+        }
+      })
+    }
+  },
+  {
+    label: '會員中心',
+    names: ['member'],
+    onClick: ()=>{
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        click_info: {
+          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+          name: 'atomboyz_member_center'
+        }
+      })
+      router.push({
+        hash: '#member'
+      })
+    }
+  }
 ]
+
 watch(()=>state.isMobileMenuOpen, (newVal)=>{
   if (!window){
     return
@@ -110,8 +117,22 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
 }, {
   immediate: true
 })
+
+onMounted(()=>{
+  if (!window){
+    return
+  }
+
+  // if has hash
+  setTimeout(()=>{
+    if (route.hash){
+      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+    }
+  }, 500)
+})
 </script>
 <template>
+  <MemberCenter v-if="store.user?.name && ['#member', '#task', '#favourite', '#voting_record'].includes(route.hash)" />
   <LightboxList />
   <FloatSticker1 />
   <FloatSticker2 />

@@ -57,7 +57,7 @@ onMounted(()=>{
         <div class="leading-[1.2]">投票<br>應援</div>
       </div>
     </NuxtLink>
-    <!-- <div
+    <div
     class="btn btn-scaleUp mt-4"
     @click="()=>{
       store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
@@ -70,6 +70,6 @@ onMounted(()=>{
     }">
       <div class="mb-1"><img class="mx-auto w-[18px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);"></div>
       <div class="leading-[1.2]">每日<br>任務</div>
-    </div> -->
+    </div>
   </div>
 </template>

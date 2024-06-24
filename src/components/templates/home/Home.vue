@@ -25,20 +25,21 @@ const viewport = useWindowSize()
 const route = useRoute()
 const state:any = reactive({
   rankTables: [
-    { key: 'personal', label: '個人排行' },
-    { key: 'team', label: '團體排行' },
-    { key: 'social', label: '社團排行' },
-    { key: 'sale', label: '銷售排行' },
+    { key: 'personal', label: '個人排行', hash: '#ranking_boyz' },
+    { key: 'team', label: '團體排行', hash: '#ranking_group' },
+    { key: 'social', label: '社團排行', hash: '#ranking_club' },
+    { key: 'sale', label: '銷售排行', hash: '#ranking_sale' },
   ],
   rankTableActive: 'personal',
-  newsTableActive: 'videos',
+  newsTableActive: 'video',
   rankList: computed(()=>{
     switch (state.rankTableActive){
       case 'personal':
         return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
           return {
             ...node,
-            href: `/vote?p=${node.tag_id}`
+            href: `/vote?p=${node.tag_id}`,
+            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
           }
         })
       case 'team':
@@ -105,6 +106,32 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 }, {
   immediate: true
 })
+
+onMounted(()=>{
+  if (!window){
+    return
+  }
+
+  // if has hash
+  setTimeout(()=>{
+    if (route.hash){
+      const rankHash = state.rankTables?.find?.((node:any)=>node.hash === route.hash)
+      if (rankHash){
+        state.rankTableActive = rankHash?.key
+        return
+      }
+
+      if (route.hash === '#video'){
+        state.newsTableActive = 'video'
+        return
+      }
+
+      if (route.hash === '#article'){
+        state.newsTableActive = 'article'
+      }
+    }
+  }, 500)
+})
 </script>
 <template>
   <main class="relative bg-[#0e160b]">
@@ -125,14 +152,15 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
         </div>
       </div>
 
-      <!-- <div
+      <div
       class="relative bg-black pb-[130px]"
       :style="{
         backgroundImage: `url(${APP_BASE}assets/img/bg_star_1.png)`
       }">
         <div class="container-fluid relative z-10 mb-[54px]">
+          <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
-            <img class="w-full" src="/assets/img/section_title_home_1.png" style="max-width:298px;">
+            <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
             <ImgFrame>
@@ -143,15 +171,16 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 left: '2%',
                 top: '3.5%',
                 width: '96%',
-                height: '87.5%',3
+                height: '87.5%',
               }">
             </ImgFrame>
           </div>
         </div>
 
         <div class="container-fluid relative z-10">
+          <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
-            <img class="w-full" src="/assets/img/section_title_home_2.png" style="max-width:274px;">
+            <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
             <ImgFrame>
@@ -167,13 +196,20 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
             </ImgFrame>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
-      <!-- <RanksTable class="pb-8 pt-16" /> -->
+      <div class="relative">
+        <div id="ranking" class="anchor relative top-[-80px]"></div>
+        <div id="ranking_boyz" class="anchor relative top-[-80px]"></div>
+        <div id="ranking_group" class="anchor relative top-[-80px]"></div>
+        <div id="ranking_club" class="anchor relative top-[-80px]"></div>
+        <div id="ranking_sale" class="anchor relative top-[-80px]"></div>
+        <RanksTable class="pb-8 pt-16" />
+      </div>
 
-      <!-- <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
+      <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
         <div
         class="relative"
         :style="{
@@ -182,25 +218,27 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
           backgroundPosition: `center 200px`,
         }">
           <div class="container mb-8">
-            <img class="mx-auto mb-2" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
+            <div id="video" class="anchor relative top-[-80px]"></div>
+            <div id="article" class="anchor relative top-[-80px]"></div>
+            <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">
               <div class="row">
                 <div class="col-6">
                   <MajorButton
-                  class="h-[50px] text-[21px]"
+                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
-                  :active="state.newsTableActive === 'videos'"
-                  @click="()=>{ state.newsTableActive = 'videos' }">
+                  :active="state.newsTableActive === 'video'"
+                  @click="()=>{ state.newsTableActive = 'video' }">
                     最新影音
                   </MajorButton>
                 </div>
                 <div class="col-6">
                   <MajorButton
-                  class="h-[50px] text-[21px]"
+                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
-                  :active="state.newsTableActive === 'news'"
+                  :active="state.newsTableActive === 'article'"
                   @click="()=>{
-                    state.newsTableActive = 'news'
+                    state.newsTableActive = 'article'
                     if( !newsFetcher.data.value ){
                       newsFetcher.execute()
                     }
@@ -212,18 +250,19 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
             </div>
           </div>
           <div class="mb-[50px]">
-            <VideoSwiper v-if="state.newsTableActive === 'videos' && videosFetcher.data.value?.data?.list" :list="videosFetcher.data.value?.data?.list" />
-            <NewsSwiper v-if="state.newsTableActive === 'news' && newsFetcher.data.value?.data?.list" :list="newsFetcher.data.value?.data?.list" />
+            <VideoSwiper v-if="state.newsTableActive === 'video' && videosFetcher.data.value?.data?.list" :list="videosFetcher.data.value?.data?.list" />
+            <NewsSwiper v-if="state.newsTableActive === 'article' && newsFetcher.data.value?.data?.list" :list="newsFetcher.data.value?.data?.list" />
           </div>
 
           <div class="pb-4">
-            <img class="mx-auto mb-4" src="/assets/img/section_title_home_5.png" style="max-width:335px;">
+            <div id="merch" class="anchor relative top-[-80px]"></div>
+            <img class="mx-auto mb-4 max-w-[318px] lg:max-w-[335px]" src="/assets/img/section_title_home_5.png">
             <SaleSwiper :list="saleFetcher.data.value?.data?.list" />
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="divider relative" style="height:120px; background: linear-gradient(black 0%, #120c60 100%);"></div> -->
+      <div class="divider relative h-[60px] lg:h-[120px]" style="background: linear-gradient(black 0%, #120c60 100%);"></div>
 
       <Teams class="relative z-10 py-8 lg:pb-[336px]" />
 
@@ -231,7 +270,8 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 
       <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
-      <!-- <div class="bg-black pb-[60px]">
+      <div class="bg-black pb-[60px]">
+        <div id="hidol" class="anchor relative top-[-80px]"></div>
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
@@ -249,7 +289,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
             </ImgFrame>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </main>
 </template>

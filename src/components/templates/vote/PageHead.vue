@@ -39,13 +39,6 @@ onMounted(()=>{
   }
   setHeaderBg()
   window.addEventListener('scroll', setHeaderBg)
-
-  // if has hash
-  setTimeout(()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  }, 500)
 })
 
 onBeforeUnmount(()=>{
@@ -72,6 +65,13 @@ onUnmounted(()=>{
             if( !window ){
               return
             }
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              click_info: {
+                type: 'search',
+                name: state.form.name
+              }
+            })
+
             state.form.name = (state.form.name || '').trim()
             const searchName = state.form.name
             const tagId = scopeStore.searchNameToTagID(searchName)
@@ -97,6 +97,14 @@ onUnmounted(()=>{
                     return
                   }
 
+                  store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+                    click_info: {
+                      type: 'page_function',
+                      sec: 'dropdown',
+                      name: teams?.find?.((node)=>node?.tagId === (e.target as any).value)?.name
+                    }
+                  })
+
                   $router.push({
                     hash: `#${(e.target as any).value}`
                   })
@@ -114,7 +122,11 @@ onUnmounted(()=>{
             </div>
             <div class="col-6 shrink lg:col-auto">
               <div class="relative h-[38px] overflow-hidden rounded">
-                <input v-model="state.form.name" type="text" class="size-full pl-2 pr-[69px] text-[13px] text-black lg:w-[200px]" placeholder="請輸入少年姓名">
+                <input
+                v-model="state.form.name"
+                type="search"
+                class="size-full pl-2 pr-[69px] text-[13px] text-black lg:w-[200px]"
+                placeholder="請輸入少年姓名">
                 <button type="submit" class="btn btn-light absolute right-0 top-0 flex h-[38px] w-[65px] items-center justify-center bg-major text-white">
                   搜尋
                 </button>
@@ -145,6 +157,13 @@ onUnmounted(()=>{
             window.setTimeout(()=>{
               scrollToSection2({el:window?.document.querySelector(`#${node.tagId}`), jump: true })
             }, 0)
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              click_info: {
+                type: 'page_function',
+                sec: 'group_icon',
+                name: node.name
+              }
+            })
           }">
             <img
             class="mb-2 w-full scale-[1.8] lg:scale-100"

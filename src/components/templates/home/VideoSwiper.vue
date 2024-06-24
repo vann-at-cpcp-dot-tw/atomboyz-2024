@@ -71,7 +71,7 @@ const listWithCoverImage = computed(()=>{
         <div class="relative mx-auto flex w-full max-w-[1188px] !flex-nowrap items-center justify-between">
           <div
           v-if="swiperRef?.isLocked === false"
-          :class="`btn btnScale-up ${swiperRef?.isBeginning ?'opacity-50 pointer-events-none' :''}`"
+          :class="`btn btnScale-up ${swiperRef?.isBeginning ?'lg:opacity-50 lg:pointer-events-none' :''}`"
           @click="()=>{
             swiperRef.slidePrev()
           }">
@@ -128,7 +128,7 @@ const listWithCoverImage = computed(()=>{
             </div>
             <NuxtLink
             v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
-            to="/posts/video"
+            to="/news/video"
             class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
               <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
               <i class="bi bi-chevron-right text-[18px] text-white"></i>
@@ -150,7 +150,7 @@ const listWithCoverImage = computed(()=>{
         <NuxtLink
         v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
         class="btn btn-scaleUp flex !flex-nowrap items-center"
-        to="/posts/video">
+        to="/news/video">
           <span class="whitespace-nowrap pr-2 text-[12px] text-white underline">更多內容</span>
           <i class="bi bi-chevron-right text-[12px] text-white"></i>
         </NuxtLink>

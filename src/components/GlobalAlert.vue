@@ -121,6 +121,14 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
           const today = getToday()
           window.localStorage.setItem('global-alert-locked-date', today)
         }
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          page_info: {
+            type: 'ads_page',
+          },
+          click_info: {
+            type: 'close'
+          }
+        })
       }
     }">
       <div
@@ -156,6 +164,14 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
                   const today = getToday()
                   window.localStorage.setItem('global-alert-locked-date', today)
                 }
+                store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                  page_info: {
+                    type: 'ads_page',
+                  },
+                  click_info: {
+                    type: 'close'
+                  }
+                })
               }"></i>
             </div>
             <div class="relative size-full overflow-auto">
@@ -165,7 +181,21 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
             </div>
             <div class="absolute bottom-5 left-0 flex w-full justify-center">
               <label class="flex items-center">
-                <input v-model="state.checked" type="checkbox">
+                <input
+                v-model="state.checked"
+                type="checkbox"
+                @change="(e:any)=>{
+                  if( e.target.checked ){
+                    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                      page_info: {
+                        type: 'ads_page'
+                      },
+                      click_info: {
+                        type: 'hide_today'
+                      }
+                    })
+                  }
+                }">
                 <div class="pl-1">今日不再顯示</div>
               </label>
             </div>

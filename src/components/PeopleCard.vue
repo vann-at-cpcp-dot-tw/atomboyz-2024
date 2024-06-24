@@ -56,6 +56,16 @@ const state = reactive({
     class="btn group"
     @click="()=>{
       props?.onThumbClick?.()
+      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+        page_info: {
+          type: 'voting_page',
+          name: props.name,
+        },
+        click_info: {
+          type: 'voting_function',
+          name: 'intro'
+        }
+      })
     }">
       <RatioArea
       ratio="92.35">
@@ -64,6 +74,16 @@ const state = reactive({
           class="btn btn-light absolute left-1.5 top-1.5 z-10 flex size-[21px] items-center justify-center rounded-full bg-major text-white"
           @mouseenter="()=>{
             state.isShareNavOpen = true
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'voting_page',
+                name: props.name,
+              },
+              click_info: {
+                type: 'voting_function',
+                name: 'share'
+              }
+            })
           }"
           @mouseleave="()=>{
             state.isShareNavOpen = false
@@ -73,6 +93,17 @@ const state = reactive({
             if( viewport.width.value <= 991){
               store.do.share($route.name, {
                 url: props?.share_links?.copy
+              })
+
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  type: 'voting_page',
+                  name: props.name,
+                },
+                click_info: {
+                  type: 'voting_function',
+                  name: 'share'
+                }
               })
             }
           }">
@@ -114,6 +145,18 @@ const state = reactive({
           @click="(e)=>{
             e.stopPropagation()
             store.do.toggleFav(props.name)
+            if( store.user?.name ){
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  type: 'voting_page',
+                  name: props.name,
+                },
+                click_info: {
+                  type: 'voting_function',
+                  name: store.user?.fav_peoples?.map((node:any)=>node.name).includes(props?.name) ?'unfollow' :'follow'
+                }
+              })
+            }
           }"></i>
           <div
           class="absolute left-0 top-0 size-full bg-cover bg-top"
@@ -133,7 +176,19 @@ const state = reactive({
         class="col-4 flex">
           <div
           class="btn btn-light relative top-[2px]"
-          @click="()=>{ state.open = convertYoutubeUrlToEmbed(props.yt_url || '')?.embedURL || '' }">
+          @click="()=>{
+            state.open = convertYoutubeUrlToEmbed(props.yt_url || '')?.embedURL || ''
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'voting_page',
+                name: props.name,
+              },
+              click_info: {
+                type: 'voting_function',
+                name: 'youtube'
+              }
+            })
+          }">
             <i class="bi bi-youtube block text-[24px] leading-none lg:text-[31px]"></i>
           </div>
         </div>
@@ -141,7 +196,22 @@ const state = reactive({
         <div
         v-show="props?.hidoi_url"
         class="col-4 flex justify-center">
-          <a class="btn btn-light relative left-1 w-[33px] lg:w-[48px]" :href="props?.hidoi_url" target="_blank">
+          <a
+          class="btn btn-light relative left-1 w-[33px] lg:w-[48px]"
+          :href="props?.hidoi_url"
+          target="_blank"
+          @click="()=>{
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'voting_page',
+                name: props.name,
+              },
+              click_info: {
+                type: 'voting_function',
+                name: 'hidol'
+              }
+            })
+          }">
             <img src="/assets/img/icon_hidol.png" alt="">
           </a>
         </div>
@@ -151,6 +221,16 @@ const state = reactive({
           class="btn btn-light flex size-5 items-center justify-center rounded-full bg-white lg:size-6"
           @click="()=>{
             props?.onThumbClick?.()
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'voting_page',
+                name: props.name,
+              },
+              click_info: {
+                type: 'voting_function',
+                name: 'intro'
+              }
+            })
           }">
             <i class="bi bi-search text-[12px] leading-none text-major"></i>
           </div>
@@ -175,6 +255,16 @@ const state = reactive({
           store.do.setUser(window?.localStorage?.getItem?.('t')).then(()=>{
             store.do.voteInput({
               name: props.name,
+            })
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                type: 'voting_page',
+                name: props.name,
+              },
+              click_info: {
+                type: 'voting_function',
+                name: 'vote'
+              }
             })
           })
         }">
