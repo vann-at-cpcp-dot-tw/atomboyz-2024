@@ -127,9 +127,6 @@ onMounted(()=>{
     })
   })
 })
-onMounted(()=>{
-  console.log(route)
-})
 </script>
 <template>
   <Html>
