@@ -17,10 +17,23 @@ const { data } = await useFetch<any>(`${API_URL}/general`)
 const store = createStore()
 store.general = data.value?.data
 
+function trackingUserLogin(openId:any){
+  if (!((window as any)?.webTrackingSDK)){
+    setTimeout(()=>{
+      trackingUserLogin(openId)
+    }, 1000)
+    return
+  }
+  (window as any)?.webTrackingSDK?.status?.setLogin?.({
+    openId
+  })
+}
+
 async function trackingInit(){
   if (!window){
     return
   }
+
   const sender = await (window as any)?.webTrackingSDK?.init?.({
     BUID: 'GAMA-hidol-01',
     property: 'hidol-web',
@@ -56,13 +69,15 @@ watch(()=>[route.query.t, window], (newVal, oldVal)=>{
     return
   }
 
-  store.do.setUser(route.query.t).then(()=>{
+  store.do.setUser(route.query.t).then((user:any)=>{
     const queryWithoutT = { ...route.query }
     delete queryWithoutT.t
     router.push({
       name: localStorage?.getItem?.('after_login_route_name') || 'index',
       query: queryWithoutT
     })
+
+    trackingUserLogin(user.openId)
   })
 }, {
   immediate: true
@@ -76,7 +91,9 @@ onMounted(()=>{
 
   // window.store = store
   if (window.localStorage.getItem('t')){
-    store.do.setUser(window.localStorage.getItem('t'))
+    store.do.setUser(window.localStorage.getItem('t')).then((user:any)=>{
+      trackingUserLogin(user.openId)
+    })
   }
 })
 
@@ -96,7 +113,7 @@ onMounted(()=>{
   })
 
   ;(window as any).GIMBotTool.init({
-    url: 'https://helpdesk.stg.gim.beango.com/Atomboyz',
+    url: IS_STAGE ? 'https://helpdesk.stg.gim.beango.com/Atomboyz' : 'https://atomboyz.gamania.chat/',
     title: '客服幫手 原子小少年',
     logoUrl: `${APP_URL}/assets/img/chat_bot_logo.png`,
     btnImgUrl: `${APP_URL}/assets/img/btn_chat_bot.png`,

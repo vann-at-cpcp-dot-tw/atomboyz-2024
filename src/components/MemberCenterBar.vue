@@ -20,6 +20,18 @@ const pageIs = computed(()=>{
       return 'logs'
   }
 })
+
+function trackingUserLogout(callback?:Function){
+  if (!((window as any)?.webTrackingSDK)){
+    setTimeout(()=>{
+      trackingUserLogout()
+    }, 1000)
+    return
+  }
+  (window as any)?.webTrackingSDK?.status?.setLogout?.()
+  callback?.()
+}
+
 </script>
 <template>
   <div :class="twMerge('', props.class)">
@@ -87,7 +99,9 @@ const pageIs = computed(()=>{
             return
           }
           window.localStorage.setItem('t', '')
-          window.location.reload()
+          trackingUserLogout(()=>{
+            (window as any).location.reload()
+          })
         }">
           登出
         </div>

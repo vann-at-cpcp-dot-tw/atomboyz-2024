@@ -14,6 +14,7 @@ switch ($method) {
             'name'=> '許毅達',
             'votes'=> 10,
             'avatar'=> '',
+            'openId'=> 'A12345',
             'fav_peoples'=> [
               [
                 'name'=> '王一一',

@@ -10,6 +10,7 @@ export interface IUser {
   name: string
   votes: number | null
   avatar: string
+  openId: string | number
   fav_peoples: {
     name: string,
     tag_id: string,
@@ -240,7 +241,7 @@ export const createStore = function(){
           store.user = result.data?.user
         }
         window?.localStorage?.setItem('t', t)
-        return result
+        return store.user
       },
       toggleFav: async function(name:string){
         const API_URL = useRuntimeConfig().public.apiURL
