@@ -39,7 +39,10 @@ onMounted(()=>{
     borderRadius: '5px 0px 0px 5px',
     background: 'linear-gradient(#5d00ff 0%, #2f0080 100%)',
     transition: 'all .4s',
-    bottom: '272px',
+    // bottom: '272px',
+    top: '50%',
+    marginTop: '0px',
+    transform: 'translateY(-50%)'
   }">
     <NuxtLink
     to="/vote"

@@ -41,6 +41,25 @@ switch ($method) {
           'team_popular'=> 2,
         ],
         'home_bottom_banner'=> '/atomboyz/assets/img/pic1.jpg', // 首頁最後一張 banner
+        'terms'=> [
+          'voteinfo'=> '<div>111222</div>', // 投票說明
+          'rules'=> '<div>333444</div>', // 活動辦法
+          'notice'=> '<div>555666</div>' // 注意事項
+        ],
+        'extra_float_btn'=> [
+          [
+            'bg'=> '/atomboyz/assets/img/pic1.jpg',
+            'text'=> '按鈕1',
+            'href'=> 'http://google.com/',
+            'href_target'=> '_blank'
+          ],
+          [
+            'bg'=> '/atomboyz/assets/img/pic2.jpg',
+            'text'=> '按鈕2',
+            'href'=> 'http://google.com/',
+            'href_target'=> '_blank'
+          ],
+        ]
       ]
     ];
   break;

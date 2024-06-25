@@ -101,6 +101,7 @@ const myList = computed(()=>{
                 :href="node?.href"
                 target="_blank"
                 @click="()=>{
+                  store.do.click('bn')
                   store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
                     page_info: {
                       sec: 'atomboyz_banner'

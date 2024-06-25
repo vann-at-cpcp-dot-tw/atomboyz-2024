@@ -85,7 +85,8 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'voteinfo'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。
+        <pre v-html="store.general?.voteinfo"></pre>
+        <!-- 此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。 -->
       </div>
     </div>
 
@@ -108,7 +109,8 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'rules'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <div>【投票資格】</div>
+        <pre v-html="store.general?.rules"></pre>
+        <!-- <div>【投票資格】</div>
         <div>只要完成 Gama Pass 帳號註冊，且進行手機或 E-mail 的綁定驗證後，即可參與每輪投票。</div>
         <br>
         <div>【投票流程】</div>
@@ -152,7 +154,7 @@ watch(()=>route.hash, (newVal)=>{
         <br>
         <div>【問題回報】</div>
         <div>如果您遇到了任何問題或需要協助，您可以透過問題回報中心與我們聯繫，只需填寫問題回報單，我們將會迅速處理您的需求。</div>
-        <div>✷ 問題回報單 ➜ <a class="text-major underline" href="https://service.antspw.com/hidol/APPForm" target="_blank">https://service.antspw.com/hidol/APPForm</a></div>
+        <div>✷ 問題回報單 ➜ <a class="text-major underline" href="https://service.antspw.com/hidol/APPForm" target="_blank">https://service.antspw.com/hidol/APPForm</a></div> -->
       </div>
     </div>
 
@@ -175,7 +177,8 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'notice'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <ListItem>
+        <pre v-html="store.general?.notice"></pre>
+        <!-- <ListItem>
           <template #dot><div class="text-major-800">1.</div></template>
           <template #default>參加此次投票活動即代表已詳細閱讀、了解並同意遵守服務條款、所有活動內容及注意事項。</template>
         </ListItem>
@@ -186,7 +189,7 @@ watch(()=>route.hash, (newVal)=>{
         <ListItem>
           <template #dot><div class="text-major-800">3.</div></template>
           <template #default>主辦單位保有最終修改、變更、活動解釋及取消本活動之權利，若有相關異動將會公告於網站，恕不另行通知。</template>
-        </ListItem>
+        </ListItem> -->
       </div>
     </div>
   </div>
