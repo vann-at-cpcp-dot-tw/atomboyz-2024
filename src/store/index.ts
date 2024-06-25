@@ -373,6 +373,18 @@ export const createStore = function(){
 
         return result
       },
+      click: async(action:string)=>{
+        const API_URL = useRuntimeConfig().public.apiURL
+        const result = await $fetch<IAPIResponse>(`${API_URL}/click`, {
+          method: 'POST',
+          params: {
+            action,
+            t: window?.localStorage?.getItem?.('t')
+          }
+        })
+        store.do.handleRes(result)
+        return result
+      }
     }
   })
 

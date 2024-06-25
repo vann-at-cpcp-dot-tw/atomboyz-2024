@@ -100,6 +100,17 @@ watch(()=>route.hash, (newVal, oldVal)=>{
       bottom: viewport.width.value<= 991 ?'130px' :'95px', // 沒有話 AI 的話 0px，有 AI 的話 130/95px
       transition: 'all .4s',
     }">
+      <a
+      v-for="(node, index) in store.general?.extra_float_btn || []"
+      :key="index"
+      class="btn btn-scaleUp mb-2 flex size-[60px] items-center justify-center overflow-hidden rounded-full bg-cover p-1.5"
+      :href="node.href"
+      :target="node?.href_target || '_self'"
+      :style="{
+        backgroundImage: `url(${node?.bg})`
+      }">
+        <div class="text-center text-[11px] leading-[1.2] text-white">{{ node.text }}</div>
+      </a>
       <div
       class="btn btn-scaleUp mb-2 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
