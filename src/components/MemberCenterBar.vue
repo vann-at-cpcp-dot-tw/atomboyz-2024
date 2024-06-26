@@ -60,9 +60,13 @@ function trackingUserLogout(callback?:Function){
         <div
         :class="`whitespace-nowrap lg:text-[16px] text-[13px] btn hover:bg-major-700 rounded-full bg-[#666464] px-3 py-1 lg:px-4 lg:py-2 text-center text-white ${ pageIs === 'quests' ?'bg-major' :'bg-[#666464]'}`"
         @click="()=>{
-          $router.push({
-            hash: '#task'
-          })
+          if( !store.user?.name ){
+            store.do.lightboxOpen('NeedLogin')
+          }else{
+            $router.push({
+              hash: '#task'
+            })
+          }
         }">
           每日任務
         </div>

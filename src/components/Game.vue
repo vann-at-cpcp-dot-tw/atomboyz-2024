@@ -85,7 +85,17 @@ watch(()=>gameFetcher.data.value, (newVal, oldVal)=>{
   }">
     <div class="mb-6">快快解鎖其他任務換取加票機會！</div>
     <div class="flex justify-end">
-      <MajorButton class="h-[40px] max-w-[154px]">
+      <MajorButton
+      class="h-[40px] max-w-[154px]"
+      @click="()=>{
+        if( !store.user?.name ){
+          store.do.lightboxOpen('NeedLogin')
+        }else{
+          $router.push({
+            hash: '#task'
+          })
+        }
+      }">
         <div class="flex items-center">
           每日任務 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
         </div>

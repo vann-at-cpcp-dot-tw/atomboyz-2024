@@ -137,6 +137,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
     :current="Number(route.query.page || 1)"
     :total="listFetcher.data.value?.data?.pagination?.total"
     :chunk-size="viewport.width.value >= 992 ?4 :3"
+    :per-page="3"
     :on-page-change="(page:number)=>{
       router.push({
         query: {

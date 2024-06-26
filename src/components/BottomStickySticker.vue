@@ -104,9 +104,15 @@ watch(()=>elRef.value, (newVal)=>{
               sec: 'bottom'
             }
           })
-          $router.push({
-            hash: '#task'
-          })
+
+          if( !store.user?.name ){
+            store.do.lightboxOpen('NeedLogin')
+          }else{
+            $router.push({
+              hash: '#task'
+            })
+          }
+
         }">
           <img class="w-[24px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);">
           <div

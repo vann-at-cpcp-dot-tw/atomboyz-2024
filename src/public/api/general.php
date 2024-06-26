@@ -59,7 +59,8 @@ switch ($method) {
             'href'=> 'http://google.com/',
             'href_target'=> '_blank'
           ],
-        ]
+        ],
+        'can_play_game'=> false,
       ]
     ];
   break;
