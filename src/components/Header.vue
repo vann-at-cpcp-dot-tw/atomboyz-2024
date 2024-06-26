@@ -6,7 +6,8 @@ import MemberCenter from './MemberCenter.vue'
 import { copyUrlToClipboard, scrollToSection2 } from '~/lib/helpers'
 import LightboxList from '~/components/LightboxList.vue'
 import { useStore } from '~/store'
-
+const config = useRuntimeConfig()
+const LOGIN_URL = config.public.loginURL
 const window = process.client ? globalThis : null
 const route = useRoute()
 const router = useRouter()
@@ -92,15 +93,25 @@ const nav:{
     label: '會員中心',
     names: ['member'],
     onClick: ()=>{
+      if (!window){
+        return
+      }
+
       store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
         click_info: {
           type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
           name: 'atomboyz_member_center'
         }
       })
-      router.push({
-        hash: '#member'
-      })
+
+      if (!store.user?.name){
+        window.localStorage.setItem('after_login_route_name', route.name)
+        window.location.href = LOGIN_URL
+      } else {
+        router.push({
+          hash: '#member'
+        })
+      }
     }
   }
 ]
@@ -118,17 +129,23 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
   immediate: true
 })
 
-onMounted(()=>{
+watch(()=>[window, route.hash], (newVal, oldVal)=>{
+  const window = newVal[0]
   if (!window){
     return
   }
 
-  // if has hash
-  setTimeout(()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  }, 500)
+  const newHash = newVal?.[1]
+  const oldHash = oldVal?.[1]
+  if (newHash && newHash !== oldHash){
+    setTimeout(()=>{
+      if (route.hash){
+        scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+      }
+    }, 500)
+  }
+}, {
+  immediate: true
 })
 </script>
 <template>

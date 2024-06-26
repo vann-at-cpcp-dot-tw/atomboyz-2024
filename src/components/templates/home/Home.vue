@@ -23,13 +23,38 @@ const IS_STAGE = config.public.isStage
 const store = useStore()
 const viewport = useWindowSize()
 const route = useRoute()
+const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank`)
+const videosFetcher = await useAsyncData<any>('video', ()=>{
+  return $fetch(`${API_URL}/video`, {
+    params: {
+      page: 1,
+      per_page: 9,
+    }
+  })
+})
+const newsFetcher = await useAsyncData<any>('news', ()=>{
+  return $fetch(`${API_URL}/news`, {
+    params: {
+      page: 1,
+      per_page: 9,
+    }
+  })
+}, {
+  // immediate: false,
+})
+const saleFetcher = await useAsyncData<any>('sale', ()=>{
+  return $fetch(`${API_URL}/sale`)
+})
+
 const state:any = reactive({
-  rankTables: [
-    { key: 'personal', label: '個人排行', hash: '#ranking_boyz' },
-    { key: 'team', label: '團體排行', hash: '#ranking_group' },
-    { key: 'social', label: '社團排行', hash: '#ranking_club' },
-    { key: 'sale', label: '銷售排行', hash: '#ranking_sale' },
-  ],
+  rankTables: computed(()=>{
+    return [
+      { key: 'personal', label: '個人排行', hash: '#ranking_boyz', display: ranksFetcher.data.value?.data?.personal?.length > 0 },
+      { key: 'team', label: '團體排行', hash: '#ranking_group', display: ranksFetcher.data.value?.data?.team?.length > 0 },
+      { key: 'social', label: '社團排行', hash: '#ranking_club', display: ranksFetcher.data.value?.data?.social?.length > 0 },
+      { key: 'sale', label: '銷售排行', hash: '#ranking_sale', display: ranksFetcher.data.value?.data?.sale?.length > 0 },
+    ]
+  }),
   rankTableActive: 'personal',
   newsTableActive: 'video',
   rankList: computed(()=>{
@@ -72,28 +97,6 @@ const state:any = reactive({
         })
     }
   }),
-})
-const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank`)
-const videosFetcher = await useAsyncData<any>('video', ()=>{
-  return $fetch(`${API_URL}/video`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
-})
-const newsFetcher = await useAsyncData<any>('news', ()=>{
-  return $fetch(`${API_URL}/news`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
-}, {
-  // immediate: false,
-})
-const saleFetcher = await useAsyncData<any>('sale', ()=>{
-  return $fetch(`${API_URL}/sale`)
 })
 
 provide('scopeStore', state)
@@ -222,8 +225,8 @@ onMounted(()=>{
             <div id="article" class="anchor relative top-[-80px]"></div>
             <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
             <div class="mx-auto w-full max-w-[360px]">
-              <div class="row">
-                <div class="col-6">
+              <div class="row justify-center">
+                <div v-if="videosFetcher.data.value?.data?.list?.length > 0" class="col-6">
                   <MajorButton
                   class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
@@ -232,7 +235,7 @@ onMounted(()=>{
                     最新影音
                   </MajorButton>
                 </div>
-                <div class="col-6">
+                <div v-if="newsFetcher.data.value?.data?.list?.length > 0" class="col-6">
                   <MajorButton
                   class="h-[44px] lg:h-[50px] lg:text-[21px]"
                   variant="outline"
