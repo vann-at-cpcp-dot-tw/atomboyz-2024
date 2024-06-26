@@ -23,6 +23,9 @@ interface IProps {
 
 const props = defineProps<IProps>()
 const viewport = useWindowSize()
+watch(()=>props.list, ()=>{
+  console.log(props.list)
+})
 </script>
 
 <template>

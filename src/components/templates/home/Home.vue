@@ -110,6 +110,13 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
   immediate: true
 })
 
+watch(()=>state.rankTables, ()=>{
+  const displayKey = state.rankTables?.find?.((node:any)=>node.display === true)?.key
+  state.rankTableActive = displayKey || 'personal'
+}, {
+  immediate: true
+})
+
 onMounted(()=>{
   if (!window){
     return
