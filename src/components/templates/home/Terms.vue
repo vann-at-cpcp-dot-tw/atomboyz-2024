@@ -85,7 +85,7 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'voteinfo'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <pre v-html="store.general?.voteinfo"></pre>
+        <pre v-html="store.general?.terms?.voteinfo"></pre>
         <!-- 此次「hidol X 原子少年2 獨家線上投票」為 hidol 首次對外曝光的跨界合作，投票活動限定使用 Gama Pass 帳號登入，並需完成手機或 E-mail 綁定驗證即可參與投票活動。更多詳細的說明再請參閱「活動辦法」。 -->
       </div>
     </div>
@@ -109,7 +109,7 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'rules'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <pre v-html="store.general?.rules"></pre>
+        <pre v-html="store.general?.terms?.rules"></pre>
         <!-- <div>【投票資格】</div>
         <div>只要完成 Gama Pass 帳號註冊，且進行手機或 E-mail 的綁定驗證後，即可參與每輪投票。</div>
         <br>
@@ -177,7 +177,7 @@ watch(()=>route.hash, (newVal)=>{
       }" />
       <div v-if="state.active === 'notice'" class="pb-4">
         <hr class="mb-4 border-major-800">
-        <pre v-html="store.general?.notice"></pre>
+        <pre v-html="store.general?.terms?.notice"></pre>
         <!-- <ListItem>
           <template #dot><div class="text-major-800">1.</div></template>
           <template #default>參加此次投票活動即代表已詳細閱讀、了解並同意遵守服務條款、所有活動內容及注意事項。</template>
