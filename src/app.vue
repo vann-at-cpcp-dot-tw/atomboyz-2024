@@ -125,6 +125,7 @@ onMounted(()=>{
         type: 'ai_customer_service',
       },
     })
+    store.do.click('ai')
   })
 })
 </script>
