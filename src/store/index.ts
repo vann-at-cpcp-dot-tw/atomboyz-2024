@@ -66,6 +66,15 @@ export interface IStore {
   user: IUser | null
   voteAjaxing: boolean,
   isNotInGetVotesTimeAlerted: boolean
+  rank: {
+    personal: any[],
+    team: any[],
+    social: any[],
+    sale: any[]
+  },
+  sale: {
+    list: any[]
+  },
   myVoting: {
     name: string
     votes: number | null
@@ -84,6 +93,15 @@ export const createStore = function(){
     bottomStickyHeight: undefined,
     isPreMode: undefined,
     isNotInGetVotesTimeAlerted: false,
+    rank: {
+      personal: [],
+      team: [],
+      social: [],
+      sale: [],
+    },
+    sale: {
+      list: []
+    },
     trackingPageName: '/',
     lightbox: [],
     voteAjaxing: false,

@@ -7,6 +7,7 @@ import { copyUrlToClipboard, scrollToSection2 } from '~/lib/helpers'
 import LightboxList from '~/components/LightboxList.vue'
 import { useStore } from '~/store'
 const config = useRuntimeConfig()
+const API_URL = config.public.apiURL
 const LOGIN_URL = config.public.loginURL
 const window = process.client ? globalThis : null
 const route = useRoute()
@@ -17,104 +18,120 @@ const state = reactive({
   isShareNavOpen: false,
   isMobileMenuOpen: false,
 })
+const ranksFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/rank`)
 
-const nav:{
+const saleFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/sale`, {
+  onResponse({ request, response, options }){
+    store.sale.list = response?._data?.data?.list
+  },
+})
+
+const navFull = computed<{
   label: string
   names: string[]
   to?: string
+  display?: boolean
   onClick?: Function
-}[] = [
-  {
-    label: '首頁',
-    names: ['index'],
-    to: '/',
-    onClick: ()=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_homepage'
-        }
-      })
+}[]>(()=>{
+  return [
+    {
+      label: '首頁',
+      names: ['index'],
+      to: '/',
+      onClick: ()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_homepage'
+          }
+        })
+      },
     },
-  },
-  {
-    label: 'NEWS',
-    names: ['news-tab', 'article-id'],
-    to: '/news/video',
-    onClick: ()=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_news'
-        }
-      })
-    }
-  },
-  {
-    label: '我要投票',
-    names: ['vote'],
-    to: '/vote',
-    onClick: ()=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_vote'
-        }
-      })
-    }
-  },
-  {
-    label: '排行榜',
-    names: ['rank'],
-    to: '/#ranking',
-    onClick: ()=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_ranking'
-        }
-      })
-    }
-  },
-  {
-    label: '周邊商品',
-    names: ['shop'],
-    to: '/#merch',
-    onClick: ()=>{
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_goods'
-        }
-      })
-    }
-  },
-  {
-    label: '會員中心',
-    names: ['member'],
-    onClick: ()=>{
-      if (!window){
-        return
-      }
-
-      store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
-        click_info: {
-          type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
-          name: 'atomboyz_member_center'
-        }
-      })
-
-      if (!store.user?.name){
-        window.localStorage.setItem('after_login_route_name', route.name)
-        window.location.href = LOGIN_URL
-      } else {
-        router.push({
-          hash: '#member'
+    {
+      label: 'NEWS',
+      names: ['news-tab', 'article-id'],
+      to: '/news/video',
+      onClick: ()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_news'
+          }
         })
       }
+    },
+    {
+      label: '我要投票',
+      names: ['vote'],
+      to: '/vote',
+      onClick: ()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_vote'
+          }
+        })
+      }
+    },
+    {
+      label: '排行榜',
+      names: ['rank'],
+      to: '/#ranking',
+      display: store.rank?.personal?.length > 0 || store.rank?.team?.length > 0 || store.rank?.social?.length > 0 || store.rank?.sale?.length > 0,
+      onClick: ()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_ranking'
+          }
+        })
+      }
+    },
+    {
+      label: '周邊商品',
+      names: ['shop'],
+      to: '/#merch',
+      display: store?.sale?.list?.length > 0,
+      onClick: ()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_goods'
+          }
+        })
+      }
+    },
+    {
+      label: '會員中心',
+      names: ['member'],
+      onClick: ()=>{
+        if (!window){
+          return
+        }
+
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+          click_info: {
+            type: viewport.width.value >= 992 ? 'top_navigation' : 'hamburger',
+            name: 'atomboyz_member_center'
+          }
+        })
+
+        if (!store.user?.name){
+          window.localStorage.setItem('after_login_route_name', route.name)
+          window.location.href = LOGIN_URL
+        } else {
+          router.push({
+            hash: '#member'
+          })
+        }
+      }
     }
-  }
-]
+  ]
+})
+
+const nav = computed(()=>{
+  return navFull.value.filter?.((node:any)=>node.display !== false)
+})
 
 watch(()=>state.isMobileMenuOpen, (newVal)=>{
   if (!window){
@@ -147,6 +164,24 @@ watch(()=>[window, route.hash], (newVal, oldVal)=>{
 }, {
   immediate: true
 })
+
+watch(()=>ranksFetcher.data.value, (newVal)=>{
+  store.rank = {
+    personal: newVal?.data?.personal,
+    team: newVal?.data?.team,
+    social: newVal?.data?.social,
+    sale: newVal?.data?.sale,
+  }
+}, {
+  immediate: true
+})
+
+watch(()=>saleFetcher.data.value, (newVal)=>{
+  store.sale.list = newVal?.data?.list
+}, {
+  immediate: true
+})
+
 </script>
 <template>
   <MemberCenter v-if="store.user?.name && ['#member', '#task', '#favourite', '#voting_record'].includes(route.hash)" />

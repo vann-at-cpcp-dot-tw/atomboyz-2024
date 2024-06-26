@@ -76,9 +76,9 @@ watch(()=>elRef.value, (newVal)=>{
       </div> -->
 
       <div
-      v-show="route.name !== 'vote'"
       class="flex h-[60px] w-full flex-nowrap text-white">
         <NuxtLink
+        v-show="route.name !== 'vote'"
         to="/vote"
         class="flex h-full grow flex-nowrap items-center justify-center bg-[#5D00FF] px-2"
         @click="()=>{
@@ -95,7 +95,7 @@ watch(()=>elRef.value, (newVal)=>{
         </NuxtLink>
 
         <div
-        class="flex h-full grow flex-nowrap items-center justify-center bg-[#1D1D1D] px-2"
+        :class="`flex h-full grow flex-nowrap items-center justify-center ${route.name !== 'vote' ?'bg-[#1D1D1D]' :'bg-[#5D00FF]'}  px-2`"
         @click="()=>{
           store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
             click_info: {

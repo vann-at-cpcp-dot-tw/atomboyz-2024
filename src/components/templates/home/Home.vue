@@ -23,7 +23,7 @@ const IS_STAGE = config.public.isStage
 const store = useStore()
 const viewport = useWindowSize()
 const route = useRoute()
-const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank`)
+
 const videosFetcher = await useAsyncData<any>('video', ()=>{
   return $fetch(`${API_URL}/video`, {
     params: {
@@ -32,6 +32,7 @@ const videosFetcher = await useAsyncData<any>('video', ()=>{
     }
   })
 })
+
 const newsFetcher = await useAsyncData<any>('news', ()=>{
   return $fetch(`${API_URL}/news`, {
     params: {
@@ -42,17 +43,15 @@ const newsFetcher = await useAsyncData<any>('news', ()=>{
 }, {
   // immediate: false,
 })
-const saleFetcher = await useAsyncData<any>('sale', ()=>{
-  return $fetch(`${API_URL}/sale`)
-})
 
 const state:any = reactive({
+
   rankTables: computed(()=>{
     return [
-      { key: 'personal', label: '個人排行', hash: '#ranking_boyz', display: ranksFetcher.data.value?.data?.personal?.length > 0 },
-      { key: 'team', label: '團體排行', hash: '#ranking_group', display: ranksFetcher.data.value?.data?.team?.length > 0 },
-      { key: 'social', label: '社團排行', hash: '#ranking_club', display: ranksFetcher.data.value?.data?.social?.length > 0 },
-      { key: 'sale', label: '銷售排行', hash: '#ranking_sale', display: ranksFetcher.data.value?.data?.sale?.length > 0 },
+      { key: 'personal', label: '個人排行', hash: '#ranking_boyz', display: store?.rank?.personal?.length > 0 },
+      { key: 'team', label: '團體排行', hash: '#ranking_group', display: store?.rank?.team?.length > 0 },
+      { key: 'social', label: '社團排行', hash: '#ranking_club', display: store?.rank?.social?.length > 0 },
+      { key: 'sale', label: '銷售排行', hash: '#ranking_sale', display: store?.rank?.sale?.length > 0 },
     ]
   }),
   rankTableActive: 'personal',
@@ -60,7 +59,7 @@ const state:any = reactive({
   rankList: computed(()=>{
     switch (state.rankTableActive){
       case 'personal':
-        return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
+        return store?.rank?.personal?.map?.((node:any)=>{
           return {
             ...node,
             href: `/vote?p=${node.tag_id}`,
@@ -68,7 +67,7 @@ const state:any = reactive({
           }
         })
       case 'team':
-        return ranksFetcher.data.value?.data?.team?.map((node:any)=>{
+        return store?.rank?.team?.map?.((node:any)=>{
           const { id } = node
           const targetTeam = teams.find((teamNode:any)=>teamNode.id === id)
           return {
@@ -81,7 +80,7 @@ const state:any = reactive({
         })
 
       case 'sale':
-        return ranksFetcher.data.value?.data?.sale?.map((node:any)=>{
+        return store?.rank?.sale?.map?.((node:any)=>{
           return {
             ...node,
             number: node.price_string
@@ -89,7 +88,8 @@ const state:any = reactive({
         })
 
       default:
-        return ranksFetcher.data.value?.data?.[state.rankTableActive]?.map((node:any)=>{
+        // @ts-ignore
+        return store?.rank?.[state.rankTableActive]?.map?.((node:any)=>{
           return {
             ...node,
             number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`
@@ -204,7 +204,7 @@ onMounted(()=>{
       <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
       <div
-      v-if="state.rankTables?.some?.((node:any)=>{ node.display === true })"
+      v-if="state.rankTables?.some?.((node:any)=>node.display === true)"
       class="relative">
         <div id="ranking" class="anchor relative top-[-80px]"></div>
         <div id="ranking_boyz" class="anchor relative top-[-80px]"></div>
@@ -263,10 +263,10 @@ onMounted(()=>{
             </div>
           </div>
 
-          <div v-if="saleFetcher.data.value?.data?.list?.length > 0" class="pb-4">
+          <div v-if="store?.sale?.list?.length > 0" class="pb-4">
             <div id="merch" class="anchor relative top-[-80px]"></div>
             <img class="mx-auto mb-4 max-w-[318px] lg:max-w-[335px]" src="/assets/img/section_title_home_5.png">
-            <SaleSwiper :list="saleFetcher.data.value?.data?.list" />
+            <SaleSwiper :list="store?.sale?.list" />
           </div>
         </div>
       </div>
@@ -284,7 +284,7 @@ onMounted(()=>{
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
-              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/5e7WK' :'https://hidol.fan/mcVjO'" target="_blank">
+              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/mcVjO' :'https://hidol.fan/mcVjO'" target="_blank">
                 <img
                 class="absolute size-full rounded-lg"
                 src="/assets/img/hidol-preheat-section.png"
