@@ -63,7 +63,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
             <a :href="node?.href" target="_blank">
               <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
             </a>
-            <pre class="text-[13px] text-white" v-html="node?.description"></pre>
+            <div class="text-[13px] text-white" v-html="node?.description"></div>
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                 <a :href="node?.href" target="_blank">
                   <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
                 </a>
-                <pre class="text-[13px] text-white" v-html="node?.description"></pre>
+                <div class="text-[13px] text-white" v-html="node?.description"></div>
               </SwiperSlide>
             </swiper>
           </div>
