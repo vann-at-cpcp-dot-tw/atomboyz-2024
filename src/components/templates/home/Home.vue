@@ -148,7 +148,7 @@ onMounted(()=>{
     <div
     class="w-full overflow-hidden bg-no-repeat pt-8 lg:pt-[176px]"
     :style="{
-      backgroundImage: viewport.width.value >= 992 ?`url(${APP_BASE}assets/img/bg_home_1.jpg)` :`url(${APP_BASE}assets/img/bg_home_1_m.jpg)`,
+      backgroundImage: viewport.width.value >= 992 ?`url(${store?.general?.home_kv_banner || `${APP_BASE}assets/img/bg_home_1.jpg`})` :`url(${store?.general?.home_kv_banner_m || `${APP_BASE}assets/img/bg_home_1_m.jpg`})`,
       backgroundSize: viewport.width.value >= 992 ?'1920px auto' :'100% auto',
       backgroundPosition: 'center top',
     }">

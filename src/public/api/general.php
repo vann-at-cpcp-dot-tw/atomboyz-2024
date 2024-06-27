@@ -40,6 +40,8 @@ switch ($method) {
           'team_champion'=> 1,
           'team_popular'=> 2,
         ],
+        'home_kv_banner'=> '',
+        'home_kv_banner_m'=> '',
         'home_bottom_banner'=> '/atomboyz/assets/img/pic1.jpg', // 首頁最後一張 banner
         'terms'=> [
           'voteinfo'=> '<div>111222</div>', // 投票說明

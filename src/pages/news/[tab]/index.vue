@@ -101,7 +101,13 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 </NuxtLink>
               </div>
               <div class="col-12 mb-5 shrink text-white lg:mb-2">
-                <NuxtLink :to="`/article/${node.id}`">
+                <NuxtLink
+                :to="tab === 'video' ?'' :`/article/${node.id}`"
+                @click="()=>{
+                  if( tab === 'video' ){
+                    state.open = convertYoutubeUrlToEmbed(node?.yt_url)?.embedURL || ''
+                  }
+                }">
                   <div class="mb-2.5 text-[18px]">{{ node.title }}</div>
                   <div class="mb-4 flex">
                     <div class="mr-2 rounded-lg bg-major px-2 py-1 text-[14px]">{{ tab === 'video' ?'影音' :'娛樂' }}</div>
