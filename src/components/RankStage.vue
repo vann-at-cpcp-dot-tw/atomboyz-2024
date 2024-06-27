@@ -131,7 +131,7 @@ watch(()=>props.list, ()=>{
                 </div>
                 <RatioArea ratio="100">
                   <div
-                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-top"
                   :style="{
                     backgroundImage:`url(${props?.list?.[1]?.img})`,
                     filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
