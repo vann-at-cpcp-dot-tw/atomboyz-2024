@@ -24,24 +24,38 @@ const store = useStore()
 const viewport = useWindowSize()
 const route = useRoute()
 
-const videosFetcher = await useAsyncData<any>('video', ()=>{
-  return $fetch(`${API_URL}/video`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
+// const videosFetcher = await useAsyncData<any>('video', ()=>{
+//   return $fetch(`${API_URL}/video`, {
+//     params: {
+//       page: 1,
+//       per_page: 9,
+//     }
+//   })
+// })
+
+const videosFetcher = await useFetch<any>(`${API_URL}/video`, {
+  query: {
+    page: 1,
+    per_page: 9,
+  }
 })
 
-const newsFetcher = await useAsyncData<any>('news', ()=>{
-  return $fetch(`${API_URL}/news`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
-}, {
-  // immediate: false,
+// const newsFetcher = await useAsyncData<any>('news', ()=>{
+//   return $fetch(`${API_URL}/news`, {
+//     params: {
+//       page: 1,
+//       per_page: 9,
+//     }
+//   })
+// }, {
+//   // immediate: false,
+// })
+
+const newsFetcher = await useFetch<any>(`${API_URL}/news`, {
+  query: {
+    page: 1,
+    per_page: 9,
+  }
 })
 
 const state:any = reactive({
@@ -235,7 +249,7 @@ onMounted(()=>{
           backgroundRepeat: `repeat-x`,
           backgroundPosition: `center 200px`,
         }">
-          <div v-if="videosFetcher.data.value?.data?.list?.length > 0 && newsFetcher.data.value?.data?.list?.length > 0">
+          <div v-if="videosFetcher.data.value?.data?.list?.length > 0 || newsFetcher.data.value?.data?.list?.length > 0">
             <div class="container mb-8">
               <div id="video" class="anchor relative top-[-80px]"></div>
               <div id="article" class="anchor relative top-[-80px]"></div>

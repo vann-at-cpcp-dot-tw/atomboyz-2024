@@ -20,11 +20,7 @@ const state = reactive({
 })
 const ranksFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/rank`)
 
-const saleFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/sale`, {
-  onResponse({ request, response, options }){
-    store.sale.list = response?._data?.data?.list
-  },
-})
+const saleFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/sale`)
 
 const navFull = computed<{
   label: string

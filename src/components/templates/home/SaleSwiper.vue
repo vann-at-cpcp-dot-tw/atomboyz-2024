@@ -15,6 +15,7 @@ interface IProps {
 const viewport = useWindowSize()
 const props = defineProps<IProps>()
 const swiperRef = ref<any>(null)
+
 const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
   if ((viewport.width.value && viewport.width.value <= 991)){
     return {
