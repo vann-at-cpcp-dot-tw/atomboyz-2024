@@ -30,13 +30,15 @@ watch(()=>props.list, ()=>{
 
 <template>
   <div v-if="props?.list" :class="twMerge('lg:max-w-full max-w-[303px] mx-auto', props.class)">
-    <div class="row row-gap-8 items-end lg:flex-nowrap">
+    <div
+    v-if="props?.type === 'sale'"
+    class="row row-gap-8 lg:flex-nowrap">
       <div
-      class="col-12 -mb-3 shrink lg:mb-0"
+      class="col-12 mb-3 shrink lg:mb-0"
       :style="{
-        maxWidth: viewport.width.value >= 992 ?props?.type === 'sale' ?'39%' :'61%' :'100%',
+        maxWidth: viewport.width.value >= 992 ?'39%' :'100%',
       }">
-        <div v-if="props?.type === 'sale'" class="relative mx-auto mb-3 max-w-[225px] lg:max-w-full">
+        <div class="relative mx-auto mb-3 max-w-[225px] lg:mb-0 lg:max-w-full">
           <div class="flex items-center">
             <img class="_lg:max-w-[44px]" src="/assets/img/icon_crown2_1.svg">
             <div class="mt-4 pl-1 text-[18px] font-700 italic leading-none text-[#FFC854] lg:text-[22px]">NO.1</div>
@@ -56,8 +58,67 @@ watch(()=>props.list, ()=>{
             </div>
           </NuxtLink>
         </div>
+      </div>
 
-        <div v-else class="relative">
+      <div
+      class="col-12 mb-0 flex shrink flex-col"
+      :style="{
+        maxWidth: viewport.width.value >= 992 ?'61%' :'100%',
+      }">
+        <div class="hidden h-[55px] lg:block"></div>
+        <div class="relative flex grow flex-col">
+          <div class="absolute left-0 top-0 z-0 size-full rounded" style="background: linear-gradient(#dad9f6 0%, rgba(218, 217, 246, 0.4) 100%); opacity: 0.25;"></div>
+          <NuxtLink
+          v-for="(node, index) in props?.list.slice(1, props?.list?.length) || []"
+          :key="index"
+          :href="node?.href"
+          :target="props?.list?.[0]?.target || '_self'"
+          class="btn btn-light relative z-10 flex grow flex-col justify-center border-t border-gray-400 py-3"
+          :style="{
+            border: index === 0 ?'none' :''
+          }">
+            <div class="row flex-nowrap items-center">
+              <div class="col-auto">
+                <div class="pl-5">
+                  <div class="w-10 text-center">
+                    <div v-if="index === 0" class="font-700 italic">
+                      <img class="mx-auto _lg:max-w-[27px]" src="/assets/img/icon_crown2_2.svg" alt="">
+                      <div class="_lg:text-[14px]">No.2</div>
+                    </div>
+                    <div v-else-if="index === 1" class="font-700 italic">
+                      <img class="mx-auto _lg:max-w-[27px]" src="/assets/img/icon_crown2_3.svg" alt="">
+                      <div class="text-[#E5AE89] _lg:text-[14px]">No.3</div>
+                    </div>
+                    <div v-else>
+                      <div class="_lg:text-[14px]">{{ String(index + 2).padStart(2, '0') }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
+              </div>
+              <div class="col-12 shrink">
+                <div class="pr-5">
+                  <div class="_lg:text-[12px]">{{ node.name }}</div>
+                  <div class="_lg:text-[12px]" v-html="node.number"></div>
+                </div>
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+
+    <div
+    v-else
+    class="row row-gap-8 items-end lg:flex-nowrap">
+      <div
+      class="col-12 -mb-3 shrink lg:mb-0"
+      :style="{
+        maxWidth: viewport.width.value >= 992 ?'61%' :'100%',
+      }">
+        <div class="relative">
           <div class="row flex-nowrap items-end justify-between">
             <div class="col-auto mb-[-6%] w-[31%]">
               <NuxtLink :class="`btn btn-light ${props?.list?.[1]?.disabled ?'opacity-50 pointer-events-none' :''}`" :href="props?.list?.[1]?.href" :target="props?.list?.[1]?.target || '_self'">
@@ -124,73 +185,32 @@ watch(()=>props.list, ()=>{
       <div
       class="col-12 mb-0 shrink lg:-mb-3"
       :style="{
-        maxWidth: viewport.width.value >= 992 ?props?.type === 'sale' ?'61%' :'39%' :'100%',
+        maxWidth: viewport.width.value >= 992 ?'39%' :'100%',
       }">
         <div
         class="relative">
           <div class="absolute left-0 top-0 z-0 size-full rounded" style="background: linear-gradient(#dad9f6 0%, rgba(218, 217, 246, 0.4) 100%); opacity: 0.25;"></div>
-          <div v-if="props?.type === 'sale'">
-            <NuxtLink
-            v-for="(node, index) in props?.list.slice(1, props?.list?.length) || []"
-            :key="index"
-            :href="node?.href"
-            :target="props?.list?.[0]?.target || '_self'"
-            class="btn btn-light relative z-10 block">
-              <hr :class="`my-3 ${index === 0 ?'opacity-0': 'opacity-60'}`">
-              <div class="row flex-nowrap items-center">
-                <div class="col-auto">
-                  <div class="pl-5">
-                    <div class="w-10 text-center">
-                      <div v-if="index === 0" class="font-700 italic">
-                        <img class="mx-auto _lg:max-w-[27px]" src="/assets/img/icon_crown2_2.svg" alt="">
-                        <div class="_lg:text-[14px]">No.2</div>
-                      </div>
-                      <div v-else-if="index === 1" class="font-700 italic">
-                        <img class="mx-auto _lg:max-w-[27px]" src="/assets/img/icon_crown2_3.svg" alt="">
-                        <div class="text-[#E5AE89] _lg:text-[14px]">No.3</div>
-                      </div>
-                      <div v-else>
-                        <div class="_lg:text-[14px]">{{ String(index + 2).padStart(2, '0') }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
-                </div>
-                <div class="col-12 shrink">
-                  <div class="pr-5">
-                    <div class="_lg:text-[12px]">{{ node.name }}</div>
-                    <div class="_lg:text-[12px]" v-html="node.number"></div>
-                  </div>
-                </div>
+          <NuxtLink
+          v-for="(node, index) in props?.list.slice(3, props?.list?.length) || []"
+          :key="index"
+          :href="node?.href"
+          :target="props?.list?.[0]?.target || '_self'"
+          :class="`btn btn-light relative z-10 block ${node?.disabled === true ?'opacity-50 pointer-events-none' :''}`">
+            <hr :class="`my-3 ${index === 0 ?'opacity-0': 'opacity-60'}`">
+            <div class="row flex-nowrap items-center">
+              <div class="col-auto"><div class="pl-5 _lg:text-[13px]">{{ String(index + 4).padStart(2, '0') }}</div></div>
+              <div class="col-auto">
+                <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
               </div>
-              <hr v-if="index === props?.list?.length-2" class="my-3 opacity-0">
-            </NuxtLink>
-          </div>
-          <div v-else>
-            <NuxtLink
-            v-for="(node, index) in props?.list.slice(3, props?.list?.length) || []"
-            :key="index"
-            :href="node?.href"
-            :target="props?.list?.[0]?.target || '_self'"
-            :class="`btn btn-light relative z-10 block ${node?.disabled === true ?'opacity-50 pointer-events-none' :''}`">
-              <hr :class="`my-3 ${index === 0 ?'opacity-0': 'opacity-60'}`">
-              <div class="row flex-nowrap items-center">
-                <div class="col-auto"><div class="pl-5 _lg:text-[13px]">{{ String(index + 4).padStart(2, '0') }}</div></div>
-                <div class="col-auto">
-                  <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
-                </div>
-                <div class="col-6 shrink">
-                  <div class="text-[13px] lg:text-[14px]">{{ node.name }}</div>
-                </div>
-                <div class="col-12 shrink">
-                  <div class="pr-5 text-right text-[13px] lg:text-[14px]" v-html="node.number"></div>
-                </div>
+              <div class="col-6 shrink">
+                <div class="text-[13px] lg:text-[14px]">{{ node.name }}</div>
               </div>
-              <hr v-if="index === props?.list?.length-4" class="my-3 opacity-0">
-            </NuxtLink>
-          </div>
+              <div class="col-12 shrink">
+                <div class="pr-5 text-right text-[13px] lg:text-[14px]" v-html="node.number"></div>
+              </div>
+            </div>
+            <hr v-if="index === props?.list?.length-4" class="my-3 opacity-0">
+          </NuxtLink>
         </div>
       </div>
     </div>

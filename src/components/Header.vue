@@ -117,8 +117,7 @@ const navFull = computed<{
         })
 
         if (!store.user?.name){
-          window.localStorage.setItem('after_login_route_name', route.name)
-          window.location.href = LOGIN_URL
+          store.do.lightboxOpen('NeedLogin')
         } else {
           router.push({
             hash: '#member'

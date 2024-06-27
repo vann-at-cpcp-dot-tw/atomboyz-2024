@@ -63,6 +63,13 @@ onMounted(()=>{
     <div
     class="btn btn-scaleUp mt-4"
     @click="()=>{
+      if( !store.user?.name ){
+        store.do.lightboxOpen('NeedLogin')
+      }else{
+        $router.push({
+          hash: '#task'
+        })
+      }
       store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
         click_info: {
           type: 'must_do',
