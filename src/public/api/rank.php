@@ -12,9 +12,9 @@ switch ($method) {
         'personal'=> [ // 個人排行
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
-            'name'=> '王一二',
+            'name'=> '王一一',
             'tag_id'=> 'boyz010',
-            'votes'=> 19786,
+            'votes'=> '19786',
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',

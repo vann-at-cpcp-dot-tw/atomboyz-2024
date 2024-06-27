@@ -63,7 +63,7 @@ const state:any = reactive({
           return {
             ...node,
             href: `/vote?p=${node.tag_id}`,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`,
           }
         })
       case 'team':
@@ -73,7 +73,7 @@ const state:any = reactive({
           return {
             img: targetTeam?.getImg?.(),
             name: targetTeam?.name,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`,
             href: `/vote#${targetTeam?.tagId}`,
             disabled: store?.general?.exclude_teams?.includes?.(id)
           }
@@ -92,7 +92,7 @@ const state:any = reactive({
         return store?.rank?.[state.rankTableActive]?.map?.((node:any)=>{
           return {
             ...node,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`
           }
         })
     }
