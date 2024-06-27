@@ -47,7 +47,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
     <ClientOnly>
       <div v-if="viewport.width.value >= 992 && props?.list?.length <= 5" class="container">
         <div class="row justify-center">
-          <div v-for="(node, index) in props?.list" :key="index" class="col-auto max-w-[20%]">
+          <div v-for="(node, index) in props?.list" :key="index" class="col-auto w-1/5">
             <div class="mb-2 text-center text-white">{{ node?.name }}</div>
             <div class="mb-5">
               <RatioArea ratio="100">
@@ -62,7 +62,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
             <a :href="node?.href" target="_blank">
               <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
             </a>
-            <div class="text-[13px] text-white">{{ node?.description }}</div>
+            <pre class="text-[13px] text-white" v-html="node?.description"></pre>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                 <a :href="node?.href" target="_blank">
                   <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
                 </a>
-                <div class="text-[13px] text-white">{{ node?.description }}</div>
+                <pre class="text-[13px] text-white" v-html="node?.description"></pre>
               </SwiperSlide>
             </swiper>
           </div>
