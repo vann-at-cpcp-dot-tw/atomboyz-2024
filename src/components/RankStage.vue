@@ -150,7 +150,7 @@ watch(()=>props.list, ()=>{
                 </div>
                 <RatioArea ratio="100">
                   <div
-                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-top"
                   :style="{
                     backgroundImage:`url(${props?.list?.[0]?.img})`,
                     filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
@@ -169,7 +169,7 @@ watch(()=>props.list, ()=>{
                 </div>
                 <RatioArea ratio="100">
                   <div
-                  class="absolute left-0 top-0 size-full rounded bg-cover bg-center"
+                  class="absolute left-0 top-0 size-full rounded bg-cover bg-top"
                   :style="{
                     backgroundImage:`url(${props?.list?.[2]?.img})`,
                     filter: 'drop-shadow(0px 0px 16px rgba(255, 255, 255, 0.42))'
@@ -200,7 +200,7 @@ watch(()=>props.list, ()=>{
             <div class="row flex-nowrap items-center">
               <div class="col-auto"><div class="pl-5 _lg:text-[13px]">{{ String(index + 4).padStart(2, '0') }}</div></div>
               <div class="col-auto">
-                <div class="size-[50px] rounded bg-cover bg-center" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
+                <div class="size-[50px] rounded bg-cover bg-top" :style="{backgroundImage: `url(${node.img || node?.getImg?.()})`}"></div>
               </div>
               <div class="col-6 shrink">
                 <div class="text-[13px] lg:text-[14px]">{{ node.name }}</div>

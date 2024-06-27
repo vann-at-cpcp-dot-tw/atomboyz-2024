@@ -74,27 +74,27 @@ switch ($method) {
         'team'=> [ // 團體排行
           [
             'id'=> 5,
-            'votes'=> 988889,
+            'votes'=> 0,
           ],
           [
             'id'=> 3,
-            'votes'=> 988888,
+            'votes'=> 0,
           ],
           [
             'id'=> 2,
-            'votes'=> 988887,
+            'votes'=> 0,
           ],
           [
             'id'=> 4,
-            'votes'=> 988886,
+            'votes'=> 0,
           ],
           [
             'id'=> 6,
-            'votes'=> 988885,
+            'votes'=> 0,
           ],
           [
             'id'=> 1,
-            'votes'=> 988884,
+            'votes'=> 0,
           ]
         ],
         'social'=> [ // 社群排行
