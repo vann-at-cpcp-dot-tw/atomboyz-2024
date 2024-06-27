@@ -167,7 +167,9 @@ onMounted(()=>{
       :style="{
         backgroundImage: `url(${APP_BASE}assets/img/bg_star_1.png)`
       }">
-        <div class="container-fluid relative z-10 mb-[54px]">
+        <div
+        v-if="store.general?.rank_summary?.team_champion"
+        class="container-fluid relative z-10 mb-[54px]">
           <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
@@ -187,7 +189,9 @@ onMounted(()=>{
           </div>
         </div>
 
-        <div class="container-fluid relative z-10">
+        <div
+        v-if="store.general?.rank_summary?.team_popular"
+        class="container-fluid relative z-10">
           <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
