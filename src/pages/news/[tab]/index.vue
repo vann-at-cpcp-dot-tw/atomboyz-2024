@@ -113,7 +113,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                     <div class="mr-2 rounded-lg bg-major px-2 py-1 text-[14px]">{{ tab === 'video' ?'影音' :'娛樂' }}</div>
                     <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
                   </div>
-                  <div class="line-clamp-2 text-[15px]">{{ node.excerpts }}</div>
+                  <div class="line-clamp-2 text-[15px]" v-html="node.excerpts"></div>
                 </NuxtLink>
               </div>
               <div class="col-auto self-end _lg:mx-auto">

@@ -88,7 +88,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                           <div class="mb-4 flex">
                             <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
                           </div>
-                          <div class="mb-3 line-clamp-2 text-[15px]">{{ node.excerpts }}</div>
+                          <div class="mb-3 line-clamp-2 text-[15px]" v-html="node.excerpts"></div>
                           <div class="flex justify-center lg:justify-end">
                             <MajorButton style="max-width:134px; height: 43px;">看更多 <i class="bi bi-chevron-double-right text-[13px]"></i></MajorButton>
                           </div>
