@@ -54,6 +54,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           }">
             <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
           </div>
+
           <div class="relative mx-auto w-full max-w-[1070px] overflow-hidden px-5">
             <Swiper
             :class="swiperConfig.class"
@@ -73,7 +74,9 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                   <div class="p-2.5">
                     <div class="row">
                       <div class="col-12 shrink lg:max-w-[51%]">
-                        <NuxtLink :to="`/article/${node.id}`">
+                        <NuxtLink
+                        :to="node.url ?node.url :`/article/${node.id}`"
+                        :target="node?.url ?'_blank' :'_self'">
                           <RatioArea ratio="66.54">
                             <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.img})` }"></div>
                           </RatioArea>
@@ -97,6 +100,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
               </SwiperSlide>
             </swiper>
           </div>
+
           <div class="hidden lg:block">
             <div
             v-if="swiperRef?.isLocked === false && !swiperRef?.isEnd"
