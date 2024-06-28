@@ -10,6 +10,7 @@ interface IProps {
   total: number
   chunkSize: number
   current: number,
+  perPage: number,
   onPageChange?: Function
 }
 const props = defineProps<IProps>()
@@ -17,20 +18,34 @@ const state = reactive({
   activeGroup: 0
 })
 
+// const chunkGroup = computed(()=>{
+//   if (typeof props.total !== 'number' || typeof props.chunkSize !== 'number'){
+//     return []
+//   }
+//   const array = [...Array(props.total)].map((node, index)=>index + 1)
+//   const chunkedArray = []
+
+//   for (let i = 0; i < array.length; i += props.chunkSize){
+//     chunkedArray.push(array.slice(i, i + props.chunkSize))
+//   }
+
+//   return chunkedArray
+// })
 const chunkGroup = computed(()=>{
-  if (typeof props.total !== 'number' || typeof props.chunkSize !== 'number'){
+  if (typeof props.total !== 'number' || typeof props.chunkSize !== 'number' || typeof props.perPage !== 'number'){
     return []
   }
-  const array = [...Array(props.total)].map((node, index)=>index + 1)
-  const chunkedArray = []
 
+  const totalPages = Math.ceil(props.total / props.perPage)
+  const array = [...Array(totalPages)].map((_, index)=>index + 1)
+
+  const chunkedArray = []
   for (let i = 0; i < array.length; i += props.chunkSize){
     chunkedArray.push(array.slice(i, i + props.chunkSize))
   }
 
   return chunkedArray
 })
-
 watch(()=>[props.current, chunkGroup], (newVal)=>{
   state.activeGroup = chunkGroup.value.findIndex((groupNode)=>{
     return groupNode.findIndex(node=>node === props.current) >= 0
@@ -42,7 +57,7 @@ watch(()=>[props.current, chunkGroup], (newVal)=>{
 <template>
   <div :class="twMerge('container', props.class)">
     <div class="row lg:row-gap-5 row-gap-4 flex-nowrap items-center justify-center">
-      <div class="col-auto">
+      <div v-if="chunkGroup?.[0]?.length > 1" class="col-auto">
         <div
         class="btn btn-dark flex items-center justify-center rounded-full bg-white px-2.5 py-2 text-black lg:px-5"
         @click="()=>{
@@ -51,6 +66,7 @@ watch(()=>[props.current, chunkGroup], (newVal)=>{
           最新一頁
         </div>
       </div>
+
       <div class="col-auto">
         <div
         :class="`btn ${isEmpty(chunkGroup[state.activeGroup-1]) ?'opacity-50 pointer-events-none' :''}`"
@@ -100,7 +116,8 @@ watch(()=>[props.current, chunkGroup], (newVal)=>{
           <img src="/assets/img/icon_arrow.svg" alt="" style="width:10px;">
         </div>
       </div>
-      <div class="col-auto">
+
+      <div v-if="chunkGroup?.[0]?.length > 1" class="col-auto">
         <div
         class="btn btn-dark flex items-center justify-center rounded-full bg-white px-2.5 py-2 text-black lg:px-5"
         @click="()=>{

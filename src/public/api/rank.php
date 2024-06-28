@@ -12,21 +12,24 @@ switch ($method) {
         'personal'=> [ // 個人排行
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
-            'name'=> '王一二',
+            'name'=> '王一一',
             'tag_id'=> 'boyz010',
-            'votes'=> 19786,
+            'votes'=> '19786',
+            'rank'=> 1,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz011',
             'votes'=> 19786,
+            'rank'=> 2,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
             'name'=> '王一二',
             'tag_id'=> 'boyz012',
             'votes'=> 19786,
+            'rank'=> 3,
           ],
           [
             'img'=> '/atomboyz/assets/img/rank_img_personal.png',
@@ -74,27 +77,27 @@ switch ($method) {
         'team'=> [ // 團體排行
           [
             'id'=> 5,
-            'votes'=> 988889,
+            'votes'=> 0,
           ],
           [
             'id'=> 3,
-            'votes'=> 988888,
+            'votes'=> 0,
           ],
           [
             'id'=> 2,
-            'votes'=> 988887,
+            'votes'=> 0,
           ],
           [
             'id'=> 4,
-            'votes'=> 988886,
+            'votes'=> 0,
           ],
           [
             'id'=> 6,
-            'votes'=> 988885,
+            'votes'=> 0,
           ],
           [
             'id'=> 1,
-            'votes'=> 988884,
+            'votes'=> 0,
           ]
         ],
         'social'=> [ // 社群排行
@@ -104,6 +107,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 1,
           ],
           [
             'name'=> '王三四',
@@ -111,6 +115,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 2,
           ],
           [
             'name'=> '王三四',
@@ -118,6 +123,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 3,
           ],
           [
             'name'=> '王三四',
@@ -125,6 +131,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 4,
           ],
           [
             'name'=> '王三四',
@@ -132,6 +139,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 5,
           ],
           [
             'name'=> '王三四',
@@ -139,6 +147,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 6,
           ],
           [
             'name'=> '王三四',
@@ -146,6 +155,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 7,
           ],
           [
             'name'=> '王三四',
@@ -153,6 +163,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 8,
           ],
           [
             'name'=> '王三四',
@@ -160,6 +171,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 9,
           ],
           [
             'name'=> '王三四',
@@ -167,6 +179,7 @@ switch ($method) {
             'votes'=> 13333,
             'href'=> 'https://google.com',
             'href_target'=> '_blank',
+            'rank'=> 10,
           ],
         ],
         'sale'=> [ // 銷售排行
@@ -207,7 +220,6 @@ switch ($method) {
           ]
         ],
       ]
-
     ];
   break;
 }

@@ -24,7 +24,7 @@ const scopeStore:any = inject('scopeStore')
         <div
         v-for="(node, index) in scopeStore.rankTables"
         :key="index"
-        class="col-3"
+        :class="`col-3 ${node.display ?'block' :'hidden'}`"
         style="max-width: 190px;">
           <MajorButton
           class="h-[30px] p-0 text-[13px] lg:h-[50px] lg:text-[21px]"

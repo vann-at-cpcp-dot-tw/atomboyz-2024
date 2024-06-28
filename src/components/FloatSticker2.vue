@@ -87,7 +87,7 @@ watch(()=>route.hash, (newVal, oldVal)=>{
 <template>
   <ClientOnly>
     <Game
-    v-if="['#game'].includes(route.hash)"
+    v-if="store.general?.can_play_game === true && ['#game'].includes(route.hash)"
     :close="()=>{
       $router.push({
         hash: ''
@@ -111,13 +111,21 @@ watch(()=>route.hash, (newVal, oldVal)=>{
       }">
         <div class="text-center text-[11px] leading-[1.2] text-white">{{ node.text }}</div>
       </a>
+
       <div
+      v-if="store.general?.can_play_game === true"
       class="btn btn-scaleUp mb-2 flex size-[60px] flex-col items-center justify-center rounded-full"
       style="background: linear-gradient(#5d00ff 0%, #2f0080 100%); box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);"
       @click="()=>{
-        $router.push({
-          hash: '#game'
-        })
+
+        if( !store.user?.name ){
+          store.do.lightboxOpen('NeedLogin')
+        }else{
+          $router.push({
+            hash: '#game'
+          })
+        }
+
         store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
           click_info: {
             type: 'game'

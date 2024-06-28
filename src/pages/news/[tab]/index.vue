@@ -101,13 +101,19 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 </NuxtLink>
               </div>
               <div class="col-12 mb-5 shrink text-white lg:mb-2">
-                <NuxtLink :to="`/article/${node.id}`">
+                <NuxtLink
+                :to="tab === 'video' ?'' :`/article/${node.id}`"
+                @click="()=>{
+                  if( tab === 'video' ){
+                    state.open = convertYoutubeUrlToEmbed(node?.yt_url)?.embedURL || ''
+                  }
+                }">
                   <div class="mb-2.5 text-[18px]">{{ node.title }}</div>
                   <div class="mb-4 flex">
                     <div class="mr-2 rounded-lg bg-major px-2 py-1 text-[14px]">{{ tab === 'video' ?'影音' :'娛樂' }}</div>
                     <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
                   </div>
-                  <div class="line-clamp-2 text-[15px]">{{ node.excerpts }}</div>
+                  <div class="line-clamp-2 text-[15px]" v-html="node.excerpts"></div>
                 </NuxtLink>
               </div>
               <div class="col-auto self-end _lg:mx-auto">
@@ -137,6 +143,7 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
     :current="Number(route.query.page || 1)"
     :total="listFetcher.data.value?.data?.pagination?.total"
     :chunk-size="viewport.width.value >= 992 ?4 :3"
+    :per-page="3"
     :on-page-change="(page:number)=>{
       router.push({
         query: {

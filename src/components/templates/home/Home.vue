@@ -23,40 +23,57 @@ const IS_STAGE = config.public.isStage
 const store = useStore()
 const viewport = useWindowSize()
 const route = useRoute()
+
+const videosFetcher = await useFetch<any>(`${API_URL}/video`, {
+  query: {
+    page: 1,
+    per_page: 9,
+  }
+})
+
+const newsFetcher = await useFetch<any>(`${API_URL}/news`, {
+  query: {
+    page: 1,
+    per_page: 9,
+  }
+})
+
 const state:any = reactive({
-  rankTables: [
-    { key: 'personal', label: '個人排行', hash: '#ranking_boyz' },
-    { key: 'team', label: '團體排行', hash: '#ranking_group' },
-    { key: 'social', label: '社團排行', hash: '#ranking_club' },
-    { key: 'sale', label: '銷售排行', hash: '#ranking_sale' },
-  ],
+
+  rankTables: computed(()=>{
+    return [
+      { key: 'personal', label: '個人排行', hash: '#ranking_boyz', display: store?.rank?.personal?.length > 0 },
+      { key: 'team', label: '團體排行', hash: '#ranking_group', display: store?.rank?.team?.length > 0 },
+      { key: 'social', label: '社團排行', hash: '#ranking_club', display: store?.rank?.social?.length > 0 },
+      { key: 'sale', label: '銷售排行', hash: '#ranking_sale', display: store?.rank?.sale?.length > 0 },
+    ]
+  }),
   rankTableActive: 'personal',
   newsTableActive: 'video',
   rankList: computed(()=>{
     switch (state.rankTableActive){
       case 'personal':
-        return ranksFetcher.data.value?.data?.personal?.map((node:any)=>{
+        return store?.rank?.personal?.map?.((node:any)=>{
           return {
             ...node,
             href: `/vote?p=${node.tag_id}`,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`,
           }
         })
       case 'team':
-        return ranksFetcher.data.value?.data?.team?.map((node:any)=>{
+        return store?.rank?.team?.map?.((node:any)=>{
           const { id } = node
           const targetTeam = teams.find((teamNode:any)=>teamNode.id === id)
           return {
             img: targetTeam?.getImg?.(),
             name: targetTeam?.name,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`,
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`,
             href: `/vote#${targetTeam?.tagId}`,
             disabled: store?.general?.exclude_teams?.includes?.(id)
           }
         })
-
       case 'sale':
-        return ranksFetcher.data.value?.data?.sale?.map((node:any)=>{
+        return store?.rank?.sale?.map?.((node:any)=>{
           return {
             ...node,
             number: node.price_string
@@ -64,36 +81,15 @@ const state:any = reactive({
         })
 
       default:
-        return ranksFetcher.data.value?.data?.[state.rankTableActive]?.map((node:any)=>{
+        // @ts-ignore
+        return store?.rank?.[state.rankTableActive]?.map?.((node:any)=>{
           return {
             ...node,
-            number: `<span><i>${numberFormat(node.votes)}</i> 票</span>`
+            number: `<span><i>${numberFormat(Number(node.votes))}</i> 票</span>`
           }
         })
     }
   }),
-})
-const ranksFetcher:{[key:string]:any} = await useFetch(`${API_URL}/rank`)
-const videosFetcher = await useAsyncData<any>('video', ()=>{
-  return $fetch(`${API_URL}/video`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
-})
-const newsFetcher = await useAsyncData<any>('news', ()=>{
-  return $fetch(`${API_URL}/news`, {
-    params: {
-      page: 1,
-      per_page: 9,
-    }
-  })
-}, {
-  // immediate: false,
-})
-const saleFetcher = await useAsyncData<any>('sale', ()=>{
-  return $fetch(`${API_URL}/sale`)
 })
 
 provide('scopeStore', state)
@@ -102,6 +98,26 @@ const isTrackingInit = ref(false)
 watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
   if (!isTrackingInit.value && store.trackingSender){
     store.do.tracking('PageViewEvent', '55001', 'hidol_campaign_page_view')
+  }
+}, {
+  immediate: true
+})
+
+watch(()=>state.rankTables, ()=>{
+  const displayKey = state.rankTables?.find?.((node:any)=>node.display === true)?.key
+  state.rankTableActive = displayKey || 'personal'
+}, {
+  immediate: true
+})
+
+watch(()=>[videosFetcher.data.value?.data?.list?.length, newsFetcher.data.value?.data?.list?.length], ()=>{
+  if (videosFetcher.data.value?.data?.list?.length > 0){
+    state.newsTableActive = 'video'
+    return
+  }
+
+  if (newsFetcher.data.value?.data?.list?.length > 0){
+    state.newsTableActive = 'news'
   }
 }, {
   immediate: true
@@ -138,7 +154,7 @@ onMounted(()=>{
     <div
     class="w-full overflow-hidden bg-no-repeat pt-8 lg:pt-[176px]"
     :style="{
-      backgroundImage: viewport.width.value >= 992 ?`url(${APP_BASE}assets/img/bg_home_1.jpg)` :`url(${APP_BASE}assets/img/bg_home_1_m.jpg)`,
+      backgroundImage: viewport.width.value >= 992 ?`url(${store?.general?.home_kv_banner || `${APP_BASE}assets/img/bg_home_1.jpg`})` :`url(${store?.general?.home_kv_banner_m || `${APP_BASE}assets/img/bg_home_1_m.jpg`})`,
       backgroundSize: viewport.width.value >= 992 ?'1920px auto' :'100% auto',
       backgroundPosition: 'center top',
     }">
@@ -157,7 +173,9 @@ onMounted(()=>{
       :style="{
         backgroundImage: `url(${APP_BASE}assets/img/bg_star_1.png)`
       }">
-        <div class="container-fluid relative z-10 mb-[54px]">
+        <div
+        v-if="store.general?.rank_summary?.team_champion"
+        class="container-fluid relative z-10 mb-[54px]">
           <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
@@ -177,7 +195,9 @@ onMounted(()=>{
           </div>
         </div>
 
-        <div class="container-fluid relative z-10">
+        <div
+        v-if="store.general?.rank_summary?.team_popular"
+        class="container-fluid relative z-10">
           <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
@@ -200,7 +220,9 @@ onMounted(()=>{
 
       <div class="divider relative z-20 mt-[-65px] h-[65px] w-full lg:mt-[-130px] lg:h-[130px]" style="background-image:linear-gradient(rgba(0,0,0,0) 0%, #120c60 100%);"></div>
 
-      <div class="relative">
+      <div
+      v-if="state.rankTables?.some?.((node:any)=>node.display === true)"
+      class="relative">
         <div id="ranking" class="anchor relative top-[-80px]"></div>
         <div id="ranking_boyz" class="anchor relative top-[-80px]"></div>
         <div id="ranking_group" class="anchor relative top-[-80px]"></div>
@@ -209,7 +231,9 @@ onMounted(()=>{
         <RanksTable class="pb-8 pt-16" />
       </div>
 
-      <div class="relative z-10 bg-black py-8" style="background: linear-gradient(#120c60 0%, #000 20%);">
+      <div
+      class="relative z-10 bg-black py-8"
+      style="background: linear-gradient(#120c60 0%, #000 20%);">
         <div
         class="relative"
         :style="{
@@ -217,47 +241,49 @@ onMounted(()=>{
           backgroundRepeat: `repeat-x`,
           backgroundPosition: `center 200px`,
         }">
-          <div class="container mb-8">
-            <div id="video" class="anchor relative top-[-80px]"></div>
-            <div id="article" class="anchor relative top-[-80px]"></div>
-            <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
-            <div class="mx-auto w-full max-w-[360px]">
-              <div class="row">
-                <div class="col-6">
-                  <MajorButton
-                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
-                  variant="outline"
-                  :active="state.newsTableActive === 'video'"
-                  @click="()=>{ state.newsTableActive = 'video' }">
-                    最新影音
-                  </MajorButton>
-                </div>
-                <div class="col-6">
-                  <MajorButton
-                  class="h-[44px] lg:h-[50px] lg:text-[21px]"
-                  variant="outline"
-                  :active="state.newsTableActive === 'article'"
-                  @click="()=>{
-                    state.newsTableActive = 'article'
-                    if( !newsFetcher.data.value ){
-                      newsFetcher.execute()
-                    }
-                  }">
-                    最新娛樂
-                  </MajorButton>
+          <div v-if="videosFetcher.data.value?.data?.list?.length > 0 || newsFetcher.data.value?.data?.list?.length > 0">
+            <div class="container mb-8">
+              <div id="video" class="anchor relative top-[-80px]"></div>
+              <div id="article" class="anchor relative top-[-80px]"></div>
+              <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
+              <div class="mx-auto w-full max-w-[360px]">
+                <div class="row justify-center">
+                  <div v-if="videosFetcher.data.value?.data?.list?.length > 0" class="col-6">
+                    <MajorButton
+                    class="h-[44px] lg:h-[50px] lg:text-[21px]"
+                    variant="outline"
+                    :active="state.newsTableActive === 'video'"
+                    @click="()=>{ state.newsTableActive = 'video' }">
+                      最新影音
+                    </MajorButton>
+                  </div>
+                  <div v-if="newsFetcher.data.value?.data?.list?.length > 0" class="col-6">
+                    <MajorButton
+                    class="h-[44px] lg:h-[50px] lg:text-[21px]"
+                    variant="outline"
+                    :active="state.newsTableActive === 'article'"
+                    @click="()=>{
+                      state.newsTableActive = 'article'
+                      if( !newsFetcher.data.value ){
+                        newsFetcher.execute()
+                      }
+                    }">
+                      最新娛樂
+                    </MajorButton>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="mb-[50px]">
-            <VideoSwiper v-if="state.newsTableActive === 'video' && videosFetcher.data.value?.data?.list" :list="videosFetcher.data.value?.data?.list" />
-            <NewsSwiper v-if="state.newsTableActive === 'article' && newsFetcher.data.value?.data?.list" :list="newsFetcher.data.value?.data?.list" />
+            <div class="mb-[50px]">
+              <VideoSwiper v-if="state.newsTableActive === 'video' && videosFetcher.data.value?.data?.list" :list="videosFetcher.data.value?.data?.list" />
+              <NewsSwiper v-if="state.newsTableActive === 'article' && newsFetcher.data.value?.data?.list" :list="newsFetcher.data.value?.data?.list" />
+            </div>
           </div>
 
-          <div class="pb-4">
+          <div v-if="store?.sale?.list?.length > 0" class="pb-4">
             <div id="merch" class="anchor relative top-[-80px]"></div>
             <img class="mx-auto mb-4 max-w-[318px] lg:max-w-[335px]" src="/assets/img/section_title_home_5.png">
-            <SaleSwiper :list="saleFetcher.data.value?.data?.list" />
+            <SaleSwiper :list="store?.sale?.list" />
           </div>
         </div>
       </div>
@@ -275,7 +301,7 @@ onMounted(()=>{
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
-              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/5e7WK' :'https://hidol.fan/mcVjO'" target="_blank">
+              <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/mcVjO' :'https://hidol.fan/mcVjO'" target="_blank">
                 <img
                 class="absolute size-full rounded-lg"
                 src="/assets/img/hidol-preheat-section.png"
