@@ -72,7 +72,6 @@ const state:any = reactive({
             disabled: store?.general?.exclude_teams?.includes?.(id)
           }
         })
-
       case 'sale':
         return store?.rank?.sale?.map?.((node:any)=>{
           return {
@@ -113,12 +112,12 @@ watch(()=>state.rankTables, ()=>{
 
 watch(()=>[videosFetcher.data.value?.data?.list?.length, newsFetcher.data.value?.data?.list?.length], ()=>{
   if (videosFetcher.data.value?.data?.list?.length > 0){
-    state.rankTableActive = 'video'
+    state.newsTableActive = 'video'
     return
   }
 
   if (newsFetcher.data.value?.data?.list?.length > 0){
-    state.rankTableActive = 'news'
+    state.newsTableActive = 'news'
   }
 }, {
   immediate: true
