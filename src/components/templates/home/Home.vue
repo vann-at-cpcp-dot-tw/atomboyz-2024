@@ -24,32 +24,12 @@ const store = useStore()
 const viewport = useWindowSize()
 const route = useRoute()
 
-// const videosFetcher = await useAsyncData<any>('video', ()=>{
-//   return $fetch(`${API_URL}/video`, {
-//     params: {
-//       page: 1,
-//       per_page: 9,
-//     }
-//   })
-// })
-
 const videosFetcher = await useFetch<any>(`${API_URL}/video`, {
   query: {
     page: 1,
     per_page: 9,
   }
 })
-
-// const newsFetcher = await useAsyncData<any>('news', ()=>{
-//   return $fetch(`${API_URL}/news`, {
-//     params: {
-//       page: 1,
-//       per_page: 9,
-//     }
-//   })
-// }, {
-//   // immediate: false,
-// })
 
 const newsFetcher = await useFetch<any>(`${API_URL}/news`, {
   query: {
@@ -127,6 +107,19 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
 watch(()=>state.rankTables, ()=>{
   const displayKey = state.rankTables?.find?.((node:any)=>node.display === true)?.key
   state.rankTableActive = displayKey || 'personal'
+}, {
+  immediate: true
+})
+
+watch(()=>[videosFetcher.data.value?.data?.list?.length, newsFetcher.data.value?.data?.list?.length], ()=>{
+  if (videosFetcher.data.value?.data?.list?.length > 0){
+    state.rankTableActive = 'video'
+    return
+  }
+
+  if (newsFetcher.data.value?.data?.list?.length > 0){
+    state.rankTableActive = 'news'
+  }
 }, {
   immediate: true
 })
