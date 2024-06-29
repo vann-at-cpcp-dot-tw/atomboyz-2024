@@ -75,7 +75,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                     <div class="row">
                       <div class="col-12 shrink lg:max-w-[51%]">
                         <NuxtLink
-                        :to="node.url ?node.url :`/article/${node.id}`"
+                        :to="node?.url ?node.url :`/article/${node.id}`"
                         :target="node?.url ?'_blank' :'_self'">
                           <RatioArea ratio="66.54">
                             <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.img})` }"></div>
@@ -83,7 +83,9 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                         </NuxtLink>
                       </div>
                       <div class="col-12 shrink text-white lg:max-w-[49%]">
-                        <NuxtLink :to="`/article/${node.id}`">
+                        <NuxtLink
+                        :to="node?.url ?node.url :`/article/${node.id}`"
+                        :target="node?.url ?'_blank' :'_self'">
                           <div class="mb-2 text-[18px]">{{ node.title }}</div>
                           <div class="mb-4 flex">
                             <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
