@@ -17,6 +17,7 @@ const viewport = useWindowSize()
 const state = reactive({
   isShareNavOpen: false,
   isMobileMenuOpen: false,
+  isMounted: false,
 })
 const ranksFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/rank`)
 
@@ -141,9 +142,28 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
   immediate: true
 })
 
-watch(()=>[window, route.hash], (newVal, oldVal)=>{
+watch(()=>ranksFetcher.data.value, (newVal)=>{
+  store.rank = {
+    personal: newVal?.data?.personal,
+    team: newVal?.data?.team,
+    social: newVal?.data?.social,
+    sale: newVal?.data?.sale,
+  }
+}, {
+  immediate: true
+})
+
+watch(()=>saleFetcher.data.value, (newVal)=>{
+  store.sale.list = newVal?.data?.list
+}, {
+  immediate: true
+})
+
+watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
   const window = newVal[0]
-  if (!window){
+  const isMounted = newVal[2]
+
+  if (!window || !isMounted){
     return
   }
 
@@ -160,21 +180,8 @@ watch(()=>[window, route.hash], (newVal, oldVal)=>{
   immediate: true
 })
 
-watch(()=>ranksFetcher.data.value, (newVal)=>{
-  store.rank = {
-    personal: newVal?.data?.personal,
-    team: newVal?.data?.team,
-    social: newVal?.data?.social,
-    sale: newVal?.data?.sale,
-  }
-}, {
-  immediate: true
-})
-
-watch(()=>saleFetcher.data.value, (newVal)=>{
-  store.sale.list = newVal?.data?.list
-}, {
-  immediate: true
+onMounted(()=>{
+  state.isMounted = true
 })
 
 </script>
