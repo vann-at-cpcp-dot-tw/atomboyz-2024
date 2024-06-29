@@ -76,7 +76,7 @@ watch(()=>[route.query.t, window], (newVal, oldVal)=>{
       name: localStorage?.getItem?.('after_login_route_name') || 'index',
       query: queryWithoutT
     })
-
+    store.do.lightboxRemove('NeedLogin')
     trackingUserLogin(user.openId)
   })
 }, {
