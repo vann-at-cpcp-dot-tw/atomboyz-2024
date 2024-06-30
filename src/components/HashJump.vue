@@ -15,7 +15,7 @@ onMounted(()=>{
   if (route.hash){
     setTimeout(()=>{
       scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }, 500)
+    }, 600)
   }
 })
 </script>
