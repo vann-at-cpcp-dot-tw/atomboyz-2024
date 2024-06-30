@@ -164,29 +164,29 @@ watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
   const newHash = newVal?.[1]
   const oldHash = oldVal?.[1]
   const isMounted = newVal[2]
-  if (!window || !isMounted){
-    return
-  }
+  // if (!window || !isMounted){
+  //   return
+  // }
 
-  if (newHash){
-    setTimeout(()=>{
-      if (route.hash){
-        scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-      }
-    }, 500)
-  }
+  // if (newHash){
+  //   setTimeout(()=>{
+  //     if (route.hash){
+  //       scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+  //     }
+  //   }, 500)
+  // }
 }, {
   immediate: true
 })
 
-onMounted(()=>{
-  state.isMounted = true
-  window?.addEventListener('load', ()=>{
-    if (route.hash){
-      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-    }
-  })
-})
+// onMounted(()=>{
+//   state.isMounted = true
+//   window?.addEventListener('load', ()=>{
+//     if (route.hash){
+//       scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+//     }
+//   })
+// })
 
 </script>
 <template>

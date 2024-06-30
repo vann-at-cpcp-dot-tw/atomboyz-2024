@@ -17,9 +17,6 @@ const scopeStore:any = inject('scopeStore')
 </script>
 <template>
   <div id="RANK" :class="twMerge('relative bg-[#120c60]', props.class)">
-    <ClientOnly>
-      <HashJump />
-    </ClientOnly>
     <div class="container mb-8">
       <div class="mb-8 flex justify-center">
         <img class="w-full max-w-[312px] lg:max-w-[335px]" src="/assets/img/section_title_home_3.png">

@@ -178,9 +178,8 @@ onMounted(()=>{
         v-if="store.general?.rank_summary?.team_champion"
         class="container-fluid relative z-10 mb-[54px]">
           <ClientOnly>
-            <HashJump />
+            <HashJump id="champion" class="anchor relative top-[-80px]" />
           </ClientOnly>
-          <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
           </div>
@@ -203,9 +202,8 @@ onMounted(()=>{
         v-if="store.general?.rank_summary?.team_popular"
         class="container-fluid relative z-10">
           <ClientOnly>
-            <HashJump />
+            <HashJump id="popular" class="anchor relative top-[-80px]" />
           </ClientOnly>
-          <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
           </div>
@@ -230,11 +228,11 @@ onMounted(()=>{
       <div
       v-if="state.rankTables?.some?.((node:any)=>node.display === true)"
       class="relative">
-        <div id="ranking" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_boyz" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_group" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_club" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_sale" class="anchor relative top-[-80px]"></div>
+        <ClientOnly><HashJump id="ranking" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_boyz" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_group" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_club" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_sale" class="anchor relative top-[-80px]" /></ClientOnly>
         <RanksTable class="pb-8 pt-16" />
       </div>
 
@@ -250,8 +248,12 @@ onMounted(()=>{
         }">
           <div v-if="videosFetcher.data.value?.data?.list?.length > 0 || newsFetcher.data.value?.data?.list?.length > 0">
             <div class="container mb-8">
-              <div id="video" class="anchor relative top-[-80px]"></div>
-              <div id="article" class="anchor relative top-[-80px]"></div>
+              <ClientOnly>
+                <HashJump id="video" class="anchor relative top-[-80px]" />
+              </ClientOnly>
+              <ClientOnly>
+                <HashJump id="article" class="anchor relative top-[-80px]" />
+              </ClientOnly>
               <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
               <div class="mx-auto w-full max-w-[360px]">
                 <div class="row justify-center">
@@ -304,14 +306,14 @@ onMounted(()=>{
       <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
       <div class="bg-black pb-[60px]">
-        <div id="hidol" class="anchor relative top-[-80px]"></div>
+        <ClientOnly>
+          <HashJump id="hidol" class="anchor relative top-[-80px]" />
+        </ClientOnly>
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
               <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/mcVjO' :'https://hidol.fan/mcVjO'" target="_blank">
-                <ClientOnly>
-                  <HashJump />
-                </ClientOnly>
+
                 <img
                 class="absolute size-full rounded-lg"
                 src="/assets/img/hidol-preheat-section.png"

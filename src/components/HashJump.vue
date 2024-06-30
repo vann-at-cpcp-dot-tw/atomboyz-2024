@@ -3,8 +3,10 @@ import { twMerge } from 'tailwind-merge'
 import { scrollToSection2 } from '~/lib/helpers'
 const window = process.client ? globalThis : null
 interface IProps {
+  id: string
   class?: string
   className?: string
+  style?: Record<string, string>
 }
 const props = defineProps<IProps>()
 const route = useRoute()
@@ -20,5 +22,5 @@ onMounted(()=>{
 })
 </script>
 <template>
-  <div></div>
+  <div :id="props.id" :class="twMerge('', props.class)" :style="props?.style"></div>
 </template>

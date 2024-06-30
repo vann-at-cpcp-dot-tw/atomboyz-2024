@@ -45,9 +45,6 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
 <template>
   <div :class="twMerge('', props.class)">
     <ClientOnly>
-      <HashJump />
-    </ClientOnly>
-    <ClientOnly>
       <div class="container-fluid">
         <div class="relative mx-auto flex w-full max-w-[1188px] !flex-nowrap items-center justify-between">
           <div

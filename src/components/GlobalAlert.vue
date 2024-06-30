@@ -94,26 +94,26 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
   immediate: true
 })
 
-watch(()=>[state.active, route.hash], (newVal, oldVal)=>{
-  if (!window){
-    return
-  }
-  const [isActive, hash] = newVal
-  if (isActive){
-    document.body.classList.add('show-global-alert')
-  } else {
-    document.body.classList.remove('show-global-alert')
-    if (hash){
-      setTimeout(()=>{
-        if (route.hash){
-          scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-        }
-      }, 500)
-    }
-  }
-}, {
-  immediate: true,
-})
+// watch(()=>[state.active, route.hash], (newVal, oldVal)=>{
+//   if (!window){
+//     return
+//   }
+//   const [isActive, hash] = newVal
+//   if (isActive){
+//     document.body.classList.add('show-global-alert')
+//   } else {
+//     document.body.classList.remove('show-global-alert')
+//     if (hash){
+//       setTimeout(()=>{
+//         if (route.hash){
+//           scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+//         }
+//       }, 500)
+//     }
+//   }
+// }, {
+//   immediate: true,
+// })
 </script>
 <template>
   <ClientOnly>
