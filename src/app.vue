@@ -102,6 +102,7 @@ onMounted(()=>{
   if (!window){
     return
   }
+  console.log('version:', '06301920')
 
   // 鎖右鍵
   window.document.addEventListener('contextmenu', function(e){
