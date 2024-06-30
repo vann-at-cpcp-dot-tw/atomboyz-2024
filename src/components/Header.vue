@@ -167,12 +167,18 @@ watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
   if (!window || !isMounted){
     return
   }
+
   if (newHash){
     setTimeout(()=>{
       if (route.hash){
         scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
       }
     }, 500)
+    window.addEventListener('load', ()=>{
+      if (route.hash){
+        scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+      }
+    })
   }
 }, {
   immediate: true
@@ -209,7 +215,7 @@ onMounted(()=>{
                 if(node.to){
                   $router.push({
                     path: node.to,
-                    hash: node?.to?.split('#') ?`#${node.to.split('#')[1]}` :''
+                    hash: node?.to?.split('#')?.[1] ?`#${node.to.split('#')[1]}` :''
                   })
                 }
               }">
@@ -375,7 +381,7 @@ onMounted(()=>{
                     if(node.to){
                       $router.push({
                         path: node.to,
-                        hash: node?.to?.split('#') ?`#${node.to.split('#')[1]}` :''
+                        hash: node?.to?.split('#')?.[1] ?`#${node.to.split('#')[1]}` :''
                       })
                     }
                   }">
