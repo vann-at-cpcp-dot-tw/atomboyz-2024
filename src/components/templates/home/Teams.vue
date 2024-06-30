@@ -2,6 +2,7 @@
 import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
 import { useStore } from '~/store'
+import HashJump from '~/components/HashJump.vue'
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -40,6 +41,9 @@ function handleClick(teamIndex:number){
 </script>
 <template>
   <div :class="twMerge('overflow-hidden bg-[#120C60]', props.class)">
+    <ClientOnly>
+      <HashJump />
+    </ClientOnly>
     <div class="container relative">
       <img class="mx-auto max-w-[254px] lg:-mb-8 lg:max-w-[267px]" src="/assets/img/section_title_home_6.png">
       <!-- <img class="absolute right-0 top-[22%] min-w-[721px] lg:top-[7%] lg:min-w-[1879px]" src="/assets/img/home_stars_circle.svg"> -->

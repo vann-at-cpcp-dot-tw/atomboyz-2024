@@ -66,6 +66,9 @@ watch(()=>route.hash, (newVal)=>{
 </script>
 <template>
   <div :class="twMerge('bg-[#120C60] lg:px-0 px-5', props.class)">
+    <ClientOnly>
+      <HashJump />
+    </ClientOnly>
     <div class="container mb-2.5 rounded bg-white">
       <div id="voteinfo" class="anchor relative top-[-80px]"></div>
       <Trigger

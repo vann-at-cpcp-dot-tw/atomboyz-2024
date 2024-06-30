@@ -13,6 +13,7 @@ import Terms from '~/components/templates/home/Terms.vue'
 import { numberFormat } from '~/lib/helpers'
 import ImgFrame from '~/components/ImgFrame.vue'
 import MajorButton from '~/components/MajorButton.vue'
+import HashJump from '~/components/HashJump.vue'
 import { teams } from '~/lib/utils'
 import 'swiper/css/effect-coverflow'
 
@@ -176,6 +177,9 @@ onMounted(()=>{
         <div
         v-if="store.general?.rank_summary?.team_champion"
         class="container-fluid relative z-10 mb-[54px]">
+          <ClientOnly>
+            <HashJump />
+          </ClientOnly>
           <div id="champion" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
@@ -198,6 +202,9 @@ onMounted(()=>{
         <div
         v-if="store.general?.rank_summary?.team_popular"
         class="container-fluid relative z-10">
+          <ClientOnly>
+            <HashJump />
+          </ClientOnly>
           <div id="popular" class="anchor relative top-[-80px]"></div>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
@@ -302,6 +309,9 @@ onMounted(()=>{
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
               <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/mcVjO' :'https://hidol.fan/mcVjO'" target="_blank">
+                <ClientOnly>
+                  <HashJump />
+                </ClientOnly>
                 <img
                 class="absolute size-full rounded-lg"
                 src="/assets/img/hidol-preheat-section.png"

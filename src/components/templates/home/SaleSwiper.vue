@@ -5,6 +5,7 @@ import type { SwiperOptions } from 'swiper/types'
 import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { useWindowSize } from '@vueuse/core'
 import MajorButton from '~/components/MajorButton.vue'
+import HashJump from '~/components/HashJump.vue'
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -45,6 +46,9 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
 </script>
 <template>
   <div id="SALE" :class="twMerge('', props.class)">
+    <ClientOnly>
+      <HashJump />
+    </ClientOnly>
     <ClientOnly>
       <div v-if="viewport.width.value >= 992 && props?.list?.length <= 5" class="container">
         <div class="row justify-center">
