@@ -174,11 +174,6 @@ watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
         scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
       }
     }, 500)
-    window.addEventListener('load', ()=>{
-      if (route.hash){
-        scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-      }
-    })
   }
 }, {
   immediate: true
@@ -186,6 +181,11 @@ watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
 
 onMounted(()=>{
   state.isMounted = true
+  window?.addEventListener('load', ()=>{
+    if (route.hash){
+      scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+    }
+  })
 })
 
 </script>
