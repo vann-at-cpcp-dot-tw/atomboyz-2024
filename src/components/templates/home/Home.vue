@@ -112,13 +112,13 @@ watch(()=>state.rankTables, ()=>{
 })
 
 watch(()=>[videosFetcher.data.value?.data?.list?.length, newsFetcher.data.value?.data?.list?.length], ()=>{
-  if (videosFetcher.data.value?.data?.list?.length > 0){
+  if (videosFetcher.data.value?.data?.list?.length > 0 && route.hash !== '#article'){
     state.newsTableActive = 'video'
     return
   }
 
-  if (newsFetcher.data.value?.data?.list?.length > 0){
-    state.newsTableActive = 'news'
+  if (newsFetcher.data.value?.data?.list?.length > 0 && route.hash !== '#video'){
+    state.newsTableActive = 'article'
   }
 }, {
   immediate: true
@@ -248,12 +248,8 @@ onMounted(()=>{
         }">
           <div v-if="videosFetcher.data.value?.data?.list?.length > 0 || newsFetcher.data.value?.data?.list?.length > 0">
             <div class="container mb-8">
-              <ClientOnly>
-                <HashJump id="video" class="anchor relative top-[-80px]" />
-              </ClientOnly>
-              <ClientOnly>
-                <HashJump id="article" class="anchor relative top-[-80px]" />
-              </ClientOnly>
+              <ClientOnly><HashJump id="video" class="anchor relative top-[-80px]" /></ClientOnly>
+              <ClientOnly><HashJump id="article" class="anchor relative top-[-80px]" /></ClientOnly>
               <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
               <div class="mx-auto w-full max-w-[360px]">
                 <div class="row justify-center">
@@ -273,9 +269,6 @@ onMounted(()=>{
                     :active="state.newsTableActive === 'article'"
                     @click="()=>{
                       state.newsTableActive = 'article'
-                      if( !newsFetcher.data.value ){
-                        newsFetcher.execute()
-                      }
                     }">
                       最新娛樂
                     </MajorButton>
