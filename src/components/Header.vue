@@ -200,16 +200,22 @@ onMounted(()=>{
           v-for="(node, index) in nav"
           :key="index"
           class="col-auto">
-            <NuxtLink :to="node?.to">
+            <div :to="node?.to">
               <div
               class="btn rounded-full py-1 text-center"
               :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major btn-scaleUp'}`"
               @click="()=>{
                 node?.onClick?.()
+                if(node.to){
+                  $router.push({
+                    path: node.to,
+                    hash: node?.to?.split('#') ?`#${node.to.split('#')[1]}` :''
+                  })
+                }
               }">
                 {{ node.label }}
               </div>
-            </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
