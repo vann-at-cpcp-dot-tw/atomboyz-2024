@@ -97,7 +97,7 @@ watch(()=>gameFetcher.data.value, (newVal, oldVal)=>{
         }
       }">
         <div class="flex items-center">
-          每日任務 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
+          任務獎勵 <i class="bi bi-chevron-double-right block text-[14px] leading-none"></i>
         </div>
       </MajorButton>
     </div>

@@ -68,7 +68,7 @@ function trackingUserLogout(callback?:Function){
             })
           }
         }">
-          每日任務
+          任務獎勵
         </div>
       </div>
       <div class="lg:col-12 col-auto shrink lg:mb-2">

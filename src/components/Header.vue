@@ -161,15 +161,13 @@ watch(()=>saleFetcher.data.value, (newVal)=>{
 
 watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
   const window = newVal[0]
+  const newHash = newVal?.[1]
+  const oldHash = oldVal?.[1]
   const isMounted = newVal[2]
-
   if (!window || !isMounted){
     return
   }
-
-  const newHash = newVal?.[1]
-  const oldHash = oldVal?.[1]
-  if (newHash && newHash !== oldHash){
+  if (newHash){
     setTimeout(()=>{
       if (route.hash){
         scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
@@ -361,17 +359,23 @@ onMounted(()=>{
               v-for="(node, index) in nav"
               :key="index"
               class="w-full pb-3">
-                <NuxtLink :to="node?.to">
+                <div :to="node?.to">
                   <div
                   class="btn rounded-full py-3 text-center text-[20px]"
                   :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major bg-white'}`"
                   @click="()=>{
                     node?.onClick?.()
                     state.isMobileMenuOpen = false
+                    if(node.to){
+                      $router.push({
+                        path: node.to,
+                        hash: node?.to?.split('#') ?`#${node.to.split('#')[1]}` :''
+                      })
+                    }
                   }">
                     {{ node.label }}
                   </div>
-                </NuxtLink>
+                </div>
               </div>
             </div>
             <div class="mt-auto flex justify-center pb-12">
