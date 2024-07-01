@@ -10,7 +10,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_1.png`
     },
-    description: '晨星是最遙遠的恆星，距離地球280億光年，它發出的光要花129億年才能到達地球。',
+    description: '晨之星（光屬性 / Light）<br/>WHL0137-LS，最遙遠的恆星，距離地球280億光年，<br/>它發出的光要花129億年才能到達地球。',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_2.png`
     },
-    description: '當我們抬起頭看，夜空中最亮的恆星，距離地球8.6光年，比太陽還亮25倍。',
+    description: '天狼星（夜屬性 / Night ）<br/>當我們抬起頭看，夜空中最亮的恆星，<br/>距離地球8.6光年，比太陽還亮25倍。',
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_3.png`
     },
-    description: 'HD 189733 b，距離地球63光年的系外行星，以強烈的炫風聞名，風速達每小時8700公里。',
+    description: '風行者（風屬性 / Wind）<br/>HD 189733 b，距離地球63光年的系外行星，<br/>以強烈的炫風聞名，風速達每小時9700公里。',
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_4.png`
     },
-    description: '克卜勒70b，距離地球4200光年的系外行星，表面溫度高達攝氏6900度，比太陽還熱。',
+    description: '克卜勒（炎屬性 / Flame）<br/>克卜勒70b，距離地球3849光年的系外行星，<br/>表面溫度高達攝氏6904度，比太陽還熱。',
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_5.png`
     },
-    description: 'BPM37093，距離地球52光年，是一顆冷卻後的恆星，核心存在大量碳晶體，相當於1x10 34克拉的鑽石。',
+    description: '鑽石星球（ 冰屬性 / Ice）<br/>BPM37093，距離地球50光年，是一顆冷卻後的恆星，<br/>核心存在大量碳晶體，相當於1x10的34次方克拉的鑽石。',
   },
   {
     id: 6,
@@ -60,7 +60,7 @@ export const teams = [
       const APP_BASE = useRuntimeConfig().public.appBase
       return `${APP_BASE}assets/img/team_6.png`
     },
-    description: 'SDSS J1228+1040 b，已知最小的系外行星，距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
+    description: ' 小行星（沙屬性 / Dune）<br/>SDSS J1228+1040 b，已知最小的系外行星，<br/>距離地球413光年，周圍是由沙礫與塵埃組成的星環。',
   },
 ]
 export function routeNameToTrackingPageName(routePath:'/'|'/vote'|'/news/video'|'/news/article'|string){

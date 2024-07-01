@@ -80,8 +80,8 @@ function handleClick(teamIndex:number){
                 <div
                 v-if="state.active === teamIndex"
                 :class="`absolute w-[226px] p-5 rounded-lg text-white z-10 top-1/2 -translate-y-1/2 left-[100%] -ml-8`"
-                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-                  {{ teams[teamIndex].description }}
+                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+                v-html="teams[teamIndex].description">
                 </div>
               </NuxtLink>
             </div>
@@ -121,8 +121,8 @@ function handleClick(teamIndex:number){
                 <div
                 v-if="state.active === teamIndex"
                 :class="`absolute w-[226px] p-5 rounded-lg text-white z-10 top-1/2 -translate-y-1/2 right-[100%] -mr-12`"
-                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-                  {{ teams[teamIndex].description }}
+                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+                v-html="teams[teamIndex].description">
                 </div>
               </NuxtLink>
             </div>
@@ -148,8 +148,8 @@ function handleClick(teamIndex:number){
             <div
             v-if="state.active === teamIndex"
             :class="`absolute w-[160px] py-2.5 px-4 rounded-lg text-[12px] text-white z-10 ${teamIndex%2 === 0 ?'left-[100%] -ml-4': 'right-[100%] -mr-4'} top-1/2 -translate-y-1/2`"
-            style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-              {{ teams[teamIndex].description }}
+            style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+            v-html="teams[teamIndex].description">
             </div>
           </div>
         </div>
