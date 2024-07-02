@@ -180,7 +180,7 @@ onMounted(()=>{
           <ClientOnly>
             <HashJump id="champion" class="anchor relative top-[-80px]" />
           </ClientOnly>
-          <div class="mb-5 flex justify-center">
+          <!-- <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
@@ -195,7 +195,7 @@ onMounted(()=>{
                 height: '87.5%',
               }">
             </ImgFrame>
-          </div>
+          </div> -->
         </div>
 
         <div
@@ -204,7 +204,7 @@ onMounted(()=>{
           <ClientOnly>
             <HashJump id="popular" class="anchor relative top-[-80px]" />
           </ClientOnly>
-          <div class="mb-5 flex justify-center">
+          <!-- <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
           </div>
           <div class="mx-auto w-full max-w-[1083px]">
@@ -219,7 +219,7 @@ onMounted(()=>{
                 height: '87.5%',
               }">
             </ImgFrame>
-          </div>
+          </div> -->
         </div>
       </div>
 
