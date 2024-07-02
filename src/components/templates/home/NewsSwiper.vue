@@ -6,6 +6,7 @@ import { EffectCoverflow } from 'swiper/modules'
 import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { useWindowSize } from '@vueuse/core'
 import MajorButton from '~/components/MajorButton.vue'
+import HashJump from '~/components/HashJump.vue'
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -19,7 +20,7 @@ const swiperRef = ref<any>(null)
 const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
   if (viewport.width.value && viewport.width.value <= 991){
     return {
-      class: '',
+      class: 'swiper-news',
       modules: [],
       spaceBetween: 0,
       grabCursor: true,
@@ -30,7 +31,7 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
   }
 
   return {
-    class: '',
+    class: 'swiper-news',
     modules: [],
     spaceBetween: 12,
     grabCursor: true,
@@ -70,12 +71,12 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
             }"
             @slide-change="()=>{}">
               <SwiperSlide v-for="(node, index) in props?.list" :key="index">
-                <div class="item" style="border-image: linear-gradient(#0c1074 0%, #5d00ff 46.03%, #0c1074 100%) 1; border-width: 7px; border-style: solid;">
-                  <div class="p-2.5">
-                    <div class="row">
+                <div class="item flex flex-col" style="border-image: linear-gradient(#0c1074 0%, #5d00ff 46.03%, #0c1074 100%) 1; border-width: 7px; border-style: solid;">
+                  <div class="flex grow flex-col p-2.5">
+                    <div class="row grow">
                       <div class="col-12 shrink lg:max-w-[51%]">
                         <NuxtLink
-                        :to="node.url ?node.url :`/article/${node.id}`"
+                        :to="node?.url ?node.url :`/article/${node.id}`"
                         :target="node?.url ?'_blank' :'_self'">
                           <RatioArea ratio="66.54">
                             <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.img})` }"></div>
@@ -83,16 +84,20 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                         </NuxtLink>
                       </div>
                       <div class="col-12 shrink text-white lg:max-w-[49%]">
-                        <NuxtLink :to="`/article/${node.id}`">
-                          <div class="mb-2 text-[18px]">{{ node.title }}</div>
+                        <NuxtLink
+                        :to="node?.url ?node.url :`/article/${node.id}`"
+                        :target="node?.url ?'_blank' :'_self'">
+                          <div class="mb-2 line-clamp-3 text-[18px]">{{ node.title }}</div>
                           <div class="mb-4 flex">
                             <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
                           </div>
                           <div class="mb-3 line-clamp-2 text-[15px]" v-html="node.excerpts"></div>
-                          <div class="flex justify-center lg:justify-end">
-                            <MajorButton style="max-width:134px; height: 43px;">看更多 <i class="bi bi-chevron-double-right text-[13px]"></i></MajorButton>
-                          </div>
                         </NuxtLink>
+                      </div>
+                      <div class="col-12 mt-auto">
+                        <div class="flex justify-center lg:justify-end">
+                          <MajorButton style="max-width:134px; height: 43px;">看更多 <i class="bi bi-chevron-double-right text-[13px]"></i></MajorButton>
+                        </div>
                       </div>
                     </div>
                   </div>

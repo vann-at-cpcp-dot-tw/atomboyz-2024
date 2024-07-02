@@ -117,7 +117,7 @@ watch(()=>elRef.value, (newVal)=>{
           <img class="w-[24px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);">
           <div
           class="pl-2 text-[20px]">
-            每日任務
+            任務獎勵
           </div>
         </div>
       </div>

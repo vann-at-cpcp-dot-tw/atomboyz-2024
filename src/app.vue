@@ -76,7 +76,7 @@ watch(()=>[route.query.t, window], (newVal, oldVal)=>{
       name: localStorage?.getItem?.('after_login_route_name') || 'index',
       query: queryWithoutT
     })
-
+    store.do.lightboxRemove('NeedLogin')
     trackingUserLogin(user.openId)
   })
 }, {
@@ -102,6 +102,7 @@ onMounted(()=>{
   if (!window){
     return
   }
+  console.log('version:', '06301920')
 
   // 鎖右鍵
   window.document.addEventListener('contextmenu', function(e){

@@ -2,6 +2,7 @@
 import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
 import { useStore } from '~/store'
+import HashJump from '~/components/HashJump.vue'
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -40,6 +41,7 @@ function handleClick(teamIndex:number){
 </script>
 <template>
   <div :class="twMerge('overflow-hidden bg-[#120C60]', props.class)">
+    <ClientOnly><HashJump id="vote" class="anchor relative top-[-80px]" /></ClientOnly>
     <div class="container relative">
       <img class="mx-auto max-w-[254px] lg:-mb-8 lg:max-w-[267px]" src="/assets/img/section_title_home_6.png">
       <!-- <img class="absolute right-0 top-[22%] min-w-[721px] lg:top-[7%] lg:min-w-[1879px]" src="/assets/img/home_stars_circle.svg"> -->
@@ -78,8 +80,8 @@ function handleClick(teamIndex:number){
                 <div
                 v-if="state.active === teamIndex"
                 :class="`absolute w-[226px] p-5 rounded-lg text-white z-10 top-1/2 -translate-y-1/2 left-[100%] -ml-8`"
-                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-                  {{ teams[teamIndex].description }}
+                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+                v-html="teams[teamIndex].description">
                 </div>
               </NuxtLink>
             </div>
@@ -119,8 +121,8 @@ function handleClick(teamIndex:number){
                 <div
                 v-if="state.active === teamIndex"
                 :class="`absolute w-[226px] p-5 rounded-lg text-white z-10 top-1/2 -translate-y-1/2 right-[100%] -mr-12`"
-                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-                  {{ teams[teamIndex].description }}
+                style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+                v-html="teams[teamIndex].description">
                 </div>
               </NuxtLink>
             </div>
@@ -146,8 +148,8 @@ function handleClick(teamIndex:number){
             <div
             v-if="state.active === teamIndex"
             :class="`absolute w-[160px] py-2.5 px-4 rounded-lg text-[12px] text-white z-10 ${teamIndex%2 === 0 ?'left-[100%] -ml-4': 'right-[100%] -mr-4'} top-1/2 -translate-y-1/2`"
-            style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);">
-              {{ teams[teamIndex].description }}
+            style="background: linear-gradient(rgba(218, 217, 246, 0.4)  0%, rgba(218, 217, 246, 0.4) 100%);"
+            v-html="teams[teamIndex].description">
             </div>
           </div>
         </div>

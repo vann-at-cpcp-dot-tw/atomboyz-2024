@@ -17,6 +17,7 @@ const viewport = useWindowSize()
 const state = reactive({
   isShareNavOpen: false,
   isMobileMenuOpen: false,
+  isMounted: false,
 })
 const ranksFetcher = await useFetch<{data:{[key:string]:any}}>(`${API_URL}/rank`)
 
@@ -141,25 +142,6 @@ watch(()=>state.isMobileMenuOpen, (newVal)=>{
   immediate: true
 })
 
-watch(()=>[window, route.hash], (newVal, oldVal)=>{
-  const window = newVal[0]
-  if (!window){
-    return
-  }
-
-  const newHash = newVal?.[1]
-  const oldHash = oldVal?.[1]
-  if (newHash && newHash !== oldHash){
-    setTimeout(()=>{
-      if (route.hash){
-        scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
-      }
-    }, 500)
-  }
-}, {
-  immediate: true
-})
-
 watch(()=>ranksFetcher.data.value, (newVal)=>{
   store.rank = {
     personal: newVal?.data?.personal,
@@ -176,6 +158,35 @@ watch(()=>saleFetcher.data.value, (newVal)=>{
 }, {
   immediate: true
 })
+
+watch(()=>[window, route.hash, state.isMounted], (newVal, oldVal)=>{
+  const window = newVal[0]
+  const newHash = newVal?.[1]
+  const oldHash = oldVal?.[1]
+  const isMounted = newVal[2]
+  // if (!window || !isMounted){
+  //   return
+  // }
+
+  // if (newHash){
+  //   setTimeout(()=>{
+  //     if (route.hash){
+  //       scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+  //     }
+  //   }, 500)
+  // }
+}, {
+  immediate: true
+})
+
+// onMounted(()=>{
+//   state.isMounted = true
+//   window?.addEventListener('load', ()=>{
+//     if (route.hash){
+//       scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+//     }
+//   })
+// })
 
 </script>
 <template>
@@ -195,16 +206,22 @@ watch(()=>saleFetcher.data.value, (newVal)=>{
           v-for="(node, index) in nav"
           :key="index"
           class="col-auto">
-            <NuxtLink :to="node?.to">
+            <div :to="node?.to">
               <div
               class="btn rounded-full py-1 text-center"
               :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major btn-scaleUp'}`"
               @click="()=>{
                 node?.onClick?.()
+                if(node.to){
+                  $router.push({
+                    path: node.to,
+                    hash: node?.to?.split('#')?.[1] ?`#${node.to.split('#')[1]}` :''
+                  })
+                }
               }">
                 {{ node.label }}
               </div>
-            </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -354,17 +371,23 @@ watch(()=>saleFetcher.data.value, (newVal)=>{
               v-for="(node, index) in nav"
               :key="index"
               class="w-full pb-3">
-                <NuxtLink :to="node?.to">
+                <div :to="node?.to">
                   <div
                   class="btn rounded-full py-3 text-center text-[20px]"
                   :class="`${node.names.includes(route.name) ?'bg-major text-white min-w-[95px]' :'text-major bg-white'}`"
                   @click="()=>{
                     node?.onClick?.()
                     state.isMobileMenuOpen = false
+                    if(node.to){
+                      $router.push({
+                        path: node.to,
+                        hash: node?.to?.split('#')?.[1] ?`#${node.to.split('#')[1]}` :''
+                      })
+                    }
                   }">
                     {{ node.label }}
                   </div>
-                </NuxtLink>
+                </div>
               </div>
             </div>
             <div class="mt-auto flex justify-center pb-12">

@@ -2,6 +2,7 @@
 import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
 import { numberFormat } from '~/lib/helpers'
+import HashJump from '~/components/HashJump.vue'
 const window = process.client ? globalThis : null
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL

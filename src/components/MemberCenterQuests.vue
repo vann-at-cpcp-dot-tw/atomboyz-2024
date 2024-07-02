@@ -11,7 +11,7 @@ const store = useStore()
 </script>
 <template>
   <div :class="twMerge('', props.class)">
-    <div class="mb-4 rounded bg-white p-2 text-center text-[12px] text-[#6B6B6B]">注意事項：每天00:00(GMT+8)每日任務將重新計算</div>
+    <div class="mb-4 rounded bg-white p-2 text-center text-[12px] text-[#6B6B6B]">注意事項：每天00:00(GMT+8)任務獎勵將重新計算</div>
     <div
     v-for="(node, index) in store?.user?.daily_quests"
     :key="index"

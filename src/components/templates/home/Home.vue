@@ -13,6 +13,7 @@ import Terms from '~/components/templates/home/Terms.vue'
 import { numberFormat } from '~/lib/helpers'
 import ImgFrame from '~/components/ImgFrame.vue'
 import MajorButton from '~/components/MajorButton.vue'
+import HashJump from '~/components/HashJump.vue'
 import { teams } from '~/lib/utils'
 import 'swiper/css/effect-coverflow'
 
@@ -111,13 +112,13 @@ watch(()=>state.rankTables, ()=>{
 })
 
 watch(()=>[videosFetcher.data.value?.data?.list?.length, newsFetcher.data.value?.data?.list?.length], ()=>{
-  if (videosFetcher.data.value?.data?.list?.length > 0){
+  if (videosFetcher.data.value?.data?.list?.length > 0 && route.hash !== '#article'){
     state.newsTableActive = 'video'
     return
   }
 
-  if (newsFetcher.data.value?.data?.list?.length > 0){
-    state.newsTableActive = 'news'
+  if (newsFetcher.data.value?.data?.list?.length > 0 && route.hash !== '#video'){
+    state.newsTableActive = 'article'
   }
 }, {
   immediate: true
@@ -176,7 +177,9 @@ onMounted(()=>{
         <div
         v-if="store.general?.rank_summary?.team_champion"
         class="container-fluid relative z-10 mb-[54px]">
-          <div id="champion" class="anchor relative top-[-80px]"></div>
+          <ClientOnly>
+            <HashJump id="champion" class="anchor relative top-[-80px]" />
+          </ClientOnly>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[279px] lg:max-w-[298px]" src="/assets/img/section_title_home_1.png">
           </div>
@@ -198,7 +201,9 @@ onMounted(()=>{
         <div
         v-if="store.general?.rank_summary?.team_popular"
         class="container-fluid relative z-10">
-          <div id="popular" class="anchor relative top-[-80px]"></div>
+          <ClientOnly>
+            <HashJump id="popular" class="anchor relative top-[-80px]" />
+          </ClientOnly>
           <div class="mb-5 flex justify-center">
             <img class="w-full max-w-[248px] lg:max-w-[274px]" src="/assets/img/section_title_home_2.png">
           </div>
@@ -223,11 +228,11 @@ onMounted(()=>{
       <div
       v-if="state.rankTables?.some?.((node:any)=>node.display === true)"
       class="relative">
-        <div id="ranking" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_boyz" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_group" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_club" class="anchor relative top-[-80px]"></div>
-        <div id="ranking_sale" class="anchor relative top-[-80px]"></div>
+        <ClientOnly><HashJump id="ranking" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_boyz" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_group" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_club" class="anchor relative top-[-80px]" /></ClientOnly>
+        <ClientOnly><HashJump id="ranking_sale" class="anchor relative top-[-80px]" /></ClientOnly>
         <RanksTable class="pb-8 pt-16" />
       </div>
 
@@ -243,8 +248,8 @@ onMounted(()=>{
         }">
           <div v-if="videosFetcher.data.value?.data?.list?.length > 0 || newsFetcher.data.value?.data?.list?.length > 0">
             <div class="container mb-8">
-              <div id="video" class="anchor relative top-[-80px]"></div>
-              <div id="article" class="anchor relative top-[-80px]"></div>
+              <ClientOnly><HashJump id="video" class="anchor relative top-[-80px]" /></ClientOnly>
+              <ClientOnly><HashJump id="article" class="anchor relative top-[-80px]" /></ClientOnly>
               <img class="mx-auto mb-2 max-w-[319px] lg:max-w-[337px]" src="/assets/img/section_title_home_4.png" style="max-width:337px;">
               <div class="mx-auto w-full max-w-[360px]">
                 <div class="row justify-center">
@@ -264,9 +269,6 @@ onMounted(()=>{
                     :active="state.newsTableActive === 'article'"
                     @click="()=>{
                       state.newsTableActive = 'article'
-                      if( !newsFetcher.data.value ){
-                        newsFetcher.execute()
-                      }
                     }">
                       最新娛樂
                     </MajorButton>
@@ -297,11 +299,14 @@ onMounted(()=>{
       <div class="divider relative mb-[-93px] h-[143px] lg:mb-[-187px] lg:h-[287px]" style="background: linear-gradient(#120c60 0%, black 100%);"></div>
 
       <div class="bg-black pb-[60px]">
-        <div id="hidol" class="anchor relative top-[-80px]"></div>
+        <ClientOnly>
+          <HashJump id="hidol" class="anchor relative top-[-80px]" />
+        </ClientOnly>
         <div class="container-fluid">
           <div class="mx-auto w-full max-w-[1320px]">
             <ImgFrame frame="2">
               <a class="absolute size-full rounded-lg" :href="IS_STAGE ?'https://hidol.fan/mcVjO' :'https://hidol.fan/mcVjO'" target="_blank">
+
                 <img
                 class="absolute size-full rounded-lg"
                 src="/assets/img/hidol-preheat-section.png"

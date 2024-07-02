@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from '@vueuse/core'
 import { calcSizeByRatio, isEmpty } from 'vanns-common-modules/dist/lib/helpers'
 import { useStore } from '~/store'
+import { scrollToSection2 } from '~/lib/helpers'
 
 const window = process.client ? globalThis : null
 interface IProps {
@@ -30,6 +31,7 @@ function getToday(){
   const today = `${year}${month}${day}`
   return today
 }
+
 watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
   if (!window){
     return
@@ -54,19 +56,6 @@ watch(()=>[window, store.general?.global_alert], (newVal, oldVal)=>{
   }
 }, {
   immediate: true
-})
-
-watch(()=>state.active, (newVal, oldVal)=>{
-  if (!window){
-    return
-  }
-  if (newVal){
-    document.body.classList.add('show-global-alert')
-  } else {
-    document.body.classList.remove('show-global-alert')
-  }
-}, {
-  immediate: true,
 })
 
 watch(()=>[state.active, store.trackingSender], (newVal)=>{
@@ -104,6 +93,27 @@ watch(()=>[viewport.width.value, viewport.height.value, contentWrapper?.value], 
 }, {
   immediate: true
 })
+
+// watch(()=>[state.active, route.hash], (newVal, oldVal)=>{
+//   if (!window){
+//     return
+//   }
+//   const [isActive, hash] = newVal
+//   if (isActive){
+//     document.body.classList.add('show-global-alert')
+//   } else {
+//     document.body.classList.remove('show-global-alert')
+//     if (hash){
+//       setTimeout(()=>{
+//         if (route.hash){
+//           scrollToSection2({ el: window.document.querySelector(route.hash), jump: true })
+//         }
+//       }, 500)
+//     }
+//   }
+// }, {
+//   immediate: true,
+// })
 </script>
 <template>
   <ClientOnly>

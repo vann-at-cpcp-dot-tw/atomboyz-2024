@@ -79,7 +79,7 @@ onMounted(()=>{
       })
     }">
       <div class="mb-1"><img class="mx-auto w-[18px]" src="/assets/img/icon_planet.svg" style="filter:brightness(100);"></div>
-      <div class="leading-[1.2]">每日<br>任務</div>
+      <div class="leading-[1.2]">任務<br>獎勵</div>
     </div>
   </div>
 </template>

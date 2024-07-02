@@ -6,7 +6,7 @@ import MajorButton from '~/components/MajorButton.vue'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import Pagination from '~/components/Pagination.vue'
 import { useStore } from '~/store'
-
+const window = process.client ? globalThis : null
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
 const viewport = useWindowSize()
@@ -90,7 +90,8 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                 </RatioArea>
                 <NuxtLink
                 v-else
-                :to="`/article/${node.id}`">
+                :to="node?.url ?node.url :`/article/${node.id}`"
+                :target="node?.url ?'_blank' :'_self'">
                   <RatioArea ratio="66.54">
                     <div
                     class="absolute left-0 top-0 size-full bg-cover bg-center bg-no-repeat"
@@ -102,7 +103,8 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
               </div>
               <div class="col-12 mb-5 shrink text-white lg:mb-2">
                 <NuxtLink
-                :to="tab === 'video' ?'' :`/article/${node.id}`"
+                :to="tab === 'video' ?'' :node?.url ?node.url :`/article/${node.id}`"
+                :target="node?.url ?'_blank' :'_self'"
                 @click="()=>{
                   if( tab === 'video' ){
                     state.open = convertYoutubeUrlToEmbed(node?.yt_url)?.embedURL || ''
@@ -124,9 +126,17 @@ watch(()=>[isTrackingInit, store.trackingSender], (newVal)=>{
                   if( tab === 'video' ){
                     state.open = convertYoutubeUrlToEmbed(node?.yt_url)?.embedURL || ''
                   }else{
+                    if( !window ){
+                      return
+                    }
+
+                    if( node?.url ){
+                      window.open(node.url, '_blank')
+                    }
                     router.push({
                       path: `/article/${node.id}`
                     })
+
                   }
                 }">
                   看更多 <i class="bi bi-chevron-double-right text-[13px]"></i>

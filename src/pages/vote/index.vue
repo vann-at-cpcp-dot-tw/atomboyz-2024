@@ -416,7 +416,7 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
     :style="{
 
     }">
-      <div :id="`${teamNode.tagId}`" class="anchor relative" :style="{top: `-${stickyHeightPx}`}"></div>
+      <ClientOnly><HashJump :id="`${teamNode.tagId}`" class="anchor relative" :style="{top: `-${stickyHeightPx}`}" /></ClientOnly>
       <div class="mx-auto w-full max-w-[1093px] rounded-xl border border-white p-2 lg:p-5">
         <div class="mx-auto w-full max-w-[959px]">
           <div class="mb-2 mt-1 flex justify-center lg:mb-4 lg:mt-3 lg:justify-start">
