@@ -154,6 +154,16 @@ onUnmounted(()=>{
                   @click="(e)=>{
                     e.stopPropagation()
                     store.do.toggleFav(props.name)
+                    store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                      page_info: {
+                        type: 'introduction',
+                        name: props.name,
+                      },
+                      click_info: {
+                        type: 'voting_function',
+                        name: store.user?.fav_peoples?.map((node:any)=>node.name).includes(props?.name) ?'unfollow' :'follow'
+                      }
+                    })
                   }"></i>
                 </div>
               </RatioArea>
