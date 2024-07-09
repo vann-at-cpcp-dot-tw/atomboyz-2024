@@ -1,6 +1,7 @@
 <script lang="tsx" setup>
 import { twMerge } from 'tailwind-merge'
 import { useStore } from '~/store'
+
 const window = process.client ? globalThis : null
 interface IProps {
   class?: string
@@ -67,6 +68,15 @@ function trackingUserLogout(callback?:Function){
               hash: '#task'
             })
           }
+          store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+            page_info: {
+              page: 'atomboyz_member',
+            },
+            click_info: {
+              type: 'page_function',
+              name: 'atomboyz_mission'
+            }
+          })
         }">
           任務獎勵
         </div>
@@ -78,6 +88,15 @@ function trackingUserLogout(callback?:Function){
           $router.push({
             hash: '#favourite'
           })
+          store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+            page_info: {
+              page: 'atomboyz_member',
+            },
+            click_info: {
+              type: 'page_function',
+              name: 'atomboyz_following'
+            }
+          })
         }">
           最愛少年
         </div>
@@ -88,6 +107,15 @@ function trackingUserLogout(callback?:Function){
         @click="()=>{
           $router.push({
             hash: '#voting_record'
+          })
+          store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+            page_info: {
+              page: 'atomboyz_member',
+            },
+            click_info: {
+              type: 'page_function',
+              name: 'voting_record'
+            }
           })
         }">
           當日投票

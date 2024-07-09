@@ -258,7 +258,18 @@ onMounted(()=>{
                     class="h-[44px] lg:h-[50px] lg:text-[21px]"
                     variant="outline"
                     :active="state.newsTableActive === 'video'"
-                    @click="()=>{ state.newsTableActive = 'video' }">
+                    @click="()=>{
+                      state.newsTableActive = 'video'
+                      store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+                        page_info: {
+                          sec: 'atomboyz_news',
+                        },
+                        click_info: {
+                          type: 'page_function',
+                          name: 'videos',
+                        }
+                      })
+                    }">
                       最新影音
                     </MajorButton>
                   </div>
@@ -269,6 +280,15 @@ onMounted(()=>{
                     :active="state.newsTableActive === 'article'"
                     @click="()=>{
                       state.newsTableActive = 'article'
+                      store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+                        page_info: {
+                          sec: 'atomboyz_news',
+                        },
+                        click_info: {
+                          type: 'page_function',
+                          name: 'news',
+                        }
+                      })
                     }">
                       最新娛樂
                     </MajorButton>
@@ -283,7 +303,9 @@ onMounted(()=>{
           </div>
 
           <div v-if="store?.sale?.list?.length > 0" class="pb-4">
-            <div id="merch" class="anchor relative top-[-80px]"></div>
+            <ClientOnly>
+              <HashJump id="merch" class="anchor relative top-[-80px]" />
+            </ClientOnly>
             <img class="mx-auto mb-4 max-w-[318px] lg:max-w-[335px]" src="/assets/img/section_title_home_5.png">
             <SaleSwiper :list="store?.sale?.list" />
           </div>

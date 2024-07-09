@@ -54,6 +54,7 @@ export interface ITrackingInfos {
     tab?: string
     sec?: string
     url?: string
+    pos?: string | number
   },
   impression_info?: {[key:string]:any},
 }

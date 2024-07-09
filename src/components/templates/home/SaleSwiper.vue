@@ -6,6 +6,8 @@ import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { useWindowSize } from '@vueuse/core'
 import MajorButton from '~/components/MajorButton.vue'
 import HashJump from '~/components/HashJump.vue'
+import { useStore } from '~/store'
+
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -13,6 +15,7 @@ interface IProps {
   className?: string
   list: any[]
 }
+const store = useStore()
 const viewport = useWindowSize()
 const props = defineProps<IProps>()
 const swiperRef = ref<any>(null)
@@ -47,9 +50,6 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
 <template>
   <div id="SALE" :class="twMerge('', props.class)">
     <ClientOnly>
-      <HashJump />
-    </ClientOnly>
-    <ClientOnly>
       <div v-if="viewport.width.value >= 992 && props?.list?.length <= 5" class="container">
         <div class="row justify-center">
           <div v-for="(node, index) in props?.list" :key="index" class="col-auto w-1/5">
@@ -64,7 +64,22 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                 </div>
               </RatioArea>
             </div>
-            <a :href="node?.href" target="_blank">
+            <a
+            :href="node?.href"
+            target="_blank"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  sec: 'atomboyz_goods'
+                },
+                click_info: {
+                  type: 'direct_goods',
+                  url: node.href,
+                  pos: index+1,
+                  name: node.name
+                }
+              })
+            }">
               <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
             </a>
             <div class="text-[13px] text-white" v-html="node?.description"></div>
@@ -78,6 +93,15 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           :class="`btn btnScale-up`"
           @click="()=>{
             swiperRef.slidePrev()
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              page_info: {
+                sec: 'atomboyz_goods'
+              },
+              click_info: {
+                type: 'switch_function',
+                name: 'left'
+              }
+            })
           }">
             <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
           </div>
@@ -107,7 +131,22 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                     </div>
                   </RatioArea>
                 </div>
-                <a :href="node?.href" target="_blank">
+                <a
+                :href="node?.href"
+                target="_blank"
+                @click="()=>{
+                  store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                    page_info: {
+                      sec: 'atomboyz_goods'
+                    },
+                    click_info: {
+                      type: 'direct_goods',
+                      url: node.href,
+                      pos: index+1,
+                      name: node.name
+                    }
+                  })
+                }">
                   <MajorButton class="btn-light mb-2 h-10">限時搶購</MajorButton>
                 </a>
                 <div class="text-[13px] text-white" v-html="node?.description"></div>
@@ -119,6 +158,15 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           :class="`btn btnScale-up`"
           @click="()=>{
             swiperRef.slideNext()
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              page_info: {
+                sec: 'atomboyz_goods'
+              },
+              click_info: {
+                type: 'switch_function',
+                name: 'right'
+              }
+            })
           }">
             <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
           </div>

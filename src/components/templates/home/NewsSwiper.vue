@@ -7,6 +7,8 @@ import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { useWindowSize } from '@vueuse/core'
 import MajorButton from '~/components/MajorButton.vue'
 import HashJump from '~/components/HashJump.vue'
+import { useStore } from '~/store'
+
 const window = process.client ? globalThis : null
 
 interface IProps {
@@ -16,6 +18,7 @@ interface IProps {
 }
 const viewport = useWindowSize()
 const props = defineProps<IProps>()
+const store = useStore()
 const swiperRef = ref<any>(null)
 const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
   if (viewport.width.value && viewport.width.value <= 991){
@@ -52,6 +55,15 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
           :class="`btn btnScale-up ${swiperRef?.isBeginning ?'lg:opacity-50 lg:pointer-events-none' :''}`"
           @click="()=>{
             swiperRef.slidePrev()
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              page_info: {
+                sec: 'atomboyz_news',
+              },
+              click_info: {
+                type: 'switch_function',
+                name: 'left'
+              }
+            })
           }">
             <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
           </div>
@@ -77,7 +89,18 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                       <div class="col-12 shrink lg:max-w-[51%]">
                         <NuxtLink
                         :to="node?.url ?node.url :`/article/${node.id}`"
-                        :target="node?.url ?'_blank' :'_self'">
+                        :target="node?.url ?'_blank' :'_self'"
+                        @click="()=>{
+                          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                            page_info: {
+                              sec: 'atomboyz_news',
+                            },
+                            click_info: {
+                              type: 'direct_news',
+                              name: node?.title
+                            }
+                          })
+                        }">
                           <RatioArea ratio="66.54">
                             <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.img})` }"></div>
                           </RatioArea>
@@ -86,7 +109,18 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                       <div class="col-12 shrink text-white lg:max-w-[49%]">
                         <NuxtLink
                         :to="node?.url ?node.url :`/article/${node.id}`"
-                        :target="node?.url ?'_blank' :'_self'">
+                        :target="node?.url ?'_blank' :'_self'"
+                        @click="()=>{
+                          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                            page_info: {
+                              sec: 'atomboyz_news',
+                            },
+                            click_info: {
+                              type: 'direct_news',
+                              name: node?.title
+                            }
+                          })
+                        }">
                           <div class="mb-2 line-clamp-3 text-[18px]">{{ node.title }}</div>
                           <div class="mb-4 flex">
                             <div class="rounded-lg border px-2 py-1 text-[12px]">{{ node.date }}</div>
@@ -96,7 +130,21 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
                       </div>
                       <div class="col-12 mt-auto">
                         <div class="flex justify-center lg:justify-end">
-                          <MajorButton style="max-width:134px; height: 43px;">看更多 <i class="bi bi-chevron-double-right text-[13px]"></i></MajorButton>
+                          <MajorButton
+                          style="max-width:134px; height: 43px;"
+                          @click="()=>{
+                            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                              page_info: {
+                                sec: 'atomboyz_news',
+                              },
+                              click_info: {
+                                type: 'direct_news',
+                                name: 'see_more'
+                              }
+                            })
+                          }">
+                            看更多 <i class="bi bi-chevron-double-right text-[13px]"></i>
+                          </MajorButton>
                         </div>
                       </div>
                     </div>
@@ -112,13 +160,33 @@ const swiperConfig = computed<SwiperOptions & {class:string}>(()=>{
             :class="`btn btn-scaleUp`"
             @click="()=>{
               swiperRef.slideNext()
+              store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+                page_info: {
+                  sec: 'atomboyz_news',
+                },
+                click_info: {
+                  type: 'switch_function',
+                  name: 'right'
+                }
+              })
             }">
               <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
             </div>
             <NuxtLink
             v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
             to="/news/article"
-            class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
+            class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  sec: 'atomboyz_news',
+                },
+                click_info: {
+                  type: 'direct_news',
+                  name: 'see_more'
+                }
+              })
+            }">
               <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
               <i class="bi bi-chevron-right text-[18px] text-white"></i>
             </NuxtLink>

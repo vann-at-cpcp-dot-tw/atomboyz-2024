@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { numberFormat } from 'vanns-common-modules/dist/lib/helpers'
 import { useWindowSize } from '@vueuse/core'
+import { useStore } from '~/store'
 
 const window = process.client ? globalThis : null
 
@@ -24,7 +25,7 @@ interface IProps {
 
 const props = defineProps<IProps>()
 const viewport = useWindowSize()
-
+const store = useStore()
 </script>
 
 <template>
@@ -42,7 +43,24 @@ const viewport = useWindowSize()
             <img class="_lg:max-w-[44px]" src="/assets/img/icon_crown2_1.svg">
             <div class="mt-4 pl-1 text-[18px] font-700 italic leading-none text-[#FFC854] lg:text-[22px]">NO.1</div>
           </div>
-          <NuxtLink class="btn btn-light" :href="props?.list?.[0]?.href" :target="props?.list?.[0]?.target || '_self'">
+          <NuxtLink
+          class="btn btn-light"
+          :href="props?.list?.[0]?.href"
+          :target="props?.list?.[0]?.target || '_self'"
+          @click="()=>{
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                sec: 'atomboyz_ranking',
+                name: 'selling_ranking',
+              },
+              click_info: {
+                type: 'direct_ranking',
+                url: props?.list?.[0]?.href,
+                pos: 1,
+                name: props?.list?.[0]?.name
+              }
+            })
+          }">
             <RatioArea ratio="100">
               <div
               class="absolute left-0 top-0 size-full rounded-t bg-cover bg-center"
@@ -75,7 +93,21 @@ const viewport = useWindowSize()
           class="btn btn-light relative z-10 flex grow flex-col justify-center border-t border-gray-400 py-3"
           :style="{
             border: index === 0 ?'none' :''
-          }">
+          }"
+          @click="{()=>{
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                sec: 'atomboyz_ranking',
+                name: 'selling_ranking',
+              },
+              click_info: {
+                type: 'direct_ranking',
+                url: node?.href,
+                pos: index+2,
+                name: node?.name
+              }
+            })
+          }}">
             <div class="row flex-nowrap items-center">
               <div class="col-auto">
                 <div class="pl-5">

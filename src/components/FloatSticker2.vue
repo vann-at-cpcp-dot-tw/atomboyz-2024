@@ -108,6 +108,16 @@ watch(()=>route.hash, (newVal, oldVal)=>{
       :target="node?.href_target || '_self'"
       :style="{
         backgroundImage: `url(${node?.bg})`
+      }"
+      @click="()=>{
+        store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click',{
+          click_info: {
+            type: 'must_do',
+            name: node.text,
+            url: node.href,
+            sec: 'float'
+          }
+        })
       }">
         <div class="text-center text-[11px] leading-[1.2] text-white">{{ node.text }}</div>
       </a>

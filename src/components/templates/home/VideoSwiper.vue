@@ -7,6 +7,7 @@ import RatioArea from 'vanns-common-modules/dist/components/vue/RatioArea'
 import { useWindowSize } from '@vueuse/core'
 import { convertYoutubeUrlToEmbed } from '~/lib/utils'
 import EmbedPlayer from '~/components/EmbedPlayer.vue'
+import { useStore } from '~/store'
 
 const window = process.client ? globalThis : null
 
@@ -20,6 +21,7 @@ interface IProps {
 }
 const viewport = useWindowSize()
 const props = defineProps<IProps>()
+const store = useStore()
 const state = reactive({
   open: '',
 })
@@ -74,6 +76,15 @@ const listWithCoverImage = computed(()=>{
           :class="`btn btnScale-up ${swiperRef?.isBeginning ?'lg:opacity-50 lg:pointer-events-none' :''}`"
           @click="()=>{
             swiperRef.slidePrev()
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              page_info: {
+                sec: 'atomboyz_videos',
+              },
+              click_info: {
+                type: 'switch_function',
+                name: 'left'
+              }
+            })
           }">
             <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="" style="transform: rotateY(180deg);">
           </div>
@@ -90,17 +101,6 @@ const listWithCoverImage = computed(()=>{
             :loop="swiperConfig.loop"
             @swiper="(swiper)=>{
               swiperRef = swiper
-            }"
-            @slide-change="(swiper)=>{
-              // if( swiper.realIndex === 0){
-
-              // }
-              // console.log(swiper)
-              // if(window?.document?.?.getElementById?.('video-swiper')?.style){
-              //   window.document.getElementById?.('video-swiper').style.left = '22px'
-              // }
-              // console.log()
-              // window.document.getElementById('video-swiper').style.left = '22px'
             }">
               <SwiperSlide v-for="(node, index) in listWithCoverImage" :key="index">
                 <div
@@ -108,6 +108,15 @@ const listWithCoverImage = computed(()=>{
                 style="background: linear-gradient(#0c1074 0%, #5d00ff 46.03%, #0c1074 100%);"
                 @click="()=>{
                   state.open = node?.embedURL || ''
+                  store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                    page_info: {
+                      sec: 'atomboyz_videos',
+                    },
+                    click_info: {
+                      type: 'direct_videos',
+                      name: node.title
+                    }
+                  })
                 }">
                   <RatioArea ratio="56">
                     <div class="absolute left-0 top-0 size-full bg-cover bg-center" :style="{ backgroundImage: `url(${node?.cover})` }"></div>
@@ -123,13 +132,33 @@ const listWithCoverImage = computed(()=>{
             :class="`btn btn-scaleUp`"
             @click="()=>{
               swiperRef.slideNext()
+              store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+                page_info: {
+                  sec: 'atomboyz_videos',
+                },
+                click_info: {
+                  type: 'switch_function',
+                  name: 'left'
+                }
+              })
             }">
               <img class="_lg:w-[12px]" src="/assets/img/icon_arrow.svg" alt="">
             </div>
             <NuxtLink
             v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
             to="/news/video"
-            class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden">
+            class="btn btn-scaleUp flex !flex-nowrap items-center _lg:hidden"
+            @click="()=>{
+              store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+                page_info: {
+                  sec: 'atomboyz_videos',
+                },
+                click_info: {
+                  type: 'direct_videos',
+                  name: 'see_more'
+                }
+              })
+            }">
               <span class="whitespace-nowrap pr-2 text-[20px] text-white underline">更多內容</span>
               <i class="bi bi-chevron-right text-[18px] text-white"></i>
             </NuxtLink>
@@ -150,7 +179,18 @@ const listWithCoverImage = computed(()=>{
         <NuxtLink
         v-if="swiperRef?.isLocked === false && swiperRef?.isEnd"
         class="btn btn-scaleUp flex !flex-nowrap items-center"
-        to="/news/video">
+        to="/news/video"
+        @click="()=>{
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            page_info: {
+              sec: 'atomboyz_videos',
+            },
+            click_info: {
+              type: 'direct_videos',
+              name: 'see_more'
+            }
+          })
+        }">
           <span class="whitespace-nowrap pr-2 text-[12px] text-white underline">更多內容</span>
           <i class="bi bi-chevron-right text-[12px] text-white"></i>
         </NuxtLink>

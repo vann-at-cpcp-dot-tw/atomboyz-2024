@@ -3,6 +3,8 @@ import { twMerge } from 'tailwind-merge'
 import { teams } from '~/lib/utils'
 import { numberFormat } from '~/lib/helpers'
 import HashJump from '~/components/HashJump.vue'
+import { useStore } from '~/store'
+
 const window = process.client ? globalThis : null
 const config = useRuntimeConfig()
 const API_URL = config.public.apiURL
@@ -13,7 +15,7 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 const scopeStore:any = inject('scopeStore')
-
+const store = useStore()
 </script>
 <template>
   <div id="RANK" :class="twMerge('relative bg-[#120c60]', props.class)">
@@ -33,6 +35,21 @@ const scopeStore:any = inject('scopeStore')
           :active="scopeStore.rankTableActive === node.key"
           @click="()=>{
             scopeStore.rankTableActive = node.key
+            store.do.tracking('ClickEvent', '55003', 'hidol_campaign_function_click', {
+              page_info: {
+                sec: 'atomboyz_ranking',
+              },
+              click_info: {
+                type: 'page_function',
+                // @ts-ignore
+                name: {
+                  '個人排行': 'personal_ranking',
+                  '團體排行': 'group_ranking',
+                  '社團排行': 'fanclub_ranking',
+                  '銷售排行': 'selling_ranking',
+                }?.[node.label] || ''
+              }
+            })
           }">
             <div>{{ node.label }}</div>
           </MajorButton>

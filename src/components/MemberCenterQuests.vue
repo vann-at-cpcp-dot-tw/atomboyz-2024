@@ -26,7 +26,19 @@ const store = useStore()
         <NuxtLink
         v-if="node?.href && !node?.is_done"
         :href="node?.href"
-        class="btn btn-scaleUp block rounded-full bg-major px-3 py-2 text-[12px] text-white">
+        class="btn btn-scaleUp block rounded-full bg-major px-3 py-2 text-[12px] text-white"
+        @click="()=>{
+          store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+            page_info: {
+              page: 'atomboyz_member',
+              sec: 'atomboyz_mission',
+            },
+            click_info: {
+              type: 'complete_mission',
+              name: node.title
+            }
+          })
+        }">
           前往破解任務
         </NuxtLink>
       </div>
