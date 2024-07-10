@@ -94,7 +94,7 @@ const store = useStore()
           :style="{
             border: index === 0 ?'none' :''
           }"
-          @click="{()=>{
+          @click="()=>{
             store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
               page_info: {
                 sec: 'atomboyz_ranking',
@@ -107,7 +107,7 @@ const store = useStore()
                 name: node?.name
               }
             })
-          }}">
+          }">
             <div class="row flex-nowrap items-center">
               <div class="col-auto">
                 <div class="pl-5">
