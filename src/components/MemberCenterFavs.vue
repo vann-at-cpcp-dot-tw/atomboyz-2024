@@ -35,6 +35,16 @@ const store = useStore()
           @click="(e)=>{
             e.stopPropagation()
             store.do.toggleFav(node.name)
+            store.do.tracking('ClickEvent', '55002', 'hidol_campaign_item_click', {
+              page_info: {
+                page: 'atomboyz_member',
+                sec: 'atomboyz_following',
+              },
+              click_info: {
+                type: 'unfollow',
+                name: node.name
+              }
+            })
           }"></i>
         </RatioArea>
       </div>

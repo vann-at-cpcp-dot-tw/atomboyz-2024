@@ -63,9 +63,19 @@ watch(()=>route.path, (newVal)=>{
 })
 
 // get user from query
-watch(()=>[route.query.t, window], (newVal, oldVal)=>{
-  const [t, window] = newVal
-  if (!window || !t){
+watch(()=>[route.query.t, window, route.query.token], (newVal, oldVal)=>{
+  const [t, window, token] = newVal
+
+  if (!window){
+    return
+  }
+
+  if (token){
+    window.location.href = `${APP_BASE}hidol_auto_login?token=${token}`
+    return
+  }
+
+  if (!t){
     return
   }
 
