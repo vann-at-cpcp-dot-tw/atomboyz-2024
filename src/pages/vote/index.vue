@@ -455,7 +455,7 @@ watch(()=>store?.general?.countdown_end_time, (newVal)=>{
             class="flex items-center justify-center rounded-lg px-4 py-1.5 text-white"
             style="background: rgba(255,255,255,0.34);">
               <img class="w-[30px]" src="/assets/img/icon_pendding.svg" alt="">
-              <div class="pl-2 text-[18px] lg:text-[20px]">待定</div>
+              <div class="pl-2 text-[18px] lg:text-[20px]">黑洞</div>
             </div>
           </div>
           <div class="lg:row-gap-5 row-gap-2 row justify-center lg:justify-start">
