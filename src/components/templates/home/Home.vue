@@ -44,7 +44,7 @@ const state:any = reactive({
   rankTables: computed(()=>{
     return [
       { key: 'personal', label: '個人排行', hash: '#ranking_boyz', display: store?.rank?.personal?.length > 0 },
-      { key: 'team', label: '團體排行', hash: '#ranking_group', display: store?.rank?.team?.length > 0 },
+      // { key: 'team', label: '團體排行', hash: '#ranking_group', display: store?.rank?.team?.length > 0 },
       { key: 'social', label: '社團排行', hash: '#ranking_club', display: store?.rank?.social?.length > 0 },
       { key: 'sale', label: '銷售排行', hash: '#ranking_sale', display: store?.rank?.sale?.length > 0 },
     ]
